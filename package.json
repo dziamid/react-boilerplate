@@ -35,15 +35,15 @@
     "clean:all": "npm run analyze:clean && npm run test:clean && npm run build:clean",
     "generate": "plop --plopfile internals/generators/index.js",
     "lint": "npm run lint:js && npm run lint:css",
-    "lint:eslint": "eslint --ignore-path .gitignore --ignore-pattern internals/scripts --fix",
+    "lint:eslint": "eslint --ignore-path .gitignore --ignore-pattern internals/ --fix",
     "lint:js": "npm run lint:eslint -- . ",
     "lint:css": "stylelint ./app/**/*.css",
     "lint:staged": "lint-staged",
     "pretest": "npm run test:clean && npm run lint",
     "test:clean": "rimraf ./coverage",
-    "test": "cross-env NODE_ENV=test jest",
-    "test:watch": "cross-env NODE_ENV=test jest",
-    "coveralls": "cat ./coverage/lcov/lcov.info | coveralls",
+    "test": "cross-env NODE_ENV=test jest --no-cache --coverage",
+    "test:watch": "cross-env NODE_ENV=test jest --no-cache --watchAll --coverage",
+    "coveralls": "cat ./coverage/lcov.info | coveralls",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
@@ -78,6 +78,7 @@
       },
       "test": {
         "plugins": [
+          "transform-es2015-modules-commonjs",
           "istanbul"
         ]
       }
@@ -89,7 +90,7 @@
     "env": {
       "browser": true,
       "node": true,
-      "jasmine": true,
+      "jest": true,
       "es6": true
     },
     "plugins": [
@@ -158,7 +159,7 @@
     "settings": {
       "import/resolver": {
         "webpack": {
-          "config": "./internals/webpack/webpack.test.babel.js"
+          "config": "./internals/webpack/webpack.dev.babel.js"
         }
       }
     }
@@ -208,12 +209,9 @@
   },
   "jest": {
     "collectCoverageFrom": [
-      "**/*.{js,jsx}",
-      "!**/node_modules/**",
-      "!internals/**",
-      "!coverage/**",
-      "!server/**",
-      "!mocks/**"
+      "app/**/*.{js,jsx}",
+      "!app/app.js",
+      "!app/routes.js"
     ],
     "moduleDirectories": [
       "node_modules",
@@ -270,6 +268,7 @@
     "babel-core": "6.14.0",
     "babel-eslint": "6.1.2",
     "babel-loader": "6.2.5",
+    "babel-jest": "^15.0.0",
     "babel-plugin-istanbul": "2.0.1",
     "babel-plugin-react-intl": "2.2.0",
     "babel-plugin-react-transform": "2.0.2",
@@ -302,7 +301,7 @@
     "html-webpack-plugin": "2.22.0",
     "image-webpack-loader": "2.0.0",
     "imports-loader": "0.6.5",
-    "jest": "^15.1.1",
+    "jest-cli": "^15.1.1",
     "json-loader": "0.5.4",
     "lint-staged": "3.0.2",
     "mocha": "3.0.2",
