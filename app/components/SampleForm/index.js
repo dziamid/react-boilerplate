@@ -1,13 +1,19 @@
 import React, { PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form';
+import TextField from 'material-ui/TextField';
 
 // import RaisedButton from 'material-ui/RaisedButton';
 // import styles from './styles.css';
 
-const Input = ({ input, type, label, meta: { touched, error } }) => (
+const Input = ({ input, label, meta: { touched, error }, ...custom }) => (
   <div>
-    <input {...input} placeholder={label} type={type} />
-    {touched && error && <span>{error}</span>}
+    <TextField
+      hintText={label}
+      floatingLabelText={label}
+      errorText={touched && error}
+      {...input}
+      {...custom}
+    />
   </div>
 );
 
