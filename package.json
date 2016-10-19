@@ -108,7 +108,7 @@
     },
     "rules": {
       "arrow-parens": [
-        "error",
+        0,
         "always"
       ],
       "arrow-body-style": [
@@ -154,7 +154,8 @@
       "react/jsx-no-target-blank": 0,
       "react/require-extension": 0,
       "react/self-closing-comp": 0,
-      "require-yield": 0
+      "require-yield": 0,
+      "react/prop-types": 1
     },
     "settings": {
       "import/resolver": {
