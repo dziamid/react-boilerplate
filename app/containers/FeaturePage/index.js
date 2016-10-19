@@ -79,7 +79,7 @@ export class FeaturePage extends React.Component {
             </p>
           </li>
         </ul>
-        <Button handleRoute={this.openHomePage}>
+        <Button onClick={this.openHomePage}>
           <FormattedMessage {...messages.homeButton} />
         </Button>
       </div>

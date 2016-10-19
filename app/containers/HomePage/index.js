@@ -118,7 +118,7 @@ export class HomePage extends React.Component {
             </form>
             {mainContent}
           </section>
-          <Button handleRoute={this.openFeaturesPage}>
+          <Button onClick={this.openFeaturesPage}>
             <FormattedMessage {...messages.featuresButton} />
           </Button>
         </div>
