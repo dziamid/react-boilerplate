@@ -9,6 +9,9 @@ pipelines:
   default:
     - step:
         script: # Modify the commands below to build your repository.
+          - node --version
+          - npm --version
+          - npm install -g npm
           - npm install -g yarn
           - yarn install
           - npm test
