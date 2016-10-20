@@ -2,7 +2,9 @@ import React, { PropTypes } from 'react';
 import { Field, reduxForm, change } from 'redux-form';
 import TextField from 'components/TextField';
 import Button from 'components/Button';
+import Checkbox from 'components/Checkbox';
 import styles from './styles.css';
+
 
 const SampleForm = (props) => {
   const { handleSubmit, reset, submitting, dispatch, form } = props;
@@ -22,6 +24,14 @@ const SampleForm = (props) => {
             withClear
             onClear={() => dispatch(change(form, 'field2', ''))}
             label="With clear button"
+          />
+        </div>
+        <div>
+          <Field
+            name="field3"
+            component={Checkbox}
+            label="Checkbox with label on the right"
+            labelPosition="right"
           />
         </div>
 
