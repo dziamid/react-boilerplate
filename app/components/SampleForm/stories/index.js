@@ -11,7 +11,7 @@ const submit = (values) => {
   return sleep(300)
     .then(() => {
       action('response-arrived')();
-      throw new SubmissionError({ email: 'User not found' });
+      throw new SubmissionError({ field1: 'Server validation failed' });
     });
 };
 
@@ -19,6 +19,6 @@ storiesOf('SampleForm', module)
   .add('default', () => (
     <SampleForm onSubmit={action('form-submitted')} />
   ))
-  .add('with submit validation', () => (
+  .add('with async validation error', () => (
     <SampleForm onSubmit={submit} />
   ));

@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, change } from 'redux-form';
 import TextField from 'components/TextField';
 import Button from 'components/Button';
 import styles from './styles.css';
 
 const SampleForm = (props) => {
-  const { handleSubmit, reset, submitting } = props;
+  const { handleSubmit, reset, submitting, dispatch, form } = props;
 
   return (
     <div>
@@ -13,6 +13,16 @@ const SampleForm = (props) => {
       <form onSubmit={handleSubmit}>
         <div>
           <Field name="field1" component={TextField} type="text" label="Label on the top" />
+        </div>
+        <div>
+          <Field
+            name="field2"
+            component={TextField}
+            type="text"
+            withClear
+            onClear={() => dispatch(change(form, 'field2', ''))}
+            label="With clear button"
+          />
         </div>
 
         <div className={styles.actionButtons}>
@@ -27,6 +37,10 @@ const SampleForm = (props) => {
 
 SampleForm.propTypes = {
   handleSubmit: PropTypes.func,
+  reset: PropTypes.func,
+  submitting: PropTypes.bool,
+  dispatch: PropTypes.func,
+  form: PropTypes.string,
 };
 
 
@@ -35,10 +49,6 @@ const validate = (values) => {
 
   if (!values.field1) {
     errors.field1 = 'Required';
-  }
-
-  if (!values.field2) {
-    errors.field2 = 'Required';
   }
 
   return errors;

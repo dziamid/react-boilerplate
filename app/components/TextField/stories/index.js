@@ -15,5 +15,5 @@ storiesOf('TextField', module)
     <TextField label="Label on the left" labelPosition="left" {...parentFieldProps} />
   ))
   .add('with clear icon', () => (
-    <TextField label="Label on the left" withClear onClearClick={action('will clear input')} {...parentFieldProps} />
+    <TextField label="Label on the left" withClear onClear={action('will clear input')} {...parentFieldProps} />
   ));

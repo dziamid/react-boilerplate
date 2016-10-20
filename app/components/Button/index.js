@@ -14,7 +14,7 @@ const icons = {
 
 function Button({ className, icon, label, children, onClick, ...rest }) {
   const isIconOnlyButton = icon && label === undefined;
-  const isRaisedButton = label !== undefined;
+  const isRaisedButton = label !== undefined || children !== undefined;
 
   return (
     <div className={cx(styles.root, className)}>
