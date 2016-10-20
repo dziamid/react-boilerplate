@@ -11,3 +11,11 @@
   color: rgba(0, 0, 0, 0.298039);
   margin: 0 8px 0 0;
 }
+
+.clearButton {
+  display: inline-block;
+  margin-left: -34px;
+  width: 24px;
+  height: 24px;
+  fill: rgba(0, 0, 0, 0.298039);
+}
