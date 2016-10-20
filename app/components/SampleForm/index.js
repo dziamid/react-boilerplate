@@ -1,25 +1,25 @@
 import React, { PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import TextField from 'components/TextField';
+import Button from 'components/Button';
+import styles from './styles.css';
 
 const SampleForm = (props) => {
-  const { handleSubmit } = props;
+  const { handleSubmit, reset, submitting } = props;
 
   return (
     <div>
       <h1>Sample form with ReduxForm and MUI components</h1>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>First Name</label>
-          <Field name="firstName" component={TextField} type="text" />
+          <Field name="field1" component={TextField} type="text" label="Label on the top" />
         </div>
 
-        <div>
-          <label>Email</label>
-          <Field name="email" component={TextField} type="text" />
+        <div className={styles.actionButtons}>
+          <Button type="submit" default onClick={reset} disabled={submitting}>Clear</Button>
+          <Button type="submit" primary onClick={handleSubmit} disabled={submitting}>Submit</Button>
         </div>
 
-        <button type="submit">Submit</button>
       </form>
     </div>
   );
@@ -33,14 +33,12 @@ SampleForm.propTypes = {
 const validate = (values) => {
   const errors = {};
 
-  if (!values.firstName) {
-    errors.firstName = 'Required';
+  if (!values.field1) {
+    errors.field1 = 'Required';
   }
 
-  if (!values.email) {
-    errors.email = 'Required';
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = 'Invalid email address';
+  if (!values.field2) {
+    errors.field2 = 'Required';
   }
 
   return errors;
