@@ -36,8 +36,8 @@ const SampleForm = (props) => {
         </div>
 
         <div className={styles.actionButtons}>
-          <Button type="submit" default onClick={reset} disabled={submitting}>Clear</Button>
-          <Button type="submit" primary onClick={handleSubmit} disabled={submitting}>Submit</Button>
+          <Button type="submit" raised default onClick={reset} disabled={submitting}>Clear</Button>
+          <Button type="submit" raised primary onClick={handleSubmit} disabled={submitting}>Submit</Button>
         </div>
 
       </form>

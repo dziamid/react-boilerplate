@@ -1,5 +1,6 @@
 import React, { PropTypes, Children } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
 import IconButton from 'material-ui/IconButton';
 import InlineSVG from 'svg-inline-react';
 
@@ -12,9 +13,10 @@ const icons = {
   close,
 };
 
-function Button({ className, icon, label, children, onClick, ...rest }) {
+function Button({ className, icon, label, raised, children, onClick, ...rest }) {
   const isIconOnlyButton = icon && label === undefined;
-  const isRaisedButton = label !== undefined || children !== undefined;
+  const isLabelledButton = label !== undefined || children !== undefined;
+  const ButtonComponent = raised ? RaisedButton : FlatButton;
 
   return (
     <div className={cx(styles.root, className)}>
@@ -26,10 +28,10 @@ function Button({ className, icon, label, children, onClick, ...rest }) {
         : null
       }
 
-      { isRaisedButton ?
-        <RaisedButton onClick={onClick} label={label} {...rest}>
+      { isLabelledButton ?
+        <ButtonComponent onClick={onClick} label={label} {...rest}>
           {Children.toArray(children)}
-        </RaisedButton>
+        </ButtonComponent>
         : null
       }
 
@@ -40,7 +42,7 @@ function Button({ className, icon, label, children, onClick, ...rest }) {
 Button.propTypes = {
   className: PropTypes.string,
   onClick: PropTypes.func.isRequired,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   icon: PropTypes.string,
   label: PropTypes.string,
 };
