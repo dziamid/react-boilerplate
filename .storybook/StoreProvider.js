@@ -1,19 +1,17 @@
-// import React from 'react';
-// import configureStore from '../app/store';
-// import { browserHistory } from 'react-router';
-// const store = configureStore({}, browserHistory);
 import React from 'react'
-
-import { Provider } from 'react-redux'
-import { createStore, combineReducers } from 'redux'
-import { reducer as reduxFormReducer } from 'redux-form'
+import { createStore as reduxCreateStore, combineReducers } from 'redux';
+import { reducer as reduxFormReducer } from 'redux-form';
+import { reducer as toastrReducer } from 'react-redux-toastr';
+import Toastr from 'components/Toastr';
 
 const reducer = combineReducers({
-  form: reduxFormReducer // mounted under "form"
+  form: reduxFormReducer,
+  toastr: toastrReducer,
 });
 
-const store =
-  (window.devToolsExtension ? window.devToolsExtension()(createStore) : createStore)(reducer)
+const devTools = window.devToolsExtension;
+const createStore = devTools ? devTools()(reduxCreateStore) : reduxCreateStore();
+const store = (createStore)(reducer);
 
 const StoreProvider = React.createClass({
   propTypes: {
@@ -29,7 +27,12 @@ const StoreProvider = React.createClass({
   },
 
   render() {
-    return <div>{this.props.children}</div>;
+    return (
+      <div>
+        <Toastr />
+        {this.props.children}
+      </div>
+    );
   }
 });
 

@@ -3338,7 +3338,7 @@ event-emitter@~0.3.4:
     d "~0.1.1"
     es5-ext "~0.10.7"
 
-eventemitter3@1.x.x:
+eventemitter3@^1.1.1, eventemitter3@1.x.x:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-1.2.0.tgz#1c86991d816ad1e504750e73874224ecf3bec508"
 
@@ -3546,7 +3546,7 @@ fastparse@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/fastparse/-/fastparse-1.1.1.tgz#d1e2643b38a94d7583b479060e6c4affc94071f8"
 
-fbjs@^0.8.1, fbjs@^0.8.4:
+fbjs@^0.8.0-alpha.3, fbjs@^0.8.1, fbjs@^0.8.4:
   version "0.8.5"
   resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-0.8.5.tgz#f69ba8a876096cb1b9bffe4d7c1e71c19d39d008"
   dependencies:
@@ -7603,6 +7603,15 @@ react-proxy@^1.1.7:
   dependencies:
     lodash "^4.6.1"
     react-deep-force-update "^1.0.0"
+
+react-redux-toastr:
+  version "3.8.5"
+  resolved "https://registry.yarnpkg.com/react-redux-toastr/-/react-redux-toastr-3.8.5.tgz#d2e730327781394819c4d792bbc333e7a9d99675"
+  dependencies:
+    classnames "^2.2.3"
+    eventemitter3 "^1.1.1"
+    fbjs "^0.8.0-alpha.3"
+    uuid "^2.0.1"
 
 react-redux@4.4.5:
   version "4.4.5"

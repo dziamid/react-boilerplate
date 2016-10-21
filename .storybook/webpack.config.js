@@ -37,9 +37,19 @@ module.exports = {
         loader: 'style-loader!css-loader?localIdentName=[local]__[path][name]__[hash:base64:5]&modules&importLoaders=1&sourceMap!postcss-loader',
       },
       {
+        test: /\.css?$/,
+        loaders: ['style', 'css', 'postcss'],
+        include: /node_modules/
+      },
+      {
         test: /\.(svg)$/,
         exclude: /(fonts)/,
         loader: 'svg-inline-loader'
+      },
+      {
+        test: /\.(eot|svg|ttf|woff|woff2)$/,
+        exclude: /(images)/,
+        loader: 'url?limit=1&name=fonts/[name].[ext]'
       },
     ],
   },

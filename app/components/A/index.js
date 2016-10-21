@@ -6,7 +6,7 @@ import React, { PropTypes } from 'react';
 
 import styles from './styles.css';
 
-function A({ ...props }) {
+function A(props) {
   const { className, children, href, target, ...rest } = props;
   return (
     <a
