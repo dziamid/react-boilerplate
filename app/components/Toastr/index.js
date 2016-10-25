@@ -5,16 +5,16 @@ import { connect } from 'react-redux';
 const Toastr = (props) => {
   const isOpen = props.activeToast !== null;
   const { message } = props.activeToast || {};
-
+  console.log(props);
   return (
     <div>
       <Snackbar
         open={isOpen}
         message={message}
         autoHideDuration={0}
+        action="undo"
       />
     </div>
-
   );
 };
 

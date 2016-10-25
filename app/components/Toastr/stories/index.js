@@ -14,6 +14,16 @@ class _Container extends Component {
     if (this.props.showError) {
       this.props.showErrorToast('Oops, there was an error');
     }
+
+    if (this.props.showSequence) {
+      this.props.showSuccessToast('First notification');
+      this.props.showSuccessToast('Second notification');
+      this.props.showSuccessToast('Last notification');
+    }
+  }
+
+  componentWillUnmount() {
+    this.props.reset();
   }
 
   render() {
@@ -34,4 +44,7 @@ storiesOf('Toastr', module)
   ))
   .add('error toast', () => (
     <Container showError />
+  ))
+  .add('sequence toasts', () => (
+    <Container showSequence />
   ));

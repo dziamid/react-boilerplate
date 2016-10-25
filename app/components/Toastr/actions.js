@@ -8,20 +8,26 @@ export function showErrorToast(message) {
 
 export function showToast(toast) {
   return {
-    type: 'SHOW_TOAST',
+    type: 'TOASTR_SHOW',
     payload: toast,
   };
 }
 
 export function queueToast(toast) {
   return {
-    type: 'QUEUE_TOAST',
+    type: 'TOASTR_QUEUE',
     payload: toast,
   };
 }
 
 export function hideActiveToast() {
   return {
-    type: 'HIDE_ACTIVE_TOAST',
+    type: 'TOASTR_HIDE_ACTIVE',
+  };
+}
+
+export function reset() {
+  return {
+    type: 'TOASTR_RESET',
   };
 }

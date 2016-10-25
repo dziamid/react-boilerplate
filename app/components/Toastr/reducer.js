@@ -8,7 +8,7 @@ const initialState = {
 function toastrReducer(state = initialState, action) {
   const toast = action.payload;
   switch (action.type) {
-    case 'QUEUE_TOAST':
+    case 'TOASTR_QUEUE':
       return {
         ...state,
         queue: [
@@ -17,18 +17,20 @@ function toastrReducer(state = initialState, action) {
         ],
       };
 
-    case 'SHOW_TOAST':
+    case 'TOASTR_SHOW':
       return {
         queue: without(state.queue, toast),
         activeToast: toast,
       };
 
-
-    case 'HIDE_ACTIVE_TOAST':
+    case 'TOASTR_HIDE_ACTIVE':
       return {
         ...state,
         activeToast: null,
       };
+
+    case 'TOASTR_RESET':
+      return initialState;
 
     default:
       return state;
