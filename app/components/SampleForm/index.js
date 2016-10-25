@@ -1,10 +1,13 @@
 import React, { PropTypes, Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import { Field, reduxForm, change, SubmissionError } from 'redux-form';
 import TextField from 'components/TextField';
 import Button from 'components/Button';
 import Checkbox from 'components/Checkbox';
 import Dialog from 'components/Dialog';
 import styles from './styles.css';
+import * as toastrActions from 'components/Toastr/actions';
 
 const sleep = ms => new Promise(resolve => setTimeout(() => resolve(), ms));
 
@@ -32,13 +35,14 @@ class SampleForm extends Component {
     });
   }
 
-  submit() {
-    return sleep(500)
-      .then(() => {
-        this.closeConfirmDialog();
-
-        throw new SubmissionError({ field1: 'Server validation failed' });
-      });
+  async submit() {
+    await sleep(500); // simulate server latency
+    this.closeConfirmDialog();
+    if (this.props.triggerValidationError) {
+      throw new SubmissionError({ field1: 'Server validation failed' });
+    }
+    await sleep(200); // make room for modal close animation
+    this.props.showSuccessToast('Congrats, data has been saved!');
   }
 
   render() {
@@ -128,7 +132,5 @@ const validate = (values) => {
   return errors;
 };
 
-export default reduxForm({
-  form: 'SampleForm',
-  validate,
-})(SampleForm);
+const form = reduxForm({ form: 'SampleForm', validate })(SampleForm);
+export default connect(null, dispatch => bindActionCreators(toastrActions, dispatch))(form);
