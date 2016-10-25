@@ -1,11 +1,25 @@
 import React from 'react';
-import ReduxToastr from 'react-redux-toastr';
-import 'react-redux-toastr/lib/css/react-redux-toastr.css';
+import Snackbar from 'material-ui/Snackbar';
+import { connect } from 'react-redux';
 
-function Tostr() {
+const Toastr = (props) => {
+  const isOpen = props.activeToast !== null;
+  const { message } = props.activeToast || {};
+
   return (
-    <ReduxToastr timeOut={0} newestOnTop={false} position="top-center" />
-  );
-}
+    <div>
+      <Snackbar
+        open={isOpen}
+        message={message}
+        autoHideDuration={0}
+      />
+    </div>
 
-export default Tostr;
+  );
+};
+
+const mapStateToProps = (state) => ({
+  activeToast: state.toastr.activeToast,
+});
+
+export default connect(mapStateToProps, null)(Toastr);

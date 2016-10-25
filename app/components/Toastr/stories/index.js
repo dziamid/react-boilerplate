@@ -16,10 +16,6 @@ class _Container extends Component {
     }
   }
 
-  componentWillUnmount() {
-    this.props.hideAllToasts();
-  }
-
   render() {
     return (
       <div>{this.props.children}</div>

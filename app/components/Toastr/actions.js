@@ -1,46 +1,27 @@
-import { ADD_TOASTR, REMOVE_TOASTR, CLEAN_TOASTR } from './constants';
-import { mapToToastrMessage } from './utils';
+export function showSuccessToast(message) {
+  return queueToast({ message, type: 'success' });
+}
 
-export function hideAllToasts() {
+export function showErrorToast(message) {
+  return queueToast({ message, type: 'error' });
+}
+
+export function showToast(toast) {
   return {
-    type: CLEAN_TOASTR,
+    type: 'SHOW_TOAST',
+    payload: toast,
   };
 }
 
-export function hideToast(id) {
+export function queueToast(toast) {
   return {
-    type: REMOVE_TOASTR,
-    payload: {
-      id,
-    },
+    type: 'QUEUE_TOAST',
+    payload: toast,
   };
 }
 
-export function showSuccessToast(...toastr) {
+export function hideActiveToast() {
   return {
-    type: ADD_TOASTR,
-    payload: mapToToastrMessage('success', toastr),
+    type: 'HIDE_ACTIVE_TOAST',
   };
 }
-
-export function showInfoToast(...toastr) {
-  return {
-    type: ADD_TOASTR,
-    payload: mapToToastrMessage('info', toastr),
-  };
-}
-
-export function showWarningToast(...toastr) {
-  return {
-    type: ADD_TOASTR,
-    payload: mapToToastrMessage('warning', toastr),
-  };
-}
-
-export function showErrorToast(...toastr) {
-  return {
-    type: ADD_TOASTR,
-    payload: mapToToastrMessage('error', toastr),
-  };
-}
-

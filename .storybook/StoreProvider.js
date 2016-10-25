@@ -2,7 +2,7 @@ import React from 'react'
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga'
 import { reducer as reduxFormReducer } from 'redux-form';
-import { reducer as toastrReducer } from 'react-redux-toastr';
+import toastrReducer from 'components/Toastr/reducer';
 import Toastr from 'components/Toastr';
 import rootSaga from './saga';
 

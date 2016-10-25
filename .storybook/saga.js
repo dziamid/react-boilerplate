@@ -1,3 +1,8 @@
+import { watchToastrQueue } from 'components/Toastr/sagas';
+
 export default function* rootSaga() {
-  console.log('Hello Sagas!')
+  console.log('root saga');
+  yield [
+    watchToastrQueue(),
+  ]
 }
