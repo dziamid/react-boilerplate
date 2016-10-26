@@ -155,7 +155,8 @@
       "react/require-extension": 0,
       "react/self-closing-comp": 0,
       "require-yield": 0,
-      "react/prop-types": 1
+      "react/prop-types": 1,
+      "react/prefer-stateless-function": 0
     },
     "settings": {
       "import/resolver": {
@@ -232,6 +233,7 @@
     "react-router": "2.8.1",
     "react-router-redux": "4.0.5",
     "react-router-scroll": "0.3.2",
+    "react-tap-event-plugin": "^1.0.0",
     "redux": "3.6.0",
     "redux-form": "^6.1.1",
     "redux-immutable": "3.0.8",

@@ -5,6 +5,10 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import theme from '../app/theme';
 import StoreProvider from './StoreProvider';
 
+
+import injectTapEventPlugin from "react-tap-event-plugin";
+injectTapEventPlugin();
+
 function loadStories() {
   require('./index');
 }
