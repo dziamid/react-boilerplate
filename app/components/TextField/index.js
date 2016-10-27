@@ -5,8 +5,8 @@ import styles from './styles.css';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
-const TextField = ({ input, label, onClear, withClear, meta: { touched, error }, ...custom }) => {
-  const { labelPosition } = custom;
+const TextField = (props) => {
+  const { input, label, onClear, withClear, labelPosition, meta: { touched, error }, ...other } = props;
   const withLeftLabel = labelPosition === 'left';
   const floatingLabel = !withLeftLabel ? label : undefined;
 
@@ -24,7 +24,7 @@ const TextField = ({ input, label, onClear, withClear, meta: { touched, error },
         floatingLabelFixed={floatingLabel !== undefined}
         errorText={touched && error}
         {...input}
-        {...custom}
+        {...other}
       />
 
       {withClear ? <Button onClick={onClear} className={styles.clearButton} icon="close" /> : null }

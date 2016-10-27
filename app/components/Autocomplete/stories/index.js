@@ -1,26 +1,24 @@
 import React from 'react';
-import { storiesOf, action } from '@kadira/storybook';
-import Select from 'react-select';
-import 'react-select/dist/react-select.css';
+import { storiesOf } from '@kadira/storybook';
 import Autocomplete from '../index';
 import countries from 'components/common/stories/countries';
 
+const props = {
+  input: { name: 'field1' },
+  meta: {},
+  dataSource: countries.map(c => ({ text: c.name, value: c.code })),
+};
+
 storiesOf('Autocomplete', module)
-  .add('react-select', () => (
-    <Select
-      name="form-field-name"
-      value="AU"
-      label="Choose country"
-      options={countries.map(c => ({ label: c.name, value: c.code }))}
-      onChange={action('onChange')}
+  .add('with freetext', () => (
+    <Autocomplete
+      {...props}
+      label="Autocomplete"
     />
   ))
-  .add('react-select-styled', () => (
+  .add('without freetext', () => (
     <Autocomplete
-      name="form-field-name"
-      value="AU"
-      label="Choose country"
-      options={countries.map(c => ({ label: c.name, value: c.code }))}
-      onChange={action('onChange')}
+      {...props}
+      label="Autocomplete"
     />
   ));
