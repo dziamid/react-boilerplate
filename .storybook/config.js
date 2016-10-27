@@ -7,7 +7,6 @@ import StoreProvider from './StoreProvider';
 
 
 import injectTapEventPlugin from "react-tap-event-plugin";
-injectTapEventPlugin();
 
 function loadStories() {
   require('./index');
@@ -15,3 +14,4 @@ function loadStories() {
 addDecorator((story) => <StoreProvider>{story()}</StoreProvider>);
 addDecorator((story) => <MuiThemeProvider muiTheme={getMuiTheme(theme)}>{story()}</MuiThemeProvider>);
 configure(loadStories, module);
+injectTapEventPlugin();

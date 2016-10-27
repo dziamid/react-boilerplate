@@ -5,6 +5,7 @@ import { reducer as reduxFormReducer } from 'redux-form';
 import toastrReducer from 'components/Toastr/reducer';
 import Toastr from 'components/Toastr';
 import rootSaga from './saga';
+import injectTapEventPlugin from "react-tap-event-plugin";
 
 const reducer = combineReducers({
   form: reduxFormReducer,
@@ -25,6 +26,7 @@ const store = createStore(
 );
 
 sagaMiddleware.run(rootSaga);
+injectTapEventPlugin();
 
 const StoreProvider = React.createClass({
   propTypes: {
