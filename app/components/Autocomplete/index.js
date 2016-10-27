@@ -8,7 +8,7 @@ const {
   fuzzyFilter,
 } = MUIAutocomplete;
 
-const caseInsensitiveStartsWithFilter = (query, key) => key.toLowerCase().indexOf(query.toLowerCase()) === 0;
+const caseInsensitiveStartsWithFilter = (searchText, value) => value.toLowerCase().indexOf(searchText.toLowerCase()) === 0;
 
 export const filters = {
   caseSensitiveFilter,
@@ -19,12 +19,39 @@ export const filters = {
 };
 
 export default class Autocomplete extends Component {
+
+  static defaultProps = {
+    input: {
+      onChange: () => {
+      },
+    },
+    filter: caseInsensitiveStartsWithFilter,
+  };
+
+  constructor() {
+    super();
+    this.handleInputUpdate = this.handleInputUpdate.bind(this);
+    this.handleNewRequest = this.handleNewRequest.bind(this);
+  }
+  
+  handleNewRequest(searchText, key) {
+    if (key !== -1) {
+      const { text } = searchText;
+      this.props.input.onChange(text);
+    }
+  }
+
+  handleInputUpdate(searchText) {
+    this.props.input.onChange(searchText);
+  }
+
   render() {
     const {
-      input: { onChange, value, ...inputProps },
+      input: { value, ...inputProps },
       meta: { touched, error },
       label,
       filter,
+      dataSource,
       ...other,
     } = this.props;
 
@@ -35,9 +62,10 @@ export default class Autocomplete extends Component {
         errorText={touched && error}
         {...inputProps}
         searchText={value}
-        onNewRequest={v => onChange(v)}
-        onUpdateInput={v => onChange(v)}
-        filter={filter || caseInsensitiveStartsWithFilter}
+        onNewRequest={this.handleNewRequest}
+        onUpdateInput={this.handleInputUpdate}
+        filter={filter}
+        dataSource={dataSource}
         {...other}
       />
     );

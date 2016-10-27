@@ -3,11 +3,13 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Field, reduxForm, change, SubmissionError } from 'redux-form';
 import TextField from 'components/TextField';
+import Autocomplete from 'components/Autocomplete';
 import Button from 'components/Button';
 import Checkbox from 'components/Checkbox';
 import Dialog from 'components/Dialog';
 import styles from './styles.css';
 import * as toastrActions from 'components/Toastr/actions';
+import countries from 'components/common/stories/countries';
 
 const sleep = ms => new Promise(resolve => setTimeout(() => resolve(), ms));
 
@@ -75,6 +77,7 @@ class SampleForm extends Component {
           <div>
             <Field name="field1" component={TextField} type="text" label="Label on the top" />
           </div>
+
           <div>
             <Field
               name="field2"
@@ -88,6 +91,15 @@ class SampleForm extends Component {
           <div>
             <Field
               name="field3"
+              component={Autocomplete}
+              dataSource={countries.map(c => ({ text: c.name, value: c.code }))}
+              label="Autocomplete"
+              disableFreetext
+            />
+          </div>
+          <div>
+            <Field
+              name="field5"
               component={Checkbox}
               label="Checkbox with label on the right"
               labelPosition="right"
