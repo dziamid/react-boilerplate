@@ -12,6 +12,7 @@ export default class ChipInput extends Component {
       },
     },
     filter: filters.caseInsensitiveStartsWithFilter,
+    freetextDisabled: false,
   };
 
   constructor(props) {
@@ -20,6 +21,9 @@ export default class ChipInput extends Component {
     this.state = {
       value: props.input.value,
     };
+
+    this.handleRequestAdd = this.handleRequestAdd.bind(this);
+    this.handleRequestDelete = this.handleRequestDelete.bind(this);
   }
 
   componentWillReceiveProps({ value }) {
@@ -28,7 +32,17 @@ export default class ChipInput extends Component {
     }
   }
 
+  isChipInSource(chip) {
+    const dataSource = this.props.dataSource || [];
+    return dataSource.indexOf(chip) !== -1;
+  }
+
   handleRequestAdd(chip) {
+    console.log('handleRequestAdd', chip);
+    if (this.props.freetextDisabled && !this.isChipInSource(chip)) {
+      return;
+    }
+
     const value = [...this.state.value, chip];
     this.props.input.onChange(value);
     this.setState({ value });
@@ -53,8 +67,8 @@ export default class ChipInput extends Component {
     return (
       <MUIChipInput
         value={value}
-        onRequestAdd={(chip) => this.handleRequestAdd(chip)}
-        onRequestDelete={(chip) => this.handleRequestDelete(chip)}
+        onRequestAdd={this.handleRequestAdd}
+        onRequestDelete={this.handleRequestDelete}
         {...inputProps}
         {...otherProps}
       />

@@ -37,14 +37,21 @@ class Form extends Component {
 
 storiesOf('ChipInput', module)
   .addDecorator(getStory => <Form>{getStory()}</Form>)
-  .add('freetext', () => (
+  .add('freetext only', () => (
     <ChipInput
       label="Input countries"
     />
   ))
-  .add('freetext with autocomplete', () => (
+  .add('autocomplete, freetext allowed', () => (
     <ChipInput
       dataSource={countries.map(c => c.name)}
       label="Input countries"
+    />
+  ))
+  .add('autocomplete, freetext not allowed', () => (
+    <ChipInput
+      dataSource={countries.map(c => c.name)}
+      label="Input countries"
+      freetextDisabled
     />
   ));
