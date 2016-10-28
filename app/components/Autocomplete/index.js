@@ -33,7 +33,7 @@ export default class Autocomplete extends Component {
     this.handleInputUpdate = this.handleInputUpdate.bind(this);
     this.handleNewRequest = this.handleNewRequest.bind(this);
   }
-  
+
   handleNewRequest(searchText, key) {
     if (key !== -1) {
       const { text } = searchText;
@@ -50,8 +50,6 @@ export default class Autocomplete extends Component {
       input: { value, ...inputProps },
       meta: { touched, error },
       label,
-      filter,
-      dataSource,
       ...other,
     } = this.props;
 
@@ -64,8 +62,6 @@ export default class Autocomplete extends Component {
         searchText={value}
         onNewRequest={this.handleNewRequest}
         onUpdateInput={this.handleInputUpdate}
-        filter={filter}
-        dataSource={dataSource}
         {...other}
       />
     );

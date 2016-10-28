@@ -10,6 +10,8 @@ export default class ChipInput extends Component {
       value: [],
       onChange: () => {
       },
+      onBlur: () => {
+      },
     },
     filter: filters.caseInsensitiveStartsWithFilter,
     freetextDisabled: false,
@@ -18,18 +20,9 @@ export default class ChipInput extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      value: props.input.value,
-    };
-
     this.handleRequestAdd = this.handleRequestAdd.bind(this);
     this.handleRequestDelete = this.handleRequestDelete.bind(this);
-  }
-
-  componentWillReceiveProps({ value }) {
-    if (value !== undefined) {
-      this.setState({ value });
-    }
+    this.handleBlur = this.handleBlur.bind(this);
   }
 
   isChipInSource(chip) {
@@ -38,37 +31,44 @@ export default class ChipInput extends Component {
   }
 
   handleRequestAdd(chip) {
-    console.log('handleRequestAdd', chip);
     if (this.props.freetextDisabled && !this.isChipInSource(chip)) {
       return;
     }
 
-    const value = [...this.state.value, chip];
+    const value = [...this.props.input.value, chip];
     this.props.input.onChange(value);
-    this.setState({ value });
   }
 
   handleRequestDelete(chip) {
-    const value = without(this.state.value, chip);
+    const value = without(this.props.input.value, chip);
     this.props.input.onChange(value);
-    this.setState({ value });
+  }
+
+  handleBlur() {
+    console.log(this.props.input.onBlur);
+    this.props.input.onBlur();
   }
 
   render() {
     const {
       input: {
         value,
+        onBlur, // eslint-disable-line no-unused-vars
         ...inputProps,
       },
+      label,
       ...otherProps,
 
     } = this.props;
 
     return (
       <MUIChipInput
+        floatingLabelText={label}
+        floatingLabelFixed={label !== undefined}
         value={value}
         onRequestAdd={this.handleRequestAdd}
         onRequestDelete={this.handleRequestDelete}
+        onBlur={this.handleBlur}
         {...inputProps}
         {...otherProps}
       />

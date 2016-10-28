@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Field, reduxForm, change, SubmissionError } from 'redux-form';
 import TextField from 'components/TextField';
 import Autocomplete from 'components/Autocomplete';
+import ChipInput from 'components/ChipInput';
 import Button from 'components/Button';
 import Checkbox from 'components/Checkbox';
 import Dialog from 'components/Dialog';
@@ -73,7 +74,7 @@ class SampleForm extends Component {
         { dialog }
 
         <h1>Sample form with ReduxForm and MUI components</h1>
-        <form >
+        <form>
           <div>
             <Field name="field1" component={TextField} type="text" label="Label on the top" />
           </div>
@@ -105,7 +106,15 @@ class SampleForm extends Component {
               labelPosition="right"
             />
           </div>
-
+          <div>
+            <Field
+              name="countries"
+              label="Choose countries"
+              component={ChipInput}
+              dataSource={countries.map(c => c.name)}
+              freetextDisabled
+            />
+          </div>
           <div className={styles.actionButtons}>
             <Button raised default onClick={reset} disabled={submitting}>Clear</Button>
             <Button
@@ -145,4 +154,10 @@ const validate = (values) => {
 };
 
 const form = reduxForm({ form: 'SampleForm', validate })(SampleForm);
-export default connect(null, dispatch => bindActionCreators(toastrActions, dispatch))(form);
+export default connect(
+  () => ({
+    initialValues: {
+      countries: [],
+    },
+  }),
+  dispatch => bindActionCreators(toastrActions, dispatch))(form);

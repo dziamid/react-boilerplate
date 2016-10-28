@@ -21,8 +21,9 @@ class Form extends Component {
     const props = {
       input: {
         name: 'field1',
-        onChange: this.onChange,
         value: this.state.value,
+        onChange: this.onChange,
+        onBlur: () => {},
       },
       meta: {},
     };
