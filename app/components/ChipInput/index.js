@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { default as MUIChipInput } from 'material-ui-chip-input';
 import without from 'lodash/without';
+import { filters } from 'components/Autocomplete';
 
 export default class ChipInput extends Component {
 
@@ -10,6 +11,7 @@ export default class ChipInput extends Component {
       onChange: () => {
       },
     },
+    filter: filters.caseInsensitiveStartsWithFilter,
   };
 
   constructor(props) {

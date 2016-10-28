@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { storiesOf } from '@kadira/storybook';
+import { storiesOf, action } from '@kadira/storybook';
 import ChipInput from '../index';
-// import countries from 'components/common/stories/countries';
+import countries from 'components/common/stories/countries';
 
 class Form extends Component {
   constructor() {
@@ -14,6 +14,7 @@ class Form extends Component {
 
   onChange(value) {
     this.setState({ value });
+    action('onChange')(value);
   }
 
   render() {
@@ -38,7 +39,12 @@ storiesOf('ChipInput', module)
   .addDecorator(getStory => <Form>{getStory()}</Form>)
   .add('freetext', () => (
     <ChipInput
-      // dataSource={countries.map(c => ({ text: c.name, value: c.code }))}
+      label="Input countries"
+    />
+  ))
+  .add('freetext with autocomplete', () => (
+    <ChipInput
+      dataSource={countries.map(c => c.name)}
       label="Input countries"
     />
   ));
