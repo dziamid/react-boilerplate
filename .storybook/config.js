@@ -14,4 +14,9 @@ function loadStories() {
 addDecorator((story) => <StoreProvider>{story()}</StoreProvider>);
 addDecorator((story) => <MuiThemeProvider muiTheme={getMuiTheme(theme)}>{story()}</MuiThemeProvider>);
 configure(loadStories, module);
-injectTapEventPlugin();
+
+try {
+  injectTapEventPlugin();
+} catch(err) {
+  console.log('Surpressed injectTapEventPlugin error');
+}

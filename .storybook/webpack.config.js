@@ -11,6 +11,7 @@ const rootDir = path.resolve('./app');
 console.log(`rootDir: ${rootDir}`);
 
 module.exports = {
+  devtool: 'eval',
   plugins: [
     // your custom plugins
   ],
