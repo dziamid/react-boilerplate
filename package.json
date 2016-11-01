@@ -304,7 +304,7 @@
     "html-webpack-plugin": "2.22.0",
     "image-webpack-loader": "2.0.0",
     "imports-loader": "0.6.5",
-    "jest-cli": "^15.1.1",
+    "jest-cli": "16.0.2",
     "json-loader": "0.5.4",
     "lint-staged": "3.0.2",
     "minimist": "1.2.0",
