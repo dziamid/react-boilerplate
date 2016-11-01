@@ -13,4 +13,5 @@ pipelines:
           - npm --version
           - npm install -g yarn
           - yarn install
+          - npm build:dll
           - npm test

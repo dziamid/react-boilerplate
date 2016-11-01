@@ -13,9 +13,8 @@ import RepoListItem from 'containers/RepoListItem';
 import List from 'components/List';
 import LoadingIndicator from 'components/LoadingIndicator';
 import { context } from 'components/common/decorators';
-
-import injectTapEventPlugin from 'react-tap-event-plugin';
-injectTapEventPlugin(); // surpress onTouchTap warnings
+import injectTapEvent from 'utils/react-tap-event-plugin';
+injectTapEvent();
 
 describe('<HomePage />', () => {
   it('should render the loading indicator when its loading', () => {
@@ -99,7 +98,7 @@ describe('<HomePage />', () => {
       });
 
       it('should dispatch changeUsername when called', () => {
-        let dispatch = jest.fn();
+        const dispatch = jest.fn();
         const result = mapDispatchToProps(dispatch);
         const username = 'mxstbr';
         result.onChangeUsername({ target: { value: username } });

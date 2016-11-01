@@ -12,6 +12,8 @@ import { NotFound } from '../index';
 import H1 from 'components/H1';
 import Button from 'components/Button';
 import { push } from 'react-router-redux';
+import injectTapEvent from 'utils/react-tap-event-plugin';
+injectTapEvent();
 
 describe('<NotFound />', () => {
   it('should render the Page Not Found text', () => {

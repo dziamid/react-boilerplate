@@ -79,8 +79,8 @@ const rootRoute = {
   childRoutes: createRoutes(store),
 };
 
-import injectTapEventPlugin from 'react-tap-event-plugin';
-injectTapEventPlugin();
+import injectTapEvent from 'utils/react-tap-event-plugin';
+injectTapEvent();
 
 const render = (messages) => {
   ReactDOM.render(

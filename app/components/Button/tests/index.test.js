@@ -8,8 +8,8 @@ import Button from '../index';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import theme from 'theme';
-import injectTapEventPlugin from 'react-tap-event-plugin';
-injectTapEventPlugin(); // surpress onTouchTap warnings
+import injectTapEvent from 'utils/react-tap-event-plugin';
+injectTapEvent();
 
 const themed = (children) => <MuiThemeProvider muiTheme={getMuiTheme(theme)}>{children}</MuiThemeProvider>;
 const noop = () => {};

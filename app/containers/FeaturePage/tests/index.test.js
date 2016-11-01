@@ -9,6 +9,8 @@ import { push } from 'react-router-redux';
 import messages from '../messages';
 import { FeaturePage } from '../index';
 import H1 from 'components/H1';
+import injectTapEvent from 'utils/react-tap-event-plugin';
+injectTapEvent();
 
 describe('<FeaturePage />', () => {
   it('should render its heading', () => {

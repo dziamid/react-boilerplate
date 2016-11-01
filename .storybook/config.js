@@ -6,7 +6,6 @@ import theme from '../app/theme';
 import StoreProvider from './StoreProvider';
 
 
-import injectTapEventPlugin from "react-tap-event-plugin";
 
 function loadStories() {
   require('./index');
@@ -15,8 +14,4 @@ addDecorator((story) => <StoreProvider>{story()}</StoreProvider>);
 addDecorator((story) => <MuiThemeProvider muiTheme={getMuiTheme(theme)}>{story()}</MuiThemeProvider>);
 configure(loadStories, module);
 
-try {
-  injectTapEventPlugin();
-} catch(err) {
-  console.log('Surpressed injectTapEventPlugin error');
-}
+injectTapEvent();

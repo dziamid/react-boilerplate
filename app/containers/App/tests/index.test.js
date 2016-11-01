@@ -3,6 +3,8 @@ import React from 'react';
 
 import App from '../index';
 import Footer from 'components/Footer';
+import injectTapEvent from 'utils/react-tap-event-plugin';
+injectTapEvent();
 
 describe('<App />', () => {
   it('should render the logo', () => {
