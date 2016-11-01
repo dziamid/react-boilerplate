@@ -19,13 +19,7 @@ export function NotFound(props) {
       <H1>
         <FormattedMessage {...messages.header} />
       </H1>
-      <Button
-        handleRoute={function redirect() {
-          props.dispatch(push('/'));
-        }}
-      >
-        <FormattedMessage {...messages.homeButton} />
-      </Button>
+      <Button onClick={() => props.dispatch(push('/'))} label="Home" />
     </article>
   );
 }
@@ -34,5 +28,10 @@ NotFound.propTypes = {
   dispatch: React.PropTypes.func,
 };
 
+export function mapDispatchToProps(dispatch) {
+  return {
+    dispatch,
+  };
+}
 // Wrap the component to inject dispatch and state into it
-export default connect()(NotFound);
+export default connect(null, mapDispatchToProps)(NotFound);

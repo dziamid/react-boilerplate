@@ -3,12 +3,15 @@
  */
 
 import { shallow, mount } from 'enzyme';
+import { context } from 'components/common/decorators';
+
 import React from 'react';
 
-import { IntlProvider, FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { NotFound } from '../index';
 import H1 from 'components/H1';
 import Button from 'components/Button';
+import { push } from 'react-router-redux';
 
 describe('<NotFound />', () => {
   it('should render the Page Not Found text', () => {
@@ -32,21 +35,15 @@ describe('<NotFound />', () => {
     expect(renderedButton.length).toBe(1);
   });
 
-  it('should link to "/"', () => {
-    const changeRouteSpy = jest.fn();
-    const onChangeRoute = (dest) => {
-      if (dest === '/') {
-        changeRouteSpy();
-      }
-    };
+  it('should redirect to "/" when button clicked', () => {
+    const dispatch = jest.fn();
 
-    const renderedComponent = mount(
-      <IntlProvider locale="en">
-        <NotFound changeRoute={onChangeRoute} />
-      </IntlProvider>
-    );
+    const renderedComponent = mount(context(
+      <NotFound dispatch={dispatch} />
+    ));
+
     const button = renderedComponent.find('button');
     button.simulate('click');
-    expect(changeRouteSpy).toHaveBeenCalled();
+    expect(dispatch).toHaveBeenCalledWith(push('/'));
   });
 });

@@ -12,11 +12,10 @@ import { push } from 'react-router-redux';
 import RepoListItem from 'containers/RepoListItem';
 import List from 'components/List';
 import LoadingIndicator from 'components/LoadingIndicator';
-import { intl, theme } from 'components/common/decorators';
+import { context } from 'components/common/decorators';
+
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin(); // surpress onTouchTap warnings
-
-const context = (children) => theme(intl(children));
 
 describe('<HomePage />', () => {
   it('should render the loading indicator when its loading', () => {
