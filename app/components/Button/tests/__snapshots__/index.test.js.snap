@@ -5,7 +5,7 @@ exports[`<Button /> should render Button with a known icon 1`] = `
     disableTouchRipple={false}
     disabled={false}
     iconStyle={Object {}}
-    onClick={[Function noop]}
+    onClick={[Function]}
     tooltipPosition="bottom-center"
     touch={false}>
     <InlineSVG
@@ -24,11 +24,11 @@ exports[`<Button /> should render Button with label 1`] = `
     label="Button with label"
     labelPosition="after"
     labelStyle={Object {}}
-    onClick={[Function noop]}
-    onKeyboardFocus={[Function onKeyboardFocus]}
-    onMouseEnter={[Function onMouseEnter]}
-    onMouseLeave={[Function onMouseLeave]}
-    onTouchStart={[Function onTouchStart]}
+    onClick={[Function]}
+    onKeyboardFocus={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    onTouchStart={[Function]}
     primary={false}
     secondary={false} />
 </div>

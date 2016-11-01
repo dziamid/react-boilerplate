@@ -1,6 +1,8 @@
 import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
 import Button from '../index';
+import messages from './messages';
+import { FormattedMessage, IntlProvider } from 'react-intl';
 
 storiesOf('Button', module)
 
@@ -21,4 +23,20 @@ storiesOf('Button', module)
 
   .add('Close button', () => (
     <Button icon="close" />
+  ))
+
+  .add('Intl label button', () => (
+    <div>
+      <IntlProvider locale="en">
+        <Button onClick={action('clicked')} label="Default" default raised>
+          <FormattedMessage {...messages.js} />
+        </Button>
+      </IntlProvider>
+      <IntlProvider locale="ru">
+        <Button onClick={action('clicked')} label="Default" default raised>
+          <FormattedMessage {...messages.js} />
+        </Button>
+      </IntlProvider>
+    </div>
+
   ));

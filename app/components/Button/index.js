@@ -1,4 +1,4 @@
-import React, { PropTypes, Children } from 'react';
+import React, { PropTypes } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import IconButton from 'material-ui/IconButton';
@@ -14,8 +14,8 @@ const icons = {
 };
 
 function Button({ className, icon, label, raised, children, onClick, ...rest }) {
-  const isIconOnlyButton = icon && label === undefined;
   const isLabelledButton = label !== undefined || children !== undefined;
+  const isIconOnlyButton = !isLabelledButton && icon;
   const ButtonComponent = raised ? RaisedButton : FlatButton;
 
   return (
@@ -29,9 +29,7 @@ function Button({ className, icon, label, raised, children, onClick, ...rest }) 
       }
 
       { isLabelledButton ?
-        <ButtonComponent onClick={onClick} label={label} {...rest}>
-          {Children.toArray(children)}
-        </ButtonComponent>
+        <ButtonComponent onClick={onClick} label={children || label} {...rest} />
         : null
       }
 
