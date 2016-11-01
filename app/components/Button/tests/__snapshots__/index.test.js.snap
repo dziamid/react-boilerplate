@@ -1,0 +1,35 @@
+exports[`<Button /> should render Button with a known icon 1`] = `
+<div
+  className="">
+  <IconButton
+    disableTouchRipple={false}
+    disabled={false}
+    iconStyle={Object {}}
+    onClick={[Function noop]}
+    tooltipPosition="bottom-center"
+    touch={false}>
+    <InlineSVG
+      element="i"
+      raw={false}
+      src="SVG_MOCK" />
+  </IconButton>
+</div>
+`;
+
+exports[`<Button /> should render Button with label 1`] = `
+<div
+  className="">
+  <FlatButton
+    disabled={false}
+    label="Button with label"
+    labelPosition="after"
+    labelStyle={Object {}}
+    onClick={[Function noop]}
+    onKeyboardFocus={[Function onKeyboardFocus]}
+    onMouseEnter={[Function onMouseEnter]}
+    onMouseLeave={[Function onMouseLeave]}
+    onTouchStart={[Function onTouchStart]}
+    primary={false}
+    secondary={false} />
+</div>
+`;

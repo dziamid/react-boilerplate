@@ -3049,6 +3049,15 @@ entities@1.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/entities/-/entities-1.0.0.tgz#b2987aa3821347fcde642b24fdfc9e4fb712bf26"
 
+enzyme-to-json:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/enzyme-to-json/-/enzyme-to-json-1.2.0.tgz#8fbfea5f929ef3d1cc86b9c2e92046e6120be8ef"
+  dependencies:
+    lodash.compact "^3.0.1"
+    lodash.omit "^4.5.0"
+    object-values "^1.0.0"
+    object.entries "^1.0.3"
+
 enzyme@2.4.1:
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/enzyme/-/enzyme-2.4.1.tgz#90fa9861d982d0ceb92a9fd57e38426a2f74d3b1"
@@ -5727,6 +5736,10 @@ lodash.clonedeep@^3.0.0:
     lodash._baseclone "^3.0.0"
     lodash._bindcallback "^3.0.0"
 
+lodash.compact@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/lodash.compact/-/lodash.compact-3.0.1.tgz#540ce3837745975807471e16b4a2ba21e7256ca5"
+
 lodash.cond@^4.3.0:
   version "4.5.2"
   resolved "https://registry.yarnpkg.com/lodash.cond/-/lodash.cond-4.5.2.tgz#f471a1da486be60f6ab955d17115523dd1d255d5"
@@ -5841,6 +5854,10 @@ lodash.merge@^4.4.0, lodash.merge@^4.6.0:
 lodash.noop@~3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/lodash.noop/-/lodash.noop-3.0.1.tgz#38188f4d650a3a474258439b96ec45b32617133c"
+
+lodash.omit@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/lodash.omit/-/lodash.omit-4.5.0.tgz#6eb19ae5a1ee1dd9df0b969e66ce0b7fa30b5e60"
 
 lodash.pick@^4.2.0, lodash.pick@^4.2.1:
   version "4.4.0"
@@ -6565,6 +6582,10 @@ object-keys@^1.0.10, object-keys@^1.0.8:
 object-path@^0.11.2:
   version "0.11.2"
   resolved "https://registry.yarnpkg.com/object-path/-/object-path-0.11.2.tgz#74bf3b3c5a7f2024d75e333f12021353fa9d485e"
+
+object-values@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/object-values/-/object-values-1.0.0.tgz#72af839630119e5b98c3b02bb8c27e3237158105"
 
 object.assign@^4.0.3:
   version "4.0.4"
@@ -7808,6 +7829,10 @@ react-tap-event-plugin:
   resolved "https://registry.yarnpkg.com/react-tap-event-plugin/-/react-tap-event-plugin-1.0.0.tgz#7a248505a9e9abecc352b2dab313d17685c51adf"
   dependencies:
     fbjs "^0.2.1"
+
+react-test-renderer:
+  version "15.3.2"
+  resolved "https://registry.yarnpkg.com/react-test-renderer/-/react-test-renderer-15.3.2.tgz#d8f083d37d2d41e97bbdc26a1dd9282f0baf7857"
 
 react-transform-catch-errors@^1.0.2:
   version "1.0.2"

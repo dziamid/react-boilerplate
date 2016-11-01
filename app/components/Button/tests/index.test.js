@@ -1,43 +1,45 @@
 /**
  * Testing our Button component
  */
-
-import Button from '../index';
-
-import { shallow } from 'enzyme';
 import React from 'react';
+import { shallow, mount } from 'enzyme';
+import { shallowToJson } from 'enzyme-to-json'
+import Button from '../index';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import theme from 'theme';
+
+const themed = (children) => <MuiThemeProvider muiTheme={getMuiTheme(theme)}>{children}</MuiThemeProvider>
+const noop = () => {};
 
 describe('<Button />', () => {
-  it('should render its children', () => {
-    const children = (<h1>Test</h1>);
-    const renderedComponent = shallow(
-      <Button href="http://mxstbr.com">
-        {children}
-      </Button>
+
+  it('should render Button with label', () => {
+    const wrapper = shallow(
+      <Button label="Button with label" onClick={noop} />
     );
-    expect(renderedComponent.contains(children)).toBe(true);
+
+    expect(shallowToJson(wrapper)).toMatchSnapshot();
   });
 
-  it('should adopt the className', () => {
-    const renderedComponent = shallow(<Button className="test"><h1>Test</h1></Button>);
-    expect(renderedComponent.find('a').hasClass('test')).toBe(true);
+  it('should render Button with a known icon', () => {
+    const wrapper = shallow(
+      <Button icon="close" onClick={noop} />
+
+    );
+
+    expect(shallowToJson(wrapper)).toMatchSnapshot();
   });
 
-  it('should render an <a> tag if no route is specified', () => {
-    const renderedComponent = shallow(<Button href="http://mxstbr.com"><h1>Test</h1></Button>);
-    expect(renderedComponent.find('a').length).toBe(1);
-  });
-
-  it('should render a button to change route if the handleRoute prop is specified', () => {
-    const renderedComponent = shallow(<Button handleRoute={function handler() {}}><h1>Test</h1></Button>);
-
-    expect(renderedComponent.find('button').length).toBe(1);
-  });
 
   it('should handle click events', () => {
     const onClickSpy = jest.fn();
-    const renderedComponent = shallow(<Button onClick={onClickSpy}><h1>Test</h1></Button>);
-    renderedComponent.find('a').simulate('click');
+    const wrapper = mount(
+      themed(<Button onClick={onClickSpy} icon="close" />)
+    );
+
+    wrapper.find('button').simulate('click');
     expect(onClickSpy).toHaveBeenCalled();
   });
+
 });
