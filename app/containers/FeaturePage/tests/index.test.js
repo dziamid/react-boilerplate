@@ -4,6 +4,7 @@ import React from 'react';
 
 import { FormattedMessage } from 'react-intl';
 import { context } from 'components/common/decorators';
+import { push } from 'react-router-redux';
 
 import messages from '../messages';
 import { FeaturePage } from '../index';
@@ -21,21 +22,15 @@ describe('<FeaturePage />', () => {
     )).toBe(true);
   });
 
-  it('should link to "/"', () => {
-    const openRouteSpy = jest.fn();
-
-    // Spy on the openRoute method of the FeaturePage
-    const openRoute = (dest) => {
-      if (dest === '/') {
-        openRouteSpy();
-      }
-    };
+  fit('should redirect to "/" when button clicked', () => {
+    const dispatch = jest.fn();
 
     const renderedComponent = mount(context(
-      <FeaturePage changeRoute={openRoute} />
+      <FeaturePage dispatch={dispatch} />
     ));
+
     const button = renderedComponent.find('button');
     button.simulate('click');
-    expect(openRouteSpy).toHaveBeenCalled();
+    expect(dispatch).toHaveBeenCalledWith(push('/'));
   });
 });
