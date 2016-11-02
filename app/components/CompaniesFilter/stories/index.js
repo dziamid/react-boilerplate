@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { storiesOf, action } from '@kadira/storybook';
 import CompaniesFilter from '../index';
 import without from 'lodash/without';
+import Popover from 'material-ui/Popover';
 
 const companies = ['Airbnb', 'Adidas', 'Tinder', 'Fedex'].map(c => ({ id: c, name: c }));
 
@@ -48,7 +49,9 @@ class Header extends Component {
 
     return (
       <div>
-        {React.cloneElement(this.props.children, props)}
+        <Popover open>
+          {React.cloneElement(this.props.children, props)}
+        </Popover>
       </div>
     );
   }
