@@ -13,10 +13,14 @@ import styles from './styles.css';
 export default class CompaniesFilter extends React.Component {
 
   static propTypes = {
-    value: PropTypes.string.isRequired,
+    value: PropTypes.string,
     onFilterChange: PropTypes.func.isRequired,
     onCompanySelected: PropTypes.func.isRequired,
     onCompanyUnselected: PropTypes.func.isRequired,
+  };
+
+  static defaultProps = {
+    value: 'all',
   };
 
   constructor(props) {
