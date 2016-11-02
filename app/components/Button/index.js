@@ -8,7 +8,7 @@ import styles from './styles.css';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
-import close from './images/close.svg';
+import close from 'components/common/images/close.svg';
 const icons = {
   close,
 };

@@ -5,6 +5,8 @@ import Divider from 'material-ui/Divider';
 import Popover from 'material-ui/Popover';
 import RadioButtonOn from 'material-ui/svg-icons/toggle/radio-button-checked';
 import RadioButtonOff from 'material-ui/svg-icons/toggle/radio-button-unchecked';
+import SettingsIcon from 'material-ui/svg-icons/action/settings';
+import AddIcon from 'material-ui/svg-icons/content/add';
 
 export default class CompaniesFilter extends React.Component {
 
@@ -53,9 +55,15 @@ export default class CompaniesFilter extends React.Component {
             leftIcon={this.radioIcon('favorite')}
           />
           <Divider />
-
-          <MenuItem primaryText="Manage Companies" />
-          <MenuItem primaryText="Add New Company" />
+          <MenuItem
+            primaryText="Manage Companies"
+            leftIcon={<SettingsIcon />}
+          />
+          <Divider />
+          <MenuItem
+            primaryText="Add New Company"
+            leftIcon={<AddIcon />}
+          />
         </Menu>
       </Popover>
 
