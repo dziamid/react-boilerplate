@@ -13,5 +13,3 @@ function loadStories() {
 addDecorator((story) => <StoreProvider>{story()}</StoreProvider>);
 addDecorator((story) => <MuiThemeProvider muiTheme={getMuiTheme(theme)}>{story()}</MuiThemeProvider>);
 configure(loadStories, module);
-
-injectTapEvent();

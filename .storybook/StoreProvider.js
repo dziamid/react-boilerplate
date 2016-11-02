@@ -5,7 +5,7 @@ import { reducer as reduxFormReducer } from 'redux-form';
 import toastrReducer from 'components/Toastr/reducer';
 import Toastr from 'components/Toastr';
 import rootSaga from './saga';
-import injectTapEvent from "utils/react-tap-event-plugin";
+import injectTapEvent from 'utils/react-tap-event-plugin';
 
 const reducer = combineReducers({
   form: reduxFormReducer,
