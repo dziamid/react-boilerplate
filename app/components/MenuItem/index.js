@@ -9,3 +9,5 @@ export default class MenuItem extends Component {
     );
   }
 }
+
+MenuItem.displayName = 'MenuItem';

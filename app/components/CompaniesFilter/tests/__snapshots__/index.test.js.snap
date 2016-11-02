@@ -1,187 +1,66 @@
 exports[`<CompaniesFilter /> should render with default props 1`] = `
-<Popover
-  anchorOrigin={
-    Object {
-      "horizontal": "left",
-      "vertical": "bottom",
-    }
-  }
-  animated={true}
-  autoCloseWhenOffScreen={true}
-  canAutoPosition={true}
-  onRequestClose={[Function]}
-  open={true}
-  style={
-    Object {
-      "overflowY": "auto",
-    }
-  }
-  targetOrigin={
-    Object {
-      "horizontal": "left",
-      "vertical": "top",
-    }
-  }
-  useLayerForClickAway={true}
-  zDepth={1}>
-  <Menu
-    autoWidth={true}
+<Menu
+  autoWidth={true}
+  desktop={false}
+  disableAutoFocus={false}
+  initiallyKeyboardFocused={false}
+  maxHeight={null}
+  multiple={false}
+  onChange={[Function]}
+  onEscKeyDown={[Function]}
+  onItemTouchTap={[Function]}
+  onKeyDown={[Function]}
+  value="favorite">
+  <MenuItem
+    checked={false}
     desktop={false}
-    disableAutoFocus={false}
-    initiallyKeyboardFocused={false}
-    maxHeight={null}
-    multiple={false}
-    onChange={[Function]}
-    onEscKeyDown={[Function]}
-    onItemTouchTap={[Function]}
-    onKeyDown={[Function]}
-    openImmediately={true}
-    value="all">
-    <MenuItem
-      checked={false}
-      desktop={false}
-      disabled={false}
-      focusState="none"
-      insetChildren={false}
-      leftIcon={<ToggleRadioButtonChecked />}
-      primaryText="Show All Companies"
-      value="all" />
-    <Divider
-      inset={true} />
-    <MenuItem
-      checked={false}
-      desktop={false}
-      disabled={false}
-      focusState="none"
-      insetChildren={false}
-      leftIcon={<ToggleRadioButtonUnchecked />}
-      primaryText="Show Selected Companies"
-      value="custom" />
-    <Divider
-      inset={true} />
-    <MenuItem
-      checked={false}
-      desktop={false}
-      disabled={false}
-      focusState="none"
-      insetChildren={false}
-      leftIcon={<ToggleRadioButtonUnchecked />}
-      primaryText="Show Favorite Companies"
-      value="favorite" />
-    <Divider
-      inset={false} />
-    <MenuItem
-      checked={false}
-      desktop={false}
-      disabled={false}
-      focusState="none"
-      insetChildren={false}
-      leftIcon={<ActionSettings />}
-      primaryText="Manage Companies" />
-    <Divider
-      inset={false} />
-    <MenuItem
-      checked={false}
-      desktop={false}
-      disabled={false}
-      focusState="none"
-      insetChildren={false}
-      leftIcon={<ContentAdd />}
-      primaryText="Add New Company" />
-  </Menu>
-</Popover>
-`;
-
-exports[`<CompaniesFilter /> should render with default required props 1`] = `
-<Popover
-  anchorOrigin={
-    Object {
-      "horizontal": "left",
-      "vertical": "bottom",
-    }
-  }
-  animated={true}
-  autoCloseWhenOffScreen={true}
-  canAutoPosition={true}
-  onRequestClose={[Function]}
-  open={true}
-  style={
-    Object {
-      "overflowY": "auto",
-    }
-  }
-  targetOrigin={
-    Object {
-      "horizontal": "left",
-      "vertical": "top",
-    }
-  }
-  useLayerForClickAway={true}
-  zDepth={1}>
-  <Menu
-    autoWidth={true}
+    disabled={false}
+    focusState="none"
+    insetChildren={false}
+    leftIcon={<ToggleRadioButtonUnchecked />}
+    primaryText="Show All Companies"
+    value="all" />
+  <Divider
+    inset={true} />
+  <MenuItem
+    checked={false}
     desktop={false}
-    disableAutoFocus={false}
-    initiallyKeyboardFocused={false}
-    maxHeight={null}
-    multiple={false}
-    onChange={[Function]}
-    onEscKeyDown={[Function]}
-    onItemTouchTap={[Function]}
-    onKeyDown={[Function]}
-    openImmediately={true}
-    value="all">
-    <MenuItem
-      checked={false}
-      desktop={false}
-      disabled={false}
-      focusState="none"
-      insetChildren={false}
-      leftIcon={<ToggleRadioButtonChecked />}
-      primaryText="Show All Companies"
-      value="all" />
-    <Divider
-      inset={true} />
-    <MenuItem
-      checked={false}
-      desktop={false}
-      disabled={false}
-      focusState="none"
-      insetChildren={false}
-      leftIcon={<ToggleRadioButtonUnchecked />}
-      primaryText="Show Selected Companies"
-      value="custom" />
-    <Divider
-      inset={true} />
-    <MenuItem
-      checked={false}
-      desktop={false}
-      disabled={false}
-      focusState="none"
-      insetChildren={false}
-      leftIcon={<ToggleRadioButtonUnchecked />}
-      primaryText="Show Favorite Companies"
-      value="favorite" />
-    <Divider
-      inset={false} />
-    <MenuItem
-      checked={false}
-      desktop={false}
-      disabled={false}
-      focusState="none"
-      insetChildren={false}
-      leftIcon={<ActionSettings />}
-      primaryText="Manage Companies" />
-    <Divider
-      inset={false} />
-    <MenuItem
-      checked={false}
-      desktop={false}
-      disabled={false}
-      focusState="none"
-      insetChildren={false}
-      leftIcon={<ContentAdd />}
-      primaryText="Add New Company" />
-  </Menu>
-</Popover>
+    disabled={false}
+    focusState="none"
+    insetChildren={false}
+    leftIcon={<ToggleRadioButtonUnchecked />}
+    primaryText="Show Selected Companies"
+    value="custom" />
+  <Divider
+    inset={true} />
+  <MenuItem
+    checked={false}
+    desktop={false}
+    disabled={false}
+    focusState="none"
+    insetChildren={false}
+    leftIcon={<ToggleRadioButtonChecked />}
+    primaryText="Show Favorite Companies"
+    value="favorite" />
+  <Divider
+    inset={false} />
+  <MenuItem
+    checked={false}
+    desktop={false}
+    disabled={false}
+    focusState="none"
+    insetChildren={false}
+    leftIcon={<ActionSettings />}
+    primaryText="Manage Companies" />
+  <Divider
+    inset={false} />
+  <MenuItem
+    checked={false}
+    desktop={false}
+    disabled={false}
+    focusState="none"
+    insetChildren={false}
+    leftIcon={<ContentAdd />}
+    primaryText="Add New Company" />
+</Menu>
 `;
