@@ -3,7 +3,6 @@ import Snackbar from 'material-ui/Snackbar';
 import { connect } from 'react-redux';
 
 const Toastr = (props) => {
-  console.log('Toastr', props);
   const isOpen = props.activeToast !== null;
   const { message } = props.activeToast || {};
   return (

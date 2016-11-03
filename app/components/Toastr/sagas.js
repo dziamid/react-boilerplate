@@ -7,7 +7,7 @@ export function* watchToastrQueue() {
   while (true) {
     const state = yield select();
     const queue = state.getIn(['toastr', 'queue']);
-    console.log(queue);
+
     if (queue.size > 0) {
       const toast = queue.get(0);
       yield put(showToast(toast));

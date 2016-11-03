@@ -67,7 +67,6 @@ export default class CompaniesFilter extends React.Component {
     return (
       <Menu value={this.props.value} onChange={this.handleFilterChange}>
         <MenuItem
-          onTouchTap={() => console.log('MenuItem.onTouchTap')}
           value="all"
           primaryText="Show All Companies"
           leftIcon={this.radioIcon('all')}

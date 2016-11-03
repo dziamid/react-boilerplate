@@ -16,6 +16,7 @@ import Img from 'components/Img';
 import Footer from 'components/Footer';
 import Banner from './banner-metal.jpg';
 import A from 'components/A';
+import Toastr from 'components/Toastr';
 
 import styles from './styles.css';
 
@@ -34,6 +35,7 @@ function App(props) {
       </A>
       {React.Children.toArray(props.children)}
       <Footer />
+      <Toastr />
     </div>
   );
 }

@@ -32,6 +32,7 @@ import H2 from 'components/H2';
 import List from 'components/List';
 import ListItem from 'components/ListItem';
 import LoadingIndicator from 'components/LoadingIndicator';
+import SampleForm from 'components/SampleForm';
 
 import styles from './styles.css';
 
@@ -44,6 +45,7 @@ export class HomePage extends React.Component {
       this.props.onSubmitForm();
     }
   }
+
   /**
    * Changes the route
    *
@@ -67,14 +69,14 @@ export class HomePage extends React.Component {
     if (this.props.loading) {
       mainContent = (<List component={LoadingIndicator} />);
 
-    // Show an error if there is one
+      // Show an error if there is one
     } else if (this.props.error !== false) {
       const ErrorComponent = () => (
         <ListItem item={'Something went wrong, please try again!'} />
       );
       mainContent = (<List component={ErrorComponent} />);
 
-    // If we're not loading, don't have an error and there are repos, show the repos
+      // If we're not loading, don't have an error and there are repos, show the repos
     } else if (this.props.repos !== false) {
       mainContent = (<List items={this.props.repos} component={RepoListItem} />);
     }
@@ -88,14 +90,7 @@ export class HomePage extends React.Component {
           ]}
         />
         <div>
-          <section className={`${styles.textSection} ${styles.centered}`}>
-            <H2>
-              <FormattedMessage {...messages.startProjectHeader} />
-            </H2>
-            <p>
-              <FormattedMessage {...messages.startProjectMessage} />
-            </p>
-          </section>
+          <SampleForm />
           <section className={styles.textSection}>
             <H2>
               <FormattedMessage {...messages.trymeHeader} />

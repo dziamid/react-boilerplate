@@ -9,6 +9,8 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 
 import globalReducer from 'containers/App/reducer';
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
+import toastrReducer from 'components/Toastr/reducer';
+import { reducer as reduxFormReducer } from 'redux-form/immutable';
 
 /*
  * routeReducer
@@ -46,6 +48,8 @@ export default function createReducer(asyncReducers) {
     route: routeReducer,
     global: globalReducer,
     language: languageProviderReducer,
+    toastr: toastrReducer,
+    form: reduxFormReducer,
     ...asyncReducers,
   });
 }
