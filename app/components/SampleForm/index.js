@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Field, reduxForm, change, SubmissionError } from 'redux-form';
+import { Field, reduxForm, change, SubmissionError } from 'redux-form/immutable';
 import TextField from 'components/TextField';
 import Autocomplete from 'components/Autocomplete';
 import ChipInput from 'components/ChipInput';
@@ -146,7 +146,7 @@ SampleForm.propTypes = {
 const validate = (values) => {
   const errors = {};
 
-  if (!values.field1) {
+  if (!values.get('field1')) {
     errors.field1 = 'Required';
   }
 
