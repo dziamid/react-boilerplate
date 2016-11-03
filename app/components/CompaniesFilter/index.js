@@ -16,10 +16,14 @@ export default class CompaniesFilter extends React.Component {
     onFilterChange: PropTypes.func.isRequired,
     onCompanySelected: PropTypes.func.isRequired,
     onCompanyUnselected: PropTypes.func.isRequired,
+    selectedCompanies: PropTypes.array,
+    companies: PropTypes.array,
   };
 
   static defaultProps = {
     value: 'all',
+    selectedCompanies: [],
+    companies: [],
   };
 
   constructor(props) {
@@ -33,7 +37,6 @@ export default class CompaniesFilter extends React.Component {
       return;
     }
 
-    console.log(`will change companies filter to: ${value}`);
     this.props.onFilterChange(value);
   }
 
@@ -47,32 +50,37 @@ export default class CompaniesFilter extends React.Component {
   }
 
   render() {
+    const customMenuItems = this.props.value === 'custom' ? (
+      <div data-id="companies" className={styles.companies}>
+        { this.props.companies.map((c, i) => (
+          <Checkbox
+            key={i}
+            label={c.name}
+            value={c.id}
+            onCheck={(event, isChecked) => this.handleCompanyChanged(c, isChecked)}
+            checked={this.props.selectedCompanies.includes(c)}
+          />
+        ))}
+      </div>
+    ) : null;
+
     return (
       <Menu value={this.props.value} onChange={this.handleFilterChange}>
         <MenuItem
+          onTouchTap={() => console.log('MenuItem.onTouchTap')}
           value="all"
           primaryText="Show All Companies"
           leftIcon={this.radioIcon('all')}
         />
+
         <Divider inset />
+
         <MenuItem
           value="custom"
           primaryText="Show Selected Companies"
           leftIcon={this.radioIcon('custom')}
         />
-        { this.props.value === 'custom' ? (
-          <div className={styles.companies}>
-            { this.props.companies.map(c => (
-              <Checkbox
-                label={c.name}
-                value={c.id}
-                onCheck={(event, isChecked) => this.handleCompanyChanged(c, isChecked)}
-                checked={this.props.selectedCompanies.includes(c)}
-              />
-            ))}
-          </div>
-        ) : null}
-
+        { customMenuItems }
 
         <Divider inset />
         <MenuItem

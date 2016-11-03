@@ -1,66 +1,71 @@
-exports[`<CompaniesFilter /> should render with default props 1`] = `
-<Menu
-  autoWidth={true}
+exports[`<CompaniesFilter /> should render favorite filter correctly 1`] = `
+<MenuItem
+  checked={false}
   desktop={false}
-  disableAutoFocus={false}
-  initiallyKeyboardFocused={false}
-  maxHeight={null}
-  multiple={false}
-  onChange={[Function]}
-  onEscKeyDown={[Function]}
-  onItemTouchTap={[Function]}
-  onKeyDown={[Function]}
-  value="favorite">
-  <MenuItem
-    checked={false}
-    desktop={false}
+  disabled={false}
+  focusState="none"
+  insetChildren={false}
+  leftIcon={<ToggleRadioButtonChecked />}
+  primaryText="Show Favorite Companies"
+  value="favorite" />
+`;
+
+exports[`<CompaniesFilter /> should render show all companies correctly 1`] = `
+<MenuItem
+  checked={false}
+  desktop={false}
+  disabled={false}
+  focusState="none"
+  insetChildren={false}
+  leftIcon={<ToggleRadioButtonChecked />}
+  onTouchTap={[Function]}
+  primaryText="Show All Companies"
+  value="all" />
+`;
+
+exports[`<CompaniesFilter /> should render show custom filter correctly 1`] = `
+<MenuItem
+  checked={false}
+  desktop={false}
+  disabled={false}
+  focusState="none"
+  insetChildren={false}
+  leftIcon={<ToggleRadioButtonChecked />}
+  primaryText="Show Selected Companies"
+  value="custom" />
+`;
+
+exports[`<CompaniesFilter /> should render show custom filter correctly 2`] = `
+<div
+  className={undefined}
+  data-id="companies">
+  <Checkbox
+    checked={true}
     disabled={false}
-    focusState="none"
-    insetChildren={false}
-    leftIcon={<ToggleRadioButtonUnchecked />}
-    primaryText="Show All Companies"
-    value="all" />
-  <Divider
-    inset={true} />
-  <MenuItem
+    label="Airbnb"
+    labelPosition="right"
+    onCheck={[Function]}
+    value="Airbnb" />
+  <Checkbox
     checked={false}
-    desktop={false}
     disabled={false}
-    focusState="none"
-    insetChildren={false}
-    leftIcon={<ToggleRadioButtonUnchecked />}
-    primaryText="Show Selected Companies"
-    value="custom" />
-  <Divider
-    inset={true} />
-  <MenuItem
+    label="Adidas"
+    labelPosition="right"
+    onCheck={[Function]}
+    value="Adidas" />
+  <Checkbox
     checked={false}
-    desktop={false}
     disabled={false}
-    focusState="none"
-    insetChildren={false}
-    leftIcon={<ToggleRadioButtonChecked />}
-    primaryText="Show Favorite Companies"
-    value="favorite" />
-  <Divider
-    inset={false} />
-  <MenuItem
+    label="Tinder"
+    labelPosition="right"
+    onCheck={[Function]}
+    value="Tinder" />
+  <Checkbox
     checked={false}
-    desktop={false}
     disabled={false}
-    focusState="none"
-    insetChildren={false}
-    leftIcon={<ActionSettings />}
-    primaryText="Manage Companies" />
-  <Divider
-    inset={false} />
-  <MenuItem
-    checked={false}
-    desktop={false}
-    disabled={false}
-    focusState="none"
-    insetChildren={false}
-    leftIcon={<ContentAdd />}
-    primaryText="Add New Company" />
-</Menu>
+    label="Fedex"
+    labelPosition="right"
+    onCheck={[Function]}
+    value="Fedex" />
+</div>
 `;
