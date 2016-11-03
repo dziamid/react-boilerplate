@@ -3,9 +3,9 @@ import Snackbar from 'material-ui/Snackbar';
 import { connect } from 'react-redux';
 
 const Toastr = (props) => {
+  console.log('Toastr', props);
   const isOpen = props.activeToast !== null;
   const { message } = props.activeToast || {};
-  console.log(props);
   return (
     <div>
       <Snackbar
@@ -19,7 +19,7 @@ const Toastr = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  activeToast: state.toastr.activeToast,
+  activeToast: state.getIn(['toastr', 'activeToast']),
 });
 
 export default connect(mapStateToProps, null)(Toastr);

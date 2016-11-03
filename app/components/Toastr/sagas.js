@@ -6,10 +6,10 @@ const TIMEOUT = 5000;
 export function* watchToastrQueue() {
   while (true) {
     const state = yield select();
-    const queue = state.toastr.queue;
-
-    if (queue.length > 0) {
-      const toast = state.toastr.queue[0];
+    const queue = state.getIn(['toastr', 'queue']);
+    console.log(queue);
+    if (queue.size > 0) {
+      const toast = queue.get(0);
       yield put(showToast(toast));
 
       yield race({

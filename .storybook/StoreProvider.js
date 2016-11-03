@@ -1,11 +1,13 @@
 import React from 'react'
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga'
 import { reducer as reduxFormReducer } from 'redux-form';
 import toastrReducer from 'components/Toastr/reducer';
 import Toastr from 'components/Toastr';
 import rootSaga from './saga';
 import injectTapEvent from 'utils/react-tap-event-plugin';
+import { fromJS } from 'immutable';
+import { combineReducers } from 'redux-immutable';
 
 const reducer = combineReducers({
   form: reduxFormReducer,
@@ -22,6 +24,7 @@ const enhancers = [
 
 const store = createStore(
   reducer,
+  fromJS({}),
   compose(...enhancers),
 );
 

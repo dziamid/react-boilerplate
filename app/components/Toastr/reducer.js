@@ -1,33 +1,25 @@
-const without = require('lodash/without');
+import { fromJS } from 'immutable';
 
-const initialState = {
+const initialState = fromJS({
   queue: [],
   activeToast: null,
-};
+});
 
 function toastrReducer(state = initialState, action) {
   const toast = action.payload;
+  const queue = state.get('queue');
+
   switch (action.type) {
     case 'TOASTR_QUEUE':
-      return {
-        ...state,
-        queue: [
-          ...state.queue,
-          toast,
-        ],
-      };
+      return state.set('queue', queue.push(toast));
 
     case 'TOASTR_SHOW':
-      return {
-        queue: without(state.queue, toast),
-        activeToast: toast,
-      };
+      return state
+        .set('activeToast', toast)
+        .set('queue', queue.delete(queue.indexOf(toast)));
 
     case 'TOASTR_HIDE_ACTIVE':
-      return {
-        ...state,
-        activeToast: null,
-      };
+      return state.set('activeToast', null);
 
     case 'TOASTR_RESET':
       return initialState;
