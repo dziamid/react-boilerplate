@@ -74,9 +74,15 @@ class SampleForm extends Component {
         { dialog }
 
         <h1>Sample form with ReduxForm and MUI components</h1>
-        <form>
+        <form style={{ width: '100%' }}>
           <div>
-            <Field name="field1" component={TextField} type="text" label="Label on the top" />
+            <Field
+              name="field1"
+              component={TextField}
+              type="text"
+              label="Label on the top"
+              fullWidth
+            />
           </div>
 
           <div>
@@ -87,6 +93,7 @@ class SampleForm extends Component {
               withClear
               onClear={() => dispatch(change(form, 'field2', ''))}
               label="With clear button"
+              fullWidth
             />
           </div>
           <div>
@@ -96,6 +103,7 @@ class SampleForm extends Component {
               dataSource={countries.map(c => ({ text: c.name, value: c.code }))}
               label="Autocomplete"
               disableFreetext
+              fullWidth
             />
           </div>
           <div>
@@ -104,6 +112,7 @@ class SampleForm extends Component {
               component={Checkbox}
               label="Checkbox with label on the right"
               labelPosition="right"
+              fullWidth
             />
           </div>
           <div>
@@ -113,6 +122,7 @@ class SampleForm extends Component {
               component={ChipInput}
               dataSource={countries.map(c => c.name)}
               freetextDisabled
+              fullWidth
             />
           </div>
           <div className={styles.actionButtons}>
