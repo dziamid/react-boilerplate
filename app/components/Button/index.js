@@ -2,16 +2,9 @@ import React, { PropTypes } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import IconButton from 'material-ui/IconButton';
-import InlineSVG from 'svg-inline-react';
-
 import styles from './styles.css';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
-
-import close from 'components/common/images/close.svg';
-const icons = {
-  close,
-};
 
 function Button({ className, icon, label, raised, children, onClick, ...rest }) {
   const isLabelledButton = label !== undefined || children !== undefined;
@@ -23,7 +16,7 @@ function Button({ className, icon, label, raised, children, onClick, ...rest }) 
 
       { isIconOnlyButton ?
         <IconButton onClick={onClick}>
-          <InlineSVG src={icons[icon]} />
+          { icon }
         </IconButton>
         : null
       }
@@ -41,7 +34,7 @@ Button.propTypes = {
   className: PropTypes.string,
   onClick: PropTypes.func.isRequired,
   children: PropTypes.node,
-  icon: PropTypes.string,
+  icon: PropTypes.object,
   label: PropTypes.string,
 };
 

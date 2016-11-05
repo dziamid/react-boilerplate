@@ -1,6 +1,8 @@
 import React, { PropTypes, Component } from 'react';
 import { default as MUITextField } from 'material-ui/TextField';
 import Button from 'components/Button';
+import CloseIcon from 'material-ui/svg-icons/navigation/close';
+
 import styles from './styles.css';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
@@ -35,6 +37,14 @@ class TextField extends Component {
       withClear,
     };
 
+    const clearButton = (
+      <Button
+        onClick={this.handleClear}
+        className={styles.clearButton}
+        icon={ <CloseIcon /> }
+      />
+    );
+
     return (
       <div className={cx(rootClassnames)}>
         {withLeftLabel ? <label>{label}</label> : null}
@@ -47,9 +57,7 @@ class TextField extends Component {
           {...input}
           {...other}
         />
-
-        {withClear ? <Button onClick={this.handleClear} className={styles.clearButton} icon="close" /> : null }
-
+        { withClear ? clearButton : null }
       </div>
     );
   }

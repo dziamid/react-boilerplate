@@ -3,6 +3,7 @@ import { storiesOf, action } from '@kadira/storybook';
 import Button from '../index';
 import messages from './messages';
 import { FormattedMessage, IntlProvider } from 'react-intl';
+import CloseIcon from 'material-ui/svg-icons/navigation/close';
 
 storiesOf('Button', module)
 
@@ -22,7 +23,7 @@ storiesOf('Button', module)
   ))
 
   .add('Close button', () => (
-    <Button icon="close" />
+    <Button icon={ <CloseIcon /> } onClick={action('clicked')} />
   ))
 
   .add('Intl label button', () => (
