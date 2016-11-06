@@ -12,8 +12,7 @@ import Avatar from 'material-ui/Avatar';
 import sampleAvatar from 'components/common/images/sample-avatar.jpg';
 import { white } from 'material-ui/styles/colors';
 import Popover from 'material-ui/Popover';
-import Menu from 'material-ui/Menu';
-import MenuItem from 'material-ui/MenuItem';
+import AddMenu from './AddMenu';
 
 class Header extends Component {
   static propTypes = {
@@ -58,10 +57,7 @@ class Header extends Component {
             anchorEl={this.state.addPopoverAnchor}
             onRequestClose={this.closeAddPopover}
           >
-            <Menu>
-              <MenuItem primaryText="Add New Company" onClick={this.closeAddPopover} />
-              <MenuItem primaryText="Add New Job Opening" onClick={this.closeAddPopover} />
-            </Menu>
+            <AddMenu onItemTouchTap={this.closeAddPopover} />
           </Popover>
         </div>
 
