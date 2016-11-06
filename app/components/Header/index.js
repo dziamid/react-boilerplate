@@ -8,6 +8,7 @@ import muiThemeable from 'material-ui/styles/muiThemeable';
 import AddIcon from 'material-ui/svg-icons/content/add';
 import NotificationsIcon from 'material-ui/svg-icons/social/notifications';
 import ActivityIcon from 'material-ui/svg-icons/av/playlist-add-check';
+import AllCompaniesIcon from 'material-ui/svg-icons/action/account-balance';
 import Avatar from 'material-ui/Avatar';
 import sampleAvatar from 'components/common/images/sample-avatar.jpg';
 import { white } from 'material-ui/styles/colors';
@@ -68,17 +69,20 @@ class Header extends Component {
 
     const actions = (
       <div className={styles.actions}>
-        <div>
-          <Button icon={<AddIcon color={white} />} onClick={this.openAddPopover} />
-          <Popover
-            open={this.state.addPopoverOpen}
-            anchorEl={this.state.addPopoverAnchor}
-            onRequestClose={this.closeAddPopover}
-          >
-            <AddMenu onItemTouchTap={this.closeAddPopover} />
-          </Popover>
-        </div>
+        <Button
+          label="All Companies"
+          icon={<AllCompaniesIcon />}
+          style={{ color: 'white' }}
+        />
 
+        <Button icon={<AddIcon color={white} />} onClick={this.openAddPopover} />
+        <Popover
+          open={this.state.addPopoverOpen}
+          anchorEl={this.state.addPopoverAnchor}
+          onRequestClose={this.closeAddPopover}
+        >
+          <AddMenu onItemTouchTap={this.closeAddPopover} />
+        </Popover>
         <Button icon={<NotificationsIcon color={white} />} />
         <Button
           icon={<Avatar src={sampleAvatar} size={32} />}
