@@ -9,6 +9,9 @@ import injectTapEvent from 'utils/react-tap-event-plugin';
 import { fromJS } from 'immutable';
 import { combineReducers } from 'redux-immutable';
 
+import 'sanitize.css/sanitize.css';
+import '../app/containers/App/styles.css';
+
 const reducer = combineReducers({
   form: reduxFormReducer,
   toastr: toastrReducer,

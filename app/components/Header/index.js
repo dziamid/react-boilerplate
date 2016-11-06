@@ -77,7 +77,7 @@ class Header extends Component {
     return (
       <header className={styles.header}>
         <AppBar
-          title="Noviopus"
+          title="NOVIOPUS"
           iconElementRight={loggedIn ? actions : null}
         />
       </header>

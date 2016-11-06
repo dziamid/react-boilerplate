@@ -10,7 +10,7 @@ import React from 'react';
 import Helmet from 'react-helmet';
 
 // Import the CSS reset, which HtmlWebpackPlugin transfers to the build folder
-// import 'sanitize.css/sanitize.css';
+import 'sanitize.css/sanitize.css';
 
 import Img from 'components/Img';
 import Footer from 'components/Footer';
@@ -20,6 +20,7 @@ import A from 'components/A';
 import Toastr from 'components/Toastr';
 
 import styles from './styles.css';
+
 const loggedInUser = {
   username: 'gordon',
   email: 'gordonvaughan@sequitur.com',
