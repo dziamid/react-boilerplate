@@ -11,18 +11,60 @@ import ActivityIcon from 'material-ui/svg-icons/av/playlist-add-check';
 import Avatar from 'material-ui/Avatar';
 import sampleAvatar from 'components/common/images/sample-avatar.jpg';
 import { white } from 'material-ui/styles/colors';
+import Popover from 'material-ui/Popover';
+import Menu from 'material-ui/Menu';
+import MenuItem from 'material-ui/MenuItem';
 
 class Header extends Component {
   static propTypes = {
     user: PropTypes.object,
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      addPopoverOpen: false,
+      addPopoverAnchor: null,
+    };
+
+    this.openAddPopover = this.openAddPopover.bind(this);
+    this.closeAddPopover = this.closeAddPopover.bind(this);
+  }
+
+  openAddPopover(event) {
+    this.setState({
+      addPopoverOpen: !this.state.addPopoverOpen,
+      addPopoverAnchor: event.currentTarget,
+    });
+  }
+
+  closeAddPopover() {
+    this.setState({
+      addPopoverOpen: false,
+    });
+  }
+
+
   render() {
     const loggedIn = this.props.user !== undefined;
 
     const actions = (
       <div className={styles.actions}>
-        <Button icon={<AddIcon color={white} />} />
+        <div>
+          <Button icon={<AddIcon color={white} />} onClick={this.openAddPopover} />
+          <Popover
+            open={this.state.addPopoverOpen}
+            anchorEl={this.state.addPopoverAnchor}
+            onRequestClose={this.closeAddPopover}
+          >
+            <Menu>
+              <MenuItem primaryText="Add New Company" onClick={this.closeAddPopover} />
+              <MenuItem primaryText="Add New Job Opening" onClick={this.closeAddPopover} />
+            </Menu>
+          </Popover>
+        </div>
+
         <Button icon={<NotificationsIcon color={white} />} />
         <Button
           icon={<Avatar src={sampleAvatar} size={32} />}
