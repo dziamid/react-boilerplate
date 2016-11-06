@@ -98,6 +98,8 @@ class Header extends Component {
         <Popover
           open={this.state.companiesPopover.open}
           anchorEl={this.state.companiesPopover.anchor}
+          anchorOrigin={{ horizontal: 'middle', vertical: 'bottom' }}
+          targetOrigin={{ horizontal: 'middle', vertical: 'top' }}
           onRequestClose={this.companiesPopover.close}
         >
           <CompaniesFilter companies={this.props.companies} />
@@ -106,6 +108,8 @@ class Header extends Component {
         <Popover
           open={this.state.addPopover.open}
           anchorEl={this.state.addPopover.anchor}
+          anchorOrigin={{ horizontal: 'middle', vertical: 'bottom' }}
+          targetOrigin={{ horizontal: 'middle', vertical: 'top' }}
           onRequestClose={this.addPopover.close}
         >
           <AddMenu onItemTouchTap={this.addPopover.close} />

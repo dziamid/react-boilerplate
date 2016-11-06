@@ -11,6 +11,8 @@ import globalReducer from 'containers/App/reducer';
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
 import toastrReducer from 'components/Toastr/reducer';
 import { reducer as reduxFormReducer } from 'redux-form/immutable';
+import companiesFilterReducer from 'components/CompaniesFilter/reducer';
+import companiesReducer from 'components/Companies/reducer';
 
 /*
  * routeReducer
@@ -50,6 +52,9 @@ export default function createReducer(asyncReducers) {
     language: languageProviderReducer,
     toastr: toastrReducer,
     form: reduxFormReducer,
+    companiesFilter: companiesFilterReducer,
+    companies: companiesReducer,
+
     ...asyncReducers,
   });
 }
