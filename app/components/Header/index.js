@@ -26,30 +26,31 @@ class Header extends Component {
     super(props);
 
     this.state = {
-      addPopoverOpen: false,
-      addPopoverAnchor: null,
-
+      addPopover: { open: false, anchor: null },
       navigationOpen: false,
     };
 
-    this.openAddPopover = this.openAddPopover.bind(this);
-    this.closeAddPopover = this.closeAddPopover.bind(this);
+    this.registerPopover('addPopover');
 
     this.openNavigation = this.openNavigation.bind(this);
     this.closeNavigation = this.closeNavigation.bind(this);
   }
 
-  openAddPopover(event) {
-    this.setState({
-      addPopoverOpen: true,
-      addPopoverAnchor: event.currentTarget,
-    });
-  }
-
-  closeAddPopover() {
-    this.setState({
-      addPopoverOpen: false,
-    });
+  registerPopover(name) {
+    this[name] = {
+      open: (event) => {
+        this.setState({
+          [name]: { open: true, anchor: event.currentTarget },
+        });
+      },
+      close: () => {
+        this.setState({
+          [name]: { open: false },
+        });
+      },
+    };
+    this[name].open = this[name].open.bind(this);
+    this[name].close = this[name].close.bind(this);
   }
 
   openNavigation() {
@@ -65,6 +66,8 @@ class Header extends Component {
   }
 
   render() {
+    console.log('this.addPopover', this.addPopover);
+
     const loggedIn = this.props.user !== undefined;
 
     const actions = (
@@ -75,13 +78,13 @@ class Header extends Component {
           style={{ color: 'white' }}
         />
 
-        <Button icon={<AddIcon color={white} />} onClick={this.openAddPopover} />
+        <Button icon={<AddIcon color={white} />} onClick={this.addPopover.open} />
         <Popover
-          open={this.state.addPopoverOpen}
-          anchorEl={this.state.addPopoverAnchor}
-          onRequestClose={this.closeAddPopover}
+          open={this.state.addPopover.open}
+          anchorEl={this.state.addPopover.anchor}
+          onRequestClose={this.addPopover.close}
         >
-          <AddMenu onItemTouchTap={this.closeAddPopover} />
+          <AddMenu onItemTouchTap={this.addPopover.close} />
         </Popover>
         <Button icon={<NotificationsIcon color={white} />} />
         <Button
