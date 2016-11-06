@@ -16,6 +16,8 @@ import Popover from 'material-ui/Popover';
 import Drawer from 'material-ui/Drawer';
 import AddMenu from './AddMenu';
 import Navigation from 'components/Navigation';
+import CompaniesFilter from 'components/CompaniesFilter';
+import { connect } from 'react-redux';
 
 class Header extends Component {
   static propTypes = {
@@ -27,10 +29,12 @@ class Header extends Component {
 
     this.state = {
       addPopover: { open: false, anchor: null },
+      companiesPopover: { open: false, anchor: null },
       navigationOpen: false,
     };
 
     this.registerPopover('addPopover');
+    this.registerPopover('companiesPopover');
 
     this.openNavigation = this.openNavigation.bind(this);
     this.closeNavigation = this.closeNavigation.bind(this);
@@ -65,19 +69,39 @@ class Header extends Component {
     });
   }
 
-  render() {
-    console.log('this.addPopover', this.addPopover);
+  getFilterButtonLabel() { // todo: move to a computed selector
+    const { value, companies } = this.props.companiesFilter;
+    if (value === 'all') {
+      return 'All Companies';
+    } else if (value === 'favorite') {
+      return 'Favorite Companies';
+    } else if (value === 'custom' && companies.length > 1) {
+      return 'Some Companies';
+    } else if (value === 'custom' && companies.length === 1) {
+      return companies[0].name;
+    }
 
+    return 'No Companies';
+  }
+
+  render() {
     const loggedIn = this.props.user !== undefined;
 
     const actions = (
       <div className={styles.actions}>
         <Button
-          label="All Companies"
+          onClick={this.companiesPopover.open}
+          label={this.getFilterButtonLabel()}
           icon={<AllCompaniesIcon />}
           style={{ color: 'white' }}
         />
-
+        <Popover
+          open={this.state.companiesPopover.open}
+          anchorEl={this.state.companiesPopover.anchor}
+          onRequestClose={this.companiesPopover.close}
+        >
+          <CompaniesFilter companies={this.props.companies} />
+        </Popover>
         <Button icon={<AddIcon color={white} />} onClick={this.addPopover.open} />
         <Popover
           open={this.state.addPopover.open}
@@ -115,4 +139,9 @@ class Header extends Component {
 
 }
 
-export default muiThemeable()(Header);
+const mapStateToProps = (state) => ({
+  companiesFilter: state.get('companiesFilter').toJS(), // todo: use selectors instead
+  companies: state.get('companies'),
+});
+
+export default connect(mapStateToProps, null)(muiThemeable()(Header));

@@ -3,6 +3,8 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga'
 import { reducer as reduxFormReducer } from 'redux-form/immutable';
 import toastrReducer from 'components/Toastr/reducer';
+import companiesFilterReducer from 'components/CompaniesFilter/reducer';
+import companiesReducer from 'components/Companies/reducer';
 import Toastr from 'components/Toastr';
 import rootSaga from './saga';
 import injectTapEvent from 'utils/react-tap-event-plugin';
@@ -15,6 +17,9 @@ import '../app/containers/App/styles.css';
 const reducer = combineReducers({
   form: reduxFormReducer,
   toastr: toastrReducer,
+  companiesFilter: companiesFilterReducer,
+  companies: companiesReducer,
+
 });
 
 const devtools = window.devToolsExtension || (() => (noop) => noop);

@@ -8,22 +8,18 @@ import RadioButtonOff from 'material-ui/svg-icons/toggle/radio-button-unchecked'
 import SettingsIcon from 'material-ui/svg-icons/action/settings';
 import AddIcon from 'material-ui/svg-icons/content/add';
 import styles from './styles.css';
+import { connect } from 'react-redux';
+import { changeValue, selectCompany, unselectCompany } from './actions';
 
-export default class CompaniesFilter extends React.Component {
+class CompaniesFilter extends React.Component {
 
   static propTypes = {
     value: PropTypes.string,
+    selectedCompanies: PropTypes.array,
+    companies: PropTypes.array,
     onFilterChange: PropTypes.func.isRequired,
     onCompanySelected: PropTypes.func.isRequired,
     onCompanyUnselected: PropTypes.func.isRequired,
-    selectedCompanies: PropTypes.array,
-    companies: PropTypes.array,
-  };
-
-  static defaultProps = {
-    value: 'all',
-    selectedCompanies: [],
-    companies: [],
   };
 
   constructor(props) {
@@ -102,3 +98,16 @@ export default class CompaniesFilter extends React.Component {
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  value: state.getIn(['companiesFilter', 'value']),
+  selectedCompanies: state.getIn(['companiesFilter', 'companies']),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onFilterChange: (value) => dispatch(changeValue(value)),
+  onCompanySelected: (company) => dispatch(selectCompany(company)),
+  onCompanyUnselected: (company) => dispatch(unselectCompany(company)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CompaniesFilter);
