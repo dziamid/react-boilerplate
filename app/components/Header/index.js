@@ -12,7 +12,9 @@ import Avatar from 'material-ui/Avatar';
 import sampleAvatar from 'components/common/images/sample-avatar.jpg';
 import { white } from 'material-ui/styles/colors';
 import Popover from 'material-ui/Popover';
+import Drawer from 'material-ui/Drawer';
 import AddMenu from './AddMenu';
+import Navigation from 'components/Navigation';
 
 class Header extends Component {
   static propTypes = {
@@ -25,15 +27,21 @@ class Header extends Component {
     this.state = {
       addPopoverOpen: false,
       addPopoverAnchor: null,
+
+      navigationOpen: false,
     };
 
     this.openAddPopover = this.openAddPopover.bind(this);
     this.closeAddPopover = this.closeAddPopover.bind(this);
+
+    this.openNavigation = this.openNavigation.bind(this);
+    this.closeNavigation = this.closeNavigation.bind(this);
+
   }
 
   openAddPopover(event) {
     this.setState({
-      addPopoverOpen: !this.state.addPopoverOpen,
+      addPopoverOpen: true,
       addPopoverAnchor: event.currentTarget,
     });
   }
@@ -44,6 +52,17 @@ class Header extends Component {
     });
   }
 
+  openNavigation() {
+    this.setState({
+      navigationOpen: true,
+    });
+  }
+
+  closeNavigation() {
+    this.setState({
+      navigationOpen: false,
+    });
+  }
 
   render() {
     const loggedIn = this.props.user !== undefined;
@@ -74,8 +93,16 @@ class Header extends Component {
       <header className={styles.header}>
         <AppBar
           title="NOVIOPUS"
+          onLeftIconButtonTouchTap={this.openNavigation}
           iconElementRight={loggedIn ? actions : null}
         />
+        <Drawer
+          docked={false}
+          open={this.state.navigationOpen}
+          onRequestChange={this.closeNavigation}
+        >
+          <Navigation onItemTouchTap={this.closeNavigation} />
+        </Drawer>
       </header>
     );
   }
