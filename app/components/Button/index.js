@@ -15,7 +15,7 @@ function Button({ className, icon, label, raised, children, onClick, ...rest }) 
     <div className={cx(styles.root, className)}>
 
       { isIconOnlyButton ?
-        <IconButton onClick={onClick}>
+        <IconButton onClick={onClick} {...rest}>
           { icon }
         </IconButton>
         : null

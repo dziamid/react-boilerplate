@@ -52,6 +52,13 @@ module.exports = {
         exclude: /(images)/,
         loader: 'url?limit=1&name=fonts/[name].[ext]'
       },
+      {
+        test: /\.(jpg|png|gif)$/,
+        loaders: [
+          'file-loader',
+          'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}}',
+        ],
+      }
     ],
   },
 };

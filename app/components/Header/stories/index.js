@@ -8,8 +8,17 @@ const Layout = ({ children }) => (
   </div>
 );
 
+const loggedInUser = {
+  username: 'gordon',
+  email: 'gordonvaughan@sequitur.com',
+  name: 'Gordon Vaughan',
+};
+
 storiesOf('Header', module)
   .addDecorator((getStory) => <Layout>{getStory()}</Layout>)
   .add('logged out', () => (
     <Header />
+  ))
+  .add('logged in', () => (
+    <Header user={loggedInUser} />
   ));
