@@ -36,7 +36,6 @@ class Header extends Component {
 
     this.openNavigation = this.openNavigation.bind(this);
     this.closeNavigation = this.closeNavigation.bind(this);
-
   }
 
   openAddPopover(event) {
