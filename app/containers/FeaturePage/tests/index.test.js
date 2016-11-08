@@ -3,7 +3,7 @@ import { shallow, mount } from 'enzyme';
 import React from 'react';
 
 import { FormattedMessage } from 'react-intl';
-import { context } from 'components/common/decorators';
+import { default as context } from 'tests/context/all';
 import { push } from 'react-router-redux';
 
 import messages from '../messages';
@@ -24,7 +24,7 @@ describe('<FeaturePage />', () => {
     )).toBe(true);
   });
 
-  fit('should redirect to "/" when button clicked', () => {
+  it('should redirect to "/" when button clicked', () => {
     const dispatch = jest.fn();
 
     const renderedComponent = mount(context(
