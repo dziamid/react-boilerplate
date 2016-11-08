@@ -5,6 +5,8 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import { shallowToJson } from 'enzyme-to-json';
 import Button from '../index';
+import CloseIcon from 'material-ui/svg-icons/navigation/close';
+
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import theme from 'theme';
@@ -25,7 +27,7 @@ describe('<Button />', () => {
 
   it('should render Button with svg icon', () => {
     const wrapper = shallow(
-      <Button icon={ <CloseIcon /> } onClick={noop} />
+      <Button icon={<CloseIcon />} onClick={noop} />
     );
 
     expect(shallowToJson(wrapper)).toMatchSnapshot();
@@ -45,7 +47,7 @@ describe('<Button />', () => {
   it('should handle click events with icon', () => {
     const onClickSpy = jest.fn();
     const wrapper = mount(
-      themed(<Button onClick={onClickSpy} icon={ <CloseIcon /> } />)
+      themed(<Button onClick={onClickSpy} icon={<CloseIcon />} />)
     );
 
     wrapper.find('button').simulate('click');

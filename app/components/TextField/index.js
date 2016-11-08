@@ -41,7 +41,7 @@ class TextField extends Component {
       <Button
         onClick={this.handleClear}
         className={styles.clearButton}
-        icon={ <CloseIcon /> }
+        icon={<CloseIcon />}
       />
     );
 

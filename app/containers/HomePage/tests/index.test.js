@@ -12,9 +12,11 @@ import { push } from 'react-router-redux';
 import RepoListItem from 'containers/RepoListItem';
 import List from 'components/List';
 import LoadingIndicator from 'components/LoadingIndicator';
-import { context } from 'components/common/decorators';
+import { store, intl, theme } from 'components/common/decorators';
 import injectTapEvent from 'utils/react-tap-event-plugin';
 injectTapEvent();
+
+const context = (children) => store(intl(theme(children)));
 
 describe('<HomePage />', () => {
   it('should render the loading indicator when its loading', () => {
@@ -84,7 +86,7 @@ describe('<HomePage />', () => {
     const renderedComponent = mount(context(
       <HomePage loading changeRoute={openRoute} />
     ));
-    const button = renderedComponent.find('button');
+    const button = renderedComponent.find('[data-id="features"]');
     button.simulate('click');
     expect(openRouteSpy).toHaveBeenCalled();
   });

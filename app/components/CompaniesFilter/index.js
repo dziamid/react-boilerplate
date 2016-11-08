@@ -11,7 +11,7 @@ import styles from './styles.css';
 import { connect } from 'react-redux';
 import { changeValue, selectCompany, unselectCompany } from './actions';
 
-class CompaniesFilter extends React.Component {
+export class CompaniesFilter extends React.Component {
 
   static propTypes = {
     value: PropTypes.string,

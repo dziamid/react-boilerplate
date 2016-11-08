@@ -102,7 +102,6 @@ class SampleForm extends Component {
               component={Autocomplete}
               dataSource={countries.map(c => ({ text: c.name, value: c.code }))}
               label="Autocomplete"
-              disableFreetext
               fullWidth
             />
           </div>
@@ -112,7 +111,6 @@ class SampleForm extends Component {
               component={Checkbox}
               label="Checkbox with label on the right"
               labelPosition="right"
-              fullWidth
             />
           </div>
           <div>

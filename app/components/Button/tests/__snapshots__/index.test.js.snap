@@ -1,35 +1,29 @@
-exports[`<Button /> should render Button with a known icon 1`] = `
-<div
-  className="">
-  <IconButton
-    disableTouchRipple={false}
-    disabled={false}
-    iconStyle={Object {}}
-    onClick={[Function]}
-    tooltipPosition="bottom-center"
-    touch={false}>
-    <InlineSVG
-      element="i"
-      raw={false}
-      src="SVG_MOCK" />
-  </IconButton>
-</div>
+exports[`<Button /> should render Button with label 1`] = `
+<FlatButton
+  disabled={false}
+  icon={undefined}
+  label="Button with label"
+  labelPosition="after"
+  labelStyle={Object {}}
+  onClick={[Function]}
+  onKeyboardFocus={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  onTouchStart={[Function]}
+  primary={false}
+  secondary={false} />
 `;
 
-exports[`<Button /> should render Button with label 1`] = `
-<div
-  className="">
-  <FlatButton
-    disabled={false}
-    label="Button with label"
-    labelPosition="after"
-    labelStyle={Object {}}
-    onClick={[Function]}
-    onKeyboardFocus={[Function]}
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-    onTouchStart={[Function]}
-    primary={false}
-    secondary={false} />
-</div>
+exports[`<Button /> should render Button with svg icon 1`] = `
+<IconButton
+  disableTouchRipple={false}
+  disabled={false}
+  icon={<NavigationClose />}
+  iconStyle={Object {}}
+  label={undefined}
+  onClick={[Function]}
+  tooltipPosition="bottom-center"
+  touch={false}>
+  <NavigationClose />
+</IconButton>
 `;

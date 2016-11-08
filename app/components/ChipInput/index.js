@@ -57,6 +57,7 @@ export default class ChipInput extends Component {
         ...inputProps,
       },
       label,
+      freetextDisabled, // eslint-disable-line no-unused-vars
       ...otherProps,
 
     } = this.props;
