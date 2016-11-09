@@ -8,7 +8,7 @@ import CalendarIcon from 'material-ui/svg-icons/action/date-range';
 import ReportsIcon from 'material-ui/svg-icons/editor/insert-chart';
 
 const Navigation = (props) => (
-  <Menu {...props}>
+  <Menu disableAutoFocus {...props}>
     <MenuItem primaryText="Overview" leftIcon={<OverviewIcon />} />
     <MenuItem primaryText="Jobs" leftIcon={<JobsIcon />} />
     <MenuItem primaryText="Candidate" leftIcon={<CandidateIcon />} />
