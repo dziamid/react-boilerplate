@@ -5,6 +5,10 @@
 const path = require('path');
 const webpack = require('webpack');
 
+const TsConfigPathsPlugin = require('awesome-typescript-loader').TsConfigPathsPlugin;
+const ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
+
+
 // PostCSS plugins
 const cssnext = require('postcss-cssnext');
 const postcssFocus = require('postcss-focus');
@@ -18,6 +22,9 @@ module.exports = (options) => ({
   }, options.output), // Merge with env dependent settings
   module: {
     loaders: [{
+      test: /\.tsx?$/,
+      loader: 'awesome-typescript-loader'
+    }, {
       test: /\.js$/, // Transform all .js files required somewhere with Babel
       loader: 'babel',
       exclude: /node_modules/,
@@ -57,6 +64,9 @@ module.exports = (options) => ({
     }],
   },
   plugins: options.plugins.concat([
+    new TsConfigPathsPlugin(),
+    new ForkCheckerPlugin(),
+
     new webpack.ProvidePlugin({
       // make fetch available
       fetch: 'exports?self.fetch!whatwg-fetch',
@@ -83,9 +93,10 @@ module.exports = (options) => ({
   resolve: {
     modules: ['app', 'node_modules'],
     extensions: [
-      '',
       '.js',
       '.jsx',
+      '.ts',
+      '.tsx',
       '.react.js',
     ],
     mainFields: [
