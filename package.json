@@ -226,7 +226,16 @@
       ".*\\.svg$": "<rootDir>/mocks/svg.js"
     },
     "setupTestFrameworkScriptFile": "<rootDir>/internals/testing/test-bundler.js",
-    "testRegex": "tests/.*\\.test\\.js$"
+    "testRegex": "tests/.*\\.test\\.(ts|tsx|js)$",
+    "transform": {
+      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "json"
+    ]
   },
   "dependencies": {
     "babel-polyfill": "6.13.0",
@@ -330,6 +339,7 @@
     "style-loader": "0.13.1",
     "stylelint": "7.2.0",
     "stylelint-config-standard": "13.0.0",
+    "ts-jest": "^17.0.0",
     "tslint": "^3.15.1",
     "tslint-loader": "^2.1.5",
     "tslint-react": "^1.1.0",
