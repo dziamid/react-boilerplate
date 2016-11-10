@@ -13,9 +13,13 @@
 }
 
 .clearButton {
-  display: inline-block;
-  margin-left: -34px;
+  position: absolute !important;
+  bottom: 0;
+  right: 0;
   width: 24px;
   height: 24px;
-  fill: rgba(0, 0, 0, 0.298039);
+}
+
+.withClear {
+  position: relative;
 }
