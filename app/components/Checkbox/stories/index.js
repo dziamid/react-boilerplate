@@ -7,14 +7,7 @@ const parentProps = (checked) => ({
   meta: {},
 });
 
-const layoutStyle = {
-  maxWidth: '256px',
-  margin: '20px',
-};
-const layout = (getStory) => <div style={layoutStyle}>{getStory()}</div>
-
 storiesOf('Checkbox', module)
-  .addDecorator(layout)
   .add('default', () => (
     <div>
       <Checkbox {...parentProps(false)} />

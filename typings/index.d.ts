@@ -49,7 +49,6 @@
 /// <reference path="globals/validator/index.d.ts" />
 /// <reference path="globals/webpack/index.d.ts" />
 /// <reference path="globals/whatwg-fetch/index.d.ts" />
-/// <reference path="globals/whatwg-streams/index.d.ts" />
 /// <reference path="modules/graphql/index.d.ts" />
 /// <reference path="modules/markdown-it/index.d.ts" />
 /// <reference path="modules/material-ui/index.d.ts" />
