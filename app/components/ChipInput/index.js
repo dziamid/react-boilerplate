@@ -13,7 +13,7 @@ export default class ChipInput extends Component {
       onBlur: () => {
       },
     },
-    filter: filters.caseInsensitiveStartsWithFilter,
+    filter: filters.caseInsensitiveFilter,
     freetextDisabled: false,
   };
 

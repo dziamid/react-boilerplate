@@ -32,7 +32,7 @@ export default class Autocomplete extends Component {
       onChange: () => {
       },
     },
-    filter: caseInsensitiveStartsWithFilter,
+    filter: caseInsensitiveFilter,
     fullWidth: true,
   };
 
