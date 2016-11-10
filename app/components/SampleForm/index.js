@@ -103,6 +103,8 @@ class SampleForm extends Component {
               dataSource={countries.map(c => ({ text: c.name, value: c.code }))}
               label="Autocomplete"
               fullWidth
+              withClear
+              onClear={() => dispatch(change(form, 'field3', ''))}
             />
           </div>
           <div>

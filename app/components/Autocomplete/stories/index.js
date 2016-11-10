@@ -41,4 +41,12 @@ storiesOf('Autocomplete', module)
       dataSource={countries.map(c => ({ text: c.name, value: c.code }))}
       label="Choose Country"
     />
+  ))
+  .add('with clear', () => (
+    <Autocomplete
+      dataSource={countries.map(c => ({ text: c.name, value: c.code }))}
+      label="Choose Country"
+      withClear
+      onClear={action('onClear')}
+    />
   ));
