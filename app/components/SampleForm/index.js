@@ -1,11 +1,12 @@
 import React, { PropTypes, Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Field, reduxForm, change, SubmissionError } from 'redux-form/immutable';
+import { Field, FieldArray, reduxForm, change, SubmissionError } from 'redux-form/immutable';
 import TextField from 'components/TextField';
 import Autocomplete from 'components/Autocomplete';
 import AddressAutocomplete from 'components/AddressAutocomplete';
 import ChipInput from 'components/ChipInput';
+import { renderUsers } from 'components/UsersForm';
 import Button from 'components/Button';
 import Checkbox from 'components/Checkbox';
 import Dialog from 'components/Dialog';
@@ -131,6 +132,9 @@ class SampleForm extends Component {
               onClear={() => dispatch(change(form, 'address', ''))}
             />
           </div>
+          <div>
+            <FieldArray name="users" component={renderUsers} />
+          </div>
 
           <div className={styles.actionButtons}>
             <Button raised default onClick={reset} disabled={submitting}>Clear</Button>
@@ -175,6 +179,9 @@ export default connect(
   () => ({
     initialValues: {
       countries: [],
+      users: [
+        { email: 'sample@user.com', name: 'Sample User' },
+      ],
     },
   }),
   dispatch => bindActionCreators(toastrActions, dispatch))(form);
