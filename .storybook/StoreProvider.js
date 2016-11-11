@@ -5,6 +5,7 @@ import { reducer as reduxFormReducer } from 'redux-form/immutable';
 import toastrReducer from 'components/Toastr/reducer';
 import companiesFilterReducer from 'components/CompaniesFilter/reducer';
 import companiesReducer from 'components/Companies/reducer';
+import addressAutocompleteReducer from 'components/AddressAutocomplete/reducer';
 import Toastr from 'components/Toastr';
 import rootSaga from './saga';
 import injectTapEvent from 'utils/react-tap-event-plugin';
@@ -19,7 +20,7 @@ const reducer = combineReducers({
   toastr: toastrReducer,
   companiesFilter: companiesFilterReducer,
   companies: companiesReducer,
-
+  addressAutocomplete: addressAutocompleteReducer
 });
 
 const devtools = window.devToolsExtension || (() => (noop) => noop);

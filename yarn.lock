@@ -5708,6 +5708,10 @@ listr@^0.4.3:
     stream-to-observable "^0.1.0"
     strip-ansi "^3.0.1"
 
+load-google-maps-api:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/load-google-maps-api/-/load-google-maps-api-0.0.2.tgz#e77f4189f087f6f9ae93b1026a9012791c909c31"
+
 load-json-file@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/load-json-file/-/load-json-file-1.1.0.tgz#956905708d58b4bab4c2261b04f59f31c99374c0"
@@ -8232,9 +8236,9 @@ redux-immutable@3.0.8:
   dependencies:
     immutable "^3.7.6"
 
-redux-saga@0.11.1:
-  version "0.11.1"
-  resolved "https://registry.yarnpkg.com/redux-saga/-/redux-saga-0.11.1.tgz#dc2023d059af0b91c0b1b4febce21194b67d5a58"
+redux-saga@0.12.1:
+  version "0.12.1"
+  resolved "https://registry.yarnpkg.com/redux-saga/-/redux-saga-0.12.1.tgz#79c9263d67486fd26a7a3d3b9df8ed65057a9fc6"
 
 redux@^3.5.2, redux@3.6.0:
   version "3.6.0"
