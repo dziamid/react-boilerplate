@@ -15,6 +15,7 @@ class TextField extends Component {
   constructor() {
     super();
     this.handleClear = this.handleClear.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleClear() {
@@ -22,9 +23,16 @@ class TextField extends Component {
     this.muiTextField.focus();
   }
 
+  handleChange(e) {
+    this.props.input.onChange(e.target.value);
+  }
+
   render() {
     const {
-      input,
+      input: {
+        onChange, // eslint-disable-line no-unused-vars
+        ...inputProps,
+      },
       label,
       onClear, // eslint-disable-line no-unused-vars
       withClear,
@@ -58,7 +66,8 @@ class TextField extends Component {
           floatingLabelText={floatingLabel}
           floatingLabelFixed={floatingLabel !== undefined}
           errorText={touched && error}
-          {...input}
+          onChange={this.handleChange}
+          {...inputProps}
           {...other}
         />
         { withClear ? clearButton : null }

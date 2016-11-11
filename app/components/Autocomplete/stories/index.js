@@ -1,49 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
 import Autocomplete from '../index';
 import countries from 'components/common/stories/countries';
-
-class Form extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      value: '',
-    };
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange(value) {
-    this.setState({ value });
-    action('onChange')(value);
-  }
-
-  handleClear() {
-    action('onClear')();
-    this.setState({ value: '' });
-  }
-
-  render() {
-    const props = {
-      input: {
-        name: 'field1',
-        onChange: this.handleChange,
-        value: this.state.value,
-      },
-      meta: {},
-      onClear: () => this.handleClear(),
-    };
-    return (
-      <div>
-        {React.cloneElement(this.props.children, props)}
-      </div>
-    );
-  }
-}
-
+import ReduxFormField from 'stories/ReduxFormField';
 
 storiesOf('Autocomplete', module)
-  .addDecorator(getStory => <Form>{getStory()}</Form>)
+  .addDecorator(getStory => <ReduxFormField>{getStory()}</ReduxFormField>)
   .add('default', () => (
     <Autocomplete
       dataSource={countries.map(c => ({ text: c.name, value: c.code }))}
