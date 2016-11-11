@@ -15,6 +15,7 @@ export default class ChipInput extends Component {
     },
     filter: filters.caseInsensitiveFilter,
     freetextDisabled: false,
+    fullWidth: true,
   };
 
   constructor(props) {

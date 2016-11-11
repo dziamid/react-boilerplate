@@ -13,6 +13,7 @@ import toastrReducer from 'components/Toastr/reducer';
 import { reducer as reduxFormReducer } from 'redux-form/immutable';
 import companiesFilterReducer from 'components/CompaniesFilter/reducer';
 import companiesReducer from 'components/Companies/reducer';
+import addressAutocompleteReducer from 'components/AddressAutocomplete/reducer';
 
 /*
  * routeReducer
@@ -54,6 +55,7 @@ export default function createReducer(asyncReducers) {
     form: reduxFormReducer,
     companiesFilter: companiesFilterReducer,
     companies: companiesReducer,
+    addressAutocomplete: addressAutocompleteReducer,
 
     ...asyncReducers,
   });

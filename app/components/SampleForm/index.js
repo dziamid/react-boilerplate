@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Field, reduxForm, change, SubmissionError } from 'redux-form/immutable';
 import TextField from 'components/TextField';
 import Autocomplete from 'components/Autocomplete';
+import AddressAutocomplete from 'components/AddressAutocomplete';
 import ChipInput from 'components/ChipInput';
 import Button from 'components/Button';
 import Checkbox from 'components/Checkbox';
@@ -81,7 +82,6 @@ class SampleForm extends Component {
               component={TextField}
               type="text"
               label="Label on the top"
-              fullWidth
             />
           </div>
 
@@ -93,7 +93,6 @@ class SampleForm extends Component {
               withClear
               onClear={() => dispatch(change(form, 'field2', ''))}
               label="With clear button"
-              fullWidth
             />
           </div>
           <div>
@@ -102,7 +101,6 @@ class SampleForm extends Component {
               component={Autocomplete}
               dataSource={countries.map(c => ({ text: c.name, value: c.code }))}
               label="Autocomplete"
-              fullWidth
               withClear
               onClear={() => dispatch(change(form, 'field3', ''))}
             />
@@ -122,9 +120,18 @@ class SampleForm extends Component {
               component={ChipInput}
               dataSource={countries.map(c => c.name)}
               freetextDisabled
-              fullWidth
             />
           </div>
+          <div>
+            <Field
+              name="address"
+              label="Enter Address"
+              component={AddressAutocomplete}
+              withClear
+              onClear={() => dispatch(change(form, 'address', ''))}
+            />
+          </div>
+
           <div className={styles.actionButtons}>
             <Button raised default onClick={reset} disabled={submitting}>Clear</Button>
             <Button
