@@ -74,6 +74,7 @@ export default class Autocomplete extends Component {
       meta: { touched, error },
       label,
       withClear,
+      onClear, // eslint-disable-line no-unused-vars
       ...other,
     } = this.props;
 

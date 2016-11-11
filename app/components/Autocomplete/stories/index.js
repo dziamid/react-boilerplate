@@ -10,20 +10,28 @@ class Form extends Component {
     this.state = {
       value: '',
     };
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  onChange(value) {
+  handleChange(value) {
     this.setState({ value });
+    action('onChange')(value);
+  }
+
+  handleClear() {
+    action('onClear')();
+    this.setState({ value: '' });
   }
 
   render() {
     const props = {
       input: {
         name: 'field1',
-        onChange: action('onChange'),
+        onChange: this.handleChange,
         value: this.state.value,
       },
       meta: {},
+      onClear: () => this.handleClear(),
     };
     return (
       <div>
