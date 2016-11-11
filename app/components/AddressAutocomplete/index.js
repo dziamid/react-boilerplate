@@ -29,6 +29,7 @@ export class AddressAutocomplete extends React.Component {
         onChange, // eslint-disable-line no-unused-vars
         ...inputProps,
       },
+      dispatch, // eslint-disable-line no-unused-vars
       ...other,
     } = this.props;
 

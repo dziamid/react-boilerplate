@@ -57,6 +57,7 @@ export default class ChipInput extends Component {
         onBlur, // eslint-disable-line no-unused-vars
         ...inputProps,
       },
+      meta, // eslint-disable-line no-unused-vars
       label,
       freetextDisabled, // eslint-disable-line no-unused-vars
       ...otherProps,
@@ -67,7 +68,7 @@ export default class ChipInput extends Component {
       <MUIChipInput
         floatingLabelText={label}
         floatingLabelFixed={label !== undefined}
-        value={value}
+        searchText={value}
         onRequestAdd={this.handleRequestAdd}
         onRequestDelete={this.handleRequestDelete}
         onBlur={this.handleBlur}

@@ -18,7 +18,7 @@ exports[`<Button /> should render Button with svg icon 1`] = `
 <IconButton
   disableTouchRipple={false}
   disabled={false}
-  icon={<NavigationClose />}
+  icon={undefined}
   iconStyle={Object {}}
   label={undefined}
   onClick={[Function]}

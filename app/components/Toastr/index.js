@@ -1,21 +1,26 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Snackbar from 'material-ui/Snackbar';
 import { connect } from 'react-redux';
 
-const Toastr = (props) => {
-  const isOpen = props.activeToast !== null;
-  const { message } = props.activeToast || {};
-  return (
-    <div>
-      <Snackbar
-        open={isOpen}
-        message={message}
-        autoHideDuration={0}
-        action="undo"
-      />
-    </div>
-  );
-};
+class Toastr extends Component {
+
+  render() {
+    const { activeToast } = this.props;
+
+    return (
+      <div>
+        <Snackbar
+          open={activeToast !== null}
+          message={activeToast ? activeToast.message : ''}
+          autoHideDuration={0}
+          action="undo"
+        />
+      </div>
+    );
+  }
+
+}
+
 
 const mapStateToProps = (state) => ({
   activeToast: state.getIn(['toastr', 'activeToast']),

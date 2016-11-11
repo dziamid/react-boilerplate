@@ -1,6 +1,6 @@
-import { fromJS } from 'immutable';
+import { Map } from 'immutable';
 
-const initialState = fromJS({
+const initialState = Map({
   queue: [],
   activeToast: null,
 });
