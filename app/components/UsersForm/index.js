@@ -1,6 +1,8 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, FieldArray, reduxForm } from 'redux-form/immutable';
+import { fromJS, Map } from 'immutable';
+
 import TextField from 'components/TextField';
 import Button from 'components/Button';
 import styles from './styles.css';
@@ -30,8 +32,9 @@ export const renderUsers = (props) => {
             component={TextField}
             className={styles.name}
           />
-          <div>
+          <div className={styles.removeUser}>
             <Button
+              disabled={fields.length === 1}
               icon={<RemoveIcon />}
               onClick={() => fields.remove(index)}
             />
@@ -42,7 +45,7 @@ export const renderUsers = (props) => {
       <Button
         icon={<AddIcon />}
         label="Add User"
-        onClick={() => fields.push({})}
+        onClick={() => fields.push(Map())}
       />
     </div>
   );
@@ -75,10 +78,10 @@ const validate = () => ({});
 const form = reduxForm({ form: 'UsersForm', validate })(UsersForm);
 export default connect(
   () => ({
-    initialValues: {
+    initialValues: fromJS({
       users: [
         { email: 'sample@user.com', name: 'Sample User' },
       ],
-    },
+    }),
   }),
   null)(form);

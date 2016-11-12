@@ -2,6 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Field, FieldArray, reduxForm, change, SubmissionError } from 'redux-form/immutable';
+
 import TextField from 'components/TextField';
 import Autocomplete from 'components/Autocomplete';
 import AddressAutocomplete from 'components/AddressAutocomplete';
@@ -166,6 +167,29 @@ SampleForm.propTypes = {
   form: PropTypes.string,
 };
 
+const required = (value) => {
+  return !value ? 'Required' : null;
+};
+
+const email = (value) => {
+  const emailRegexp = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+  return !emailRegexp.test(value) ? 'Invalid email address' : null;
+};
+
+const uniqueEmail = (list) => (value) => {
+  return list.filter(i => i.get('email') === value).size > 1 ? 'Email address must be unique' : null;
+};
+
+const all = (value, ...validators) => {
+  for (const v of validators) {
+    const result = v(value);
+    if (result !== null) {
+      return result;
+    }
+  }
+
+  return null;
+};
 
 const validate = (values) => {
   const errors = {};
@@ -173,6 +197,17 @@ const validate = (values) => {
   if (!values.get('field1')) {
     errors.field1 = 'Required';
   }
+
+  const users = values.get('users');
+
+  if (users.size < 1) {
+    errors.users = { _error: 'At least one user is required' };
+  }
+
+  errors.users = users.map(u => ({
+    email: all(u.get('email'), required, email, uniqueEmail(users)),
+    name: required(u.get('name')),
+  })).toJS();
 
   return errors;
 };
