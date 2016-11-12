@@ -1,0 +1,59 @@
+.SingleTitle { /* stylelint-disable */
+
+}
+
+.formRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.paper {
+  padding: 20px;
+  min-width: 90%;
+  display: inline-block;
+}
+
+.tableWrapper {
+  /*margin-top: 50px;*/
+  padding-top: 20px;
+  max-height: 300px;
+  overflow: scroll;
+}
+
+.tableRow {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  border-bottom: 1px dashed gray;
+}
+
+.tableHeader {
+  composes: tableRow;
+  font-weight: 900;
+  border-bottom: none;
+}
+
+.column {
+  width: 25%;
+  margin: 10px;
+}
+
+.jobTitleCol {
+  composes: column;
+  width: 60%;
+}
+
+.proximityCol{
+  composes: column;
+  width: 30%;
+}
+
+.proximityField {
+  max-width: 120px;
+
+}
+
+.buttonCol{
+  composes: column;
+  width: 10%;
+}

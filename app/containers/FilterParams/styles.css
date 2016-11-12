@@ -1,0 +1,24 @@
+.FilterParams { /* stylelint-disable */
+
+}
+
+.filterField {
+  /*margin: 0 100px;*/
+  min-width: 50%;
+}
+
+.formRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.totalsRow {
+  composes: formRow;
+  margin: 40px 10px 0 0;
+}
+
+.paper {
+  padding: 20px;
+  min-width: 90%;
+  display: inline-block;
+}

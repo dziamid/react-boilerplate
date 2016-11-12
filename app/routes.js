@@ -21,6 +21,28 @@ export default function createRoutes(store) {
 
   return [
     {
+      path: '/titles-editor',
+      name: 'titlesEditor',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          System.import('containers/TitlesEditor/reducer'),
+          System.import('containers/TitlesEditor/sagas'),
+          System.import('containers/TitlesEditor'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('titleseditor', reducer.default);
+          injectSagas(sagas.default);
+
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    },
+    {
       path: '/',
       name: 'home',
       getComponent(nextState, cb) {
