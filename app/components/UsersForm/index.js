@@ -22,11 +22,13 @@ export const renderUsers = (props) => {
             type="email"
             component={TextField}
             label="Email Address"
+            className={styles.email}
           />
           <Field
             name={`${user}.name`}
             label="Name"
             component={TextField}
+            className={styles.name}
           />
           <div>
             <Button
@@ -38,9 +40,8 @@ export const renderUsers = (props) => {
       )}
 
       <Button
-        raised
         icon={<AddIcon />}
-        label="Add Another"
+        label="Add User"
         onClick={() => fields.push({})}
       />
     </div>

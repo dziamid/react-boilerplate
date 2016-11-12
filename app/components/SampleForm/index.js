@@ -63,6 +63,7 @@ class SampleForm extends Component {
         actions={dialogActions}
         modal
         open={this.state.showConfirmDialog}
+        autoScrollBodyContent
       >
         <p>You are about to submit the following data to server:</p>
         <pre>
@@ -133,6 +134,7 @@ class SampleForm extends Component {
             />
           </div>
           <div>
+            <h2>Embedded users form</h2>
             <FieldArray name="users" component={renderUsers} />
           </div>
 
@@ -140,7 +142,8 @@ class SampleForm extends Component {
             <Button raised default onClick={reset} disabled={submitting}>Clear</Button>
             <Button
               type="submit"
-              raised primary
+              raised
+              primary
               disabled={submitting}
               onClick={handleSubmit(this.confirmSubmit)}
             >

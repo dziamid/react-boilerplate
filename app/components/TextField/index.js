@@ -38,6 +38,8 @@ class TextField extends Component {
       withClear,
       labelPosition,
       meta: { touched, error },
+      style,
+      className,
       ...other,
     } = this.props;
 
@@ -47,6 +49,7 @@ class TextField extends Component {
     const rootClassnames = {
       withLeftLabel,
       withClear,
+      [className]: className,
     };
 
     const clearButton = (
@@ -58,7 +61,7 @@ class TextField extends Component {
     );
 
     return (
-      <div className={cx(rootClassnames)}>
+      <div style={style} className={cx(rootClassnames)}>
         {withLeftLabel ? <label>{label}</label> : null}
 
         <MUITextField
