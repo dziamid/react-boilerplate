@@ -12,7 +12,6 @@ import styles from './styles.css';
 
 import { connect } from 'react-redux';
 import { Field, reduxForm, change, SubmissionError } from 'redux-form/immutable';
-import TextField from 'components/TextField';
 import SelectField from 'components/SelectField';
 import MenuItem from 'components/MenuItem';
 import H3 from 'components/H3';

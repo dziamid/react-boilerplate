@@ -1,14 +1,23 @@
 import { createSelector } from 'reselect';
+import { fromJS } from 'immutable';
 
 /**
- * Direct selector to the FilterResults state domain
+ * Direct selector to the FilterResults state domain and form
  */
-const selectFilterResultsDomain = () => (state) => state.get('FilterResults');
+const selectFilterResultsDomain = () => (state) =>
+  state.getIn(['titlesEditorRoot', 'filterResults'], fromJS({}));
+
+const selectFilterResultsForm = () => (state) => {
+  return state.getIn(['form', 'filterResults'], {});
+};
 
 /**
  * Other specific selectors
  */
-
+const selectResultsList = () => createSelector(
+  selectFilterResultsDomain(),
+  substate => substate.get('results')
+);
 
 /**
  * Default selector used by FilterResults
@@ -21,5 +30,6 @@ const selectFilterResults = () => createSelector(
 
 export default selectFilterResults;
 export {
-  selectFilterResultsDomain,
+  selectFilterResultsForm,
+  selectResultsList,
 };
