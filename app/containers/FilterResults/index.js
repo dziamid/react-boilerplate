@@ -15,9 +15,6 @@ import { updateResults } from './actions';
 
 import { connect } from 'react-redux';
 import { Field, reduxForm, change, SubmissionError } from 'redux-form/immutable';
-import TextField from 'components/TextField';
-import Autocomplete from 'components/Autocomplete';
-import Paper from 'material-ui/Paper';
 
 export class FilterResults extends Component { // eslint-disable-line react/prefer-stateless-function
   render() {

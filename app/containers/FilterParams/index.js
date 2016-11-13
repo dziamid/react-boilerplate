@@ -5,7 +5,7 @@
  */
 
 import React, { PropTypes, Component } from 'react';
-// import selectFilterParams from './selectors';
+import selectFilterParams from './selectors';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import styles from './styles.css';
@@ -14,21 +14,23 @@ import { connect } from 'react-redux';
 import { Field, reduxForm, change, SubmissionError } from 'redux-form/immutable';
 import TextField from 'components/TextField';
 import Autocomplete from 'components/Autocomplete';
-import Paper from 'material-ui/Paper';
+import { createStructuredSelector } from 'reselect';
+
+import { fetchSubCategories, fetchTitles, filterResults } from './actions';
 
 import { jobCategories, jobSubCategories } from './mocks';
 
 export class FilterParams extends Component { // eslint-disable-line react/prefer-stateless-function
   render() {
-    const { handleSubmit, reset, submitting, dispatch, form } = this.props;
+    const { filterParams: { categories }, fetchSubCategories, handleSubmit, reset, submitting, dispatch, form } = this.props;
 
-    const
-      numFiltered = 20,
-      numTotal = 104;
+    const numFiltered = 1,
+      numTotal = 100;
 
     return (
-      <div className={styles.paper} zDepth={1}>
+      <div className={styles.paper} >
         <div className={styles.FilterParams}>
+          <button onClick={() => fetchSubCategories('abcd')}>Fetch categories (test)</button>
           <div className={styles.formRow}>
             <Field
               name="category"
@@ -37,6 +39,7 @@ export class FilterParams extends Component { // eslint-disable-line react/prefe
               label={<FormattedMessage {...messages.category} />}
               disableFreetext
               className={styles.filterField}
+              onNewRequest={item => fetchSubCategories(item.value)}
             />
 
             <Field
@@ -73,13 +76,15 @@ FilterParams.propTypes = {
   form: PropTypes.string,
 };
 
-const mapStateToProps = () => {
-  return {};
-}; // selectFilterParams();
+const mapStateToProps = createStructuredSelector({
+  filterParams: selectFilterParams(),
+});
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    fetchSubCategories: categoryId => dispatch(fetchSubCategories(categoryId)),
+    fetchTitles: subCategoryId => dispatch(fetchTitles(subCategoryId)),
+    filterResults: filterText => dispatch(filterResults(filterText)),
   };
 }
 
