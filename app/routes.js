@@ -25,15 +25,15 @@ export default function createRoutes(store) {
       name: 'titlesEditor',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
-          System.import('containers/TitlesEditor/reducers'),
+          // System.import('containers/TitlesEditor/reducers'),
           System.import('containers/TitlesEditor/sagas'),
           System.import('containers/TitlesEditor'),
         ]);
 
         const renderRoute = loadModule(cb);
 
-        importModules.then(([reducer, sagas, component]) => {
-          injectReducer('titlesEditorRoot', reducer.default);
+        importModules.then(([sagas, component]) => {
+          // injectReducer('titlesEditorRoot', reducer.default);
           injectSagas(sagas.default);
 
           renderRoute(component);

@@ -11,7 +11,7 @@ import Helmet from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import styles from './styles.css';
-import H1 from 'componentS/H1';
+import H1 from 'components/H1';
 
 import SampleForm from 'components/SampleForm';
 
@@ -61,9 +61,7 @@ export class TitlesEditor extends React.Component { // eslint-disable-line react
   }
 }
 
-const mapStateToProps = () => {
-  return {};
-}; // selectTitlesEditor();
+const mapStateToProps = () => ({}); // selectTitlesEditor();
 
 function mapDispatchToProps(dispatch) {
   return {

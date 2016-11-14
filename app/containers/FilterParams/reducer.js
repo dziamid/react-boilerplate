@@ -30,18 +30,12 @@ const initialState = fromJS({
 function filterParamsReducer(state = initialState, action) {
   switch (action.type) {
     case FETCH_SUBCATEGORIES:
-      console.log(`in reducer: ${FETCH_SUBCATEGORIES}`);
+      return state
+        .set('loading', true)
+        .set('error', false)
+        .set('subCategories', [])
+        .set('selectedSubCategory', false);
 
-      debugger;
-      // return state
-      //   .set('loading', true)
-      //   .set('error', false)
-      //   .set('subCategories', [])
-      //   .set('selectedSubCategory', false);
-      const newState = fromJS({ testState: 'this is a test' });
-      console.log(`will return: ${newState}`);
-      return newState.toJS();
-      break;
     case FETCH_SUBCATEGORIES_SUCCESS:
       return state
         .set('loading', false)
