@@ -13,15 +13,9 @@ const initialState = fromJS({
   titlesEditor: '',
 });
 
-const otherState = fromJS({
-  a: 1,
-  b: 2,
-});
 
 function titlesEditorReducer(state = initialState, action) {
   switch (action.type) {
-    case 'app/FilterParams/FETCH_SUBCATEGORIES':
-      return otherState;
     default:
       return state;
   }

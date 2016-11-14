@@ -34,12 +34,18 @@ function filterParamsReducer(state = initialState, action) {
         .set('loading', true)
         .set('error', false)
         .set('subCategories', [])
-        .set('selectedSubCategory', false);
-
+        .set('selectedSubCategory', false)
+        .set('selectedCategory', action.categoryId);
     case FETCH_SUBCATEGORIES_SUCCESS:
+      const subCats = action.subCategories.map(sc => {
+        return {
+          _id: sc._id.$oid,
+          name: sc.name,
+        };
+      });
       return state
         .set('loading', false)
-        .set('subCategories', action.subCategories);
+        .set('subCategories', subCats);
     case FETCH_SUBCATEGORIES_ERROR:
       return state
         .set('error', action.error)

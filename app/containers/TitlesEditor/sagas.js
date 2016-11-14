@@ -1,48 +1,50 @@
 /**
- * Gets the repositories of the user from Github
+ * Gets the subcategories & categories
  */
 
 import { take, call, put, select, fork, cancel } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
-import { LOAD_REPOS } from 'containers/App/constants';
-import { reposLoaded, repoLoadingError } from 'containers/App/actions';
+import { FETCH_SUBCATEGORIES } from 'containers/FilterParams/constants';
+import { fetchSubCategoriesSuccess } from 'containers/FilterParams/actions';
 
 import request from 'utils/request';
-import { selectUsername } from 'containers/HomePage/selectors';
+import selectFilterParams from 'containers/FilterParams/selectors';
 
 /**
  * Github repos request/response handler
  */
-export function* getRepos() {
-  // Select username from store
-  const username = yield select(selectUsername());
-  const requestURL = `https://api.github.com/users/${username}/repos?type=all&sort=updated`;
+export function* fetchSubCats() {
+  // Select from store
+  const filterParams = yield select(selectFilterParams());
+  const selectedCat = filterParams.selectedCategory;
+  const requestURL =
+    'https://api.mlab.com/api/1/databases/noviopus/collections/jobSubCategories?apiKey=WNDdxGon5y3SRaWjlqSM18l4gPvVhVgN';
 
   // Call our request helper (see 'utils/request')
-  const repos = yield call(request, requestURL);
+  const subCats = yield call(request, requestURL);
 
-  if (!repos.err) {
-    yield put(reposLoaded(repos.data, username));
+  if (!subCats.err) {
+    yield put(fetchSubCategoriesSuccess(subCats.data));
   } else {
-    yield put(repoLoadingError(repos.err));
+    // yield put(repoLoadingError(repos.err));
   }
 }
 
 /**
  * Watches for LOAD_REPOS action and calls handler
  */
-export function* getReposWatcher() {
-  while (yield take(LOAD_REPOS)) {
-    yield call(getRepos);
+export function* getSubCatsWatcher() {
+  while (yield take(FETCH_SUBCATEGORIES)) {
+    yield call(fetchSubCats);
   }
 }
 
 /**
  * Root saga manages watcher lifecycle
  */
-export function* githubData() {
+export function* categoriesData() {
   // Fork watcher so we can continue execution
-  const watcher = yield fork(getReposWatcher);
+  const watcher = yield fork(getSubCatsWatcher);
 
   // Suspend execution until location changes
   yield take(LOCATION_CHANGE);
@@ -51,5 +53,5 @@ export function* githubData() {
 
 // Bootstrap sagas
 export default [
-  githubData,
+  categoriesData,
 ];

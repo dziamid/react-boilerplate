@@ -22,15 +22,19 @@ import { jobCategories, jobSubCategories } from './mocks';
 
 export class FilterParams extends Component { // eslint-disable-line react/prefer-stateless-function
   render() {
-    const { filterParams: { categories }, fetchSubCategories, handleSubmit, reset, submitting, dispatch, form } = this.props;
+    const { filterParams: { categories, subCategories, loading, error }, fetchSubCategories, handleSubmit, reset, submitting, dispatch, form } = this.props;
 
     const numFiltered = 1,
       numTotal = 100;
 
     return (
-      <div className={styles.paper} >
+      <div className={styles.paper}>
+        <span style={{ position: 'absolute' }}>
+          {loading ? 'loading...' : ''}
+          {error ? 'error!' : ''}
+        </span>
         <div className={styles.FilterParams}>
-          <button onClick={() => fetchSubCategories('abcd')}>Fetch categories (test)</button>
+          {/* <button onClick={() => fetchSubCategories('abcd')}>Fetch categories (test)</button>*/}
           <div className={styles.formRow}>
             <Field
               name="category"
@@ -45,7 +49,7 @@ export class FilterParams extends Component { // eslint-disable-line react/prefe
             <Field
               name="subCategory"
               component={Autocomplete}
-              dataSource={jobSubCategories.map(j => ({ text: j.name, value: j._id }))}
+              dataSource={subCategories.map(s => ({ text: s.name, value: s._id }))}
               label={<FormattedMessage {...messages.subCategory} />}
               disableFreetext
             />
