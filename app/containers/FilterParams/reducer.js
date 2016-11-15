@@ -51,6 +51,7 @@ function filterParamsReducer(state = initialState, action) {
       return state
         .set('loading', true)
         .set('error', false)
+        .set('selectedSubCategory', action.subCategoryId)
         .set('titles', []);
     case FETCH_TITLES_SUCCESS:
       const titles = parseMlabIds(action.titles);

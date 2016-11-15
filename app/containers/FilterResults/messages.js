@@ -22,4 +22,8 @@ export default defineMessages({
     id: 'app.containers.FilterResults.addRelation',
     defaultMessage: 'Add Relation',
   },
+  total: {
+    id: 'app.containers.FilterResults.totals',
+    defaultMessage: 'Displaying [[filtered]] out of [[total]] Titles',
+  },
 });

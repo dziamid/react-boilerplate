@@ -6,6 +6,7 @@
 
 import React, { PropTypes, Component } from 'react';
 import { selectFilterResults, selectResultsList } from './selectors';
+import selectFilterParams from 'containers/FilterParams/selectors';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import styles from './styles.css';
@@ -18,7 +19,24 @@ import { Field, reduxForm, change, SubmissionError } from 'redux-form/immutable'
 
 export class FilterResults extends Component { // eslint-disable-line react/prefer-stateless-function
   render() {
-    const { results, updateResults, handleSubmit, reset, submitting, dispatch, form } = this.props;
+    const {
+      results,
+      updateResults,
+      filterParams: {
+        titles,
+      },
+      filterText
+    } = this.props;
+
+    const filteredTitles = titles ?
+      titles.filter(t => t.title.toLowerCase().includes((filterText || '').trim()))
+      : [];
+
+    const
+      total = titles.length,
+      filtered = filteredTitles.length;
+
+    const statusLine = `Displaying ${filtered} out of ${total} Titles`;
 
     const singleResult = r => (
       <div className={styles.tableRow}>
@@ -26,7 +44,7 @@ export class FilterResults extends Component { // eslint-disable-line react/pref
             select
           </span>
         <span className={styles.jobTitleCol}>
-                {r.jobTitle}
+                {r.title}
           </span>
         <span className={styles.seniorityCol}>
                 {r.seniority}
@@ -39,7 +57,9 @@ export class FilterResults extends Component { // eslint-disable-line react/pref
 
     return (
       <div>
-        <button onClick={updateResults}>UPDATE RESULTS</button>
+        <div>
+          {statusLine}
+        </div>
         <div className={styles.tableWrapper}>
           <div className={styles.tableHeader}>
           <span className={styles.selectHeader}>
@@ -56,7 +76,7 @@ export class FilterResults extends Component { // eslint-disable-line react/pref
           </span>
           </div>
 
-          {results.map(r => singleResult(r))}
+          {filteredTitles.map(t => singleResult(t))}
         </div>
       </div>
     );
@@ -72,7 +92,9 @@ FilterResults.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  results: selectResultsList(),
+  // results: selectResultsList(),
+  filterParams: selectFilterParams(),
+  filterText: (state) => state.getIn(['form', 'FilterParams', 'values', 'filter'])
 });
 
 function mapDispatchToProps(dispatch) {
@@ -91,5 +113,5 @@ const validate = (values) => {
   return errors;
 };
 
-const form = reduxForm({ form: 'filterResults', validate })(FilterResults);
+const form = reduxForm({form: 'filterResults', validate})(FilterResults);
 export default connect(mapStateToProps, mapDispatchToProps)(form);

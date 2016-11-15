@@ -36,7 +36,7 @@ export function fetchSubCategoriesError(error) {
 }
 
 export function fetchTitles(subCategoryId) {
-  console.debug('fetch titles')
+
   return {
     type: FETCH_TITLES,
     subCategoryId,

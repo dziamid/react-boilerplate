@@ -7,6 +7,9 @@ import { fromJS } from 'immutable';
 const selectFilterResultsDomain = () => (state) =>
   state.getIn(['titlesEditorRoot', 'filterResults'], fromJS({}));
 
+const selectFilterParamsDomain = () => (state) =>
+  state.getIn(['titlesEditorRoot', 'filterParams'], fromJS({}));
+
 const selectFilterResultsForm = () => (state) => {
   return state.getIn(['form', 'filterResults'], {});
 };

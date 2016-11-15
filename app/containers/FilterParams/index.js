@@ -30,7 +30,8 @@ export class FilterParams extends Component { // eslint-disable-line react/prefe
         error
       },
       fetchSubCategories,
-      fetchTitles
+      fetchTitles,
+      filterResults
     } = this.props;
 
     const numFiltered = 1,
@@ -38,12 +39,11 @@ export class FilterParams extends Component { // eslint-disable-line react/prefe
 
     return (
       <div className={styles.paper}>
-        <span style={{position: 'absolute'}}>
+        <span style={{position: 'absolute', background: 'yellow'}}>
           {loading ? 'loading...' : ''}
           {error ? 'error!' : ''}
         </span>
         <div className={styles.FilterParams}>
-          {/* <button onClick={() => fetchSubCategories('abcd')}>Fetch categories (test)</button>*/}
           <div className={styles.formRow}>
             <Field
               name="category"
@@ -53,6 +53,7 @@ export class FilterParams extends Component { // eslint-disable-line react/prefe
               disableFreetext
               className={styles.filterField}
               onNewRequest={item => fetchSubCategories(item.value)}
+              defaultValue="au"
             />
 
             <Field
@@ -62,7 +63,7 @@ export class FilterParams extends Component { // eslint-disable-line react/prefe
               label={<FormattedMessage {...messages.subCategory} />}
               disableFreetext
               className={styles.filterField}
-              onNewRequest={item => fetchTitles(item.value)}
+              onNewRequest={item => fetchTitles(item.text)}
             />
           </div>
 
@@ -73,9 +74,6 @@ export class FilterParams extends Component { // eslint-disable-line react/prefe
               label={<FormattedMessage {...messages.filter} />}
               className={styles.filterField}
             />
-          </div>
-          <div className={styles.totalsRow}>
-            <FormattedMessage numFiltered={numFiltered} numTotal={numTotal} {...messages.total} />
           </div>
         </div>
       </div>

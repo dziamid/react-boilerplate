@@ -18,9 +18,4 @@ export default defineMessages({
     id: 'app.containers.FilterParams.filter',
     defaultMessage: 'Filter Results',
   },
-  total: {
-    id: 'app.containers.FilterParams.totals',
-    defaultMessage: 'Displaying X out of YYY Titles',
-    // defaultMessage: `Displaying ${props.numFiltered} out of ${props.numTotal} Titles`,
-  },
 });
