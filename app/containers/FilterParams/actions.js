@@ -7,7 +7,10 @@
 import {
   FETCH_SUBCATEGORIES,
   FETCH_SUBCATEGORIES_SUCCESS,
+  FETCH_SUBCATEGORIES_ERROR,
   FETCH_TITLES,
+  FETCH_TITLES_SUCCESS,
+  FETCH_TITLES_ERROR,
   FILTER_RESULTS,
 } from './constants';
 
@@ -25,10 +28,25 @@ export function fetchSubCategoriesSuccess(subCategories) {
   };
 }
 
+export function fetchSubCategoriesError(error) {
+  return {
+    type: FETCH_SUBCATEGORIES_ERROR,
+    error
+  };
+}
+
 export function fetchTitles(subCategoryId) {
+  console.debug('fetch titles')
   return {
     type: FETCH_TITLES,
     subCategoryId,
+  };
+}
+
+export function fetchTitlesSuccess(titles) {
+  return {
+    type: FETCH_TITLES_SUCCESS,
+    titles
   };
 }
 

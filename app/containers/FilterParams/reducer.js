@@ -14,6 +14,7 @@ import {
   FILTER_RESULTS,
 } from './constants';
 import { fromJS } from 'immutable';
+import { parseMlabIds } from 'utils/api';
 
 // The initial state
 const initialState = fromJS({
@@ -37,12 +38,8 @@ function filterParamsReducer(state = initialState, action) {
         .set('selectedSubCategory', false)
         .set('selectedCategory', action.categoryId);
     case FETCH_SUBCATEGORIES_SUCCESS:
-      const subCats = action.subCategories.map(sc => {
-        return {
-          _id: sc._id.$oid,
-          name: sc.name,
-        };
-      });
+      const subCats = parseMlabIds(action.subCategories);
+
       return state
         .set('loading', false)
         .set('subCategories', subCats);
@@ -56,9 +53,11 @@ function filterParamsReducer(state = initialState, action) {
         .set('error', false)
         .set('titles', []);
     case FETCH_TITLES_SUCCESS:
+      const titles = parseMlabIds(action.titles);
+
       return state
         .set('loading', false)
-        .set('titles', action.titles);
+        .set('titles', titles);
     case FETCH_TITLES_ERROR:
       return state
         .set('error', action.error)

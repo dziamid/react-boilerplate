@@ -22,14 +22,23 @@ import { jobCategories, jobSubCategories } from './mocks';
 
 export class FilterParams extends Component { // eslint-disable-line react/prefer-stateless-function
   render() {
-    const { filterParams: { categories, subCategories, loading, error }, fetchSubCategories, handleSubmit, reset, submitting, dispatch, form } = this.props;
+    const {
+      filterParams: {
+        categories,
+        subCategories,
+        loading,
+        error
+      },
+      fetchSubCategories,
+      fetchTitles
+    } = this.props;
 
     const numFiltered = 1,
       numTotal = 100;
 
     return (
       <div className={styles.paper}>
-        <span style={{ position: 'absolute' }}>
+        <span style={{position: 'absolute'}}>
           {loading ? 'loading...' : ''}
           {error ? 'error!' : ''}
         </span>
@@ -39,7 +48,7 @@ export class FilterParams extends Component { // eslint-disable-line react/prefe
             <Field
               name="category"
               component={Autocomplete}
-              dataSource={jobCategories.map(j => ({ text: j.name, value: j._id }))}
+              dataSource={jobCategories.map(j => ({text: j.name, value: j._id}))}
               label={<FormattedMessage {...messages.category} />}
               disableFreetext
               className={styles.filterField}
@@ -49,9 +58,11 @@ export class FilterParams extends Component { // eslint-disable-line react/prefe
             <Field
               name="subCategory"
               component={Autocomplete}
-              dataSource={subCategories.map(s => ({ text: s.name, value: s._id }))}
+              dataSource={subCategories.map(s => ({text: s.name, value: s._id}))}
               label={<FormattedMessage {...messages.subCategory} />}
               disableFreetext
+              className={styles.filterField}
+              onNewRequest={item => fetchTitles(item.value)}
             />
           </div>
 
@@ -102,5 +113,5 @@ const validate = (values) => {
   return errors;
 };
 
-const form = reduxForm({ form: 'FilterParams', validate })(FilterParams);
+const form = reduxForm({form: 'FilterParams', validate})(FilterParams);
 export default connect(mapStateToProps, mapDispatchToProps)(form);
