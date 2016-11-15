@@ -15,4 +15,12 @@ storiesOf('TextField', module)
   ))
   .add('with clear icon', () => (
     <TextField label="Label on the left" withClear onClear={action('will clear input')} />
+  ))
+  .add('with custom onChange', () => (
+    <TextField
+      label="Label on the left"
+      withClear
+      onClear={action('will clear input')}
+      onChange={action('custom onChange')}
+    />
   ));
