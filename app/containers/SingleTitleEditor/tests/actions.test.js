@@ -3,14 +3,14 @@ import {
   defaultAction,
 } from '../actions';
 import {
-  DEFAULT_ACTION,
+  UPDATE_TITLE,
 } from '../constants';
 
 describe('SingleTitle actions', () => {
   describe('Default Action', () => {
-    it('has a type of DEFAULT_ACTION', () => {
+    it('has a type of UPDATE_TITLE', () => {
       const expected = {
-        type: DEFAULT_ACTION,
+        type: UPDATE_TITLE,
       };
       expect(defaultAction()).toEqual(expected);
     });

@@ -4,4 +4,4 @@
  *
  */
 
-export const DEFAULT_ACTION = 'app/SingleTitle/DEFAULT_ACTION';
+export const UPDATE_TITLE = 'app/SingleTitle/UPDATE_TITLE';

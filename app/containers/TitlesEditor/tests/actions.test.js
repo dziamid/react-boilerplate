@@ -8,7 +8,7 @@ import {
 
 describe('TitlesEditor actions', () => {
   describe('Default Action', () => {
-    it('has a type of DEFAULT_ACTION', () => {
+    it('has a type of UPDATE_TITLE', () => {
       const expected = {
         type: DEFAULT_ACTION,
       };

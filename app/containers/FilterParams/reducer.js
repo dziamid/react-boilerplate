@@ -12,9 +12,13 @@ import {
   FETCH_TITLES_SUCCESS,
   FETCH_TITLES_ERROR,
   FILTER_RESULTS,
+  UPDATE_TITLE,
+  UPDATE_TITLE_SUCCESS,
+  UPDATE_TITLE_ERROR,
 } from './constants';
 import { fromJS } from 'immutable';
 import { parseMlabIds } from 'utils/api';
+import * as _ from 'lodash';
 
 // The initial state
 const initialState = fromJS({
@@ -26,6 +30,7 @@ const initialState = fromJS({
   selectedCategory: false,
   selectedSubCategory: false,
   filterText: '',
+  titleToUpdate: false
 });
 
 function filterParamsReducer(state = initialState, action) {
@@ -66,6 +71,23 @@ function filterParamsReducer(state = initialState, action) {
     // case FILTER_RESULTS:
     //   return state
     //     .set('filterText', action.filterText);
+    case UPDATE_TITLE:
+      return state
+        .set('loading', true)
+        .set('error', false)
+        .set('titleToUpdate', action.title);
+    case UPDATE_TITLE_SUCCESS:
+      const titleObj = _.find(state.titles, {_id: action.title._id})  //TODO: $Oid ?
+
+
+      return state
+        .set('loading', false)
+        .set('titles', titles);
+    case UPDATE_TITLE_ERROR:
+      return state
+        .set('error', action.error)
+        .set('loading', false);
+
     default:
       return state;
   }

@@ -39,7 +39,7 @@ export class FilterParams extends Component { // eslint-disable-line react/prefe
 
     return (
       <div className={styles.paper}>
-        <span style={{ position: 'absolute', background: 'yellow' }}>
+        <span style={{position: 'absolute', background: 'yellow'}}>
           {loading ? 'loading...' : ''}
           {error ? 'error!' : ''}
         </span>
@@ -48,18 +48,20 @@ export class FilterParams extends Component { // eslint-disable-line react/prefe
             <Field
               name="category"
               component={Autocomplete}
-              dataSource={jobCategories.map(j => ({ text: j.name, value: j._id }))}
+              dataSource={jobCategories.map(j => ({text: j.name, value: j._id}))}
               label={<FormattedMessage {...messages.category} />}
               disableFreetext
               className={styles.filterField}
               onNewRequest={item => fetchSubCategories(item.value)}
               defaultValue="au"
             />
+          </div>
 
+          <div className={styles.formRow}>
             <Field
               name="subCategory"
               component={Autocomplete}
-              dataSource={subCategories.map(s => ({ text: s.name, value: s._id }))}
+              dataSource={subCategories.map(s => ({text: s.name, value: s._id}))}
               label={<FormattedMessage {...messages.subCategory} />}
               disableFreetext
               className={styles.filterField}
@@ -111,5 +113,5 @@ const validate = (values) => {
   return errors;
 };
 
-const form = reduxForm({ form: 'FilterParams', validate })(FilterParams);
+const form = reduxForm({form: 'FilterParams', validate})(FilterParams);
 export default connect(mapStateToProps, mapDispatchToProps)(form);
