@@ -7,7 +7,7 @@
 import { fromJS } from 'immutable';
 import {
   DEFAULT_ACTION,
-  UPDATE_RESULTS,
+  SET_SELECTED_TITLE,
 } from './constants';
 
 const initialState = fromJS({
@@ -18,8 +18,8 @@ function FilterResultsReducer(state = initialState, action) {
   switch (action.type) {
     case DEFAULT_ACTION:
       return state;
-    case UPDATE_RESULTS:
-      return state.set('results', action.data);
+    case SET_SELECTED_TITLE:
+      return state.set('selectedTitle', action.titleId);
     default:
       return state;
   }

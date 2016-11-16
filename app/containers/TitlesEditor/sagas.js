@@ -10,10 +10,10 @@ import {
   fetchSubCategoriesSuccess,
   fetchSubCategoriesError,
   fetchTitlesSuccess,
-  fetchTitlesError
+  fetchTitlesError,
 } from 'containers/FilterParams/actions';
 
-import { BASE_API, API_KEY} from 'containers/TitlesEditor/constants';
+import { BASE_API, API_KEY } from 'containers/TitlesEditor/constants';
 import selectFilterParams from 'Containers/FilterParams/selectors';
 
 import request from 'utils/request';
@@ -35,10 +35,10 @@ export function* fetchData(requestURL, successCb, errCb) {
 
 export function* fetchSubCats() {
   // category: Computer, Software, Hardware, IT and Web
-  const requestURL = BASE_API.replace('[[query]]',
+  const requestURL = `${BASE_API.replace('[[query]]',
     'jobSubCategories')
     // 'jobSubCategories?q={\'category\':{$eq: \'Computer, Software, Hardware, IT and Web\'}}')
-    + '?' + API_KEY;
+     }?${API_KEY}`;
 
   yield call(fetchData, requestURL, fetchSubCategoriesSuccess, fetchSubCategoriesError);
 }
@@ -48,9 +48,9 @@ export function* fetchTitles() {
   const filterParams = yield select(selectFilterParams());
   const selectedCat = filterParams.selectedSubCategory;
 
-  const requestURL = BASE_API.replace('[[query]]',
+  const requestURL = `${BASE_API.replace('[[query]]',
       `jobTitles?q={\'subCategory\':{$eq: \'${selectedCat}\'}}`)
-    + '&' + API_KEY;
+     }&${API_KEY}`;
 
   yield call(fetchData, requestURL, fetchTitlesSuccess, fetchTitlesError);
 }

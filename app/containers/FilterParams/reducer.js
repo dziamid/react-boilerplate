@@ -63,9 +63,9 @@ function filterParamsReducer(state = initialState, action) {
       return state
         .set('error', action.error)
         .set('loading', false);
-    case FILTER_RESULTS:
-      return state
-        .set('filterText', action.filterText);
+    // case FILTER_RESULTS:
+    //   return state
+    //     .set('filterText', action.filterText);
     default:
       return state;
   }

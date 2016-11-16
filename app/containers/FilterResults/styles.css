@@ -19,6 +19,17 @@
   display: flex;
   justify-content: space-between;
   flex-direction: row;
+  transition: background 0.3s;
+}
+
+.tableRow :hover {
+  font-weight: bold;
+}
+
+.selectedRow {
+  composes: tableRow;
+  background: lightskyblue;
+  font-weight: bold;
 }
 
 .tableHeader {
@@ -41,9 +52,14 @@
   composes: selectCol;
 }
 
-.jobTitleCol {
+.jobTitleHeader {
   composes: column;
   width: 40%;
+}
+
+.jobTitleCol {
+  composes: jobTitleHeader;
+  margin-top: 20px;
 }
 
 .seniorityCol {

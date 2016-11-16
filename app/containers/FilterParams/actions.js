@@ -31,12 +31,11 @@ export function fetchSubCategoriesSuccess(subCategories) {
 export function fetchSubCategoriesError(error) {
   return {
     type: FETCH_SUBCATEGORIES_ERROR,
-    error
+    error,
   };
 }
 
 export function fetchTitles(subCategoryId) {
-
   return {
     type: FETCH_TITLES,
     subCategoryId,
@@ -46,7 +45,7 @@ export function fetchTitles(subCategoryId) {
 export function fetchTitlesSuccess(titles) {
   return {
     type: FETCH_TITLES_SUCCESS,
-    titles
+    titles,
   };
 }
 

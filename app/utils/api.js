@@ -4,7 +4,7 @@ export function parseMlabIds(responseAr) {
   return responseAr.map(item => {
     return {
       _id: item._id.$oid,
-      ..._.omit(item, '_id')
+      ..._.omit(item, '_id'),
     };
   });
 }

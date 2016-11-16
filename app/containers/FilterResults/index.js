@@ -12,10 +12,11 @@ import messages from './messages';
 import styles from './styles.css';
 import { createStructuredSelector } from 'reselect';
 
-import { updateResults } from './actions';
+import { setSelectedTitle } from './actions';
 
 import { connect } from 'react-redux';
 import { Field, reduxForm, change, SubmissionError } from 'redux-form/immutable';
+import Button from 'components/Button'
 
 export class FilterResults extends Component { // eslint-disable-line react/prefer-stateless-function
   render() {
@@ -25,7 +26,9 @@ export class FilterResults extends Component { // eslint-disable-line react/pref
       filterParams: {
         titles,
       },
-      filterText
+      filterText,
+      setSelectedTitle,
+      selectedTitle
     } = this.props;
 
     const filteredTitles = titles ?
@@ -38,19 +41,29 @@ export class FilterResults extends Component { // eslint-disable-line react/pref
 
     const statusLine = `Displaying ${filtered} out of ${total} Titles`;
 
-    const singleResult = r => (
-      <div className={styles.tableRow}>
+    const getRowStyle = (id) => {
+      if (selectedTitle === id) {
+        return styles.selectedRow;
+      } else {
+        return styles.tableRow;
+      }
+    };
+
+    const singleResult = t => (
+      <div className={getRowStyle(t._id)}>
           <span className={styles.selectCol}>
-            select
+            <Button
+              raised
+              onClick={() => setSelectedTitle(t._id)}>Select</Button>
           </span>
         <span className={styles.jobTitleCol}>
-                {r.title}
+                {t.title}
           </span>
         <span className={styles.seniorityCol}>
-                {r.seniority}
+                {t.seniority}
           </span>
         <span className={styles.relationCol}>
-                {r.relations}
+                {t.relations}
           </span>
       </div>
     );
@@ -65,7 +78,7 @@ export class FilterResults extends Component { // eslint-disable-line react/pref
           <span className={styles.selectHeader}>
             <FormattedMessage {...messages.select} />
           </span>
-            <span className={styles.jobTitleCol}>
+            <span className={styles.jobTitleHeader}>
             <FormattedMessage {...messages.jobTitle} />
           </span>
             <span className={styles.seniorityCol}>
@@ -94,12 +107,13 @@ FilterResults.propTypes = {
 const mapStateToProps = createStructuredSelector({
   // results: selectResultsList(),
   filterParams: selectFilterParams(),
-  filterText: (state) => state.getIn(['form', 'FilterParams', 'values', 'filter'])
+  filterText: (state) => state.getIn(['form', 'FilterParams', 'values', 'filter']),
+  selectedTitle: (state) => state.getIn(['titlesEditorRoot', 'filterResults', 'selectedTitle'])
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    updateResults: () => dispatch(updateResults()),
+    setSelectedTitle: (titleId) => dispatch(setSelectedTitle(titleId)),
   };
 }
 

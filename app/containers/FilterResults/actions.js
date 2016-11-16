@@ -6,10 +6,8 @@
 
 import {
   DEFAULT_ACTION,
-  UPDATE_RESULTS,
+  SET_SELECTED_TITLE,
 } from './constants';
-
-import { getResults } from './mocks';
 
 export function defaultAction() {
   return {
@@ -17,9 +15,9 @@ export function defaultAction() {
   };
 }
 
-export function updateResults() {
+export function setSelectedTitle(titleId) {
   return {
-    type: UPDATE_RESULTS,
-    data: getResults(),
+    type: SET_SELECTED_TITLE,
+    titleId
   };
 }
