@@ -1,7 +1,8 @@
 NOVIOPUS
 --------
 
-
+Deploy to heroku: `npm run heroku`
+Checkout deployment config at: 'Gruntfile.js'
 
 
 BOILER PLATE NOTES
