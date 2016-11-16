@@ -3,7 +3,7 @@
  */
 
 import { shallow, mount } from 'enzyme';
-import { context } from 'components/common/decorators';
+import { default as context } from 'tests/context/all';
 
 import React from 'react';
 

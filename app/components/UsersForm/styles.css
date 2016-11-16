@@ -1,0 +1,19 @@
+.user {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.email {
+  width: 100%;
+  margin: 0 10px 0 0;
+}
+
+.name {
+  width: 100%;
+  margin: 0 10px 0 0;
+}
+
+.removeUser {
+  align-self: center;
+}

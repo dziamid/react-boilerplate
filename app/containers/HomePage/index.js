@@ -113,7 +113,7 @@ export class HomePage extends React.Component {
             </form>
             {mainContent}
           </section>
-          <Button onClick={this.openFeaturesPage}>
+          <Button data-id="features" onClick={this.openFeaturesPage}>
             <FormattedMessage {...messages.featuresButton} />
           </Button>
         </div>
