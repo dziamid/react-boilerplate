@@ -1,5 +1,3 @@
-
-
 module.exports = function (grunt) {
   // Load grunt tasks automatically, when needed
   grunt.loadNpmTasks('grunt-build-control');
@@ -26,20 +24,34 @@ module.exports = function (grunt) {
         connectCommits: false,
         message: 'Built %sourceName% from commit %sourceCommit% on branch %sourceBranch%',
       },
-      heroku: {
+      stable: {
         options: {
           remote: 'git@heroku.com:novio-ats.git',
           branch: 'dev',
           remoteBranch: 'master',
         },
       },
+      manual: {
+        options: {
+          remote: 'git@heroku.com:novio-ats-manual.git',
+          branch: 'manual',
+          remoteBranch: 'master',
+          force: true,
+        },
+      },
     },
 
   });
 
-  grunt.registerTask('heroku', [
+  grunt.registerTask('heroku:stable', [
     'clean:heroku',
     'copy:heroku',
-    'buildcontrol:heroku',
+    'buildcontrol:stable',
+  ]);
+
+  grunt.registerTask('heroku:manual', [
+    'clean:heroku',
+    'copy:heroku',
+    'buildcontrol:manual',
   ]);
 };

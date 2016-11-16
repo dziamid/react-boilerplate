@@ -1,8 +1,13 @@
 NOVIOPUS
 --------
 
-Deploy to heroku: `npm run heroku`
-Checkout deployment config at: 'Gruntfile.js'
+Deploying to heroku:
+
+1. CI calls `npm heroku:stable` upon successful build and test-run of `dev` branch
+   and deploys to: https://novio-ats.herokuapp.com/
+
+2. Run `npm build && npm heroku` to deploy any local branch manually
+   to https://novio-ats-manual.herokuapp.com/
 
 
 BOILER PLATE NOTES
