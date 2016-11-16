@@ -18,7 +18,6 @@ exports[`<CompaniesFilter /> should render show all companies correctly 1`] = `
   focusState="none"
   insetChildren={false}
   leftIcon={<ToggleRadioButtonChecked />}
-  onTouchTap={[Function]}
   primaryText="Show All Companies"
   value="all" />
 `;

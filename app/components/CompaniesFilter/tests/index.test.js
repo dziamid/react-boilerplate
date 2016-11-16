@@ -4,7 +4,7 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import { shallowToJson } from 'enzyme-to-json';
-import CompaniesFilter from '../index';
+import { CompaniesFilter } from '../index';
 
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import { default as theme } from 'theme';

@@ -12,7 +12,8 @@ import { push } from 'react-router-redux';
 import RepoListItem from 'containers/RepoListItem';
 import List from 'components/List';
 import LoadingIndicator from 'components/LoadingIndicator';
-import { context } from 'components/common/decorators';
+import { default as context } from 'tests/context/all';
+
 import injectTapEvent from 'utils/react-tap-event-plugin';
 injectTapEvent();
 
@@ -84,7 +85,7 @@ describe('<HomePage />', () => {
     const renderedComponent = mount(context(
       <HomePage loading changeRoute={openRoute} />
     ));
-    const button = renderedComponent.find('button');
+    const button = renderedComponent.find('[data-id="features"]');
     button.simulate('click');
     expect(openRouteSpy).toHaveBeenCalled();
   });

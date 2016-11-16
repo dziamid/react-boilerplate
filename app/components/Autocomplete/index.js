@@ -1,5 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { default as MUIAutocomplete } from 'material-ui/AutoComplete';
+import Button from 'components/Button';
+import CloseIcon from 'material-ui/svg-icons/navigation/close';
+
+import styles from './styles.css';
+import classNames from 'classnames/bind';
+const cx = classNames.bind(styles);
+import { minBlack } from 'material-ui/styles/colors';
 
 const {
   noFilter,
@@ -25,13 +32,23 @@ export default class Autocomplete extends Component {
       onChange: () => {
       },
     },
-    filter: caseInsensitiveStartsWithFilter,
+    filter: caseInsensitiveFilter,
+    fullWidth: true,
+  };
+
+  static propTypes = {
+    input: PropTypes.object,
+    label: PropTypes.string,
+    meta: PropTypes.object,
+    withClear: PropTypes.bool,
+    onClear: PropTypes.func,
   };
 
   constructor() {
     super();
     this.handleInputUpdate = this.handleInputUpdate.bind(this);
     this.handleNewRequest = this.handleNewRequest.bind(this);
+    this.handleClear = this.handleClear.bind(this);
   }
 
   handleNewRequest(searchText, key) {
@@ -45,25 +62,51 @@ export default class Autocomplete extends Component {
     this.props.input.onChange(searchText);
   }
 
+
+  handleClear() {
+    this.props.onClear();
+    this.muiAutocomplete.focus();
+  }
+
   render() {
     const {
       input: { value, ...inputProps },
       meta: { touched, error },
       label,
+      withClear,
+      onClear, // eslint-disable-line no-unused-vars
       ...other,
     } = this.props;
 
-    return (
-      <MUIAutocomplete
-        floatingLabelText={label}
-        floatingLabelFixed={label !== undefined}
-        errorText={touched && error}
-        {...inputProps}
-        searchText={value}
-        onNewRequest={this.handleNewRequest}
-        onUpdateInput={this.handleInputUpdate}
-        {...other}
+    const rootClassnames = {
+      withClear,
+    };
+
+    const clearButton = (
+      <Button
+        onClick={this.handleClear}
+        className={styles.clearButton}
+        icon={<CloseIcon color={minBlack} />}
       />
+    );
+
+    return (
+      <div className={cx(rootClassnames)}>
+        <MUIAutocomplete
+          ref={ref => (this.muiAutocomplete = ref)}
+          floatingLabelText={label}
+          floatingLabelFixed={label !== undefined}
+          errorText={touched && error}
+          {...inputProps}
+          searchText={value}
+          onNewRequest={this.handleNewRequest}
+          onUpdateInput={this.handleInputUpdate}
+          {...other}
+        />
+        { withClear ? clearButton : null }
+
+      </div>
+
     );
   }
 }

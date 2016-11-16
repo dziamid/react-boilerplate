@@ -2,8 +2,10 @@
 
 import { watchToastrQueue } from 'components/Toastr/sagas';
 import { categoriesData } from 'containers/TitlesEditor/sagas';
+import { watchAddressRequest } from 'components/AddressAutocomplete/sagas';
 
 export default [
   watchToastrQueue,
   categoriesData,
+  watchAddressRequest,
 ];
