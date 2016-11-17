@@ -11,7 +11,6 @@ import {
   FETCH_TITLES,
   FETCH_TITLES_SUCCESS,
   FETCH_TITLES_ERROR,
-  FILTER_RESULTS,
   UPDATE_TITLE,
   UPDATE_TITLE_SUCCESS,
   UPDATE_TITLE_ERROR,
@@ -85,10 +84,10 @@ function filterParamsReducer(state = initialState, action) {
 
       // Get the title from the collection
       const titlesFromState = state.get('titles');
-      let titleObj = _.find(titlesFromState, { _id: action.newTitle._id });
+      let titleObj = _.find(titlesFromState, { _id: action.updatedTitle._id });
 
       // Point the title object to the updated object
-      titleObj = action.newTitle;
+      titleObj = action.updatedTitle;
 
       return state
         .set('loading', false)
