@@ -21,7 +21,7 @@ import H2 from 'components/H2';
 import { seniorities, proximities, titleName } from './mocks';
 import MUISelectField from 'material-ui/SelectField';
 
-import { updateTitle } from 'Containers/FilterParams/actions';
+import { updateTitle } from 'containers/FilterParams/actions';
 
 export class SingleTitle extends Component { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
