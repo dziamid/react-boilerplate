@@ -44,13 +44,13 @@ export class FilterParams extends Component { // eslint-disable-line react/prefe
             <Field
               name="category"
               component={Autocomplete}
-              dataSource={jobCategories.map(j => ({text: j.name, value: j._id}))}
+              dataSource={jobCategories.map(j => ({ text: j.name, value: j._id }))}
               label={<FormattedMessage {...messages.category} />}
               disableFreetext
               className={styles.filterField}
               onNewRequest={item => fetchSubCategories(item.value)}
               defaultValue="au"
-              style={{width: 350}}
+              style={{ width: 350 }}
             />
           </div>
 
@@ -58,12 +58,12 @@ export class FilterParams extends Component { // eslint-disable-line react/prefe
             <Field
               name="subCategory"
               component={Autocomplete}
-              dataSource={subCategories.map(s => ({text: s.name, value: s._id}))}
+              dataSource={subCategories.map(s => ({ text: s.name, value: s._id }))}
               label={<FormattedMessage {...messages.subCategory} />}
               disableFreetext
               className={styles.filterField}
               onNewRequest={item => fetchTitles(item.text)}
-              style={{width: 350}}
+              style={{ width: 350 }}
             />
           </div>
 
@@ -75,7 +75,7 @@ export class FilterParams extends Component { // eslint-disable-line react/prefe
               className={styles.filterField}
             />
           </div>
-          <span style={{position: 'absolute', background: 'yellow'}}>
+          <span style={{ position: 'absolute', background: 'yellow' }}>
           {loading ? 'loading...' : ''}
             {error ? 'error!' : ''}
         </span>
@@ -116,5 +116,5 @@ const validate = (values) => {
   return errors;
 };
 
-const form = reduxForm({form: 'FilterParams', validate})(FilterParams);
+const form = reduxForm({ form: 'FilterParams', validate })(FilterParams);
 export default connect(mapStateToProps, mapDispatchToProps)(form);

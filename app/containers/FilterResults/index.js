@@ -16,7 +16,7 @@ import { setSelectedTitle } from './actions';
 
 import { connect } from 'react-redux';
 import { Field, reduxForm, change, SubmissionError } from 'redux-form/immutable';
-import Button from 'components/Button'
+import Button from 'components/Button';
 
 export class FilterResults extends Component { // eslint-disable-line react/prefer-stateless-function
   render() {
@@ -28,7 +28,7 @@ export class FilterResults extends Component { // eslint-disable-line react/pref
       },
       filterText,
       setSelectedTitle,
-      selectedTitle
+      selectedTitle,
     } = this.props;
 
     const filteredTitles = titles ?
@@ -54,7 +54,8 @@ export class FilterResults extends Component { // eslint-disable-line react/pref
           <span className={styles.selectCol}>
             <Button
               raised
-              onClick={() => setSelectedTitle(t._id)}>Select</Button>
+              onClick={() => setSelectedTitle(t._id)}
+            >Select</Button>
           </span>
         <span className={styles.jobTitleCol}>
                 {t.title}
@@ -108,7 +109,7 @@ const mapStateToProps = createStructuredSelector({
   // results: selectResultsList(),
   filterParams: selectFilterParams(),
   filterText: (state) => state.getIn(['form', 'FilterParams', 'values', 'filter']),
-  selectedTitle: (state) => state.getIn(['titlesEditorRoot', 'filterResults', 'selectedTitle'])
+  selectedTitle: (state) => state.getIn(['titlesEditorRoot', 'filterResults', 'selectedTitle']),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -127,5 +128,5 @@ const validate = (values) => {
   return errors;
 };
 
-const form = reduxForm({form: 'filterResults', validate})(FilterResults);
+const form = reduxForm({ form: 'filterResults', validate })(FilterResults);
 export default connect(mapStateToProps, mapDispatchToProps)(form);

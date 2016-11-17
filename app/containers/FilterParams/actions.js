@@ -73,7 +73,7 @@ export function updateTitleErr(titleId, error) {
   return {
     type: UPDATE_TITLE_ERROR,
     titleId,
-    error
+    error,
   };
 }
 

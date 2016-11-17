@@ -31,21 +31,21 @@ export class SingleTitle extends Component { // eslint-disable-line react/prefer
   }
 
   updateRelationProximity(rel, key) {
-    this.selectedTitle.relations =  this.selectedTitle.relations || [];
+    this.selectedTitle.relations = this.selectedTitle.relations || [];
     rel.proximity = key;
     this.selectedTitle.relations.push(rel);
     this.props.updateTitle(this.selectedTitle._id, this.selectedTitle);
   }
 
   render() {
-    const {selectedTitle} = this.props;
+    const { selectedTitle } = this.props;
 
-    const seniorityOptions = seniorities.map(s => <MenuItem key={s.value} value={s.name} primaryText={s.name}/>);
-    const proximityOptions = proximities.map(p => <MenuItem key={p.value} value={p.name} primaryText={p.name}/>);
+    const seniorityOptions = seniorities.map(s => <MenuItem key={s.value} value={s.name} primaryText={s.name} />);
+    const proximityOptions = proximities.map(p => <MenuItem key={p.value} value={p.name} primaryText={p.name} />);
 
     this.selectedTitle = selectedTitle;
 
-    const mockRel = [{title: 'related title #1', proximity: 3}, {title: 'related title #2', proximity: 4}];
+    const mockRel = [{ title: 'related title #1', proximity: 3 }, { title: 'related title #2', proximity: 4 }];
 
     return (
       <div className={styles.SingleTitle}>
@@ -59,7 +59,7 @@ export class SingleTitle extends Component { // eslint-disable-line react/prefer
             className={styles.filterField}
             onChange={(e, key, value) => {
               console.log(e, key, value);
-              selectedTitle.seniority = value
+              selectedTitle.seniority = value;
             }}
           >
             {seniorityOptions}
@@ -128,7 +128,7 @@ const mapStateToProps = createStructuredSelector({
     const titles = state.getIn(['titlesEditorRoot', 'filterParams', 'titles']);
     const selected = titles ? titles.filter(t => t._id === titleId) : null;
     return Array.isArray(selected) && selected[0] ? selected[0] : {};
-  }
+  },
 });
 
 function mapDispatchToProps(dispatch) {

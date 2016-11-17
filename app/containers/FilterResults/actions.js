@@ -18,6 +18,6 @@ export function defaultAction() {
 export function setSelectedTitle(titleId) {
   return {
     type: SET_SELECTED_TITLE,
-    titleId
+    titleId,
   };
 }

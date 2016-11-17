@@ -30,7 +30,7 @@ const initialState = fromJS({
   selectedCategory: false,
   selectedSubCategory: false,
   filterText: '',
-  titleToUpdate: false
+  titleToUpdate: false,
 });
 
 function filterParamsReducer(state = initialState, action) {
@@ -85,7 +85,7 @@ function filterParamsReducer(state = initialState, action) {
 
       // Get the title from the collection
       const titlesFromState = state.get('titles');
-      let titleObj = _.find(titlesFromState, {_id: action.newTitle._id});
+      let titleObj = _.find(titlesFromState, { _id: action.newTitle._id });
 
       // Point the title object to the updated object
       titleObj = action.newTitle;
