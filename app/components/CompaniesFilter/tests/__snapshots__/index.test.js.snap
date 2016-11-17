@@ -36,7 +36,6 @@ exports[`<CompaniesFilter /> should render show custom filter correctly 1`] = `
 
 exports[`<CompaniesFilter /> should render show custom filter correctly 2`] = `
 <div
-  className={undefined}
   data-id="companies">
   <Checkbox
     checked={true}
