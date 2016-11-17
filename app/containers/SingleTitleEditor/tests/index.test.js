@@ -1,6 +1,6 @@
 // import SingleTitle from '../index';
 
-import expect from 'expect';
+import expect from 'chai';
 // import { shallow } from 'enzyme';
 // import React from 'react';
 

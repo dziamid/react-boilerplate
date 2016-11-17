@@ -1,6 +1,6 @@
 // import { selectSingleTitleDomain } from '../selectors';
 // import { fromJS } from 'immutable';
-import expect from 'expect';
+import expect from 'chai';
 
 // const selector = selectSingleTitleDomain();
 

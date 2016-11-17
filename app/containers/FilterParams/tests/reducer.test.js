@@ -1,4 +1,4 @@
-import expect from 'expect';
+import expect from 'chai';
 import FilterParamsReducer from '../reducer';
 import { fromJS } from 'immutable';
 
