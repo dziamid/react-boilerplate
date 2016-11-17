@@ -50,7 +50,7 @@ export class FilterParams extends Component { // eslint-disable-line react/prefe
               className={styles.filterField}
               onNewRequest={item => fetchSubCategories(item.value)}
               defaultValue="au"
-              style={{ width: 350 }}
+              fullWidth
             />
           </div>
 
@@ -63,7 +63,7 @@ export class FilterParams extends Component { // eslint-disable-line react/prefe
               disableFreetext
               className={styles.filterField}
               onNewRequest={item => fetchTitles(item.text)}
-              style={{ width: 350 }}
+              fullWidth
             />
           </div>
 

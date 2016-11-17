@@ -5,7 +5,6 @@
  */
 
 import React, { PropTypes, Component } from 'react';
-// import selectSingleTitle from './selectors';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import styles from './styles.css';
@@ -13,12 +12,10 @@ import styles from './styles.css';
 import { createStructuredSelector } from 'reselect';
 
 import { connect } from 'react-redux';
-// import { Field, reduxForm, change, SubmissionError } from 'redux-form/immutable';
-// import SelectField from 'components/SelectField';
 import MenuItem from 'components/MenuItem';
 import H3 from 'components/H3';
 import H2 from 'components/H2';
-import { seniorities, proximities, titleName } from './mocks';
+import { seniorities, proximities } from './constants';
 import MUISelectField from 'material-ui/SelectField';
 
 import { updateTitle } from 'containers/FilterParams/actions';
@@ -28,20 +25,27 @@ export class SingleTitle extends Component { // eslint-disable-line react/prefer
     super(props);
 
     this.updateRelationProximity = this.updateRelationProximity.bind(this);
+    this.updateSeniority = this.updateSeniority.bind(this);
   }
 
-  updateRelationProximity(rel, key) {
+  updateRelationProximity(rel, proximityKey) {
     this.selectedTitle.relations = this.selectedTitle.relations || [];
-    rel.proximity = key;
+    rel.proximity = proximityKey;
     this.selectedTitle.relations.push(rel);
     this.props.updateTitle(this.selectedTitle._id, this.selectedTitle);
+  }
+
+  updateSeniority(seniorityKey) {
+    this.selectedTitle.seniority = seniorityKey;
+    this.props.updateTitle(this.selectedTitle._id, this.selectedTitle);
+    this.forceUpdate();
   }
 
   render() {
     const { selectedTitle } = this.props;
 
-    const seniorityOptions = seniorities.map(s => <MenuItem key={s.value} value={s.name} primaryText={s.name} />);
-    const proximityOptions = proximities.map(p => <MenuItem key={p.value} value={p.name} primaryText={p.name} />);
+    const seniorityOptions = seniorities.map(s => <MenuItem key={s.value} value={s.value} primaryText={s.name} />);
+    const proximityOptions = proximities.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.name} />);
 
     this.selectedTitle = selectedTitle;
 
@@ -57,11 +61,10 @@ export class SingleTitle extends Component { // eslint-disable-line react/prefer
             label={<FormattedMessage {...messages.seniority} />}
             value={selectedTitle.seniority}
             className={styles.filterField}
-            onChange={(e, key, value) => {
-              console.log(e, key, value);
-              selectedTitle.seniority = value;
-            }}
+            fullWidth
+            onChange={(e, key, value) => this.updateSeniority(value)}
           >
+
             {seniorityOptions}
           </MUISelectField>
         </div>
@@ -86,9 +89,9 @@ export class SingleTitle extends Component { // eslint-disable-line react/prefer
                 </span>
           </div>
 
-          {(selectedTitle.relations || mockRel).map(rel => {
+          {(selectedTitle.relations || mockRel).map((rel, index) => {
             return (
-              <div className={styles.tableRow}>
+              <div className={styles.tableRow} key={index}>
                   <span className={styles.jobTitleCol}>
                     rel.title
                   </span>
@@ -96,6 +99,7 @@ export class SingleTitle extends Component { // eslint-disable-line react/prefer
                     <MUISelectField
                       value={rel.proximity}
                       className={styles.proximityField}
+                      style={{ minWidth: 150 }}
                       onChange={(e, key, value) => this.updateRelationProximity(rel, key)}
                     >
                       {proximityOptions}

@@ -13,5 +13,3 @@ export const proximities = [
   { name: 'DD', value: 4 },
   { name: 'EE', value: 5 },
 ];
-
-export const titleName = 'Web Developer';

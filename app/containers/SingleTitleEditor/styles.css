@@ -40,12 +40,12 @@
 
 .jobTitleCol {
   composes: column;
-  width: 60%;
+  width: 45%;
 }
 
 .proximityCol{
   composes: column;
-  width: 30%;
+  width: 40%;
 }
 
 .proximityField {

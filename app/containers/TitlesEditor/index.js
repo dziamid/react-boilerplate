@@ -7,14 +7,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-// import selectTitlesEditor from './selectors';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import styles from './styles.css';
 import H1 from 'components/H1';
-
 import SampleForm from 'components/SampleForm';
-
 import SingleTitleEditor from '../SingleTitleEditor';
 import FilterResults from '../FilterResults';
 import FilterParams from '../FilterParams';

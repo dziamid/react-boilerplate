@@ -17,7 +17,6 @@ import { BASE_API, API_KEY } from 'containers/TitlesEditor/constants';
 import selectFilterParams from 'containers/FilterParams/selectors';
 
 import request from 'utils/request';
-// import selectFilterParams from 'containers/FilterParams/selectors';
 
 /**
  * Generic request/response handler

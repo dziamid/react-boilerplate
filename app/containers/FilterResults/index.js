@@ -18,6 +18,8 @@ import { connect } from 'react-redux';
 import { Field, reduxForm, change, SubmissionError } from 'redux-form/immutable';
 import Button from 'components/Button';
 
+import { getSeniorityName } from 'containers/SingleTitleEditor/constants';
+
 export class FilterResults extends Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     const {
@@ -49,22 +51,22 @@ export class FilterResults extends Component { // eslint-disable-line react/pref
       }
     };
 
-    const singleResult = t => (
-      <div className={getRowStyle(t._id)}>
+    const Title = ({ title }) => (
+      <div className={getRowStyle(title._id)}>
           <span className={styles.selectCol}>
             <Button
               raised
-              onClick={() => setSelectedTitle(t._id)}
+              onClick={() => setSelectedTitle(title._id)}
             >Select</Button>
           </span>
         <span className={styles.jobTitleCol}>
-                {t.title}
+                {title.title}
           </span>
         <span className={styles.seniorityCol}>
-                {t.seniority}
+                {getSeniorityName(title.seniority)}
           </span>
         <span className={styles.relationCol}>
-                {t.relations}
+                {title.relations}
           </span>
       </div>
     );
@@ -90,7 +92,11 @@ export class FilterResults extends Component { // eslint-disable-line react/pref
           </span>
           </div>
 
-          {filteredTitles.map(t => singleResult(t))}
+          {filteredTitles.map(title =>
+            <Title
+              title={title}
+              key={title._id}
+            />)}
         </div>
       </div>
     );
