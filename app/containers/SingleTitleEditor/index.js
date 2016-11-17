@@ -29,10 +29,10 @@ export class SingleTitle extends Component { // eslint-disable-line react/prefer
   }
 
   updateRelationProximity(rel, proximityKey) {
-    this.selectedTitle.relations = this.selectedTitle.relations || [];
-    rel.proximity = proximityKey;
-    this.selectedTitle.relations.push(rel);
-    this.props.updateTitle(this.selectedTitle._id, this.selectedTitle);
+    // this.selectedTitle.relations = this.selectedTitle.relations || [];
+    // rel.proximity = proximityKey;
+    // this.selectedTitle.relations.push(rel);
+    // this.props.updateTitle(this.selectedTitle._id, this.selectedTitle);
   }
 
   updateSeniority(seniorityKey) {
@@ -42,7 +42,7 @@ export class SingleTitle extends Component { // eslint-disable-line react/prefer
   }
 
   render() {
-    const { selectedTitle } = this.props;
+    const { selectedTitle, relations } = this.props;
 
     const seniorityOptions = seniorities.map(s => <MenuItem key={s.value} value={s.value} primaryText={s.name} />);
     const proximityOptions = proximities.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.name} />);
@@ -53,9 +53,9 @@ export class SingleTitle extends Component { // eslint-disable-line react/prefer
 
     return (
       <div className={styles.SingleTitle}>
-        <H2>
+        <H3>
           <div>{selectedTitle.title}</div>
-        </H2>
+        </H3>
         <div className={styles.formRow}>
           <MUISelectField
             label={<FormattedMessage {...messages.seniority} />}
@@ -89,11 +89,11 @@ export class SingleTitle extends Component { // eslint-disable-line react/prefer
                 </span>
           </div>
 
-          {(selectedTitle.relations || mockRel).map((rel, index) => {
+          {(relations || []).map((rel, index) => {
             return (
               <div className={styles.tableRow} key={index}>
                   <span className={styles.jobTitleCol}>
-                    rel.title
+                    {rel.title}
                   </span>
                 <span className={styles.proximityCol}>
                     <MUISelectField
@@ -132,6 +132,12 @@ const mapStateToProps = createStructuredSelector({
     const titles = state.getIn(['titlesEditorRoot', 'filterParams', 'titles']);
     const selected = titles ? titles.filter(t => t._id === titleId) : null;
     return Array.isArray(selected) && selected[0] ? selected[0] : {};
+  },
+  relations: (state) => {
+    const titleId = state.getIn(['titlesEditorRoot', 'filterResults', 'selectedTitle']);
+    const titles = state.getIn(['titlesEditorRoot', 'filterParams', 'titles']);
+    const selected = titles ? titles.filter(t => t._id === titleId) : null;
+    return Array.isArray(selected) && selected[0] ? selected[0].relations : [];
   },
 });
 

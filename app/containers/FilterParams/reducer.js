@@ -14,6 +14,7 @@ import {
   UPDATE_TITLE,
   UPDATE_TITLE_SUCCESS,
   UPDATE_TITLE_ERROR,
+  ADD_RELATION,
 } from './constants';
 import { fromJS } from 'immutable';
 import { parseMlabIds } from 'utils/api';
@@ -76,18 +77,13 @@ function filterParamsReducer(state = initialState, action) {
         .set('error', false)
         .set('titleToUpdate', action.newTitle);
     case UPDATE_TITLE_SUCCESS:
-
-      // const titleObj = _.find(state.titles, (value, key) => {
-      //   if (value._id === action.title._id) {
-      //     myObj = key;
-      //   }
-
       // Get the title from the collection
       const titlesFromState = state.get('titles');
-      let titleObj = _.find(titlesFromState, { _id: action.updatedTitle._id });
+      let titleObj = _.find(titlesFromState, {_id: action.updatedTitle._id});
 
       // Point the title object to the updated object
-      titleObj = action.updatedTitle;
+      // titleObj = action.updatedTitle;
+      titleObj.seniority = 5;
 
       return state
         .set('loading', false)
@@ -98,6 +94,20 @@ function filterParamsReducer(state = initialState, action) {
       return state
         .set('error', action.error)
         .set('loading', false);
+
+    case ADD_RELATION:
+      // Get the title from the collection
+      const titles2 = state.get('titles');
+      let title = _.find(titles2, {_id: action.titleId});
+
+      title.relations = title.relations || [];
+      title.relations.push(action.rel);
+
+      return state
+        .set('loading', false)
+
+        // Update the store with a deep clone of the titles
+        .set('titles', titles2);
 
     default:
       return state;

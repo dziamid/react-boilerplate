@@ -10,7 +10,7 @@ import Helmet from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import styles from './styles.css';
-import H1 from 'components/H1';
+import H3 from 'components/H3';
 import SampleForm from 'components/SampleForm';
 import SingleTitleEditor from '../SingleTitleEditor';
 import FilterResults from '../FilterResults';
@@ -29,9 +29,9 @@ export class TitlesEditor extends React.Component { // eslint-disable-line react
         />
         <div className={styles.pageLayout}>
           <div className={styles.pageColumn}>
-            <H1>
+            <H3>
               <FormattedMessage {...messages.searchTitles} />
-            </H1>
+            </H3>
             <Paper className={styles.paper} zDepth={1}>
               <div className={styles.paperWrapper}>
                 <FilterParams />
@@ -40,9 +40,9 @@ export class TitlesEditor extends React.Component { // eslint-disable-line react
             </Paper>
           </div>
           <div className={styles.pageColumn}>
-            <H1>
+            <H3>
               <FormattedMessage {...messages.editSeniorityAndRelations} />
-            </H1>
+            </H3>
             <Paper className={styles.paper} zDepth={1}>
               <div className={styles.paperWrapper}>
                 <SingleTitleEditor />

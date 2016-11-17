@@ -15,6 +15,7 @@ import {
   UPDATE_TITLE,
   UPDATE_TITLE_SUCCESS,
   UPDATE_TITLE_ERROR,
+  ADD_RELATION,
 } from './constants';
 
 export function fetchSubCategories(categoryId) {
@@ -81,5 +82,13 @@ export function filterResults(filterText) {
   return {
     type: FILTER_RESULTS,
     filterText,
+  };
+}
+
+export function addRelation(titleId, rel) {
+  return {
+    type: ADD_RELATION,
+    titleId,
+    rel
   };
 }

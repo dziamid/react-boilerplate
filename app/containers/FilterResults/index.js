@@ -5,7 +5,6 @@
  */
 
 import React, { PropTypes, Component } from 'react';
-import { selectFilterResults, selectResultsList } from './selectors';
 import selectFilterParams from 'containers/FilterParams/selectors';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
@@ -13,6 +12,7 @@ import styles from './styles.css';
 import { createStructuredSelector } from 'reselect';
 
 import { setSelectedTitle } from './actions';
+import { updateTitle, addRelation } from 'containers/FilterParams/actions';
 
 import { connect } from 'react-redux';
 import { Field, reduxForm, change, SubmissionError } from 'redux-form/immutable';
@@ -31,6 +31,8 @@ export class FilterResults extends Component { // eslint-disable-line react/pref
       filterText,
       setSelectedTitle,
       selectedTitle,
+      updateTitle,
+      addRelation,
     } = this.props;
 
     const filteredTitles = titles ?
@@ -51,7 +53,9 @@ export class FilterResults extends Component { // eslint-disable-line react/pref
       }
     };
 
-    const Title = ({ title }) => (
+    this.selectedTitle = selectedTitle;
+
+    const Title = ({title}) => (
       <div className={getRowStyle(title._id)}>
           <span className={styles.selectCol}>
             <Button
@@ -66,7 +70,13 @@ export class FilterResults extends Component { // eslint-disable-line react/pref
                 {getSeniorityName(title.seniority)}
           </span>
         <span className={styles.relationCol}>
-                {title.relations}
+                <span
+                  style={{minWidth: 30, display: 'inline-block'}}>{title.relations ? title.relations.length : ''}</span>
+          <Button
+            raised
+            className={styles.addButton}
+            onClick={() => addRelation(selectedTitle, title)}
+          > + </Button>
           </span>
       </div>
     );
@@ -112,15 +122,18 @@ FilterResults.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  // results: selectResultsList(),
   filterParams: selectFilterParams(),
   filterText: (state) => state.getIn(['form', 'FilterParams', 'values', 'filter']),
-  selectedTitle: (state) => state.getIn(['titlesEditorRoot', 'filterResults', 'selectedTitle']),
+  selectedTitle: (state) => {
+    return state.getIn(['titlesEditorRoot', 'filterResults', 'selectedTitle'])
+  },
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     setSelectedTitle: (titleId) => dispatch(setSelectedTitle(titleId)),
+    updateTitle: (id, title) => dispatch(updateTitle(id, title)),
+    addRelation: (titleId, rel) => dispatch(addRelation(titleId, rel))
   };
 }
 
@@ -134,5 +147,5 @@ const validate = (values) => {
   return errors;
 };
 
-const form = reduxForm({ form: 'filterResults', validate })(FilterResults);
+const form = reduxForm({form: 'filterResults', validate})(FilterResults);
 export default connect(mapStateToProps, mapDispatchToProps)(form);
