@@ -36,7 +36,7 @@ export class FilterResults extends Component { // eslint-disable-line react/pref
       : [];
 
     const
-      total = titles.length,
+      total = (titles || []).length,
       filtered = filteredTitles.length;
 
     const statusLine = `Displaying ${filtered} out of ${total} Titles`;

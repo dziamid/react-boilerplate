@@ -12,6 +12,9 @@ import {
   FETCH_TITLES_SUCCESS,
   FETCH_TITLES_ERROR,
   FILTER_RESULTS,
+  UPDATE_TITLE,
+  UPDATE_TITLE_SUCCESS,
+  UPDATE_TITLE_ERROR,
 } from './constants';
 
 export function fetchSubCategories(categoryId) {
@@ -46,6 +49,31 @@ export function fetchTitlesSuccess(titles) {
   return {
     type: FETCH_TITLES_SUCCESS,
     titles,
+  };
+}
+
+export function updateTitle(titleId, newTitle) {
+  return {
+    type: UPDATE_TITLE_SUCCESS,
+    titleId,
+    updatedTitle: newTitle,
+    // newTitle,
+  };
+}
+
+export function updateTitleSuccess(titleId, updatedTitle) {
+  return {
+    type: UPDATE_TITLE_SUCCESS,
+    titleId,
+    updatedTitle,
+  };
+}
+
+export function updateTitleErr(titleId, error) {
+  return {
+    type: UPDATE_TITLE_ERROR,
+    titleId,
+    error
   };
 }
 

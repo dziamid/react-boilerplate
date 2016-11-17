@@ -39,10 +39,6 @@ export class FilterParams extends Component { // eslint-disable-line react/prefe
 
     return (
       <div className={styles.paper}>
-        <span style={{position: 'absolute', background: 'yellow'}}>
-          {loading ? 'loading...' : ''}
-          {error ? 'error!' : ''}
-        </span>
         <div className={styles.FilterParams}>
           <div className={styles.formRow}>
             <Field
@@ -54,6 +50,7 @@ export class FilterParams extends Component { // eslint-disable-line react/prefe
               className={styles.filterField}
               onNewRequest={item => fetchSubCategories(item.value)}
               defaultValue="au"
+              style={{width: 350}}
             />
           </div>
 
@@ -66,6 +63,7 @@ export class FilterParams extends Component { // eslint-disable-line react/prefe
               disableFreetext
               className={styles.filterField}
               onNewRequest={item => fetchTitles(item.text)}
+              style={{width: 350}}
             />
           </div>
 
@@ -77,6 +75,11 @@ export class FilterParams extends Component { // eslint-disable-line react/prefe
               className={styles.filterField}
             />
           </div>
+          <span style={{position: 'absolute', background: 'yellow'}}>
+          {loading ? 'loading...' : ''}
+            {error ? 'error!' : ''}
+        </span>
+
         </div>
       </div>
     );

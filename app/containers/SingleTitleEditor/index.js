@@ -21,13 +21,31 @@ import H2 from 'components/H2';
 import { seniorities, proximities, titleName } from './mocks';
 import MUISelectField from 'material-ui/SelectField';
 
+import { updateTitle } from 'Containers/FilterParams/actions';
 
 export class SingleTitle extends Component { // eslint-disable-line react/prefer-stateless-function
+  constructor(props) {
+    super(props);
+
+    this.updateRelationProximity = this.updateRelationProximity.bind(this);
+  }
+
+  updateRelationProximity(rel, key) {
+    this.selectedTitle.relations =  this.selectedTitle.relations || [];
+    rel.proximity = key;
+    this.selectedTitle.relations.push(rel);
+    this.props.updateTitle(this.selectedTitle._id, this.selectedTitle);
+  }
+
   render() {
     const {selectedTitle} = this.props;
 
     const seniorityOptions = seniorities.map(s => <MenuItem key={s.value} value={s.name} primaryText={s.name}/>);
     const proximityOptions = proximities.map(p => <MenuItem key={p.value} value={p.name} primaryText={p.name}/>);
+
+    this.selectedTitle = selectedTitle;
+
+    const mockRel = [{title: 'related title #1', proximity: 3}, {title: 'related title #2', proximity: 4}];
 
     return (
       <div className={styles.SingleTitle}>
@@ -39,7 +57,10 @@ export class SingleTitle extends Component { // eslint-disable-line react/prefer
             label={<FormattedMessage {...messages.seniority} />}
             value={selectedTitle.seniority}
             className={styles.filterField}
-            onChange={(e, key, value) => {console.log(e, key, value); selectedTitle.seniority = value}}
+            onChange={(e, key, value) => {
+              console.log(e, key, value);
+              selectedTitle.seniority = value
+            }}
           >
             {seniorityOptions}
           </MUISelectField>
@@ -65,18 +86,17 @@ export class SingleTitle extends Component { // eslint-disable-line react/prefer
                 </span>
           </div>
 
-          {(selectedTitle.relations || [1, 2]).map(i => {
+          {(selectedTitle.relations || mockRel).map(rel => {
             return (
               <div className={styles.tableRow}>
                   <span className={styles.jobTitleCol}>
-                    title
-                    -{i}
+                    rel.title
                   </span>
                 <span className={styles.proximityCol}>
                     <MUISelectField
-                      value={i.proximity}
+                      value={rel.proximity}
                       className={styles.proximityField}
-                      onChange={(e, key, value) => console.log(e, key, value)}
+                      onChange={(e, key, value) => this.updateRelationProximity(rel, key)}
                     >
                       {proximityOptions}
                     </MUISelectField>
@@ -89,8 +109,6 @@ export class SingleTitle extends Component { // eslint-disable-line react/prefer
             );
           })}
         </div>
-
-
       </div>
     );
   }
@@ -108,14 +126,14 @@ const mapStateToProps = createStructuredSelector({
   selectedTitle: (state) => {
     const titleId = state.getIn(['titlesEditorRoot', 'filterResults', 'selectedTitle']);
     const titles = state.getIn(['titlesEditorRoot', 'filterParams', 'titles']);
-    const selected = titles.filter(t => t._id === titleId);
+    const selected = titles ? titles.filter(t => t._id === titleId) : null;
     return Array.isArray(selected) && selected[0] ? selected[0] : {};
   }
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    updateTitle: (id, title) => dispatch(updateTitle(id, title)),
   };
 }
 

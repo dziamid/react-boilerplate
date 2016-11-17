@@ -75,14 +75,26 @@ function filterParamsReducer(state = initialState, action) {
       return state
         .set('loading', true)
         .set('error', false)
-        .set('titleToUpdate', action.title);
+        .set('titleToUpdate', action.newTitle);
     case UPDATE_TITLE_SUCCESS:
-      const titleObj = _.find(state.titles, {_id: action.title._id})  //TODO: $Oid ?
 
+      // const titleObj = _.find(state.titles, (value, key) => {
+      //   if (value._id === action.title._id) {
+      //     myObj = key;
+      //   }
+
+      // Get the title from the collection
+      const titlesFromState = state.get('titles');
+      let titleObj = _.find(titlesFromState, {_id: action.newTitle._id});
+
+      // Point the title object to the updated object
+      titleObj = action.newTitle;
 
       return state
         .set('loading', false)
-        .set('titles', titles);
+
+        // Update the store with a deep clone of the titles
+        .set('titles', titlesFromState);
     case UPDATE_TITLE_ERROR:
       return state
         .set('error', action.error)
