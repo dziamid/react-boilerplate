@@ -10,6 +10,7 @@
 
 .pageColumn {
   width: 50%;
+  padding: 10px;
 }
 
 .sampleFormWrapper {
@@ -20,12 +21,11 @@
 }
 
 .paperWrapper {
-  margin: 20px 0;
+  margin: 0 0 20px 0;
 }
 
 .paper {
   padding: 10px;
-  min-width: 90%;
-  display: inline-block;
+  display: block;
 }
 

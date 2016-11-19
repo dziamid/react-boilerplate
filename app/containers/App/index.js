@@ -12,10 +12,7 @@ import Helmet from 'react-helmet';
 // Import the CSS reset, which HtmlWebpackPlugin transfers to the build folder
 import 'sanitize.css/sanitize.css';
 
-import Img from 'components/Img';
-import Footer from 'components/Footer';
 import Header from 'components/Header';
-import A from 'components/A';
 import Toastr from 'components/Toastr';
 
 import styles from './styles.css';
@@ -40,7 +37,6 @@ function App(props) {
           ]}
         />
         {React.Children.toArray(props.children)}
-        <Footer />
         <Toastr />
       </div>
     </div>

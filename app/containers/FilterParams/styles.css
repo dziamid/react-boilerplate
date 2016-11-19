@@ -16,9 +16,3 @@
   composes: formRow;
   margin: 40px 10px 0 0;
 }
-
-.paper {
-  padding: 10px;
-  min-width: 90%;
-  display: inline-block;
-}

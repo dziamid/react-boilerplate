@@ -35,8 +35,8 @@ export class TitlesEditor extends React.Component { // eslint-disable-line react
             <Paper className={styles.paper} zDepth={1}>
               <div className={styles.paperWrapper}>
                 <FilterParams />
+                <FilterResults />
               </div>
-              <FilterResults />
             </Paper>
           </div>
           <div className={styles.pageColumn}>
