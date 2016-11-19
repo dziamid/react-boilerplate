@@ -75,7 +75,7 @@ export class FilterResults extends Component { // eslint-disable-line react/pref
       <Table
         onRowSelection={this.handleRowSelection}
       >
-        <TableHeader>
+        <TableHeader displaySelectAll={false} adjustForCheckbox>
           <TableRow>
             <TableHeaderColumn className={styles.titleColumn}>Title</TableHeaderColumn>
             <TableHeaderColumn>Seniority</TableHeaderColumn>

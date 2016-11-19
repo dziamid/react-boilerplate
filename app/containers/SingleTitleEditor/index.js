@@ -22,7 +22,12 @@ import { difference } from 'lodash';
 import RemoveIcon from 'material-ui/svg-icons/content/remove-circle-outline';
 import Button from 'components/Button';
 
-export class SingleTitle extends Component { // eslint-disable-line react/prefer-stateless-function
+import {
+  Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn,
+}
+  from 'material-ui/Table';
+
+export class SingleTitle extends Component {
   constructor(props) {
     super(props);
 
@@ -85,43 +90,45 @@ export class SingleTitle extends Component { // eslint-disable-line react/prefer
             </H3>
           </div>
         </div>
-        <div className={styles.tableWrapper}>
-          <div className={styles.tableHeader}>
-            <span className={styles.jobTitleCol}>
-              <FormattedMessage {...messages.jobTitle} />
-            </span>
-            <span className={styles.proximityCol}>
-              <FormattedMessage {...messages.proximity} />
-            </span>
-            <span className={styles.buttonCol}>
-              {/* <FormattedMessage {...messages.delete} />*/}
-            </span>
-          </div>
+        <Table selectable={false}>
+          <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
+            <TableRow>
+              <TableHeaderColumn className={styles.titleColumn}>
+                <FormattedMessage {...messages.jobTitle} />
+              </TableHeaderColumn>
+              <TableHeaderColumn className={styles.proximityColumn}>
+                <FormattedMessage {...messages.proximity} />
+              </TableHeaderColumn>
+              <TableHeaderColumn />
+            </TableRow>
+          </TableHeader>
+          <TableBody displayRowCheckbox={false}>
+            {relations.map((rel, index) =>
+              <TableRow key={index}>
+                <TableRowColumn className={styles.titleColumn}>
+                  {rel.title}
+                </TableRowColumn>
+                <TableRowColumn className={styles.proximityColumn}>
+                  <MUISelectField
+                    value={rel.proximity}
+                    className={styles.proximityField}
+                  >
+                    {proximityOptions}
+                  </MUISelectField>
 
-          {relations.map((rel, index) => (
-            <div className={styles.tableRow} key={index}>
-              <span className={styles.jobTitleCol}>
-                {rel.title}
-              </span>
-              <span className={styles.proximityCol}>
-                <MUISelectField
-                  value={rel.proximity}
-                  className={styles.proximityField}
-                  style={{ minWidth: 150 }}
-                >
-                  {proximityOptions}
-                </MUISelectField>
-              </span>
-              <span className={styles.buttonCol}>
-                <Button
-                  icon={<RemoveIcon />}
-                  onClick={() => this.props.removeRelation(rel._id, selectedTitle._id)}
-                />
-              </span>
-            </div>
+                </TableRowColumn>
+                <TableRowColumn className={styles.removeColumn}>
+                  <Button
+                    icon={<RemoveIcon />}
+                    onClick={() => this.props.removeRelation(rel._id, selectedTitle._id)}
+                  />
+                </TableRowColumn>
+              </TableRow>
+            )}
 
-          ))}
-        </div>
+          </TableBody>
+        </Table>
+
       </div>
     );
   }

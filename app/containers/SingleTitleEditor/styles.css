@@ -13,47 +13,19 @@
   display: inline-block;
 }
 
-.tableWrapper {
-  /*margin-top: 50px;*/
-  padding-top: 20px;
-  max-height: 300px;
-  overflow: scroll;
+.titleColumn {
+  width: 50%;
 }
 
-.tableRow {
-  display: flex;
-  justify-content: space-between;
-  flex-direction: row;
-  border-bottom: 1px dashed gray;
+.proximityColumn {
+  width: 200px;
 }
 
-.tableHeader {
-  composes: tableRow;
-  font-weight: 900;
-  border-bottom: none;
-}
+.removeColumn {
+  width: 96px;
 
-.column {
-  width: 25%;
-  margin: 10px;
 }
-
-.jobTitleCol {
-  composes: column;
-  width: 45%;
-}
-
-.proximityCol{
-  composes: column;
-  width: 40%;
-}
-
 .proximityField {
-  max-width: 120px;
+  max-width: calc(200px - 48px);
 
-}
-
-.buttonCol{
-  composes: column;
-  width: 10%;
 }
