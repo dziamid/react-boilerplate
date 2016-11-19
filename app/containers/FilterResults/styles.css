@@ -1,6 +1,7 @@
 
 .titleColumn {
   width: 50%;
+  cursor: pointer;
 }
 
 .addButton {

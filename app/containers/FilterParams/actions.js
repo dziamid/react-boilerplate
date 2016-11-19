@@ -10,9 +10,7 @@ import {
   FETCH_SUBCATEGORIES_ERROR,
   FETCH_TITLES,
   FETCH_TITLES_SUCCESS,
-  FETCH_TITLES_ERROR,
   FILTER_RESULTS,
-  UPDATE_TITLE,
   UPDATE_TITLE_SUCCESS,
   UPDATE_TITLE_ERROR,
   ADD_RELATION,
@@ -85,10 +83,9 @@ export function filterResults(filterText) {
   };
 }
 
-export function addRelation(titleId, rel) {
+export function addRelation(titleA, titleB) { // array of title ids
   return {
     type: ADD_RELATION,
-    titleId,
-    rel
+    titles: [titleA, titleB],
   };
 }

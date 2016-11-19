@@ -31,6 +31,7 @@ const initialState = fromJS({
   selectedSubCategory: false,
   filterText: '',
   titleToUpdate: false,
+  relations: [],
 });
 
 function filterParamsReducer(state = initialState, action) {
@@ -71,7 +72,7 @@ function filterParamsReducer(state = initialState, action) {
 
       return state
         .set('loading', false)
-        .set('titles', titles.map(title => ({ ...title, relations: [] })));
+        .set('titles', titles);
     }
 
     case FETCH_TITLES_ERROR: {
@@ -113,19 +114,14 @@ function filterParamsReducer(state = initialState, action) {
     }
 
     case ADD_RELATION: {
-      // Get the title from the collection
-      const titles2 = state.get('titles');
-      const title = _.find(titles2, { _id: action.titleId });
-
-      if (title.relations.indexOf(action.rel) === -1) {
-        title.relations.push(action.rel);
+      const [a, b] = action.titles; // ids
+      let relations = state.get('relations');
+      const exits = state.get('relations').find(r => r.indexOf(a) !== -1 && r.indexOf(b) !== -1);
+      if (!exits) {
+        relations = relations.push([a, b]);
       }
 
-      return state
-        .set('loading', false)
-
-        // Update the store with a deep clone of the titles
-        .set('titles', titles2);
+      return state.set('relations', relations);
     }
 
     default:
