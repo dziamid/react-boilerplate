@@ -17,8 +17,10 @@ import H3 from 'components/H3';
 import { seniorities, proximities } from './constants';
 import MUISelectField from 'material-ui/SelectField';
 
-import { updateTitle } from 'containers/FilterParams/actions';
+import { updateTitle, removeRelation } from 'containers/FilterParams/actions';
 import { difference } from 'lodash';
+import RemoveIcon from 'material-ui/svg-icons/content/remove-circle-outline';
+import Button from 'components/Button';
 
 export class SingleTitle extends Component { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
@@ -111,7 +113,10 @@ export class SingleTitle extends Component { // eslint-disable-line react/prefer
                 </MUISelectField>
               </span>
               <span className={styles.buttonCol}>
-                <a href>X</a>
+                <Button
+                  icon={<RemoveIcon />}
+                  onClick={() => this.props.removeRelation(rel._id, selectedTitle._id)}
+                />
               </span>
             </div>
 
@@ -135,7 +140,8 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    updateTitle: (id, title) => dispatch(updateTitle(id, title)),
+    updateTitle: (...args) => dispatch(updateTitle(...args)),
+    removeRelation: (...args) => dispatch(removeRelation(...args)),
   };
 }
 

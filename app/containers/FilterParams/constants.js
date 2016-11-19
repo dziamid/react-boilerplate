@@ -15,3 +15,4 @@ export const UPDATE_TITLE = 'app/FilterParams/UPDATE_TITLE';
 export const UPDATE_TITLE_SUCCESS = 'app/FilterParams/UPDATE_TITLE_SUCCESS';
 export const UPDATE_TITLE_ERROR = 'app/FilterParams/UPDATE_TITLE_ERROR';
 export const ADD_RELATION = 'app/FilterParams/ADD_RELATION';
+export const REMOVE_RELATION = 'app/FilterParams/REMOVE_RELATION';

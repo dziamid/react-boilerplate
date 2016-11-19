@@ -14,6 +14,7 @@ import {
   UPDATE_TITLE_SUCCESS,
   UPDATE_TITLE_ERROR,
   ADD_RELATION,
+  REMOVE_RELATION,
 } from './constants';
 
 export function fetchSubCategories(categoryId) {
@@ -83,9 +84,16 @@ export function filterResults(filterText) {
   };
 }
 
-export function addRelation(titleA, titleB) { // array of title ids
+export function addRelation(...titles) {
   return {
     type: ADD_RELATION,
-    titles: [titleA, titleB],
+    titles: [...titles],
+  };
+}
+
+export function removeRelation(...titles) {
+  return {
+    type: REMOVE_RELATION,
+    titles: [...titles],
   };
 }

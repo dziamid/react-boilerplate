@@ -15,6 +15,7 @@ import {
   UPDATE_TITLE_SUCCESS,
   UPDATE_TITLE_ERROR,
   ADD_RELATION,
+  REMOVE_RELATION,
 } from './constants';
 import { fromJS } from 'immutable';
 import { parseMlabIds } from 'utils/api';
@@ -119,6 +120,17 @@ function filterParamsReducer(state = initialState, action) {
       const exits = state.get('relations').find(r => r.indexOf(a) !== -1 && r.indexOf(b) !== -1);
       if (!exits) {
         relations = relations.push([a, b]);
+      }
+
+      return state.set('relations', relations);
+    }
+
+    case REMOVE_RELATION: {
+      const [a, b] = action.titles; // ids
+      let relations = state.get('relations');
+      const relIndex = state.get('relations').findIndex(r => r.indexOf(a) !== -1 && r.indexOf(b) !== -1);
+      if (relIndex !== -1) {
+        relations = relations.remove(relIndex);
       }
 
       return state.set('relations', relations);

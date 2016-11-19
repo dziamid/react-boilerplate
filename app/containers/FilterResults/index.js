@@ -15,6 +15,7 @@ import { updateTitle, addRelation } from 'containers/FilterParams/actions';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form/immutable';
 import Button from 'components/Button';
+import AddIcon from 'material-ui/svg-icons/content/add-circle-outline';
 
 import {
   Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn,
@@ -35,6 +36,7 @@ export class FilterResults extends Component { // eslint-disable-line react/pref
   }
 
   handleRowSelection(indexes) {
+    console.log('handleRowSelection', indexes);
     const selectedTitle = indexes.length > 0 ? this.props.results[indexes[0]]._id : null;
     this.props.setSelectedTitle(selectedTitle);
   }
@@ -67,6 +69,8 @@ export class FilterResults extends Component { // eslint-disable-line react/pref
       results,
     } = this.props;
 
+    const addIcon = <AddIcon />;
+
     return (
       <Table
         onRowSelection={this.handleRowSelection}
@@ -78,7 +82,7 @@ export class FilterResults extends Component { // eslint-disable-line react/pref
             <TableHeaderColumn colSpan="2">Relations</TableHeaderColumn>
           </TableRow>
         </TableHeader>
-        <TableBody>
+        <TableBody deselectOnClickaway={false}>
           {results.map(title =>
             <TableRow
               key={title._id}
@@ -89,10 +93,10 @@ export class FilterResults extends Component { // eslint-disable-line react/pref
               <TableRowColumn>
                 { this.showAddRelationButton(title) ? (
                   <Button
-                    raised
+                    icon={addIcon}
                     className={styles.addButton}
                     onClick={e => e.stopPropagation() || this.handleAddRelation(title)}
-                  > + </Button>
+                  />
                 ) : null }
 
               </TableRowColumn>
