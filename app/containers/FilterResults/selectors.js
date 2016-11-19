@@ -1,38 +1,21 @@
 import { createSelector } from 'reselect';
-import { fromJS } from 'immutable';
 
-/**
- * Direct selector to the FilterResults state domain and form
- */
-const selectFilterResultsDomain = () => (state) =>
-  state.getIn(['titlesEditorRoot', 'filterResults'], fromJS({}));
+const titles = () => (state) => state.getIn(['titlesEditorRoot', 'filterParams', 'titles']);
+const query = () => (state) => state.getIn(['form', 'FilterParams', 'values', 'filter']); // todo: why separate state root? use titlesEditorRoot.filterParams
+const selectedTitle = () => (state) => state.getIn(['titlesEditorRoot', 'filterResults', 'selectedTitle']);
+const relations = () => (state) => state.getIn(['titlesEditorRoot', 'filterParams', 'relations']);
 
-const selectFilterParamsDomain = () => (state) =>
-  state.getIn(['titlesEditorRoot', 'filterParams'], fromJS({}));
+const results = () => createSelector(
+  titles(),
+  query(),
+  (titles, query) => {
+    return titles.filter(t => t.title.toLowerCase().includes((query || '').trim()));
+  });
 
-const selectFilterResultsForm = () => (state) => {
-  return state.getIn(['form', 'filterResults'], {});
-};
 
-/**
- * Other specific selectors
- */
-const selectResultsList = () => createSelector(
-  selectFilterResultsDomain(),
-  substate => substate.get('results')
-);
-
-/**
- * Default selector used by FilterResults
- */
-
-const selectFilterResults = () => createSelector(
-  selectFilterResultsDomain(),
-  (substate) => substate.toJS()
-);
-
-export default selectFilterResults;
 export {
-  selectFilterResultsForm,
-  selectResultsList,
+  titles,
+  results,
+  selectedTitle,
+  relations,
 };

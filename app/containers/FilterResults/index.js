@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import selectFilterParams from 'containers/FilterParams/selectors';
+import * as selectors from './selectors';
 import styles from './styles.css';
 import { createStructuredSelector } from 'reselect';
 
@@ -15,7 +15,6 @@ import { updateTitle, addRelation } from 'containers/FilterParams/actions';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form/immutable';
 import Button from 'components/Button';
-import { uniqBy } from 'lodash';
 
 import {
   Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn,
@@ -31,17 +30,18 @@ export class FilterResults extends Component { // eslint-disable-line react/pref
     this.handleRowSelection = this.handleRowSelection.bind(this);
     this.handleAddRelation = this.handleAddRelation.bind(this);
     this.getRelations = this.getRelations.bind(this);
+    this.showAddRelationButton = this.showAddRelationButton.bind(this);
+    // todo: use autobind
   }
 
-  handleRowSelection(jobTitle) {
-    if (jobTitle) {
-      this.props.setSelectedTitle(jobTitle._id);
-    }
+  handleRowSelection(indexes) {
+    const selectedTitle = indexes.length > 0 ? this.props.results[indexes[0]] : null;
+    this.props.setSelectedTitle(selectedTitle._id);
   }
 
-  handleAddRelation(jobTitle) {
+  handleAddRelation(title) {
     if (this.props.selectedTitle) {
-      this.props.addRelation(this.props.selectedTitle, jobTitle._id);
+      this.props.addRelation(this.props.selectedTitle, title._id);
     }
   }
 
@@ -49,29 +49,27 @@ export class FilterResults extends Component { // eslint-disable-line react/pref
     return this.props.relations.find(r => r.indexOf(titleA) !== -1 && r.indexOf(titleB) !== -1);
   }
 
-  getRelations(jobTitle) {
-    return this.props.relations.filter(r => r.indexOf(jobTitle._id) !== -1); // use selector
+  getRelations(title) {
+    return this.props.relations.filter(r => r.indexOf(title._id) !== -1); // use selector
+  }
+
+  showAddRelationButton(title) {
+    const { selectedTitle } = this.props;
+
+    return selectedTitle &&
+      selectedTitle !== title._id && !this.hasRelation(title._id, selectedTitle);
   }
 
   render() {
     const {
-      filterParams: {
-        titles = [], // todo: use selector for results filtering
-      },
-      filterText,
       selectedTitle,
+      titles,
+      results,
     } = this.props;
-
-    let results = titles.filter(t => t.title.toLowerCase().includes((filterText || '').trim()))
-      .slice(0, 20);
-
-    results = uniqBy(results, r => r.title);
-
-    const statusLine = `Displaying ${titles.length} out of ${results.length} Titles`;
 
     return (
       <Table
-        onRowSelection={indexes => this.handleRowSelection(results[indexes[0]])}
+        onRowSelection={this.handleRowSelection}
       >
         <TableHeader>
           <TableRow>
@@ -81,25 +79,25 @@ export class FilterResults extends Component { // eslint-disable-line react/pref
           </TableRow>
         </TableHeader>
         <TableBody>
-          {results.map(job =>
+          {results.map(title =>
             <TableRow
-              key={job._id}
-              selected={job._id === selectedTitle}
+              key={title._id}
+              selected={title._id === selectedTitle}
             >
-              <TableRowColumn className={styles.titleColumn}>{job.title}</TableRowColumn>
-              <TableRowColumn>{getSeniorityName(job.title)}</TableRowColumn>
+              <TableRowColumn className={styles.titleColumn}>{title.title}</TableRowColumn>
+              <TableRowColumn>{getSeniorityName(title.title)}</TableRowColumn>
               <TableRowColumn>
-                { selectedTitle && !this.hasRelation(job._id, selectedTitle) ? (
+                { this.showAddRelationButton(title) ? (
                   <Button
                     raised
                     className={styles.addButton}
-                    onClick={e => e.stopPropagation() || this.handleAddRelation(job)}
+                    onClick={e => e.stopPropagation() || this.handleAddRelation(title)}
                   > + </Button>
                 ) : null }
 
               </TableRowColumn>
               <TableRowColumn>
-                { this.getRelations(job).size || '0' }
+                { this.getRelations(title).size || '0' }
               </TableRowColumn>
             </TableRow>
           )}
@@ -108,7 +106,7 @@ export class FilterResults extends Component { // eslint-disable-line react/pref
         <TableFooter>
           <TableRow>
             <TableRowColumn colSpan="4" style={{ textAlign: 'left' }}>
-              { statusLine }
+              { `Displaying ${results.length || '0'} out of ${titles.length || '0'} Titles` }
             </TableRowColumn>
           </TableRow>
         </TableFooter>
@@ -118,12 +116,10 @@ export class FilterResults extends Component { // eslint-disable-line react/pref
 }
 
 const mapStateToProps = createStructuredSelector({
-  filterParams: selectFilterParams(),
-  filterText: (state) => state.getIn(['form', 'FilterParams', 'values', 'filter']),
-  selectedTitle: (state) => {
-    return state.getIn(['titlesEditorRoot', 'filterResults', 'selectedTitle']);
-  },
-  relations: state => state.getIn(['titlesEditorRoot', 'filterParams', 'relations']),
+  results: selectors.results(),
+  titles: selectors.titles(),
+  selectedTitle: selectors.selectedTitle(),
+  relations: selectors.relations(),
 });
 
 function mapDispatchToProps(dispatch) {
