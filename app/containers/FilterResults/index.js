@@ -77,11 +77,14 @@ export class FilterResults extends Component { // eslint-disable-line react/pref
               <TableRowColumn className={styles.titleColumn}>{job.title}</TableRowColumn>
               <TableRowColumn>{getSeniorityName(job.title)}</TableRowColumn>
               <TableRowColumn>
-                <Button
-                  raised
-                  className={styles.addButton}
-                  onClick={e => e.stopPropagation() || this.handleAddRelation(job)}
-                > + </Button>
+                { selectedTitle && job._id !== selectedTitle ? (
+                  <Button
+                    raised
+                    className={styles.addButton}
+                    onClick={e => e.stopPropagation() || this.handleAddRelation(job)}
+                  > + </Button>
+                ) : null }
+
               </TableRowColumn>
               <TableRowColumn>
                 {job.relations ? job.relations.length : ''}
