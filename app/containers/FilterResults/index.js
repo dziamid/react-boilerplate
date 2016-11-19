@@ -35,8 +35,8 @@ export class FilterResults extends Component { // eslint-disable-line react/pref
   }
 
   handleRowSelection(indexes) {
-    const selectedTitle = indexes.length > 0 ? this.props.results[indexes[0]] : null;
-    this.props.setSelectedTitle(selectedTitle._id);
+    const selectedTitle = indexes.length > 0 ? this.props.results[indexes[0]]._id : null;
+    this.props.setSelectedTitle(selectedTitle);
   }
 
   handleAddRelation(title) {
