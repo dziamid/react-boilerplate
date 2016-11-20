@@ -149,7 +149,7 @@ function filterParamsReducer(state = initialState, action) {
       const [a, b] = action.titles; // ids
       let relations = state.get('relations');
       const entry = relations.findEntry(r => r.indexOf(a) !== -1 && r.indexOf(b) !== -1); // returns [idx, relation]
-      if (!entry && Array.isArray(entry[1])) {
+      if (entry && Array.isArray(entry[1])) {
         return state;
       }
       entry[1].push('new data');
