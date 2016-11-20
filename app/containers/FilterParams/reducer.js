@@ -11,11 +11,10 @@ import {
   FETCH_TITLES,
   FETCH_TITLES_SUCCESS,
   FETCH_TITLES_ERROR,
-  UPDATE_TITLE,
-  UPDATE_TITLE_SUCCESS,
-  UPDATE_TITLE_ERROR,
   ADD_RELATION,
   REMOVE_RELATION,
+  // UPDATE_PROXIMITY,
+  UPDATE_SENIORITY,
 } from './constants';
 import { fromJS } from 'immutable';
 import { parseMlabIds } from 'utils/api';
@@ -80,39 +79,36 @@ function filterParamsReducer(state = initialState, action) {
       return state
         .set('error', action.error)
         .set('loading', false);
-      // case FILTER_RESULTS:
-      //   return state
-      //     .set('filterText', action.filterText);
     }
 
-    case UPDATE_TITLE: {
-      return state
-        .set('loading', true)
-        .set('error', false)
-        .set('titleToUpdate', action.newTitle);
-    }
-
-    case UPDATE_TITLE_SUCCESS: {
-      // Get the title from the collection
-      const titlesFromState = state.get('titles');
-      const titleObj = _.find(titlesFromState, { _id: action.updatedTitle._id });
-
-      // Point the title object to the updated object
-      // titleObj = action.updatedTitle;
-      titleObj.seniority = 5;
-
-      return state
-        .set('loading', false)
-
-        // Update the store with a deep clone of the titles
-        .set('titles', titlesFromState);
-    }
-
-    case UPDATE_TITLE_ERROR: {
-      return state
-        .set('error', action.error)
-        .set('loading', false);
-    }
+    // case UPDATE_TITLE: {
+    //   return state
+    //     .set('loading', true)
+    //     .set('error', false)
+    //     .set('titleToUpdate', action.newTitle);
+    // }
+    //
+    // case UPDATE_TITLE_SUCCESS: {
+    //   // Get the title from the collection
+    //   const titlesFromState = state.get('titles');
+    //   const titleObj = _.find(titlesFromState, { _id: action.updatedTitle._id });
+    //
+    //   // Point the title object to the updated object
+    //   // titleObj = action.updatedTitle;
+    //   titleObj.seniority = 5;
+    //
+    //   return state
+    //     .set('loading', false)
+    //
+    //     // Update the store with a deep clone of the titles
+    //     .set('titles', titlesFromState);
+    // }
+    //
+    // case UPDATE_TITLE_ERROR: {
+    //   return state
+    //     .set('error', action.error)
+    //     .set('loading', false);
+    // }
 
     case ADD_RELATION: {
       const [a, b] = action.titles; // ids
@@ -134,6 +130,19 @@ function filterParamsReducer(state = initialState, action) {
       }
 
       return state.set('relations', relations);
+    }
+
+    case UPDATE_SENIORITY: {
+      const titleId = action.titleId;
+      const seniority = action.seniority;
+      const titles = state.get('titles');
+
+      const titleObj = _.find(titles, { _id: titleId });
+      titleObj.seniority = seniority;
+
+      const clonedTitles = _.cloneDeep(titles);
+
+      return state.set('titles', clonedTitles);
     }
 
     default:

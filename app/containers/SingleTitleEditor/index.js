@@ -17,7 +17,7 @@ import H3 from 'components/H3';
 import { seniorities, proximities } from './constants';
 import MUISelectField from 'material-ui/SelectField';
 
-import { updateTitle, removeRelation } from 'containers/FilterParams/actions';
+import { updateSeniority, removeRelation } from 'containers/FilterParams/actions';
 import { difference } from 'lodash';
 import RemoveIcon from 'material-ui/svg-icons/content/remove-circle-outline';
 import Button from 'components/Button';
@@ -45,7 +45,7 @@ export class SingleTitle extends Component {
 
   updateSeniority(seniorityKey) {
     this.selectedTitle.seniority = seniorityKey;
-    this.props.updateTitle(this.selectedTitle._id, this.selectedTitle);
+    this.props.updateSeniority(this.selectedTitle._id, seniorityKey);
     this.forceUpdate();
   }
 
@@ -147,7 +147,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    updateTitle: (...args) => dispatch(updateTitle(...args)),
+    updateSeniority: (...args) => dispatch(updateSeniority(...args)),
     removeRelation: (...args) => dispatch(removeRelation(...args)),
   };
 }

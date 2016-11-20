@@ -11,10 +11,10 @@ import {
   FETCH_TITLES,
   FETCH_TITLES_SUCCESS,
   FILTER_RESULTS,
-  UPDATE_TITLE_SUCCESS,
-  UPDATE_TITLE_ERROR,
   ADD_RELATION,
   REMOVE_RELATION,
+  // UPDATE_PROXIMITY,
+  UPDATE_SENIORITY,
 } from './constants';
 
 export function fetchSubCategories(categoryId) {
@@ -52,28 +52,11 @@ export function fetchTitlesSuccess(titles) {
   };
 }
 
-export function updateTitle(titleId, newTitle) {
+export function updateSeniority(titleId, seniority) {
   return {
-    type: UPDATE_TITLE_SUCCESS,
+    type: UPDATE_SENIORITY,
     titleId,
-    updatedTitle: newTitle,
-    // newTitle,
-  };
-}
-
-export function updateTitleSuccess(titleId, updatedTitle) {
-  return {
-    type: UPDATE_TITLE_SUCCESS,
-    titleId,
-    updatedTitle,
-  };
-}
-
-export function updateTitleErr(titleId, error) {
-  return {
-    type: UPDATE_TITLE_ERROR,
-    titleId,
-    error,
+    seniority,
   };
 }
 
