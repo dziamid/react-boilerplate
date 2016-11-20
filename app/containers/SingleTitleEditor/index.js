@@ -38,7 +38,7 @@ export class SingleTitle extends Component {
   }
 
   updateRelationProximity(...args) {
-    this.props.updateProximity(args);
+    this.props.updateProximity(...args);
   }
 
   updateSeniority(seniorityKey) {
