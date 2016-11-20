@@ -13,7 +13,7 @@ import {
   FILTER_RESULTS,
   ADD_RELATION,
   REMOVE_RELATION,
-  // UPDATE_PROXIMITY,
+  UPDATE_PROXIMITY,
   UPDATE_SENIORITY,
 } from './constants';
 
@@ -52,14 +52,6 @@ export function fetchTitlesSuccess(titles) {
   };
 }
 
-export function updateSeniority(titleId, seniority) {
-  return {
-    type: UPDATE_SENIORITY,
-    titleId,
-    seniority,
-  };
-}
-
 export function filterResults(filterText) {
   return {
     type: FILTER_RESULTS,
@@ -80,3 +72,20 @@ export function removeRelation(...titles) {
     titles: [...titles],
   };
 }
+
+export function updateSeniority(titleId, seniority) {
+  return {
+    type: UPDATE_SENIORITY,
+    titleId,
+    seniority,
+  };
+}
+
+export function updateProximity(proximity, ...titles) {
+  return {
+    type: UPDATE_PROXIMITY,
+    titles: [...titles],
+    proximity,
+  };
+}
+

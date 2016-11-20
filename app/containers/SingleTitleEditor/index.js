@@ -17,7 +17,7 @@ import H3 from 'components/H3';
 import { seniorities, proximities } from './constants';
 import MUISelectField from 'material-ui/SelectField';
 
-import { updateSeniority, removeRelation } from 'containers/FilterParams/actions';
+import { updateSeniority, updateProximity, removeRelation } from 'containers/FilterParams/actions';
 import { difference } from 'lodash';
 import RemoveIcon from 'material-ui/svg-icons/content/remove-circle-outline';
 import Button from 'components/Button';
@@ -34,14 +34,12 @@ export class SingleTitle extends Component {
     // this.updateRelationProximity = this.updateRelationProximity.bind(this);
     this.updateSeniority = this.updateSeniority.bind(this);
     this.getRelations = this.getRelations.bind(this);
+    this.updateRelationProximity = this.updateRelationProximity.bind(this);
   }
 
-  // updateRelationProximity(rel, proximityKey) {
-  //   this.selectedTitle.relations = this.selectedTitle.relations || [];
-  //   rel.proximity = proximityKey;
-  //   this.selectedTitle.relations.push(rel);
-  //   this.props.updateTitle(this.selectedTitle._id, this.selectedTitle);
-  // }
+  updateRelationProximity(...args) {
+    this.props.updateProximity(args);
+  }
 
   updateSeniority(seniorityKey) {
     this.selectedTitle.seniority = seniorityKey;
@@ -112,6 +110,7 @@ export class SingleTitle extends Component {
                   <MUISelectField
                     value={rel.proximity}
                     className={styles.proximityField}
+                    onChange={(e, key, value) => this.updateRelationProximity(value, rel._id, selectedTitle._id)}
                   >
                     {proximityOptions}
                   </MUISelectField>
@@ -148,6 +147,7 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     updateSeniority: (...args) => dispatch(updateSeniority(...args)),
+    updateProximity: (...args) => dispatch(updateProximity(...args)),
     removeRelation: (...args) => dispatch(removeRelation(...args)),
   };
 }

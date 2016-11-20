@@ -13,7 +13,7 @@ import {
   FETCH_TITLES_ERROR,
   ADD_RELATION,
   REMOVE_RELATION,
-  // UPDATE_PROXIMITY,
+  UPDATE_PROXIMITY,
   UPDATE_SENIORITY,
 } from './constants';
 import { fromJS } from 'immutable';
@@ -69,6 +69,8 @@ function filterParamsReducer(state = initialState, action) {
 
     case FETCH_TITLES_SUCCESS: {
       const titles = parseMlabIds(action.titles);
+      // const stateTitles = state.get('titles');
+      // titles.map(t => stateTitles.push(t));
 
       return state
         .set('loading', false)
@@ -118,7 +120,7 @@ function filterParamsReducer(state = initialState, action) {
         relations = relations.push([a, b]);
       }
 
-      return state.set('relations', relations);
+      return state.set('relations', relations); // TODO: Use immutable relations
     }
 
     case REMOVE_RELATION: {
@@ -129,7 +131,7 @@ function filterParamsReducer(state = initialState, action) {
         relations = relations.remove(relIndex);
       }
 
-      return state.set('relations', relations);
+      return state.set('relations', relations); // TODO: Use immutable relations
     }
 
     case UPDATE_SENIORITY: {
@@ -140,9 +142,20 @@ function filterParamsReducer(state = initialState, action) {
       const titleObj = _.find(titles, { _id: titleId });
       titleObj.seniority = seniority;
 
-      const clonedTitles = _.cloneDeep(titles);
+      return state.set('titles', titles); // TODO: Use immutable titles Map
+    }
 
-      return state.set('titles', clonedTitles);
+    case UPDATE_PROXIMITY: {
+      const [a, b] = action.titles; // ids
+      let relations = state.get('relations');
+      const entry = relations.findEntry(r => r.indexOf(a) !== -1 && r.indexOf(b) !== -1); // returns [idx, relation]
+      if (!entry && Array.isArray(entry[1])) {
+        return state;
+      }
+      entry[1].push('new data');
+      relations = relations.update(entry[0], () => entry[1]);
+
+      return state.set('relations', relations);
     }
 
     default:
