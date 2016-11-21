@@ -32,12 +32,10 @@ export function* fetchData(requestURL, successCb, errCb) {
   }
 }
 
+
 export function* fetchSubCats() {
   // category: Computer, Software, Hardware, IT and Web
-  const requestURL = `${BASE_API.replace('[[query]]',
-    'jobSubCategories')
-    // 'jobSubCategories?q={\'category\':{$eq: \'Computer, Software, Hardware, IT and Web\'}}')
-     }?${API_KEY}`;
+  const requestURL = `${BASE_API}/jobSubCategories`;
 
   yield call(fetchData, requestURL, fetchSubCategoriesSuccess, fetchSubCategoriesError);
 }
@@ -45,11 +43,8 @@ export function* fetchSubCats() {
 export function* fetchTitles() {
   // Select from store
   const filterParams = yield select(selectFilterParams());
-  const selectedCat = filterParams.selectedSubCategory;
-
-  const requestURL = `${BASE_API.replace('[[query]]',
-      `jobTitles?q={\'subCategory\':{$eq: \'${selectedCat}\'}}`)
-     }&${API_KEY}`;
+  const subCategoryId = filterParams.selectedSubCategory;
+  const requestURL = `${BASE_API}/jobSubCategories/${subCategoryId}/jobTitles`;
 
   yield call(fetchData, requestURL, fetchTitlesSuccess, fetchTitlesError);
 }

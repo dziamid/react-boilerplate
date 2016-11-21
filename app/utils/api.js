@@ -8,3 +8,7 @@ export function parseMlabIds(responseAr) {
     };
   });
 }
+
+export function mongoID(entity) {
+  return { _id: entity.id, ...entity };
+}

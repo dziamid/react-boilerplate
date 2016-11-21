@@ -18,7 +18,7 @@ import { createStructuredSelector } from 'reselect';
 
 import { fetchSubCategories, fetchTitles, filterResults } from './actions';
 
-import { jobCategories, jobSubCategories } from './mocks';
+import { jobCategories } from './mocks';
 
 export class FilterParams extends Component { // eslint-disable-line react/prefer-stateless-function
   render() {
@@ -33,9 +33,6 @@ export class FilterParams extends Component { // eslint-disable-line react/prefe
       fetchTitles,
       filterResults,
     } = this.props;
-
-    const numFiltered = 1,
-      numTotal = 100;
 
     return (
       <div className={styles.paper}>
@@ -62,7 +59,7 @@ export class FilterParams extends Component { // eslint-disable-line react/prefe
               label={<FormattedMessage {...messages.subCategory} />}
               disableFreetext
               className={styles.filterField}
-              onNewRequest={item => fetchTitles(item.text)}
+              onNewRequest={item => fetchTitles(item.value)}
               fullWidth
             />
           </div>
@@ -76,9 +73,9 @@ export class FilterParams extends Component { // eslint-disable-line react/prefe
             />
           </div>
           <span style={{ position: 'absolute', background: 'yellow' }}>
-          {loading ? 'loading...' : ''}
+            {loading ? 'loading...' : ''}
             {error ? 'error!' : ''}
-        </span>
+          </span>
 
         </div>
       </div>

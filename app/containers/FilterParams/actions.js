@@ -10,6 +10,7 @@ import {
   FETCH_SUBCATEGORIES_ERROR,
   FETCH_TITLES,
   FETCH_TITLES_SUCCESS,
+  FETCH_TITLES_ERROR,
   FILTER_RESULTS,
   ADD_RELATION,
   REMOVE_RELATION,
@@ -49,6 +50,13 @@ export function fetchTitlesSuccess(titles) {
   return {
     type: FETCH_TITLES_SUCCESS,
     titles,
+  };
+}
+
+export function fetchTitlesError(error) {
+  return {
+    type: FETCH_TITLES_ERROR,
+    error,
   };
 }
 

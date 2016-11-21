@@ -17,7 +17,7 @@ import {
   UPDATE_SENIORITY,
 } from './constants';
 import { fromJS } from 'immutable';
-import { parseMlabIds } from 'utils/api';
+import { mongoID } from 'utils/api';
 import * as _ from 'lodash';
 
 // The initial state
@@ -36,6 +36,8 @@ const initialState = fromJS({
 
 function filterParamsReducer(state = initialState, action) {
   switch (action.type) {
+
+
     case FETCH_SUBCATEGORIES: {
       return state
         .set('loading', true)
@@ -46,7 +48,7 @@ function filterParamsReducer(state = initialState, action) {
     }
 
     case FETCH_SUBCATEGORIES_SUCCESS: {
-      const subCats = parseMlabIds(action.subCategories);
+      const subCats = action.subCategories.map(mongoID);
 
       return state
         .set('loading', false)
@@ -68,9 +70,7 @@ function filterParamsReducer(state = initialState, action) {
     }
 
     case FETCH_TITLES_SUCCESS: {
-      const titles = parseMlabIds(action.titles);
-      // const stateTitles = state.get('titles');
-      // titles.map(t => stateTitles.push(t));
+      const titles = action.titles.map(t => ({ title: t.name, ...mongoID(t) }));
 
       return state
         .set('loading', false)
