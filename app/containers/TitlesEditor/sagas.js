@@ -5,7 +5,7 @@
 import { take, call, put, select, fork, cancel } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import { FETCH_SUBCATEGORIES, FETCH_TITLES } from 'containers/FilterParams/constants';
-
+import request from 'superagent';
 import {
   fetchSubCategoriesSuccess,
   fetchSubCategoriesError,
@@ -17,47 +17,36 @@ import {
 import { BASE_API, API_KEY } from 'containers/TitlesEditor/constants';
 import selectFilterParams from 'containers/FilterParams/selectors';
 
-import request, { buildURL } from 'utils/request';
+export function* get(params, onSuccess, onError) {
+  const opts = typeof (params) === 'string' ? { url: params } : params;
 
-/**
- * Generic request/response handler
- */
-export function* fetchData(requestURL, successCb, errCb) {
-  // Call our request helper (see 'utils/request')
-  const response = yield call(request, requestURL);
-
-  if (!response.err) {
-    yield put(successCb(response.data));
-  } else if (errCb) {
-    yield put(errCb(response.err));
+  try {
+    const { body } = yield call(request.get, opts.url);
+    yield put(onSuccess(body));
+  } catch (err) {
+    onError && (yield put(onError(err)));
   }
 }
 
 
 export function* fetchSubCats() {
-  // category: Computer, Software, Hardware, IT and Web
-  const requestURL = `${BASE_API}/jobSubCategories`;
-
-  yield call(fetchData, requestURL, fetchSubCategoriesSuccess, fetchSubCategoriesError);
+  yield call(get, `${BASE_API}/jobSubCategories`, fetchSubCategoriesSuccess, fetchSubCategoriesError);
 }
 
 export function* fetchTitles() {
-  // Select from store
-  const filterParams = yield select(selectFilterParams());
-  const subCategoryId = filterParams.selectedSubCategory;
-  const requestURL = `${BASE_API}/jobSubCategories/${subCategoryId}/jobTitles`;
-
-  yield call(fetchData, requestURL, fetchTitlesSuccess, fetchTitlesError);
+  const { selectedSubCategory } = yield select(selectFilterParams());
+  const requestURL = `${BASE_API}/jobSubCategories/${selectedSubCategory}/jobTitles`;
+  yield call(get, requestURL, fetchTitlesSuccess, fetchTitlesError);
 }
 
 export function* fetchTitleRelations() {
   // Select from store
-  const filterParams = yield select(selectFilterParams());
-  const ids = filterParams.titles.map(t => t._id);
+  const { titles } = yield select(selectFilterParams());
+  const ids = titles.map(t => t._id);
   const filter = { where: { jobTitleId: { inq: ids } } };
-  const requestURL = buildURL(`${BASE_API}/jobTitleNeighbors`, { filter: JSON.stringify(filter) });
-
-  yield call(fetchData, requestURL, fetchTitleRelationsSuccess);
+  const url = `${BASE_API}/jobTitleNeighbors`;
+  const query = { filter: JSON.stringify(filter) };
+  yield call(get, { url, query }, fetchTitleRelationsSuccess);
 }
 
 /**
