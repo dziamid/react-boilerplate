@@ -18,3 +18,4 @@ export const ADD_RELATION = 'app/FilterParams/ADD_RELATION';
 export const REMOVE_RELATION = 'app/FilterParams/REMOVE_RELATION';
 export const UPDATE_PROXIMITY = 'app/FilterParams/UPDATE_PROXIMITY';
 export const UPDATE_SENIORITY = 'app/FilterParams/UPDATE_SENIORITY';
+export const FETCH_TITLE_RELATIONS_SUCCESS = 'app/FilterParams/FETCH_TITLE_RELATIONS_SUCCESS';

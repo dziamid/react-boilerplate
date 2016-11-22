@@ -43,3 +43,14 @@ export default function request(url, options) {
     .then((data) => ({ data }))
     .catch((err) => ({ err }));
 }
+
+
+export function buildURL(url, query) {
+  return url + (url.indexOf('?') === -1 ? '?' : '&') + queryParams(query);
+}
+
+function queryParams(params) {
+  return Object.keys(params)
+        .map(k => `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`)
+        .join('&');
+}

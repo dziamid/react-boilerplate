@@ -18,7 +18,7 @@ import { seniorities, proximities } from './constants';
 import MUISelectField from 'material-ui/SelectField';
 
 import { updateSeniority, updateProximity, removeRelation } from 'containers/FilterParams/actions';
-import { difference } from 'lodash';
+import { difference, compact } from 'lodash';
 import RemoveIcon from 'material-ui/svg-icons/content/remove-circle-outline';
 import Button from 'components/Button';
 
@@ -51,7 +51,9 @@ export class SingleTitle extends Component {
     const relations = this.props.relations.filter(r => r.indexOf(title._id) !== -1); // todo: use selector
     const relatedIds = relations.map(r => difference(r, [title._id])[0]);
 
-    return relatedIds.map(id => this.props.titles.find(t => t._id === id));
+    const titles = relatedIds.map(id => this.props.titles.find(t => t._id === id));
+
+    return titles.filter(t => t !== undefined);
   }
 
   render() {

@@ -11,12 +11,13 @@ import {
   fetchSubCategoriesError,
   fetchTitlesSuccess,
   fetchTitlesError,
+  fetchTitleRelationsSuccess,
 } from 'containers/FilterParams/actions';
 
 import { BASE_API, API_KEY } from 'containers/TitlesEditor/constants';
 import selectFilterParams from 'containers/FilterParams/selectors';
 
-import request from 'utils/request';
+import request, { buildURL } from 'utils/request';
 
 /**
  * Generic request/response handler
@@ -27,7 +28,7 @@ export function* fetchData(requestURL, successCb, errCb) {
 
   if (!response.err) {
     yield put(successCb(response.data));
-  } else {
+  } else if (errCb) {
     yield put(errCb(response.err));
   }
 }
@@ -49,6 +50,16 @@ export function* fetchTitles() {
   yield call(fetchData, requestURL, fetchTitlesSuccess, fetchTitlesError);
 }
 
+export function* fetchTitleRelations() {
+  // Select from store
+  const filterParams = yield select(selectFilterParams());
+  const ids = filterParams.titles.map(t => t._id);
+  const filter = { where: { jobTitleId: { inq: ids } } };
+  const requestURL = buildURL(`${BASE_API}/jobTitleNeighbors`, { filter: JSON.stringify(filter) });
+
+  yield call(fetchData, requestURL, fetchTitleRelationsSuccess);
+}
+
 /**
  * Watches for an action called on the store and calls handler
  */
@@ -61,6 +72,7 @@ export function* getSubCatsWatcher() {
 export function* getTitlesWatcher() {
   while (yield take(FETCH_TITLES)) {
     yield call(fetchTitles);
+    yield call(fetchTitleRelations);
   }
 }
 

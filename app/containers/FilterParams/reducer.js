@@ -11,12 +11,13 @@ import {
   FETCH_TITLES,
   FETCH_TITLES_SUCCESS,
   FETCH_TITLES_ERROR,
+  FETCH_TITLE_RELATIONS_SUCCESS,
   ADD_RELATION,
   REMOVE_RELATION,
   UPDATE_PROXIMITY,
   UPDATE_SENIORITY,
 } from './constants';
-import { fromJS } from 'immutable';
+import { fromJS, List } from 'immutable';
 import { mongoID } from 'utils/api';
 import * as _ from 'lodash';
 
@@ -81,6 +82,16 @@ function filterParamsReducer(state = initialState, action) {
       return state
         .set('error', action.error)
         .set('loading', false);
+    }
+
+    case FETCH_TITLE_RELATIONS_SUCCESS: {
+      const relations = _.chain(action.relations)
+        .map(r => [r.jobTitleId, r.neighborId].sort())
+        .uniqBy(r => r.join(','))
+        .value();
+
+      return state
+        .set('relations', List(relations));
     }
 
     // case UPDATE_TITLE: {

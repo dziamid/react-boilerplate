@@ -11,6 +11,7 @@ import {
   FETCH_TITLES,
   FETCH_TITLES_SUCCESS,
   FETCH_TITLES_ERROR,
+  FETCH_TITLE_RELATIONS_SUCCESS,
   FILTER_RESULTS,
   ADD_RELATION,
   REMOVE_RELATION,
@@ -59,6 +60,15 @@ export function fetchTitlesError(error) {
     error,
   };
 }
+
+
+export function fetchTitleRelationsSuccess(relations) {
+  return {
+    type: FETCH_TITLE_RELATIONS_SUCCESS,
+    relations,
+  };
+}
+
 
 export function filterResults(filterText) {
   return {
