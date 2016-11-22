@@ -4,7 +4,7 @@ import axios from 'axios';
 export default function* request(params, onSuccess, onError) {
   try {
     const { data } = yield call(axios, params);
-    yield putSaga(onSuccess(data));
+    onSuccess && (yield putSaga(onSuccess(data)));
   } catch (err) {
     onError && (yield putSaga(onError(err)));
   }

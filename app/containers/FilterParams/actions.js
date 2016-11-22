@@ -17,6 +17,7 @@ import {
   REMOVE_RELATION,
   UPDATE_PROXIMITY,
   UPDATE_SENIORITY,
+  UPDATE_TITLE,
 } from './constants';
 
 export function fetchSubCategories(categoryId) {
@@ -107,3 +108,11 @@ export function updateProximity(proximity, ...titles) {
   };
 }
 
+export function updateTitle(titleId, field, value) {
+  return {
+    type: UPDATE_TITLE,
+    titleId,
+    field,
+    value,
+  };
+}

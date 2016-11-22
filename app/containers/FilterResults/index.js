@@ -10,7 +10,7 @@ import styles from './styles.css';
 import { createStructuredSelector } from 'reselect';
 
 import { setSelectedTitle } from './actions';
-import { addRelation } from 'containers/FilterParams/actions';
+import { addRelation, updateTitle } from 'containers/FilterParams/actions';
 
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form/immutable';
@@ -129,7 +129,7 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     setSelectedTitle: (titleId) => dispatch(setSelectedTitle(titleId)),
-    // updateTitle: (id, title) => dispatch(updateTitle(id, title)),
+    updateTitle: (id, title) => dispatch(updateTitle(id, title)),
     addRelation: (titleId, rel) => dispatch(addRelation(titleId, rel)),
   };
 }
