@@ -3,9 +3,11 @@
  */
 
 import { take, call, put, select, fork, cancel } from 'redux-saga/effects';
+import request, { get } from 'utils/request';
+
 import { LOCATION_CHANGE } from 'react-router-redux';
 import { FETCH_SUBCATEGORIES, FETCH_TITLES } from 'containers/FilterParams/constants';
-import request from 'superagent';
+
 import {
   fetchSubCategoriesSuccess,
   fetchSubCategoriesError,
@@ -17,17 +19,6 @@ import {
 import { BASE_API, API_KEY } from 'containers/TitlesEditor/constants';
 import selectFilterParams from 'containers/FilterParams/selectors';
 
-export function* get(params, onSuccess, onError) {
-  const opts = typeof (params) === 'string' ? { url: params } : params;
-
-  try {
-    const { body } = yield call(request.get, opts.url);
-    yield put(onSuccess(body));
-  } catch (err) {
-    onError && (yield put(onError(err)));
-  }
-}
-
 
 export function* fetchSubCats() {
   yield call(get, `${BASE_API}/jobSubCategories`, fetchSubCategoriesSuccess, fetchSubCategoriesError);
@@ -35,18 +26,18 @@ export function* fetchSubCats() {
 
 export function* fetchTitles() {
   const { selectedSubCategory } = yield select(selectFilterParams());
-  const requestURL = `${BASE_API}/jobSubCategories/${selectedSubCategory}/jobTitles`;
-  yield call(get, requestURL, fetchTitlesSuccess, fetchTitlesError);
+  const url = `${BASE_API}/jobSubCategories/${selectedSubCategory}/jobTitles`;
+  yield call(request, url, fetchTitlesSuccess, fetchTitlesError);
 }
 
 export function* fetchTitleRelations() {
-  // Select from store
   const { titles } = yield select(selectFilterParams());
   const ids = titles.map(t => t._id);
   const filter = { where: { jobTitleId: { inq: ids } } };
   const url = `${BASE_API}/jobTitleNeighbors`;
-  const query = { filter: JSON.stringify(filter) };
-  yield call(get, { url, query }, fetchTitleRelationsSuccess);
+  const params = { filter };
+
+  yield call(request, { url, params }, fetchTitleRelationsSuccess);
 }
 
 /**
@@ -85,3 +76,4 @@ export function* dataLoader() {
 export default [
   dataLoader,
 ];
+
