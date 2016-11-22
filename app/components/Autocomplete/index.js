@@ -38,7 +38,6 @@ export default class Autocomplete extends Component {
 
   static propTypes = {
     input: PropTypes.object,
-    label: PropTypes.string,
     meta: PropTypes.object,
     withClear: PropTypes.bool,
     onClear: PropTypes.func,

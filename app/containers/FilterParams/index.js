@@ -43,10 +43,8 @@ export class FilterParams extends Component { // eslint-disable-line react/prefe
               component={Autocomplete}
               dataSource={jobCategories.map(j => ({ text: j.name, value: j._id }))}
               label={<FormattedMessage {...messages.category} />}
-              disableFreetext
               className={styles.filterField}
               onNewRequest={item => fetchSubCategories(item.value)}
-              defaultValue="au"
               fullWidth
             />
           </div>
@@ -57,7 +55,6 @@ export class FilterParams extends Component { // eslint-disable-line react/prefe
               component={Autocomplete}
               dataSource={subCategories.map(s => ({ text: s.name, value: s._id }))}
               label={<FormattedMessage {...messages.subCategory} />}
-              disableFreetext
               className={styles.filterField}
               onNewRequest={item => fetchTitles(item.value)}
               fullWidth
