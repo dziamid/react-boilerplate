@@ -88,8 +88,8 @@ export class FilterResults extends Component { // eslint-disable-line react/pref
               key={title.id}
               selected={title.id === selectedTitle}
             >
-              <TableRowColumn className={styles.titleColumn}>{title.title}</TableRowColumn>
-              <TableRowColumn>{getSeniorityName(title.title)}</TableRowColumn>
+              <TableRowColumn className={styles.titleColumn}>{title.name}</TableRowColumn>
+              <TableRowColumn>{getSeniorityName(title.name)}</TableRowColumn>
               <TableRowColumn>
                 { this.showAddRelationButton(title) ? (
                   <Button

@@ -70,7 +70,7 @@ function filterParamsReducer(state = initialState, action) {
     }
 
     case FETCH_TITLES_SUCCESS: {
-      const titles = action.titles.map(t => ({ title: t.name, ...t }));
+      const titles = action.titles;
 
       return state
         .set('loading', false)

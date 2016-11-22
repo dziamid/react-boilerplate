@@ -68,7 +68,7 @@ export class SingleTitle extends Component {
     return (
       <div className={styles.SingleTitle}>
         <H3>
-          <div>{selectedTitle.title}</div>
+          <div>{selectedTitle.name}</div>
         </H3>
         <div className={styles.formRow}>
           <MUISelectField
@@ -106,7 +106,7 @@ export class SingleTitle extends Component {
             {relations.map((rel, index) =>
               <TableRow key={index}>
                 <TableRowColumn className={styles.titleColumn}>
-                  {rel.title}
+                  {rel.name}
                 </TableRowColumn>
                 <TableRowColumn className={styles.proximityColumn}>
                   <MUISelectField

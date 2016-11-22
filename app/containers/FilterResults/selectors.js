@@ -9,7 +9,7 @@ const results = () => createSelector(
   titles(),
   query(),
   (titles, query) => {
-    return titles.filter(t => t.title.toLowerCase().includes((query || '').trim()));
+    return titles.filter(t => t.name.toLowerCase().includes((query || '').trim()));
   });
 
 
