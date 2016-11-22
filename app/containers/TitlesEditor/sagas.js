@@ -32,7 +32,7 @@ export function* fetchTitles() {
 
 export function* fetchTitleRelations() {
   const { titles } = yield select(selectFilterParams());
-  const ids = titles.map(t => t._id);
+  const ids = titles.map(t => t.id);
   const filter = { where: { jobTitleId: { inq: ids } } };
   const url = `${BASE_API}/jobTitleNeighbors`;
   const params = { filter };

@@ -43,15 +43,15 @@ export class SingleTitle extends Component {
 
   updateSeniority(seniorityKey) {
     this.selectedTitle.seniority = seniorityKey;
-    this.props.updateSeniority(this.selectedTitle._id, seniorityKey);
+    this.props.updateSeniority(this.selectedTitle.id, seniorityKey);
     this.forceUpdate();
   }
 
   getRelations(title) {
-    const relations = this.props.relations.filter(r => r.indexOf(title._id) !== -1); // todo: use selector
-    const relatedIds = relations.map(r => difference(r, [title._id])[0]);
+    const relations = this.props.relations.filter(r => r.indexOf(title.id) !== -1); // todo: use selector
+    const relatedIds = relations.map(r => difference(r, [title.id])[0]);
 
-    const titles = relatedIds.map(id => this.props.titles.find(t => t._id === id));
+    const titles = relatedIds.map(id => this.props.titles.find(t => t.id === id));
 
     return titles.filter(t => t !== undefined);
   }
@@ -112,7 +112,7 @@ export class SingleTitle extends Component {
                   <MUISelectField
                     value={rel.proximity}
                     className={styles.proximityField}
-                    onChange={(e, key, value) => this.updateRelationProximity(value, rel._id, selectedTitle._id)}
+                    onChange={(e, key, value) => this.updateRelationProximity(value, rel.id, selectedTitle.id)}
                   >
                     {proximityOptions}
                   </MUISelectField>
@@ -121,7 +121,7 @@ export class SingleTitle extends Component {
                 <TableRowColumn className={styles.removeColumn}>
                   <Button
                     icon={<RemoveIcon />}
-                    onClick={() => this.props.removeRelation(rel._id, selectedTitle._id)}
+                    onClick={() => this.props.removeRelation(rel.id, selectedTitle.id)}
                   />
                 </TableRowColumn>
               </TableRow>
@@ -141,7 +141,7 @@ const mapStateToProps = createStructuredSelector({
     const titleId = state.getIn(['titlesEditorRoot', 'filterResults', 'selectedTitle']);
     const titles = state.getIn(['titlesEditorRoot', 'filterParams', 'titles'], []);
 
-    return titles.find(t => t._id === titleId) || {};
+    return titles.find(t => t.id === titleId) || {};
   },
   relations: (state) => state.getIn(['titlesEditorRoot', 'filterParams', 'relations']),
 });

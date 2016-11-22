@@ -37,13 +37,13 @@ export class FilterResults extends Component { // eslint-disable-line react/pref
 
   handleRowSelection(indexes) {
     console.log('handleRowSelection', indexes);
-    const selectedTitle = indexes.length > 0 ? this.props.results[indexes[0]]._id : null;
+    const selectedTitle = indexes.length > 0 ? this.props.results[indexes[0]].id : null;
     this.props.setSelectedTitle(selectedTitle);
   }
 
   handleAddRelation(title) {
     if (this.props.selectedTitle) {
-      this.props.addRelation(this.props.selectedTitle, title._id);
+      this.props.addRelation(this.props.selectedTitle, title.id);
     }
   }
 
@@ -52,14 +52,14 @@ export class FilterResults extends Component { // eslint-disable-line react/pref
   }
 
   getRelations(title) {
-    return this.props.relations.filter(r => r.indexOf(title._id) !== -1); // use selector
+    return this.props.relations.filter(r => r.indexOf(title.id) !== -1); // use selector
   }
 
   showAddRelationButton(title) {
     const { selectedTitle } = this.props;
 
     return selectedTitle &&
-      selectedTitle !== title._id && !this.hasRelation(title._id, selectedTitle);
+      selectedTitle !== title.id && !this.hasRelation(title.id, selectedTitle);
   }
 
   render() {
@@ -85,8 +85,8 @@ export class FilterResults extends Component { // eslint-disable-line react/pref
         <TableBody deselectOnClickaway={false}>
           {results.map(title =>
             <TableRow
-              key={title._id}
-              selected={title._id === selectedTitle}
+              key={title.id}
+              selected={title.id === selectedTitle}
             >
               <TableRowColumn className={styles.titleColumn}>{title.title}</TableRowColumn>
               <TableRowColumn>{getSeniorityName(title.title)}</TableRowColumn>

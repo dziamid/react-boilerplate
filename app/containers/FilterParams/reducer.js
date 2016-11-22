@@ -18,7 +18,6 @@ import {
   UPDATE_SENIORITY,
 } from './constants';
 import { fromJS, List } from 'immutable';
-import { mongoID } from 'utils/api';
 import * as _ from 'lodash';
 
 // The initial state
@@ -49,7 +48,7 @@ function filterParamsReducer(state = initialState, action) {
     }
 
     case FETCH_SUBCATEGORIES_SUCCESS: {
-      const subCats = action.subCategories.map(mongoID);
+      const subCats = action.subCategories;
 
       return state
         .set('loading', false)
@@ -71,7 +70,7 @@ function filterParamsReducer(state = initialState, action) {
     }
 
     case FETCH_TITLES_SUCCESS: {
-      const titles = action.titles.map(t => ({ title: t.name, ...mongoID(t) }));
+      const titles = action.titles.map(t => ({ title: t.name, ...t }));
 
       return state
         .set('loading', false)
@@ -104,7 +103,7 @@ function filterParamsReducer(state = initialState, action) {
     // case UPDATE_TITLE_SUCCESS: {
     //   // Get the title from the collection
     //   const titlesFromState = state.get('titles');
-    //   const titleObj = _.find(titlesFromState, { _id: action.updatedTitle._id });
+    //   const titleObj = _.find(titlesFromState, { id: action.updatedTitle.id });
     //
     //   // Point the title object to the updated object
     //   // titleObj = action.updatedTitle;
@@ -150,7 +149,7 @@ function filterParamsReducer(state = initialState, action) {
       const seniority = action.seniority;
       const titles = state.get('titles');
 
-      const titleObj = _.find(titles, { _id: titleId });
+      const titleObj = _.find(titles, { id: titleId });
       titleObj.seniority = seniority;
 
       return state.set('titles', titles); // TODO: Use immutable titles Map

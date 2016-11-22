@@ -41,7 +41,7 @@ export class FilterParams extends Component { // eslint-disable-line react/prefe
             <Field
               name="category"
               component={Autocomplete}
-              dataSource={jobCategories.map(j => ({ text: j.name, value: j._id }))}
+              dataSource={jobCategories.map(j => ({ text: j.name, value: j.id }))}
               label={<FormattedMessage {...messages.category} />}
               className={styles.filterField}
               onNewRequest={item => fetchSubCategories(item.value)}
@@ -53,7 +53,7 @@ export class FilterParams extends Component { // eslint-disable-line react/prefe
             <Field
               name="subCategory"
               component={Autocomplete}
-              dataSource={subCategories.map(s => ({ text: s.name, value: s._id }))}
+              dataSource={subCategories.map(s => ({ text: s.name, value: s.id }))}
               label={<FormattedMessage {...messages.subCategory} />}
               className={styles.filterField}
               onNewRequest={item => fetchTitles(item.value)}
