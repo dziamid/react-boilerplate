@@ -31,5 +31,5 @@ export function* remove(params, ...other) {
 }
 
 function mapAxiosParams(params) {
-  return typeof(params) === 'string' ? { url: params } : params;
+  return typeof (params) === 'string' ? { url: params } : params;
 }
