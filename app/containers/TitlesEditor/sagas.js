@@ -10,7 +10,7 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 import {
   FETCH_SUBCATEGORIES,
   FETCH_TITLES,
-  UPDATE_SENIORITY,
+  PATCH_SENIORITY,
   CREATE_RELATION,
   DESTROY_RELATION,
   UPDATE_PROXIMITY,
@@ -25,6 +25,7 @@ import {
   addRelation,
   removeRelation,
   updateProximityLocal,
+  updateSeniority,
 } from './actions';
 
 function* fetchSubCats() {
@@ -49,12 +50,13 @@ function* fetchTitleRelations() {
   yield call(request, { url, params }, fetchTitleRelationsSuccess);
 }
 
-function* updateSeniority(action) {
-  const { titleId, seniority } = action;
-  const url = `/jobTitles/${titleId}`;
+function* patchSeniority(action) {
+  const { title, seniority } = action;
+  const url = `/jobTitles/${title.id}`;
   const data = { seniority };
 
   yield call(patch, { url, data });
+  yield put(updateSeniority(title, seniority));
 }
 
 function* createSingleRelation(action) {
@@ -78,7 +80,7 @@ function* destoySingleRelation(relation) {
 function* destroyRelation({ relation }) {
   const bucket = [relation];
 
-  const neighbor = getNeighborRelation(relation);
+  const neighbor = yield getNeighborRelation(relation);
   if (neighbor) {
     bucket.push(neighbor);
   }
@@ -94,7 +96,7 @@ function* updateSingleProximity(relation, proximity) {
 function* updateProximity({ relation, proximity }) {
   const bucket = [relation];
 
-  const neighbor = getNeighborRelation(relation);
+  const neighbor = yield getNeighborRelation(relation);
   if (neighbor) {
     bucket.push(neighbor);
   }
@@ -105,7 +107,7 @@ function* updateProximity({ relation, proximity }) {
 function* getNeighborRelation(relation) {
   const relations = yield select(selectors.relations());
 
-  return relations.find(r => r.jobTitleId === relation.neighborId)
+  return relations.find(r => r.jobTitleId === relation.neighborId);
 }
 
 
@@ -114,7 +116,7 @@ function* getNeighborRelation(relation) {
  */
 export function* dataLoader() {
   const watcher = yield [
-    fork(takeEvery, UPDATE_SENIORITY, updateSeniority),
+    fork(takeEvery, PATCH_SENIORITY, patchSeniority),
     fork(takeEvery, FETCH_SUBCATEGORIES, fetchSubCats),
     fork(takeEvery, FETCH_TITLES, fetchTitles),
     fork(takeEvery, CREATE_RELATION, createRelation),

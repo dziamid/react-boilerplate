@@ -13,6 +13,7 @@ import {
   DESTROY_RELATION,
   UPDATE_PROXIMITY,
   UPDATE_PROXIMITY_LOCAL,
+  PATCH_SENIORITY,
   UPDATE_SENIORITY,
   UPDATE_TITLE,
   SET_SELECTED_TITLE,
@@ -105,10 +106,18 @@ export function removeRelation(relation) {
   };
 }
 
-export function updateSeniority(titleId, seniority) {
+export function updateSeniority(title, seniority) {
   return {
     type: UPDATE_SENIORITY,
-    titleId,
+    title,
+    seniority,
+  };
+}
+
+export function patchSeniority(title, seniority) {
+  return {
+    type: PATCH_SENIORITY,
+    title,
     seniority,
   };
 }

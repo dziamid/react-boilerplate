@@ -23,6 +23,7 @@ export const REMOVE_RELATION = 'app/FilterParams/REMOVE_RELATION';
 export const UPDATE_PROXIMITY = 'app/FilterParams/UPDATE_PROXIMITY';
 export const UPDATE_PROXIMITY_LOCAL = 'app/FilterParams/UPDATE_PROXIMITY_LOCAL';
 export const UPDATE_SENIORITY = 'app/FilterParams/UPDATE_SENIORITY';
+export const PATCH_SENIORITY = 'app/FilterParams/PATCH_SENIORITY';
 export const UPDATE_TITLE = 'app/FilterParams/UPDATE_TITLE';
 export const FETCH_TITLE_RELATIONS_SUCCESS = 'app/FilterParams/FETCH_TITLE_RELATIONS_SUCCESS';
 

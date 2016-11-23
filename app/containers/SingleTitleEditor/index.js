@@ -46,9 +46,7 @@ export default class SingleTitleEditor extends Component {
   }
 
   handleSeniorityChange(e, key, value) {
-    this.props.title.seniority = value;
-
-    this.props.onSeniorityChange(this.props.title.id, value);
+    this.props.onSeniorityChange(this.props.title, value);
   }
 
   handleRelationRemove(relation) {

@@ -17,7 +17,7 @@ import FilterParams from '../FilterParams';
 import Paper from 'material-ui/Paper';
 import * as selectors from './selectors';
 import {
-  updateSeniority,
+  patchSeniority,
   updateProximity,
   destroyRelation,
   setSelectedTitle,
@@ -68,7 +68,7 @@ export class TitlesEditor extends React.Component { // eslint-disable-line react
                 <SingleTitleEditor
                   title={selectedTitle || {}}
                   relations={selectedTitleRelations}
-                  onSeniorityChange={this.props.updateSeniority}
+                  onSeniorityChange={this.props.patchSeniority}
                   onProximityChange={this.props.updateProximity}
                   onRelationRemove={this.props.destroyRelation}
                 />
@@ -92,7 +92,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   dispatch,
-  updateSeniority: (...args) => dispatch(updateSeniority(...args)),
+  patchSeniority: (...args) => dispatch(patchSeniority(...args)),
   updateProximity: (...args) => dispatch(updateProximity(...args)),
   setSelectedTitle: (...args) => dispatch(setSelectedTitle(...args)),
   createRelation: (...args) => dispatch(createRelation(...args)),

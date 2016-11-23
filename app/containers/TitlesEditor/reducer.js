@@ -66,7 +66,7 @@ function filterParamsReducer(state = initialState, action) {
         .set('loading', true)
         .set('error', false)
         .set('selectedSubCategory', action.subCategoryId)
-        .set('titles', []);
+        .set('titles', List([]));
     }
 
     case FETCH_TITLES_SUCCESS: {
@@ -74,7 +74,7 @@ function filterParamsReducer(state = initialState, action) {
 
       return state
         .set('loading', false)
-        .set('titles', titles);
+        .set('titles', List(titles));
     }
 
     case FETCH_TITLES_ERROR: {
@@ -98,7 +98,7 @@ function filterParamsReducer(state = initialState, action) {
       const { relation } = action;
 
       let relations = state.get('relations');
-      const relIndex = state.get('relations').findIndex(r => r.id === relation.id);
+      const relIndex = relations.findIndex(r => r.id === relation.id);
 
       if (relIndex !== -1) {
         relations = relations.remove(relIndex);
@@ -108,13 +108,11 @@ function filterParamsReducer(state = initialState, action) {
     }
 
     case UPDATE_SENIORITY: {
-      const { titleId, seniority } = action;
+      const { title, seniority } = action;
       const titles = state.get('titles');
+      const index = titles.findIndex(t => t.id === title.id);
 
-      const titleObj = _.find(titles, { id: titleId });
-      titleObj.seniority = seniority;
-
-      return state.set('titles', titles);
+      return state.setIn(['titles', index], { ...title, seniority });
     }
 
     case UPDATE_PROXIMITY_LOCAL: {
@@ -122,7 +120,7 @@ function filterParamsReducer(state = initialState, action) {
 
       const relations = state.get('relations');
       const index = relations.findIndex(r => r.id === relation.id);
-      //todo: make entities inside array immutable
+      // todo: make entities inside array immutable
       // and use setIn(['realations', index, 'proximity'])
       return state.setIn(['relations', index], { ...relation, proximity });
     }

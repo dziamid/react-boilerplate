@@ -27,9 +27,9 @@ export default class FilterResults extends Component { // eslint-disable-line re
   }
 
   handleRowSelection(indexes) {
-    const selectedTitle = indexes.length > 0 ? this.props.results[indexes[0]].id : null;
+    const selectedTitle = indexes.length > 0 ? this.props.results.get(indexes[0]).id : null;
     this.props.onRowSelection(selectedTitle);
-  }
+  }w
 
   handleAddRelation(title) {
     if (this.props.selectedTitle) {
@@ -114,7 +114,7 @@ export default class FilterResults extends Component { // eslint-disable-line re
         <TableFooter>
           <TableRow>
             <TableRowColumn colSpan="4" style={{ textAlign: 'left' }}>
-              { `Displaying ${results.length || '0'} out of ${titlesTotal || '0'} Titles` }
+              { `Displaying ${results.size || '0'} out of ${titlesTotal || '0'} Titles` }
             </TableRowColumn>
           </TableRow>
         </TableFooter>
