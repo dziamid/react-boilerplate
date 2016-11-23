@@ -3,6 +3,11 @@ import { fromJS } from 'immutable';
 import { difference } from 'lodash';
 
 export const titles = () => (state) => state.getIn(['titlesEditorRoot', 'titles']);
+export const titlesTotal = () => createSelector(
+  titles(),
+  (titles) => titles.size
+);
+
 export const query = () => (state) => state.getIn(['form', 'FilterParams', 'values', 'filter']); // todo: why separate state root? use titlesEditorRoot.filterParams
 export const selectedSubCategory = () => (state) => state.getIn(['titlesEditorRoot', 'selectedSubCategory']);
 export const relations = () => (state) => state.getIn(['titlesEditorRoot', 'relations']);

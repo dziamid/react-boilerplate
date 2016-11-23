@@ -11,13 +11,18 @@ import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import styles from './styles.css';
 import H3 from 'components/H3';
-import SampleForm from 'components/SampleForm';
 import SingleTitleEditor from '../SingleTitleEditor';
 import FilterResults from '../FilterResults';
 import FilterParams from '../FilterParams';
 import Paper from 'material-ui/Paper';
 import * as selectors from './selectors';
-import { updateSeniority, updateProximity, removeRelation } from './actions';
+import {
+  updateSeniority,
+  updateProximity,
+  removeRelation,
+  setSelectedTitle,
+  addRelation,
+} from './actions';
 
 
 export class TitlesEditor extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -43,7 +48,14 @@ export class TitlesEditor extends React.Component { // eslint-disable-line react
             <Paper className={styles.paper} zDepth={1}>
               <div className={styles.paperWrapper}>
                 <FilterParams />
-                <FilterResults />
+                <FilterResults
+                  results={this.props.results}
+                  titlesTotal={this.props.titlesTotal}
+                  selectedTitle={this.props.selectedTitleId}
+                  relations={this.props.relations}
+                  onRowSelection={this.props.setSelectedTitle}
+                  onAddRelation={this.props.addRelation}
+                />
               </div>
             </Paper>
           </div>
@@ -64,9 +76,6 @@ export class TitlesEditor extends React.Component { // eslint-disable-line react
             </Paper>
           </div>
         </div>
-        <div className={styles.sampleFormWrapper} style={{ display: 'none' }}>
-          <SampleForm />
-        </div>
       </div>
     );
   }
@@ -75,6 +84,10 @@ export class TitlesEditor extends React.Component { // eslint-disable-line react
 const mapStateToProps = (state) => ({
   selectedTitle: selectors.selectedTitle()(state),
   selectedTitleRelations: selectors.selectedTitleRelations()(state),
+  results: selectors.results()(state),
+  titlesTotal: selectors.titlesTotal()(state),
+  selectedTitleId: selectors.selectedTitleId()(state),
+  relations: selectors.relations()(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -82,6 +95,8 @@ const mapDispatchToProps = (dispatch) => ({
   updateSeniority: (...args) => dispatch(updateSeniority(...args)),
   updateProximity: (...args) => dispatch(updateProximity(...args)), // todo: implement
   removeRelation: (...args) => dispatch(removeRelation(...args)),
+  setSelectedTitle: (titleId) => dispatch(setSelectedTitle(titleId)),
+  addRelation: (titleId, rel) => dispatch(addRelation(titleId, rel)),
 
 });
 

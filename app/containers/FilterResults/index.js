@@ -5,16 +5,10 @@
  */
 
 import React, { Component } from 'react';
-import * as selectors from 'containers/TitlesEditor/selectors';
 import styles from './styles.css';
-import { createStructuredSelector } from 'reselect';
-import { setSelectedTitle, addRelation } from 'containers/TitlesEditor/actions';
 import seniorities from 'mocks/seniorities';
-import { connect } from 'react-redux';
-import { reduxForm } from 'redux-form/immutable';
 import Button from 'components/Button';
 import AddIcon from 'material-ui/svg-icons/content/add-circle-outline';
-import cx from 'classnames';
 
 import {
   Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn,
@@ -22,7 +16,7 @@ import {
   from 'material-ui/Table';
 
 
-export class FilterResults extends Component { // eslint-disable-line react/prefer-stateless-function
+export default class FilterResults extends Component { // eslint-disable-line react/prefer-stateless-function
 
   constructor() {
     super();
@@ -30,17 +24,16 @@ export class FilterResults extends Component { // eslint-disable-line react/pref
     this.handleAddRelation = this.handleAddRelation.bind(this);
     this.getRelations = this.getRelations.bind(this);
     this.showAddRelationButton = this.showAddRelationButton.bind(this);
-    // todo: use autobind
   }
 
   handleRowSelection(indexes) {
     const selectedTitle = indexes.length > 0 ? this.props.results[indexes[0]].id : null;
-    this.props.setSelectedTitle(selectedTitle);
+    this.props.onRowSelection(selectedTitle);
   }
 
   handleAddRelation(title) {
     if (this.props.selectedTitle) {
-      this.props.addRelation(this.props.selectedTitle, title.id);
+      this.props.onAddRelation(this.props.selectedTitle, title.id);
     }
   }
 
@@ -68,7 +61,7 @@ export class FilterResults extends Component { // eslint-disable-line react/pref
   render() {
     const {
       selectedTitle,
-      titles,
+      titlesTotal,
       results,
     } = this.props;
 
@@ -121,7 +114,7 @@ export class FilterResults extends Component { // eslint-disable-line react/pref
         <TableFooter>
           <TableRow>
             <TableRowColumn colSpan="4" style={{ textAlign: 'left' }}>
-              { `Displaying ${results.length || '0'} out of ${titles.length || '0'} Titles` }
+              { `Displaying ${results.length || '0'} out of ${titlesTotal || '0'} Titles` }
             </TableRowColumn>
           </TableRow>
         </TableFooter>
@@ -129,30 +122,3 @@ export class FilterResults extends Component { // eslint-disable-line react/pref
     );
   }
 }
-
-const mapStateToProps = createStructuredSelector({
-  results: selectors.results(),
-  titles: selectors.titles(),
-  selectedTitle: selectors.selectedTitleId(),
-  relations: selectors.relations(),
-});
-
-function mapDispatchToProps(dispatch) {
-  return {
-    setSelectedTitle: (titleId) => dispatch(setSelectedTitle(titleId)),
-    addRelation: (titleId, rel) => dispatch(addRelation(titleId, rel)),
-  };
-}
-
-const validate = (values) => {
-  const errors = {};
-
-  if (!values.get('field1')) {
-    errors.field1 = 'Required';
-  }
-
-  return errors;
-};
-
-const form = reduxForm({ form: 'filterResults', validate })(FilterResults);
-export default connect(mapStateToProps, mapDispatchToProps)(form);
