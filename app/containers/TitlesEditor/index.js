@@ -6,6 +6,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import Helmet from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
@@ -90,14 +91,12 @@ const mapStateToProps = (state) => ({
   relations: selectors.relations()(state),
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  dispatch,
-  patchSeniority: (...args) => dispatch(patchSeniority(...args)),
-  patchProximity: (...args) => dispatch(patchProximity(...args)),
-  setSelectedTitle: (...args) => dispatch(setSelectedTitle(...args)),
-  createRelation: (...args) => dispatch(createRelation(...args)),
-  destroyRelation: (...args) => dispatch(destroyRelation(...args)),
-
-});
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+  patchSeniority,
+  patchProximity,
+  setSelectedTitle,
+  createRelation,
+  destroyRelation,
+}, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(TitlesEditor);

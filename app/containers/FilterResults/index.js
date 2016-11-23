@@ -81,6 +81,11 @@ export default class FilterResults extends Component { // eslint-disable-line re
             </TableHeaderColumn>
             <TableHeaderColumn colSpan="2">Relations</TableHeaderColumn>
           </TableRow>
+          <TableRow>
+            <TableRowColumn colSpan="4" style={{ textAlign: 'left' }}>
+              { `Displaying ${results.size || '0'} out of ${titlesTotal || '0'} Titles` }
+            </TableRowColumn>
+          </TableRow>
         </TableHeader>
         <TableBody deselectOnClickaway={false}>
           {results.map(title =>
@@ -111,13 +116,6 @@ export default class FilterResults extends Component { // eslint-disable-line re
           )}
 
         </TableBody>
-        <TableFooter>
-          <TableRow>
-            <TableRowColumn colSpan="4" style={{ textAlign: 'left' }}>
-              { `Displaying ${results.size || '0'} out of ${titlesTotal || '0'} Titles` }
-            </TableRowColumn>
-          </TableRow>
-        </TableFooter>
       </Table>
     );
   }
