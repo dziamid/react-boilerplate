@@ -13,6 +13,7 @@ import {
   UPDATE_SENIORITY,
   CREATE_RELATION,
   DESTROY_RELATION,
+  UPDATE_PROXIMITY,
 } from './constants';
 
 import {
@@ -23,6 +24,7 @@ import {
   fetchTitleRelationsSuccess,
   addRelation,
   removeRelation,
+  updateProximityLocal,
 } from './actions';
 
 function* fetchSubCats() {
@@ -74,15 +76,36 @@ function* destoySingleRelation(relation) {
 }
 
 function* destroyRelation({ relation }) {
-  const toDestroy = [relation];
-  const relations = yield select(selectors.relations());
+  const bucket = [relation];
 
-  const neighborRelation = relations.find(r => r.jobTitleId === relation.neighborId);
-  if (neighborRelation) {
-    toDestroy.push(neighborRelation);
+  const neighbor = getNeighborRelation(relation);
+  if (neighbor) {
+    bucket.push(neighbor);
   }
 
-  yield toDestroy.map(r => destoySingleRelation(r));
+  yield bucket.map(r => destoySingleRelation(r));
+}
+
+function* updateSingleProximity(relation, proximity) {
+  yield call(patch, { url: `/jobTitleNeighbors/${relation.id}`, data: { proximity } });
+  yield put(updateProximityLocal(relation, proximity));
+}
+
+function* updateProximity({ relation, proximity }) {
+  const bucket = [relation];
+
+  const neighbor = getNeighborRelation(relation);
+  if (neighbor) {
+    bucket.push(neighbor);
+  }
+
+  yield bucket.map(r => updateSingleProximity(relation, proximity));
+}
+
+function* getNeighborRelation(relation) {
+  const relations = yield select(selectors.relations());
+
+  return relations.find(r => r.jobTitleId === relation.neighborId)
 }
 
 
@@ -96,6 +119,7 @@ export function* dataLoader() {
     fork(takeEvery, FETCH_TITLES, fetchTitles),
     fork(takeEvery, CREATE_RELATION, createRelation),
     fork(takeEvery, DESTROY_RELATION, destroyRelation),
+    fork(takeEvery, UPDATE_PROXIMITY, updateProximity),
 
   ];
 

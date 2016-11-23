@@ -12,10 +12,11 @@ import {
   CREATE_RELATION,
   DESTROY_RELATION,
   UPDATE_PROXIMITY,
+  UPDATE_PROXIMITY_LOCAL,
   UPDATE_SENIORITY,
   UPDATE_TITLE,
   SET_SELECTED_TITLE,
-} from 'containers/TitlesEditor/constants';
+} from './constants';
 
 export function fetchSubCategories(categoryId) {
   return {
@@ -115,6 +116,14 @@ export function updateSeniority(titleId, seniority) {
 export function updateProximity(relation, proximity) {
   return {
     type: UPDATE_PROXIMITY,
+    relation,
+    proximity,
+  };
+}
+
+export function updateProximityLocal(relation, proximity) {
+  return {
+    type: UPDATE_PROXIMITY_LOCAL,
     relation,
     proximity,
   };

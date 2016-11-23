@@ -9,10 +9,10 @@ import {
   FETCH_TITLE_RELATIONS_SUCCESS,
   ADD_RELATION,
   REMOVE_RELATION,
-  UPDATE_PROXIMITY,
+  UPDATE_PROXIMITY_LOCAL,
   UPDATE_SENIORITY,
   SET_SELECTED_TITLE,
-} from 'containers/TitlesEditor/constants';
+} from './constants';
 
 import { fromJS, List } from 'immutable';
 import * as _ from 'lodash';
@@ -108,18 +108,23 @@ function filterParamsReducer(state = initialState, action) {
     }
 
     case UPDATE_SENIORITY: {
-      const titleId = action.titleId;
-      const seniority = action.seniority;
+      const { titleId, seniority } = action;
       const titles = state.get('titles');
 
       const titleObj = _.find(titles, { id: titleId });
       titleObj.seniority = seniority;
 
-      return state.set('titles', titles); // TODO: Use immutable titles Map
+      return state.set('titles', titles);
     }
 
-    case UPDATE_PROXIMITY: {
-      throw 'not implemented';
+    case UPDATE_PROXIMITY_LOCAL: {
+      const { relation, proximity } = action;
+
+      const relations = state.get('relations');
+      const index = relations.findIndex(r => r.id === relation.id);
+      //todo: make entities inside array immutable
+      // and use setIn(['realations', index, 'proximity'])
+      return state.setIn(['relations', index], { ...relation, proximity });
     }
 
     default:
