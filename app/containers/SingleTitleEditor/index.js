@@ -136,14 +136,14 @@ export class SingleTitle extends Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  titles: state => state.getIn(['titlesEditorRoot', 'filterParams', 'titles'], []),
+  titles: state => state.getIn(['titlesEditorRoot', 'titles'], []),
   selectedTitle: (state) => {
-    const titleId = state.getIn(['titlesEditorRoot', 'filterResults', 'selectedTitle']);
-    const titles = state.getIn(['titlesEditorRoot', 'filterParams', 'titles'], []);
+    const titleId = state.getIn(['titlesEditorRoot', 'selectedTitle']);
+    const titles = state.getIn(['titlesEditorRoot', 'titles'], []);
 
     return titles.find(t => t.id === titleId) || {};
   },
-  relations: (state) => state.getIn(['titlesEditorRoot', 'filterParams', 'relations']),
+  relations: (state) => state.getIn(['titlesEditorRoot', 'relations']),
 });
 
 function mapDispatchToProps(dispatch) {

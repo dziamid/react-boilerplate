@@ -12,7 +12,7 @@ import languageProviderReducer from 'containers/LanguageProvider/reducer';
 import toastrReducer from 'components/Toastr/reducer';
 
 import { reducer as reduxFormReducer } from 'redux-form/immutable';
-import titlesEditorReducer from 'containers/TitlesEditor/reducers';
+import titlesEditorReducer from 'containers/TitlesEditor/reducer';
 import companiesFilterReducer from 'components/CompaniesFilter/reducer';
 import companiesReducer from 'components/Companies/reducer';
 import addressAutocompleteReducer from 'components/AddressAutocomplete/reducer';

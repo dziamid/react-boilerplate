@@ -5,11 +5,8 @@ import { fromJS } from 'immutable';
  * Direct selector to the FilterParams state domain
  */
 const selectFilterParamsDomain = () => (state) =>
-  state.getIn(['titlesEditorRoot', 'filterParams'], fromJS({}));
+  state.getIn(['titlesEditorRoot'], fromJS({}));
 
-const selectFilterParamsForm = () => (state) => {
-  return state.getIn(['form', 'filterParams'], {});
-};
 
 /**
  * Other specific selectors
