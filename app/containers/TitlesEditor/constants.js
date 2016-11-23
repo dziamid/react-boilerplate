@@ -17,6 +17,7 @@ export const FILTER_RESULTS = 'app/FilterParams/FILTER_RESULTS';
 // export const UPDATE_TITLE_ERROR = 'app/FilterParams/UPDATE_TITLE_ERROR';
 export const ADD_RELATION = 'app/FilterParams/ADD_RELATION';
 export const CREATE_RELATION = 'app/FilterParams/CREATE_RELATION';
+export const DESTROY_RELATION = 'app/FilterParams/DESTROY_RELATION';
 
 export const REMOVE_RELATION = 'app/FilterParams/REMOVE_RELATION';
 export const UPDATE_PROXIMITY = 'app/FilterParams/UPDATE_PROXIMITY';

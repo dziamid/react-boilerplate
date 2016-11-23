@@ -38,7 +38,7 @@ export default class SingleTitleEditor extends Component {
 
     this.handleSeniorityChange = this.handleSeniorityChange.bind(this);
     this.handleProximityChange = this.handleProximityChange.bind(this);
-    this.handleRemoveRelation = this.handleRemoveRelation.bind(this);
+    this.handleRelationRemove = this.handleRelationRemove.bind(this);
   }
 
   handleProximityChange(relation, value) {
@@ -51,8 +51,8 @@ export default class SingleTitleEditor extends Component {
     this.props.onSeniorityChange(this.props.title.id, value);
   }
 
-  handleRemoveRelation(relation) {
-    this.props.onRelationRemove(this.props.title, relation);
+  handleRelationRemove(relation) {
+    this.props.onRelationRemove(relation);
   }
 
   render() {
@@ -120,7 +120,7 @@ export default class SingleTitleEditor extends Component {
                 <TableRowColumn className={styles.removeColumn}>
                   <Button
                     icon={<RemoveIcon />}
-                    onClick={() => this.handleRemoveRelation(rel)}
+                    onClick={() => this.handleRelationRemove(rel)}
                   />
                 </TableRowColumn>
               </TableRow>

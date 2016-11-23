@@ -4,7 +4,7 @@
 
 import { takeEvery } from 'redux-saga';
 import { take, call, put, select, fork, cancel } from 'redux-saga/effects';
-import request, { get, post, patch } from 'utils/request';
+import request, { get, post, patch, destroy } from 'utils/request';
 import * as selectors from './selectors';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import {
@@ -12,6 +12,7 @@ import {
   FETCH_TITLES,
   UPDATE_SENIORITY,
   CREATE_RELATION,
+  DESTROY_RELATION,
 } from './constants';
 
 import {
@@ -21,6 +22,7 @@ import {
   fetchTitlesError,
   fetchTitleRelationsSuccess,
   addRelation,
+  removeRelation,
 } from './actions';
 
 function* fetchSubCats() {
@@ -66,6 +68,23 @@ function* createRelation({ jobTitleId, neighborId, proximity }) {
   ];
 }
 
+function* destoySingleRelation(relation) {
+  yield call(destroy, { url: `/jobTitleNeighbors/${relation.id}` });
+  yield put(removeRelation(relation));
+}
+
+function* destroyRelation({ relation }) {
+  const toDestroy = [relation];
+  const relations = yield select(selectors.relations());
+
+  const neighborRelation = relations.find(r => r.jobTitleId === relation.neighborId);
+  if (neighborRelation) {
+    toDestroy.push(neighborRelation);
+  }
+
+  yield toDestroy.map(r => destoySingleRelation(r));
+}
+
 
 /**
  * Root saga manages watcher lifecycle
@@ -76,6 +95,8 @@ export function* dataLoader() {
     fork(takeEvery, FETCH_SUBCATEGORIES, fetchSubCats),
     fork(takeEvery, FETCH_TITLES, fetchTitles),
     fork(takeEvery, CREATE_RELATION, createRelation),
+    fork(takeEvery, DESTROY_RELATION, destroyRelation),
+
   ];
 
   yield take(LOCATION_CHANGE);

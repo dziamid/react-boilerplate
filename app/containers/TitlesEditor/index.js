@@ -19,7 +19,7 @@ import * as selectors from './selectors';
 import {
   updateSeniority,
   updateProximity,
-  removeRelation,
+  destroyRelation,
   setSelectedTitle,
   createRelation,
 } from './actions';
@@ -70,7 +70,7 @@ export class TitlesEditor extends React.Component { // eslint-disable-line react
                   relations={selectedTitleRelations}
                   onSeniorityChange={this.props.updateSeniority}
                   onProximityChange={this.props.updateProximity}
-                  onRelationRemove={this.props.removeRelation}
+                  onRelationRemove={this.props.destroyRelation}
                 />
               </div>
             </Paper>
@@ -93,10 +93,10 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   dispatch,
   updateSeniority: (...args) => dispatch(updateSeniority(...args)),
-  updateProximity: (...args) => dispatch(updateProximity(...args)), // todo: implement
-  removeRelation: (...args) => dispatch(removeRelation(...args)),
-  setSelectedTitle: (titleId) => dispatch(setSelectedTitle(titleId)),
+  updateProximity: (...args) => dispatch(updateProximity(...args)),
+  setSelectedTitle: (...args) => dispatch(setSelectedTitle(...args)),
   createRelation: (...args) => dispatch(createRelation(...args)),
+  destroyRelation: (...args) => dispatch(destroyRelation(...args)),
 
 });
 

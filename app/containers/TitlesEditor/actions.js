@@ -8,8 +8,9 @@ import {
   FETCH_TITLE_RELATIONS_SUCCESS,
   FILTER_RESULTS,
   ADD_RELATION,
-  CREATE_RELATION,
   REMOVE_RELATION,
+  CREATE_RELATION,
+  DESTROY_RELATION,
   UPDATE_PROXIMITY,
   UPDATE_SENIORITY,
   UPDATE_TITLE,
@@ -89,10 +90,16 @@ export function addRelation(relation) {
   };
 }
 
-export function removeRelation(title, relation) {
+export function destroyRelation(relation) {
+  return {
+    type: DESTROY_RELATION,
+    relation,
+  };
+}
+
+export function removeRelation(relation) {
   return {
     type: REMOVE_RELATION,
-    title,
     relation,
   };
 }

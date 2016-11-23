@@ -27,15 +27,11 @@ export function* post(params, ...other) {
   yield* request({ method: 'POST', ...mapAxiosParams(params) }, ...other);
 }
 
-export function* put(params, ...other) {
-  yield* request({ method: 'PUT', ...mapAxiosParams(params) }, ...other);
-}
-
 export function* patch(params, ...other) {
   yield* request({ method: 'PATCH', ...mapAxiosParams(params) }, ...other);
 }
 
-export function* remove(params, ...other) {
+export function* destroy(params, ...other) {
   yield* request({ method: 'DELETE', ...mapAxiosParams(params) }, ...other);
 }
 
