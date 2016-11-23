@@ -21,17 +21,15 @@ import {
   fetchTitleRelationsSuccess,
 } from 'containers/FilterParams/actions';
 
-import { BASE_API, API_KEY } from 'containers/TitlesEditor/constants';
 import selectFilterParams from 'containers/FilterParams/selectors';
 
-// todo: move BASE_API to utils/request
 function* fetchSubCats() {
-  yield call(get, `${BASE_API}/jobSubCategories`, fetchSubCategoriesSuccess, fetchSubCategoriesError);
+  yield call(get, '/jobSubCategories', fetchSubCategoriesSuccess, fetchSubCategoriesError);
 }
 
 function* fetchTitles() {
   const { selectedSubCategory } = yield select(selectFilterParams());
-  const url = `${BASE_API}/jobSubCategories/${selectedSubCategory}/jobTitles`;
+  const url = `/jobSubCategories/${selectedSubCategory}/jobTitles`;
   yield call(request, url, fetchTitlesSuccess, fetchTitlesError);
 
   yield fetchTitleRelations();
@@ -41,7 +39,7 @@ function* fetchTitleRelations() {
   const { titles } = yield select(selectFilterParams());
   const ids = titles.map(t => t.id);
   const filter = { where: { jobTitleId: { inq: ids } } };
-  const url = `${BASE_API}/jobTitleNeighbors`;
+  const url = '/jobTitleNeighbors';
   const params = { filter };
 
   yield call(request, { url, params }, fetchTitleRelationsSuccess);
@@ -49,7 +47,7 @@ function* fetchTitleRelations() {
 
 function* updateSeniority(action) {
   const { titleId, seniority } = action;
-  const url = `${BASE_API}/jobTitles/${titleId}`;
+  const url = `/jobTitles/${titleId}`;
   const data = { seniority };
 
   yield call(patch, { url, data });

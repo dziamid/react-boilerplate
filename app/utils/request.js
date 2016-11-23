@@ -1,9 +1,18 @@
 import { call, put as putSaga } from 'redux-saga/effects';
 import axios from 'axios';
 
+export const BASE_API = process.env.BASE_API || 'http://138.68.100.219:4000/api';
+// export const API_KEY = process.env.API_KEY || 'apiKey=WNDdxGon5y3SRaWjlqSM18l4gPvVhVgN&l=99999';
+
 export default function* request(params, onSuccess, onError) {
+  const _params = mapAxiosParams(params);
+  if (_params.url.indexOf('/') === 0) {
+    //relative url detected
+    _params.url = BASE_API + _params.url;
+  }
+
   try {
-    const { data } = yield call(axios, params);
+    const { data } = yield call(axios, _params);
     onSuccess && (yield putSaga(onSuccess(data)));
   } catch (err) {
     onError && (yield putSaga(onError(err)));
