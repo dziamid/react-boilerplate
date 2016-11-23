@@ -8,15 +8,11 @@ import React, { Component, PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import styles from './styles.css';
-import * as selectors from 'containers/TitlesEditor/selectors';
-
-import { connect } from 'react-redux';
 import MenuItem from 'components/MenuItem';
 import H3 from 'components/H3';
-import { seniorities, proximities } from 'containers/TitlesEditor/constants';
+import seniorities from 'mocks/seniorities';
+import proximities from 'mocks/proximities';
 import MUISelectField from 'material-ui/SelectField';
-
-import { updateSeniority, updateProximity, removeRelation } from 'containers/TitlesEditor/actions';
 import { difference, compact } from 'lodash';
 import RemoveIcon from 'material-ui/svg-icons/content/remove-circle-outline';
 import Button from 'components/Button';

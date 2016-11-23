@@ -9,11 +9,12 @@ import * as selectors from 'containers/TitlesEditor/selectors';
 import styles from './styles.css';
 import { createStructuredSelector } from 'reselect';
 import { setSelectedTitle, addRelation } from 'containers/TitlesEditor/actions';
-import { getSeniorityName } from 'containers/TitlesEditor/constants';
+import seniorities from 'mocks/seniorities';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form/immutable';
 import Button from 'components/Button';
 import AddIcon from 'material-ui/svg-icons/content/add-circle-outline';
+import cx from 'classnames';
 
 import {
   Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn,
@@ -58,6 +59,12 @@ export class FilterResults extends Component { // eslint-disable-line react/pref
       selectedTitle !== title.id && !this.hasRelation(title.id, selectedTitle);
   }
 
+  getSeniorityName(value) {
+    const seniority = seniorities.find(s => s.value === value);
+
+    return seniority ? seniority.name : null;
+  }
+
   render() {
     const {
       selectedTitle,
@@ -73,8 +80,12 @@ export class FilterResults extends Component { // eslint-disable-line react/pref
       >
         <TableHeader displaySelectAll={false} adjustForCheckbox>
           <TableRow>
-            <TableHeaderColumn className={styles.titleColumn}>Title</TableHeaderColumn>
-            <TableHeaderColumn>Seniority</TableHeaderColumn>
+            <TableHeaderColumn className={styles.titleColumn}>
+              Title
+            </TableHeaderColumn>
+            <TableHeaderColumn className={styles.seniorityColumn}>
+              Seniority
+            </TableHeaderColumn>
             <TableHeaderColumn colSpan="2">Relations</TableHeaderColumn>
           </TableRow>
         </TableHeader>
@@ -84,8 +95,12 @@ export class FilterResults extends Component { // eslint-disable-line react/pref
               key={title.id}
               selected={title.id === selectedTitle}
             >
-              <TableRowColumn className={styles.titleColumn}>{title.name}</TableRowColumn>
-              <TableRowColumn>{getSeniorityName(title.name)}</TableRowColumn>
+              <TableRowColumn className={styles.titleColumn}>
+                {title.name}
+              </TableRowColumn>
+              <TableRowColumn className={styles.seniorityColumn}>
+                {this.getSeniorityName(title.seniority)}
+              </TableRowColumn>
               <TableRowColumn>
                 { this.showAddRelationButton(title) ? (
                   <Button
