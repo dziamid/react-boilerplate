@@ -5,7 +5,7 @@
 import { takeEvery } from 'redux-saga';
 import { take, call, put, select, fork, cancel } from 'redux-saga/effects';
 import request, { get, patch } from 'utils/request';
-
+import * as selectors from './selectors';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import {
   FETCH_SUBCATEGORIES,
@@ -21,14 +21,12 @@ import {
   fetchTitleRelationsSuccess,
 } from 'containers/TitlesEditor/actions';
 
-import { selectFilterParams } from './selectors';
-
 function* fetchSubCats() {
   yield call(get, '/jobSubCategories', fetchSubCategoriesSuccess, fetchSubCategoriesError);
 }
 
 function* fetchTitles() {
-  const { selectedSubCategory } = yield select(selectFilterParams());
+  const selectedSubCategory = yield select(selectors.selectedSubCategory());
   const url = `/jobSubCategories/${selectedSubCategory}/jobTitles`;
   yield call(request, url, fetchTitlesSuccess, fetchTitlesError);
 
@@ -36,7 +34,7 @@ function* fetchTitles() {
 }
 
 function* fetchTitleRelations() {
-  const { titles } = yield select(selectFilterParams());
+  const titles = yield select(selectors.titles());
   const ids = titles.map(t => t.id);
   const filter = { where: { jobTitleId: { inq: ids } } };
   const url = '/jobTitleNeighbors';

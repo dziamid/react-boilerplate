@@ -33,7 +33,6 @@ export class FilterResults extends Component { // eslint-disable-line react/pref
   }
 
   handleRowSelection(indexes) {
-    console.log('handleRowSelection', indexes);
     const selectedTitle = indexes.length > 0 ? this.props.results[indexes[0]].id : null;
     this.props.setSelectedTitle(selectedTitle);
   }
@@ -119,7 +118,7 @@ export class FilterResults extends Component { // eslint-disable-line react/pref
 const mapStateToProps = createStructuredSelector({
   results: selectors.results(),
   titles: selectors.titles(),
-  selectedTitle: selectors.selectedTitle(),
+  selectedTitle: selectors.selectedTitleId(),
   relations: selectors.relations(),
 });
 

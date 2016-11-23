@@ -15,6 +15,4 @@ const messages = {};
 }
 );
 
-console.log(messages);
-
 export default defineMessages(messages);

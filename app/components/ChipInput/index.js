@@ -46,7 +46,6 @@ export default class ChipInput extends Component {
   }
 
   handleBlur() {
-    console.log(this.props.input.onBlur);
     this.props.input.onBlur();
   }
 

@@ -5,7 +5,6 @@
  */
 
 import React, { PropTypes, Component } from 'react';
-import { selectFilterParams } from 'containers/TitlesEditor/selectors';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import styles from './styles.css';
@@ -14,7 +13,6 @@ import { connect } from 'react-redux';
 import { Field, reduxForm, change, SubmissionError } from 'redux-form/immutable';
 import TextField from 'components/TextField';
 import Autocomplete from 'components/Autocomplete';
-import { createStructuredSelector } from 'reselect';
 
 import { fetchSubCategories, fetchTitles, filterResults } from 'containers/TitlesEditor/actions';
 
@@ -23,12 +21,10 @@ import { jobCategories } from './mocks';
 export class FilterParams extends Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     const {
-      filterParams: {
-        categories,
-        subCategories,
-        loading,
-        error,
-      },
+      categories,
+      subCategories,
+      loading,
+      error,
       fetchSubCategories,
       fetchTitles,
       filterResults,
@@ -88,8 +84,11 @@ FilterParams.propTypes = {
   form: PropTypes.string,
 };
 
-const mapStateToProps = createStructuredSelector({
-  filterParams: selectFilterParams(),
+const mapStateToProps = (state) => ({
+  categories: state.getIn(['titlesEditorRoot', 'categories']),
+  subCategories: state.getIn(['titlesEditorRoot', 'subCategories']),
+  loading: state.getIn(['titlesEditorRoot', 'loading']),
+  error: state.getIn(['titlesEditorRoot', 'error']),
 });
 
 function mapDispatchToProps(dispatch) {

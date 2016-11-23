@@ -8,8 +8,7 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import styles from './styles.css';
-
-import { createStructuredSelector } from 'reselect';
+import * as selectors from 'containers/TitlesEditor/selectors';
 
 import { connect } from 'react-redux';
 import MenuItem from 'components/MenuItem';
@@ -28,12 +27,16 @@ import {
   from 'material-ui/Table';
 
 export class SingleTitle extends Component {
+  static defaultProps = {
+    title: {}, // show empty form
+    relations: [],
+  };
+
   constructor(props) {
     super(props);
 
     // this.updateRelationProximity = this.updateRelationProximity.bind(this);
     this.updateSeniority = this.updateSeniority.bind(this);
-    this.getRelations = this.getRelations.bind(this);
     this.updateRelationProximity = this.updateRelationProximity.bind(this);
   }
 
@@ -42,38 +45,29 @@ export class SingleTitle extends Component {
   }
 
   updateSeniority(seniorityKey) {
-    this.selectedTitle.seniority = seniorityKey;
-    this.props.updateSeniority(this.selectedTitle.id, seniorityKey);
+    this.props.title.seniority = seniorityKey;
+    this.props.updateSeniority(this.props.title.id, seniorityKey);
     this.forceUpdate();
   }
 
-  getRelations(title) {
-    const relations = this.props.relations.filter(r => r.indexOf(title.id) !== -1); // todo: use selector
-    const relatedIds = relations.map(r => difference(r, [title.id])[0]);
-
-    const titles = relatedIds.map(id => this.props.titles.find(t => t.id === id));
-
-    return titles.filter(t => t !== undefined);
-  }
-
   render() {
-    const { selectedTitle } = this.props;
-    const relations = this.getRelations(selectedTitle);
+    const {
+      title,
+      relations,
+    } = this.props;
 
     const seniorityOptions = seniorities.map(s => <MenuItem key={s.value} value={s.value} primaryText={s.name} />);
     const proximityOptions = proximities.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.name} />);
 
-    this.selectedTitle = selectedTitle;
-
     return (
       <div className={styles.SingleTitle}>
         <H3>
-          <div>{selectedTitle.name}</div>
+          <div>{title.name}</div>
         </H3>
         <div className={styles.formRow}>
           <MUISelectField
             label={<FormattedMessage {...messages.seniority} />}
-            value={selectedTitle.seniority}
+            value={title.seniority}
             className={styles.filterField}
             fullWidth
             onChange={(e, key, value) => this.updateSeniority(value)}
@@ -112,7 +106,7 @@ export class SingleTitle extends Component {
                   <MUISelectField
                     value={rel.proximity}
                     className={styles.proximityField}
-                    onChange={(e, key, value) => this.updateRelationProximity(value, rel.id, selectedTitle.id)}
+                    onChange={(e, key, value) => this.updateRelationProximity(value, rel.id, title.id)}
                   >
                     {proximityOptions}
                   </MUISelectField>
@@ -121,7 +115,7 @@ export class SingleTitle extends Component {
                 <TableRowColumn className={styles.removeColumn}>
                   <Button
                     icon={<RemoveIcon />}
-                    onClick={() => this.props.removeRelation(rel.id, selectedTitle.id)}
+                    onClick={() => this.props.removeRelation(rel.id, title.id)}
                   />
                 </TableRowColumn>
               </TableRow>
@@ -135,17 +129,6 @@ export class SingleTitle extends Component {
   }
 }
 
-const mapStateToProps = createStructuredSelector({
-  titles: state => state.getIn(['titlesEditorRoot', 'titles'], []),
-  selectedTitle: (state) => {
-    const titleId = state.getIn(['titlesEditorRoot', 'selectedTitle']);
-    const titles = state.getIn(['titlesEditorRoot', 'titles'], []);
-
-    return titles.find(t => t.id === titleId) || {};
-  },
-  relations: (state) => state.getIn(['titlesEditorRoot', 'relations']),
-});
-
 function mapDispatchToProps(dispatch) {
   return {
     updateSeniority: (...args) => dispatch(updateSeniority(...args)),
@@ -154,5 +137,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-// const form = reduxForm({ form: 'SingleTitle', validate })(SingleTitle);
-export default connect(mapStateToProps, mapDispatchToProps)(SingleTitle);
+export default connect(null, mapDispatchToProps)(SingleTitle);

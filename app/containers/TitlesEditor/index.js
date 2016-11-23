@@ -16,9 +16,12 @@ import SingleTitleEditor from '../SingleTitleEditor';
 import FilterResults from '../FilterResults';
 import FilterParams from '../FilterParams';
 import Paper from 'material-ui/Paper';
+import * as selectors from './selectors';
 
 export class TitlesEditor extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
+    const { selectedTitle, selectedTitleRelations } = this.props;
+
     return (
       <div className={styles.titlesEditor}>
         <Helmet
@@ -45,7 +48,10 @@ export class TitlesEditor extends React.Component { // eslint-disable-line react
             </H3>
             <Paper className={styles.paper} zDepth={1}>
               <div className={styles.paperWrapper}>
-                <SingleTitleEditor />
+                <SingleTitleEditor
+                  title={selectedTitle}
+                  relations={selectedTitleRelations}
+                />
               </div>
             </Paper>
           </div>
@@ -58,12 +64,13 @@ export class TitlesEditor extends React.Component { // eslint-disable-line react
   }
 }
 
-const mapStateToProps = () => ({}); // selectTitlesEditor();
+const mapStateToProps = (state) => ({
+  selectedTitle: selectors.selectedTitle()(state),
+  selectedTitleRelations: selectors.selectedTitleRelations()(state),
+});
 
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch,
-  };
-}
+const mapDispatchToProps = (dispatch) => ({
+  dispatch,
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(TitlesEditor);
