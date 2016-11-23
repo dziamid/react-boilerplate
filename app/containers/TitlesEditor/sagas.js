@@ -11,7 +11,7 @@ import {
   FETCH_SUBCATEGORIES,
   FETCH_TITLES,
   UPDATE_SENIORITY,
-} from 'containers/FilterParams/constants';
+} from './constants';
 
 import {
   fetchSubCategoriesSuccess,
@@ -19,7 +19,7 @@ import {
   fetchTitlesSuccess,
   fetchTitlesError,
   fetchTitleRelationsSuccess,
-} from 'containers/FilterParams/actions';
+} from 'containers/TitlesEditor/actions';
 
 import selectFilterParams from 'containers/FilterParams/selectors';
 

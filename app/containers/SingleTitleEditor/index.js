@@ -14,10 +14,10 @@ import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import MenuItem from 'components/MenuItem';
 import H3 from 'components/H3';
-import { seniorities, proximities } from './constants';
+import { seniorities, proximities } from 'containers/TitlesEditor/constants';
 import MUISelectField from 'material-ui/SelectField';
 
-import { updateSeniority, updateProximity, removeRelation } from 'containers/FilterParams/actions';
+import { updateSeniority, updateProximity, removeRelation } from 'containers/TitlesEditor/actions';
 import { difference, compact } from 'lodash';
 import RemoveIcon from 'material-ui/svg-icons/content/remove-circle-outline';
 import Button from 'components/Button';

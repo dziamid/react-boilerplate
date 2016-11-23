@@ -1,63 +1,120 @@
-/*
- * App Actions
- *
- * Actions change things in your application
- * Since this boilerplate uses a uni-directional data flow, specifically redux,
- * we have these actions which are the only way your application interacts with
- * your application state. This guarantees that your state is up to date and nobody
- * messes it up weirdly somewhere.
- *
- * To add a new Action:
- * 1) Import your constant
- * 2) Add a function like this:
- *    export function yourAction(var) {
- *        return { type: YOUR_ACTION_CONSTANT, var: var }
- *    }
- */
-
 import {
-  LOAD_REPOS,
-  LOAD_REPOS_SUCCESS,
-  LOAD_REPOS_ERROR,
-} from './constants';
+  FETCH_SUBCATEGORIES,
+  FETCH_SUBCATEGORIES_SUCCESS,
+  FETCH_SUBCATEGORIES_ERROR,
+  FETCH_TITLES,
+  FETCH_TITLES_SUCCESS,
+  FETCH_TITLES_ERROR,
+  FETCH_TITLE_RELATIONS_SUCCESS,
+  FILTER_RESULTS,
+  ADD_RELATION,
+  REMOVE_RELATION,
+  UPDATE_PROXIMITY,
+  UPDATE_SENIORITY,
+  UPDATE_TITLE,
+  SET_SELECTED_TITLE,
+} from 'containers/TitlesEditor/constants';
 
-/**
- * Load the repositories, this action starts the request saga
- *
- * @return {object} An action object with a type of LOAD_REPOS
- */
-export function loadRepos() {
+export function fetchSubCategories(categoryId) {
   return {
-    type: LOAD_REPOS,
+    type: FETCH_SUBCATEGORIES,
+    categoryId,
   };
 }
 
-/**
- * Dispatched when the repositories are loaded by the request saga
- *
- * @param  {array} repos The repository data
- * @param  {string} username The current username
- *
- * @return {object}      An action object with a type of LOAD_REPOS_SUCCESS passing the repos
- */
-export function reposLoaded(repos, username) {
+export function fetchSubCategoriesSuccess(subCategories) {
   return {
-    type: LOAD_REPOS_SUCCESS,
-    repos,
-    username,
+    type: FETCH_SUBCATEGORIES_SUCCESS,
+    subCategories,
   };
 }
 
-/**
- * Dispatched when loading the repositories fails
- *
- * @param  {object} error The error
- *
- * @return {object}       An action object with a type of LOAD_REPOS_ERROR passing the error
- */
-export function repoLoadingError(error) {
+export function fetchSubCategoriesError(error) {
   return {
-    type: LOAD_REPOS_ERROR,
+    type: FETCH_SUBCATEGORIES_ERROR,
     error,
+  };
+}
+
+export function fetchTitles(subCategoryId) {
+  return {
+    type: FETCH_TITLES,
+    subCategoryId,
+  };
+}
+
+export function fetchTitlesSuccess(titles) {
+  return {
+    type: FETCH_TITLES_SUCCESS,
+    titles,
+  };
+}
+
+export function fetchTitlesError(error) {
+  return {
+    type: FETCH_TITLES_ERROR,
+    error,
+  };
+}
+
+
+export function fetchTitleRelationsSuccess(relations) {
+  return {
+    type: FETCH_TITLE_RELATIONS_SUCCESS,
+    relations,
+  };
+}
+
+
+export function filterResults(filterText) {
+  return {
+    type: FILTER_RESULTS,
+    filterText,
+  };
+}
+
+export function addRelation(...titles) {
+  return {
+    type: ADD_RELATION,
+    titles: [...titles],
+  };
+}
+
+export function removeRelation(...titles) {
+  return {
+    type: REMOVE_RELATION,
+    titles: [...titles],
+  };
+}
+
+export function updateSeniority(titleId, seniority) {
+  return {
+    type: UPDATE_SENIORITY,
+    titleId,
+    seniority,
+  };
+}
+
+export function updateProximity(proximity, ...titles) {
+  return {
+    type: UPDATE_PROXIMITY,
+    titles: [...titles],
+    proximity,
+  };
+}
+
+export function updateTitle(titleId, field, value) {
+  return {
+    type: UPDATE_TITLE,
+    titleId,
+    field,
+    value,
+  };
+}
+
+export function setSelectedTitle(titleId) {
+  return {
+    type: SET_SELECTED_TITLE,
+    titleId,
   };
 }

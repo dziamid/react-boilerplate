@@ -8,10 +8,8 @@ import React, { Component } from 'react';
 import * as selectors from './selectors';
 import styles from './styles.css';
 import { createStructuredSelector } from 'reselect';
-
-import { setSelectedTitle } from './actions';
-import { addRelation, updateTitle } from 'containers/FilterParams/actions';
-
+import { setSelectedTitle, addRelation } from 'containers/TitlesEditor/actions';
+import { getSeniorityName } from 'containers/TitlesEditor/constants';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form/immutable';
 import Button from 'components/Button';
@@ -22,7 +20,6 @@ import {
 }
   from 'material-ui/Table';
 
-import { getSeniorityName } from 'containers/SingleTitleEditor/constants';
 
 export class FilterResults extends Component { // eslint-disable-line react/prefer-stateless-function
 
@@ -129,7 +126,6 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     setSelectedTitle: (titleId) => dispatch(setSelectedTitle(titleId)),
-    updateTitle: (id, title) => dispatch(updateTitle(id, title)),
     addRelation: (titleId, rel) => dispatch(addRelation(titleId, rel)),
   };
 }

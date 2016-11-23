@@ -16,7 +16,7 @@ import TextField from 'components/TextField';
 import Autocomplete from 'components/Autocomplete';
 import { createStructuredSelector } from 'reselect';
 
-import { fetchSubCategories, fetchTitles, filterResults } from './actions';
+import { fetchSubCategories, fetchTitles, filterResults } from 'containers/TitlesEditor/actions';
 
 import { jobCategories } from './mocks';
 

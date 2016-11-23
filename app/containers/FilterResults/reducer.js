@@ -1,14 +1,9 @@
-/*
- *
- * FilterResults reducer
- *
- */
 
 import { fromJS } from 'immutable';
+
 import {
-  DEFAULT_ACTION,
   SET_SELECTED_TITLE,
-} from './constants';
+} from 'containers/TitlesEditor/constants';
 
 const initialState = fromJS({
   results: [],
@@ -16,8 +11,6 @@ const initialState = fromJS({
 
 function FilterResultsReducer(state = initialState, action) {
   switch (action.type) {
-    case DEFAULT_ACTION:
-      return state;
     case SET_SELECTED_TITLE:
       return state.set('selectedTitle', action.titleId);
     default:

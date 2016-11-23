@@ -16,7 +16,7 @@ import {
   REMOVE_RELATION,
   UPDATE_PROXIMITY,
   UPDATE_SENIORITY,
-} from './constants';
+} from 'containers/TitlesEditor/constants';
 import { fromJS, List } from 'immutable';
 import * as _ from 'lodash';
 
