@@ -20,8 +20,8 @@ export const CREATE_RELATION = 'app/FilterParams/CREATE_RELATION';
 export const DESTROY_RELATION = 'app/FilterParams/DESTROY_RELATION';
 
 export const REMOVE_RELATION = 'app/FilterParams/REMOVE_RELATION';
+export const PATCH_PROXIMITY = 'app/FilterParams/PATCH_PROXIMITY';
 export const UPDATE_PROXIMITY = 'app/FilterParams/UPDATE_PROXIMITY';
-export const UPDATE_PROXIMITY_LOCAL = 'app/FilterParams/UPDATE_PROXIMITY_LOCAL';
 export const UPDATE_SENIORITY = 'app/FilterParams/UPDATE_SENIORITY';
 export const PATCH_SENIORITY = 'app/FilterParams/PATCH_SENIORITY';
 export const UPDATE_TITLE = 'app/FilterParams/UPDATE_TITLE';

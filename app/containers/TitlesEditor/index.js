@@ -18,7 +18,7 @@ import Paper from 'material-ui/Paper';
 import * as selectors from './selectors';
 import {
   patchSeniority,
-  updateProximity,
+  patchProximity,
   destroyRelation,
   setSelectedTitle,
   createRelation,
@@ -69,7 +69,7 @@ export class TitlesEditor extends React.Component { // eslint-disable-line react
                   title={selectedTitle || {}}
                   relations={selectedTitleRelations}
                   onSeniorityChange={this.props.patchSeniority}
-                  onProximityChange={this.props.updateProximity}
+                  onProximityChange={this.props.patchProximity}
                   onRelationRemove={this.props.destroyRelation}
                 />
               </div>
@@ -93,7 +93,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   dispatch,
   patchSeniority: (...args) => dispatch(patchSeniority(...args)),
-  updateProximity: (...args) => dispatch(updateProximity(...args)),
+  patchProximity: (...args) => dispatch(patchProximity(...args)),
   setSelectedTitle: (...args) => dispatch(setSelectedTitle(...args)),
   createRelation: (...args) => dispatch(createRelation(...args)),
   destroyRelation: (...args) => dispatch(destroyRelation(...args)),

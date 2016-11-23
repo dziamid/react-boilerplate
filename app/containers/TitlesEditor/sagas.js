@@ -13,7 +13,7 @@ import {
   PATCH_SENIORITY,
   CREATE_RELATION,
   DESTROY_RELATION,
-  UPDATE_PROXIMITY,
+  PATCH_PROXIMITY,
 } from './constants';
 
 import {
@@ -24,7 +24,7 @@ import {
   fetchTitleRelationsSuccess,
   addRelation,
   removeRelation,
-  updateProximityLocal,
+  updateProximity,
   updateSeniority,
 } from './actions';
 
@@ -90,10 +90,10 @@ function* destroyRelation({ relation }) {
 
 function* updateSingleProximity(relation, proximity) {
   yield call(patch, { url: `/jobTitleNeighbors/${relation.id}`, data: { proximity } });
-  yield put(updateProximityLocal(relation, proximity));
+  yield put(updateProximity(relation, proximity));
 }
 
-function* updateProximity({ relation, proximity }) {
+function* patchProximity({ relation, proximity }) {
   const bucket = [relation];
 
   const neighbor = yield getNeighborRelation(relation);
@@ -121,8 +121,7 @@ export function* dataLoader() {
     fork(takeEvery, FETCH_TITLES, fetchTitles),
     fork(takeEvery, CREATE_RELATION, createRelation),
     fork(takeEvery, DESTROY_RELATION, destroyRelation),
-    fork(takeEvery, UPDATE_PROXIMITY, updateProximity),
-
+    fork(takeEvery, PATCH_PROXIMITY, patchProximity),
   ];
 
   yield take(LOCATION_CHANGE);

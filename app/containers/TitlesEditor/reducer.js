@@ -9,7 +9,7 @@ import {
   FETCH_TITLE_RELATIONS_SUCCESS,
   ADD_RELATION,
   REMOVE_RELATION,
-  UPDATE_PROXIMITY_LOCAL,
+  UPDATE_PROXIMITY,
   UPDATE_SENIORITY,
   SET_SELECTED_TITLE,
 } from './constants';
@@ -115,7 +115,7 @@ function filterParamsReducer(state = initialState, action) {
       return state.setIn(['titles', index], { ...title, seniority });
     }
 
-    case UPDATE_PROXIMITY_LOCAL: {
+    case UPDATE_PROXIMITY: {
       const { relation, proximity } = action;
 
       const relations = state.get('relations');

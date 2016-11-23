@@ -11,8 +11,8 @@ import {
   REMOVE_RELATION,
   CREATE_RELATION,
   DESTROY_RELATION,
+  PATCH_PROXIMITY,
   UPDATE_PROXIMITY,
-  UPDATE_PROXIMITY_LOCAL,
   PATCH_SENIORITY,
   UPDATE_SENIORITY,
   UPDATE_TITLE,
@@ -122,17 +122,17 @@ export function patchSeniority(title, seniority) {
   };
 }
 
-export function updateProximity(relation, proximity) {
+export function patchProximity(relation, proximity) {
   return {
-    type: UPDATE_PROXIMITY,
+    type: PATCH_PROXIMITY,
     relation,
     proximity,
   };
 }
 
-export function updateProximityLocal(relation, proximity) {
+export function updateProximity(relation, proximity) {
   return {
-    type: UPDATE_PROXIMITY_LOCAL,
+    type: UPDATE_PROXIMITY,
     relation,
     proximity,
   };
