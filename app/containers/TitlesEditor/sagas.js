@@ -25,17 +25,19 @@ import { BASE_API, API_KEY } from 'containers/TitlesEditor/constants';
 import selectFilterParams from 'containers/FilterParams/selectors';
 
 // todo: move BASE_API to utils/request
-export function* fetchSubCats() {
+function* fetchSubCats() {
   yield call(get, `${BASE_API}/jobSubCategories`, fetchSubCategoriesSuccess, fetchSubCategoriesError);
 }
 
-export function* fetchTitles() {
+function* fetchTitles() {
   const { selectedSubCategory } = yield select(selectFilterParams());
   const url = `${BASE_API}/jobSubCategories/${selectedSubCategory}/jobTitles`;
   yield call(request, url, fetchTitlesSuccess, fetchTitlesError);
+
+  yield fetchTitleRelations();
 }
 
-export function* fetchTitleRelations() {
+function* fetchTitleRelations() {
   const { titles } = yield select(selectFilterParams());
   const ids = titles.map(t => t.id);
   const filter = { where: { jobTitleId: { inq: ids } } };
@@ -45,7 +47,7 @@ export function* fetchTitleRelations() {
   yield call(request, { url, params }, fetchTitleRelationsSuccess);
 }
 
-export function* updateSeniority(action) {
+function* updateSeniority(action) {
   const { titleId, seniority } = action;
   const url = `${BASE_API}/jobTitles/${titleId}`;
   const data = { seniority };
@@ -53,42 +55,19 @@ export function* updateSeniority(action) {
   yield call(patch, { url, data });
 }
 
-export function* updateTitleWatcher() {
-  yield takeEvery(UPDATE_SENIORITY, updateSeniority);
-}
-
-/**
- * Watches for an action called on the store and calls handler
- */
-export function* getSubCatsWatcher() {
-  while (yield take(FETCH_SUBCATEGORIES)) {
-    yield call(fetchSubCats);
-  }
-}
-
-export function* getTitlesWatcher() {
-  while (yield take(FETCH_TITLES)) {
-    yield call(fetchTitles);
-    yield call(fetchTitleRelations);
-  }
-}
-
 
 /**
  * Root saga manages watcher lifecycle
  */
 export function* dataLoader() {
-  // Fork watcher so we can continue execution
-  const watchers = [];
-  watchers.push(yield fork(getSubCatsWatcher));
-  watchers.push(yield fork(getTitlesWatcher));
-  watchers.push(yield fork(updateTitleWatcher));
+  const watcher = yield [
+    fork(takeEvery, UPDATE_SENIORITY, updateSeniority),
+    fork(takeEvery, FETCH_SUBCATEGORIES, fetchSubCats),
+    fork(takeEvery, FETCH_TITLES, fetchTitles),
+  ];
 
-  // Suspend execution until location changes
   yield take(LOCATION_CHANGE);
-
-  // watchers.map(w => yield cancel(w));
-  yield cancel(watchers);
+  yield cancel(watcher);
 }
 
 // Bootstrap sagas
