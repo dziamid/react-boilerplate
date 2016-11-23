@@ -5,7 +5,7 @@
  */
 
 import React, { PropTypes, Component } from 'react';
-import selectFilterParams from './selectors';
+import { selectFilterParams } from 'containers/TitlesEditor/selectors';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import styles from './styles.css';

@@ -21,7 +21,7 @@ import {
   fetchTitleRelationsSuccess,
 } from 'containers/TitlesEditor/actions';
 
-import selectFilterParams from 'containers/FilterParams/selectors';
+import { selectFilterParams } from './selectors';
 
 function* fetchSubCats() {
   yield call(get, '/jobSubCategories', fetchSubCategoriesSuccess, fetchSubCategoriesError);

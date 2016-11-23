@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import * as selectors from './selectors';
+import * as selectors from 'containers/TitlesEditor/selectors';
 import styles from './styles.css';
 import { createStructuredSelector } from 'reselect';
 import { setSelectedTitle, addRelation } from 'containers/TitlesEditor/actions';
