@@ -80,10 +80,11 @@ export function addRelation(...titles) {
   };
 }
 
-export function removeRelation(...titles) {
+export function removeRelation(title, relation) {
   return {
     type: REMOVE_RELATION,
-    titles: [...titles],
+    title,
+    relation,
   };
 }
 
@@ -95,10 +96,10 @@ export function updateSeniority(titleId, seniority) {
   };
 }
 
-export function updateProximity(proximity, ...titles) {
+export function updateProximity(relation, proximity) {
   return {
     type: UPDATE_PROXIMITY,
-    titles: [...titles],
+    relation,
     proximity,
   };
 }

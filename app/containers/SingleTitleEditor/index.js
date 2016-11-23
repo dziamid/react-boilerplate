@@ -4,7 +4,7 @@
  *
  */
 
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import styles from './styles.css';
@@ -20,34 +20,43 @@ import { updateSeniority, updateProximity, removeRelation } from 'containers/Tit
 import { difference, compact } from 'lodash';
 import RemoveIcon from 'material-ui/svg-icons/content/remove-circle-outline';
 import Button from 'components/Button';
+import { List } from 'immutable';
 
 import {
   Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn,
 }
   from 'material-ui/Table';
 
-export class SingleTitle extends Component {
-  static defaultProps = {
-    title: {}, // show empty form
-    relations: [],
+export default class SingleTitleEditor extends Component {
+
+  static propTypes = {
+    title: PropTypes.object,
+    relations: PropTypes.oneOfType([PropTypes.instanceOf(List), PropTypes.array]),
+    onSeniorityChange: PropTypes.func,
+    onProximityChange: PropTypes.func,
+    onRelationRemove: PropTypes.func,
   };
 
   constructor(props) {
     super(props);
 
-    // this.updateRelationProximity = this.updateRelationProximity.bind(this);
-    this.updateSeniority = this.updateSeniority.bind(this);
-    this.updateRelationProximity = this.updateRelationProximity.bind(this);
+    this.handleSeniorityChange = this.handleSeniorityChange.bind(this);
+    this.handleProximityChange = this.handleProximityChange.bind(this);
+    this.handleRemoveRelation = this.handleRemoveRelation.bind(this);
   }
 
-  updateRelationProximity(...args) {
-    this.props.updateProximity(...args);
+  handleProximityChange(relation, value) {
+    this.props.onProximityChange(relation, value);
   }
 
-  updateSeniority(seniorityKey) {
-    this.props.title.seniority = seniorityKey;
-    this.props.updateSeniority(this.props.title.id, seniorityKey);
-    this.forceUpdate();
+  handleSeniorityChange(e, key, value) {
+    this.props.title.seniority = value;
+
+    this.props.onSeniorityChange(this.props.title.id, value);
+  }
+
+  handleRemoveRelation(relation) {
+    this.props.onRelationRemove(this.props.title, relation);
   }
 
   render() {
@@ -70,7 +79,7 @@ export class SingleTitle extends Component {
             value={title.seniority}
             className={styles.filterField}
             fullWidth
-            onChange={(e, key, value) => this.updateSeniority(value)}
+            onChange={this.handleSeniorityChange}
           >
 
             {seniorityOptions}
@@ -106,7 +115,7 @@ export class SingleTitle extends Component {
                   <MUISelectField
                     value={rel.proximity}
                     className={styles.proximityField}
-                    onChange={(e, key, value) => this.updateRelationProximity(value, rel.id, title.id)}
+                    onChange={(e, key, value) => this.handleProximityChange(rel, value)}
                   >
                     {proximityOptions}
                   </MUISelectField>
@@ -115,7 +124,7 @@ export class SingleTitle extends Component {
                 <TableRowColumn className={styles.removeColumn}>
                   <Button
                     icon={<RemoveIcon />}
-                    onClick={() => this.props.removeRelation(rel.id, title.id)}
+                    onClick={() => this.handleRemoveRelation(rel)}
                   />
                 </TableRowColumn>
               </TableRow>
@@ -128,13 +137,3 @@ export class SingleTitle extends Component {
     );
   }
 }
-
-function mapDispatchToProps(dispatch) {
-  return {
-    updateSeniority: (...args) => dispatch(updateSeniority(...args)),
-    updateProximity: (...args) => dispatch(updateProximity(...args)),
-    removeRelation: (...args) => dispatch(removeRelation(...args)),
-  };
-}
-
-export default connect(null, mapDispatchToProps)(SingleTitle);

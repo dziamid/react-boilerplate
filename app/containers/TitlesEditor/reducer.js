@@ -105,9 +105,13 @@ function filterParamsReducer(state = initialState, action) {
     }
 
     case REMOVE_RELATION: {
-      const [a, b] = action.titles; // ids
+      const { relation, title } = action;
+      const a = relation.id;
+      const b = title.id;
+
       let relations = state.get('relations');
       const relIndex = state.get('relations').findIndex(r => r.indexOf(a) !== -1 && r.indexOf(b) !== -1);
+
       if (relIndex !== -1) {
         relations = relations.remove(relIndex);
       }
@@ -127,16 +131,7 @@ function filterParamsReducer(state = initialState, action) {
     }
 
     case UPDATE_PROXIMITY: {
-      const [a, b] = action.titles; // ids
-      let relations = state.get('relations');
-      const entry = relations.findEntry(r => r.indexOf(a) !== -1 && r.indexOf(b) !== -1); // returns [idx, relation]
-      if (entry && Array.isArray(entry[1])) {
-        return state;
-      }
-      entry[1].push('new data');
-      relations = relations.update(entry[0], () => entry[1]);
-
-      return state.set('relations', relations);
+      throw 'not implemented';
     }
 
     default:

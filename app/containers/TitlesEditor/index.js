@@ -17,10 +17,15 @@ import FilterResults from '../FilterResults';
 import FilterParams from '../FilterParams';
 import Paper from 'material-ui/Paper';
 import * as selectors from './selectors';
+import { updateSeniority, updateProximity, removeRelation } from './actions';
+
 
 export class TitlesEditor extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
-    const { selectedTitle, selectedTitleRelations } = this.props;
+    const {
+      selectedTitle,
+      selectedTitleRelations,
+    } = this.props;
 
     return (
       <div className={styles.titlesEditor}>
@@ -49,8 +54,11 @@ export class TitlesEditor extends React.Component { // eslint-disable-line react
             <Paper className={styles.paper} zDepth={1}>
               <div className={styles.paperWrapper}>
                 <SingleTitleEditor
-                  title={selectedTitle}
+                  title={selectedTitle || {}}
                   relations={selectedTitleRelations}
+                  onSeniorityChange={this.props.updateSeniority}
+                  onProximityChange={this.props.updateProximity}
+                  onRelationRemove={this.props.removeRelation}
                 />
               </div>
             </Paper>
@@ -71,6 +79,10 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   dispatch,
+  updateSeniority: (...args) => dispatch(updateSeniority(...args)),
+  updateProximity: (...args) => dispatch(updateProximity(...args)), // todo: implement
+  removeRelation: (...args) => dispatch(removeRelation(...args)),
+
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TitlesEditor);
