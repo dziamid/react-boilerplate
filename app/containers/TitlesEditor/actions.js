@@ -8,6 +8,7 @@ import {
   FETCH_TITLE_RELATIONS_SUCCESS,
   FILTER_RESULTS,
   ADD_RELATION,
+  CREATE_RELATION,
   REMOVE_RELATION,
   UPDATE_PROXIMITY,
   UPDATE_SENIORITY,
@@ -73,10 +74,18 @@ export function filterResults(filterText) {
   };
 }
 
-export function addRelation(...titles) {
+export function createRelation(jobTitleId, neighborId) {
+  return {
+    type: CREATE_RELATION,
+    jobTitleId,
+    neighborId,
+  };
+}
+
+export function addRelation(relation) {
   return {
     type: ADD_RELATION,
-    titles: [...titles],
+    relation,
   };
 }
 

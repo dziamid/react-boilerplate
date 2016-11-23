@@ -38,11 +38,11 @@ export default class FilterResults extends Component { // eslint-disable-line re
   }
 
   hasRelation(titleA, titleB) {
-    return this.props.relations.find(r => r.indexOf(titleA) !== -1 && r.indexOf(titleB) !== -1);
+    return this.props.relations.find(r => r.jobTitleId === titleA && r.neighborId === titleB);
   }
 
   getRelations(title) {
-    return this.props.relations.filter(r => r.indexOf(title.id) !== -1); // use selector
+    return this.props.relations.filter(r => r.jobTitleId === title.id);
   }
 
   showAddRelationButton(title) {

@@ -156,6 +156,7 @@
         }
       ],
       "no-shadow": 0,
+      "no-throw-literal": 1,
       "prefer-template": 2,
       "class-methods-use-this": 0,
       "react/forbid-prop-types": 0,

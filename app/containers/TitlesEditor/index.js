@@ -21,7 +21,7 @@ import {
   updateProximity,
   removeRelation,
   setSelectedTitle,
-  addRelation,
+  createRelation,
 } from './actions';
 
 
@@ -54,7 +54,7 @@ export class TitlesEditor extends React.Component { // eslint-disable-line react
                   selectedTitle={this.props.selectedTitleId}
                   relations={this.props.relations}
                   onRowSelection={this.props.setSelectedTitle}
-                  onAddRelation={this.props.addRelation}
+                  onAddRelation={this.props.createRelation}
                 />
               </div>
             </Paper>
@@ -96,7 +96,7 @@ const mapDispatchToProps = (dispatch) => ({
   updateProximity: (...args) => dispatch(updateProximity(...args)), // todo: implement
   removeRelation: (...args) => dispatch(removeRelation(...args)),
   setSelectedTitle: (titleId) => dispatch(setSelectedTitle(titleId)),
-  addRelation: (titleId, rel) => dispatch(addRelation(titleId, rel)),
+  createRelation: (...args) => dispatch(createRelation(...args)),
 
 });
 

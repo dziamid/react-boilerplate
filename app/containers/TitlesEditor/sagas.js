@@ -4,13 +4,14 @@
 
 import { takeEvery } from 'redux-saga';
 import { take, call, put, select, fork, cancel } from 'redux-saga/effects';
-import request, { get, patch } from 'utils/request';
+import request, { get, post, patch } from 'utils/request';
 import * as selectors from './selectors';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import {
   FETCH_SUBCATEGORIES,
   FETCH_TITLES,
   UPDATE_SENIORITY,
+  CREATE_RELATION,
 } from './constants';
 
 import {
@@ -19,7 +20,8 @@ import {
   fetchTitlesSuccess,
   fetchTitlesError,
   fetchTitleRelationsSuccess,
-} from 'containers/TitlesEditor/actions';
+  addRelation,
+} from './actions';
 
 function* fetchSubCats() {
   yield call(get, '/jobSubCategories', fetchSubCategoriesSuccess, fetchSubCategoriesError);
@@ -51,6 +53,19 @@ function* updateSeniority(action) {
   yield call(patch, { url, data });
 }
 
+function* createSingleRelation(action) {
+  yield call(post, { url: '/jobTitleNeighbors', data: action }, addRelation);
+}
+
+function* createRelation({ jobTitleId, neighborId, proximity }) {
+  const rel = { jobTitleId, neighborId, proximity };
+  const oppositeRel = { jobTitleId: neighborId, neighborId: jobTitleId, proximity };
+  yield [
+    createSingleRelation(rel),
+    createSingleRelation(oppositeRel),
+  ];
+}
+
 
 /**
  * Root saga manages watcher lifecycle
@@ -60,6 +75,7 @@ export function* dataLoader() {
     fork(takeEvery, UPDATE_SENIORITY, updateSeniority),
     fork(takeEvery, FETCH_SUBCATEGORIES, fetchSubCats),
     fork(takeEvery, FETCH_TITLES, fetchTitles),
+    fork(takeEvery, CREATE_RELATION, createRelation),
   ];
 
   yield take(LOCATION_CHANGE);

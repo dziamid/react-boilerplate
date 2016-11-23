@@ -84,39 +84,27 @@ function filterParamsReducer(state = initialState, action) {
     }
 
     case FETCH_TITLE_RELATIONS_SUCCESS: {
-      const relations = _.chain(action.relations)
-        .map(r => [r.jobTitleId, r.neighborId].sort())
-        .uniqBy(r => r.join(','))
-        .value();
-
       return state
-        .set('relations', List(relations));
+        .set('relations', List(action.relations));
     }
 
     case ADD_RELATION: {
-      const [a, b] = action.titles; // ids
-      let relations = state.get('relations');
-      const exits = state.get('relations').find(r => r.indexOf(a) !== -1 && r.indexOf(b) !== -1);
-      if (!exits) {
-        relations = relations.push([a, b]);
-      }
+      const { relation } = action;
 
-      return state.set('relations', relations); // TODO: Use immutable relations
+      return state.set('relations', state.get('relations').push(relation));
     }
 
     case REMOVE_RELATION: {
-      const { relation, title } = action;
-      const a = relation.id;
-      const b = title.id;
+      const { relation } = action;
 
       let relations = state.get('relations');
-      const relIndex = state.get('relations').findIndex(r => r.indexOf(a) !== -1 && r.indexOf(b) !== -1);
+      const relIndex = state.get('relations').findIndex(r => r.id === relation.id);
 
       if (relIndex !== -1) {
         relations = relations.remove(relIndex);
       }
 
-      return state.set('relations', relations); // TODO: Use immutable relations
+      return state.set('relations', relations);
     }
 
     case UPDATE_SENIORITY: {

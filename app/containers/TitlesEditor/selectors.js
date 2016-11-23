@@ -25,15 +25,18 @@ export const selectedTitleRelations = () => createSelector(
   selectedTitle(),
   titles(),
   relations(),
-  (selectedTitle, titles, relations) => {
-    if (!selectedTitle) {
+  (title, titles, relations) => {
+    if (!title) {
       return [];
     }
 
-    const relatedIds = relations.map(r => difference(r, [selectedTitle.id])[0]);
-    const relatedTitles = relatedIds.map(id => titles.find(t => t.id === id));
+    const titleRelations = relations.filter(r => r.jobTitleId === title.id);
+    const relatedTitles = titleRelations.map(r => titles.find(t => t.id === r.neighborId));
 
-    return relatedTitles.filter(r => r !== undefined);
+    return titleRelations.map((r, i) => ({
+      ...r,
+      name: relatedTitles.get(i).name,
+    }));
   }
 );
 
