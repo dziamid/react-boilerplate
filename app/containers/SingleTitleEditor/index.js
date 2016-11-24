@@ -14,8 +14,6 @@ import seniorities from 'mocks/seniorities';
 import proximities from 'mocks/proximities';
 import MUISelectField from 'material-ui/SelectField';
 import { difference, compact } from 'lodash';
-import RemoveIcon from 'material-ui/svg-icons/content/remove-circle-outline';
-import Button from 'components/Button';
 import { List } from 'immutable';
 
 import {
@@ -30,7 +28,6 @@ export default class SingleTitleEditor extends Component {
     relations: PropTypes.oneOfType([PropTypes.instanceOf(List), PropTypes.array]),
     onSeniorityChange: PropTypes.func,
     onProximityChange: PropTypes.func,
-    onRelationRemove: PropTypes.func,
   };
 
   constructor(props) {
@@ -38,7 +35,6 @@ export default class SingleTitleEditor extends Component {
 
     this.handleSeniorityChange = this.handleSeniorityChange.bind(this);
     this.handleProximityChange = this.handleProximityChange.bind(this);
-    this.handleRelationRemove = this.handleRelationRemove.bind(this);
   }
 
   handleProximityChange(relation, value) {
@@ -47,10 +43,6 @@ export default class SingleTitleEditor extends Component {
 
   handleSeniorityChange(e, key, value) {
     this.props.onSeniorityChange(this.props.title, value);
-  }
-
-  handleRelationRemove(relation) {
-    this.props.onRelationRemove(relation);
   }
 
   render() {
@@ -96,7 +88,6 @@ export default class SingleTitleEditor extends Component {
               <TableHeaderColumn className={styles.proximityColumn}>
                 <FormattedMessage {...messages.proximity} />
               </TableHeaderColumn>
-              <TableHeaderColumn />
             </TableRow>
           </TableHeader>
           <TableBody displayRowCheckbox={false}>
@@ -114,12 +105,6 @@ export default class SingleTitleEditor extends Component {
                     {proximityOptions}
                   </MUISelectField>
 
-                </TableRowColumn>
-                <TableRowColumn className={styles.removeColumn}>
-                  <Button
-                    icon={<RemoveIcon />}
-                    onClick={() => this.handleRelationRemove(rel)}
-                  />
                 </TableRowColumn>
               </TableRow>
             )}
