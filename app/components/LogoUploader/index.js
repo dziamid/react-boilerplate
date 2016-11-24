@@ -33,6 +33,7 @@ const deleteBtnStyle = {
 };
 
 export default class LogoUploader extends React.Component {
+  
   constructor(props) {
     super(props);
 
