@@ -79,8 +79,9 @@ function* destoySingleRelation(relation) {
 
 function* destroyRelation({ relation }) {
   const bucket = [relation];
+  const relations = yield select(selectors.relations());
+  const neighbor = getNeighborRelation(relations, relation);
 
-  const neighbor = yield getNeighborRelation(relation);
   if (neighbor) {
     bucket.push(neighbor);
   }
@@ -88,7 +89,7 @@ function* destroyRelation({ relation }) {
   yield bucket.map(r => destoySingleRelation(r));
 }
 
-function* updateSingleProximity(relation, proximity) {
+function* patchSingleProximity(relation, proximity) {
   yield call(patch, { url: `/jobTitleNeighbors/${relation.id}`, data: { proximity } });
   yield put(updateProximity(relation, proximity));
 }
@@ -96,17 +97,17 @@ function* updateSingleProximity(relation, proximity) {
 function* patchProximity({ relation, proximity }) {
   const bucket = [relation];
 
-  const neighbor = yield getNeighborRelation(relation);
+  const relations = yield select(selectors.relations());
+  const neighbor = getNeighborRelation(relations, relation);
+
   if (neighbor) {
     bucket.push(neighbor);
   }
 
-  yield bucket.map(r => updateSingleProximity(relation, proximity));
+  yield bucket.map(r => patchSingleProximity(r, proximity));
 }
 
-function* getNeighborRelation(relation) {
-  const relations = yield select(selectors.relations());
-
+function getNeighborRelation(relations, relation) {
   return relations.find(r => r.jobTitleId === relation.neighborId);
 }
 
