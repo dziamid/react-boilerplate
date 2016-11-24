@@ -42,11 +42,11 @@ injectTapEvent();
 
 const StoreProvider = React.createClass({
   propTypes: {
-    children: React.PropTypes.any.isRequired
+    children: React.PropTypes.any
   },
 
   childContextTypes: {
-    store: React.PropTypes.object
+    store: React.PropTypes.object.isRequired
   },
 
   getChildContext() {
