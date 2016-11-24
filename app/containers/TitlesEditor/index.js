@@ -17,6 +17,8 @@ import FilterResults from '../FilterResults';
 import FilterParams from '../FilterParams';
 import Paper from 'material-ui/Paper';
 import * as selectors from './selectors';
+import { DEFAULT_PROXIMITY } from 'mocks/proximities';
+
 import {
   patchSeniority,
   patchProximity,
@@ -38,7 +40,7 @@ export class TitlesEditor extends React.Component { // eslint-disable-line react
       patchProximity,
     } = this.props;
 
-    if (proximity === 5) {
+    if (proximity === DEFAULT_PROXIMITY) {
       destroyRelation(relation);
     } else if (relation.id === undefined) {
       createRelation({ ...relation, proximity });
@@ -75,7 +77,6 @@ export class TitlesEditor extends React.Component { // eslint-disable-line react
                   selectedTitle={this.props.selectedTitleId}
                   relations={this.props.relations}
                   onRowSelection={this.props.setSelectedTitle}
-                  onAddRelation={this.props.createRelation}
                 />
               </div>
             </Paper>

@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
 import { fromJS } from 'immutable';
 import { difference } from 'lodash';
+import { DEFAULT_PROXIMITY } from 'mocks/proximities';
 
 export const titles = () => (state) => state.getIn(['titlesEditorRoot', 'titles']);
 export const titlesTotal = () => createSelector(
@@ -41,7 +42,7 @@ export const selectedTitleRelations = () => createSelector(
     const createRelation = (title, neighbor) => ({
       jobTitleId: title.id,
       neighborId: neighbor.id,
-      proximity: 5,
+      proximity: DEFAULT_PROXIMITY,
     });
 
     const getRelation = (title) => {
