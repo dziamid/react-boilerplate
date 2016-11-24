@@ -21,22 +21,38 @@ export const selectedTitle = () => createSelector(
   }
 );
 
+/**
+ * Returns a list of jobTitleNeighbor objects
+ *
+ * jobTitleNeighbor objects embed a `name` property for simplicity
+ *
+ */
 export const selectedTitleRelations = () => createSelector(
   selectedTitle(),
   titles(),
   relations(),
-  (title, titles, relations) => {
-    if (!title) {
+  (selectedTitle, titles, relations) => {
+    if (!selectedTitle) {
       return [];
     }
 
-    const titleRelations = relations.filter(r => r.jobTitleId === title.id);
-    const relatedTitles = titleRelations.map(r => titles.find(t => t.id === r.neighborId));
+    const relatedTitles = titles.filter(t => t.id !== selectedTitle.id);
 
-    return titleRelations.map((r, i) => ({
-      ...r,
-      name: relatedTitles.get(i).name,
-    }));
+    const createRelation = (title, neightbor) => ({
+      jobTitleId: title.id,
+      neightborId: neightbor.id,
+      proximity: '1'
+    });
+
+    const getRelation = (title) => {
+      return relations.find(r => r.jobTitleId === title.id);
+    };
+
+    return relatedTitles.map(title => {
+      const relation = getRelation(title) || createRelation(selectedTitle, title);
+
+      return { ...relation, name: title.name };
+    })
   }
 );
 
