@@ -53,6 +53,6 @@ storiesOf('ChipInput', module)
     <ChipInput
       dataSource={countries.map(c => c.name)}
       label="Input countries"
-      freetextDisabled
+      noFreetext
     />
   ));

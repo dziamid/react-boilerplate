@@ -37,11 +37,14 @@ export class FilterParams extends Component { // eslint-disable-line react/prefe
             <Field
               name="category"
               component={Autocomplete}
-              dataSource={jobCategories.map(j => ({ text: j.name, value: j.id }))}
+              dataSource={jobCategories.map(c => ({ text: c.name, value: c.id }))}
+              onNewRequest={item => fetchSubCategories(item.value)}
+
               label={<FormattedMessage {...messages.category} />}
               className={styles.filterField}
-              onNewRequest={item => fetchSubCategories(item.value)}
               fullWidth
+              noFreetext
+              openOnFocus
             />
           </div>
 
@@ -54,6 +57,8 @@ export class FilterParams extends Component { // eslint-disable-line react/prefe
               className={styles.filterField}
               onNewRequest={item => fetchTitles(item.value)}
               fullWidth
+              noFreetext
+              openOnFocus
             />
           </div>
 
@@ -99,15 +104,5 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-const validate = (values) => {
-  const errors = {};
-
-  if (!values.get('field1')) {
-    errors.field1 = 'Required';
-  }
-
-  return errors;
-};
-
-const form = reduxForm({ form: 'FilterParams', validate })(FilterParams);
+const form = reduxForm({ form: 'FilterParams' })(FilterParams);
 export default connect(mapStateToProps, mapDispatchToProps)(form);

@@ -14,7 +14,7 @@ export default class ChipInput extends Component {
       },
     },
     filter: filters.caseInsensitiveFilter,
-    freetextDisabled: false,
+    noFreetext: false,
     fullWidth: true,
   };
 
@@ -32,7 +32,7 @@ export default class ChipInput extends Component {
   }
 
   handleRequestAdd(chip) {
-    if (this.props.freetextDisabled && !this.isChipInSource(chip)) {
+    if (this.props.noFreetext && !this.isChipInSource(chip)) {
       return;
     }
 
@@ -58,7 +58,7 @@ export default class ChipInput extends Component {
       },
       meta, // eslint-disable-line no-unused-vars
       label,
-      freetextDisabled, // eslint-disable-line no-unused-vars
+      noFreetext, // eslint-disable-line no-unused-vars
       ...otherProps,
 
     } = this.props;
