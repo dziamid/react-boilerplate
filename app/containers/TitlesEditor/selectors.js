@@ -38,10 +38,10 @@ export const selectedTitleRelations = () => createSelector(
 
     const relatedTitles = titles.filter(t => t.id !== selectedTitle.id);
 
-    const createRelation = (title, neightbor) => ({
+    const createRelation = (title, neighbor) => ({
       jobTitleId: title.id,
-      neightborId: neightbor.id,
-      proximity: '1'
+      neighborId: neighbor.id,
+      proximity: 5,
     });
 
     const getRelation = (title) => {
@@ -52,7 +52,7 @@ export const selectedTitleRelations = () => createSelector(
       const relation = getRelation(title) || createRelation(selectedTitle, title);
 
       return { ...relation, name: title.name };
-    })
+    });
   }
 );
 

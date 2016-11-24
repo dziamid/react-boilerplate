@@ -59,16 +59,16 @@ function* patchSeniority(action) {
   yield put(updateSeniority(title, seniority));
 }
 
-function* createSingleRelation(action) {
-  yield call(post, { url: '/jobTitleNeighbors', data: action }, addRelation);
+function* createSingleRelation(data) {
+  yield call(post, { url: '/jobTitleNeighbors', data }, addRelation);
 }
 
-function* createRelation({ jobTitleId, neighborId, proximity }) {
-  const rel = { jobTitleId, neighborId, proximity };
-  const oppositeRel = { jobTitleId: neighborId, neighborId: jobTitleId, proximity };
+function* createRelation({ relation }) {
+  const { jobTitleId, neighborId, proximity } = relation;
+  const neighbor = { jobTitleId: neighborId, neighborId: jobTitleId, proximity };
   yield [
-    createSingleRelation(rel),
-    createSingleRelation(oppositeRel),
+    createSingleRelation(relation),
+    createSingleRelation(neighbor),
   ];
 }
 

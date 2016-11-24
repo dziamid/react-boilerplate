@@ -77,11 +77,10 @@ export function filterResults(filterText) {
   };
 }
 
-export function createRelation(jobTitleId, neighborId) {
+export function createRelation(relation) {
   return {
     type: CREATE_RELATION,
-    jobTitleId,
-    neighborId,
+    relation,
   };
 }
 

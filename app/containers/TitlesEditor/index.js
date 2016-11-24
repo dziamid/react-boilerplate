@@ -25,8 +25,28 @@ import {
   createRelation,
 } from './actions';
 
-
 export class TitlesEditor extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  constructor() {
+    super();
+    this.handleProximityChange = this.handleProximityChange.bind(this);
+  }
+
+  handleProximityChange(relation, proximity) {
+    const {
+      createRelation,
+      destroyRelation,
+      patchProximity,
+    } = this.props;
+
+    if (proximity === 5) {
+      destroyRelation(relation);
+    } else if (relation.id === undefined) {
+      createRelation({ ...relation, proximity });
+    } else {
+      patchProximity(relation, proximity);
+    }
+  }
+
   render() {
     const {
       selectedTitle,
@@ -70,7 +90,7 @@ export class TitlesEditor extends React.Component { // eslint-disable-line react
                   title={selectedTitle || {}}
                   relations={selectedTitleRelations}
                   onSeniorityChange={this.props.patchSeniority}
-                  onProximityChange={this.props.patchProximity}
+                  onProximityChange={this.handleProximityChange}
                   onRelationRemove={this.props.destroyRelation}
                 />
               </div>
