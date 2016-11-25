@@ -8,7 +8,7 @@ import config from 'config';
 import AWSUpload from './getSignedUrl';
 
 
-const dropzoneStyle = {
+const dropzoneStyle = { // todo: styles.css
   position: 'relative',
   height: '114px',
   width: '114px',
@@ -39,8 +39,8 @@ export default class LogoUploader extends React.Component {
 
   static defaultProps = {
     input: {
-      onChange: () => {}
-    }
+      onChange: () => {},
+    },
   };
 
   constructor(props) {
@@ -64,7 +64,7 @@ export default class LogoUploader extends React.Component {
     const options = {
       headers: {
         'Content-type': uploadedFile.type,
-      }
+      },
     };
 
     const imgUrl = `${bucketUrl}/${uploadedFile.name}`;
@@ -73,7 +73,7 @@ export default class LogoUploader extends React.Component {
     await Axios.put(signedUrl, uploadedFile, options);
   }
 
-  onDeleteImg(index) {
+  handleDeleteImg(index) {
     this.setState({
       uploadedFiles: this.state.uploadedFiles.filter((f, i) => i !== index),
     });
@@ -82,7 +82,6 @@ export default class LogoUploader extends React.Component {
   }
 
   render() {
-
     const displayUploader = this.props.multiple === false && this.state.uploadedFiles.length === 1;
 
     const displayPreviewZone = this.state.uploadedFiles.length > 0;
@@ -103,7 +102,7 @@ export default class LogoUploader extends React.Component {
       <div>
         {this.state.uploadedFiles.map((item, index) =>
           <div key={index} className={styles.logo_container}>
-            <ContentClear style={deleteBtnStyle} onClick={() => this.onDeleteImg(index)} />
+            <ContentClear style={deleteBtnStyle} onClick={() => this.handleDeleteImg(index)} />
             <div className={styles.logo}>
               <img className={styles.logo_img} src={item.preview} alt="img" />
             </div>

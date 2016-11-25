@@ -14,18 +14,16 @@ export default {
         Bucket: config.bucketName,
         Key: filename,
         Expires: 60,
-        ContentType: filetype
+        ContentType: filetype,
       };
 
-      s3.getSignedUrl('putObject', params, function(err, data) {
+      s3.getSignedUrl('putObject', params, (err, data) => {
         if (err) {
-          console.log('error', err);
-          reject(error);
+          reject(err);
         } else {
-          console.log('data', data);
           resolve(data);
         }
       });
-    })
-  }
+    });
+  },
 };
