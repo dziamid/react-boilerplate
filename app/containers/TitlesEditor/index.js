@@ -113,7 +113,7 @@ export class TitlesEditor extends React.Component { // eslint-disable-line react
 
 const mapStateToProps = (state) => ({
   selectedTitle: selectors.selectedTitle()(state),
-  selectedTitleRelations: selectors.selectedTitleRelations()(state),
+  selectedTitleRelations: selectors.selectedTitleRelationsSorted()(state),
   filteredTitles: selectors.filteredTitles()(state),
   titlesTotal: selectors.titlesTotal()(state),
   selectedTitleId: selectors.selectedTitleId()(state),

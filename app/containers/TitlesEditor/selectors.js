@@ -1,6 +1,8 @@
 import { createSelector } from 'reselect';
 import { fromJS } from 'immutable';
 import { difference } from 'lodash';
+import { strings, numbers, seq } from 'utils/sort';
+
 import { DEFAULT_PROXIMITY } from 'mocks/proximities';
 
 export const titles = () => (state) => state.getIn(['titlesEditorRoot', 'titles']);
@@ -23,6 +25,23 @@ export const selectedTitle = () => createSelector(
     return titles.find(t => t.id === selectedTitleId);
   }
 );
+
+export const filteredTitles = () => createSelector(
+  titles(),
+  titleFilter(),
+  (titles, titleFilter) => {
+    return titles
+      .filter(t => t.name.toLowerCase().includes((titleFilter || '').trim()))
+      .sort((a, b) => strings(a.name, b.name));
+  });
+
+export const filteredRelatedTitles = () => createSelector(
+  titles(),
+  relatedTitlesFilter(),
+  (titles, titleFilter) => {
+    return titles.filter(t => t.name.toLowerCase().includes((titleFilter || '').trim()));
+  });
+
 
 /**
  * Returns a list of jobTitleNeighbor objects
@@ -51,25 +70,23 @@ export const selectedTitleRelations = () => createSelector(
       return relations.find(r => r.jobTitleId === title.id);
     };
 
-    return relatedTitles.map(title => {
-      const relation = getRelation(title) || createRelation(selectedTitle, title);
+    return relatedTitles
+      .map(title => {
+        const relation = getRelation(title) || createRelation(selectedTitle, title);
 
-      return { ...relation, name: title.name };
-    });
+        return { ...relation, name: title.name };
+      });
   }
 );
 
-export const filteredTitles = () => createSelector(
-  titles(),
-  titleFilter(),
-  (titles, titleFilter) => {
-    return titles.filter(t => t.name.toLowerCase().includes((titleFilter || '').trim()));
-  });
 
-export const filteredRelatedTitles = () => createSelector(
-  titles(),
-  relatedTitlesFilter(),
-  (titles, titleFilter) => {
-    return titles.filter(t => t.name.toLowerCase().includes((titleFilter || '').trim()));
-  });
+export const selectedTitleRelationsSorted = () => createSelector(
+  selectedTitleRelations(),
+  (relations) => {
 
+    const byProximity = (a, b) => -numbers(a.proximity, b.proximity);
+    const byTitle = (a, b) => strings(a.name, b.name);
+
+    return relations.sort(seq(byProximity, byTitle));
+  }
+);
