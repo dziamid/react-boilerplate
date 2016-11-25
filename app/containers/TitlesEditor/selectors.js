@@ -67,7 +67,7 @@ export const selectedTitleRelations = () => createSelector(
     });
 
     const getRelation = (title) => {
-      return relations.find(r => r.jobTitleId === title.id);
+      return relations.find(r => r.jobTitleId === title.id && r.neighborId === selectedTitle.id);
     };
 
     return relatedTitles
@@ -83,7 +83,6 @@ export const selectedTitleRelations = () => createSelector(
 export const selectedTitleRelationsSorted = () => createSelector(
   selectedTitleRelations(),
   (relations) => {
-
     const byProximity = (a, b) => -numbers(a.proximity, b.proximity);
     const byTitle = (a, b) => strings(a.name, b.name);
 

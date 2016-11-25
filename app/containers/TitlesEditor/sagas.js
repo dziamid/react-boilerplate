@@ -66,10 +66,8 @@ function* createSingleRelation(data) {
 function* createRelation({ relation }) {
   const { jobTitleId, neighborId, proximity } = relation;
   const neighbor = { jobTitleId: neighborId, neighborId: jobTitleId, proximity };
-  yield [
-    createSingleRelation(relation),
-    createSingleRelation(neighbor),
-  ];
+
+  yield [relation, neighbor].map(createSingleRelation);
 }
 
 function* destoySingleRelation(relation) {
@@ -78,15 +76,13 @@ function* destoySingleRelation(relation) {
 }
 
 function* destroyRelation({ relation }) {
-  const bucket = [relation];
   const relations = yield select(selectors.relations());
   const neighbor = getNeighborRelation(relations, relation);
 
-  if (neighbor) {
-    bucket.push(neighbor);
+  if (!neighbor) {
+    throw new Error(`Could not find neighbor relation for jobTitleNeighbor.id = ${relation.id}`);
   }
-
-  yield bucket.map(r => destoySingleRelation(r));
+  yield [relation, neighbor].map(r => destoySingleRelation(r));
 }
 
 function* patchSingleProximity(relation, proximity) {
@@ -95,16 +91,14 @@ function* patchSingleProximity(relation, proximity) {
 }
 
 function* patchProximity({ relation, proximity }) {
-  const bucket = [relation];
-
   const relations = yield select(selectors.relations());
   const neighbor = getNeighborRelation(relations, relation);
 
-  if (neighbor) {
-    bucket.push(neighbor);
+  if (!neighbor) {
+    throw new Error(`Could not find neighbor relation for jobTitleNeighbor.id = ${relation.id}`);
   }
 
-  yield bucket.map(r => patchSingleProximity(r, proximity));
+  yield [relation, neighbor].map(r => patchSingleProximity(r, proximity));
 }
 
 function getNeighborRelation(relations, relation) {
