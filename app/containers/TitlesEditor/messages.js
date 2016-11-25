@@ -8,11 +8,11 @@ import startCase from 'lodash/startCase';
 
 const messages = {};
 
-['searchTitles', 'editSeniorityAndRelations'].map(t => messages[t] =
-{
-  id: `app.containers.TitlesEditor.${t}`,
-  defaultMessage: startCase(t),
-}
-);
+['searchTitles', 'editSeniorityAndRelations'].forEach(t => {
+  messages[t] = {
+    id: `app.containers.TitlesEditor.${t}`,
+    defaultMessage: startCase(t),
+  };
+});
 
 export default defineMessages(messages);
