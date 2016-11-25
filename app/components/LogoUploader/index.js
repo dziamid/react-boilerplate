@@ -1,8 +1,11 @@
 import React from 'react';
 import Dropzone from 'react-dropzone';
+import Axios from 'axios';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import ContentClear from 'material-ui/svg-icons/content/clear';
 import styles from './styles.css';
+import config from 'config';
+import AWSUpload from './getSignedUrl';
 
 
 const dropzoneStyle = {
@@ -33,35 +36,60 @@ const deleteBtnStyle = {
 };
 
 export default class LogoUploader extends React.Component {
-  
+
+  static defaultProps = {
+    input: {
+      onChange: () => {}
+    }
+  };
+
   constructor(props) {
     super(props);
 
     this.state = {
       uploadedFiles: [],
     };
+
+    this.handleImageDrop = this.handleImageDrop.bind(this);
   }
 
-  onImageDrop(file) {
+  async handleImageDrop(file) {
     this.setState({
       uploadedFiles: this.state.uploadedFiles.concat(file),
     });
+
+    const bucketUrl = `https://${config.bucketName}.s3.amazonaws.com`;
+    const uploadedFile = file[0];
+
+    const options = {
+      headers: {
+        'Content-type': uploadedFile.type,
+      }
+    };
+
+    const imgUrl = `${bucketUrl}/${uploadedFile.name}`;
+    this.props.input.onChange(imgUrl);
+    const signedUrl = await AWSUpload.sign(uploadedFile.name, uploadedFile.type);
+    await Axios.put(signedUrl, uploadedFile, options);
   }
 
   onDeleteImg(index) {
     this.setState({
       uploadedFiles: this.state.uploadedFiles.filter((f, i) => i !== index),
     });
+
+    this.props.input.onChange(null);
   }
 
   render() {
+
     const displayUploader = this.props.multiple === false && this.state.uploadedFiles.length === 1;
 
     const displayPreviewZone = this.state.uploadedFiles.length > 0;
 
     const uploader = (
       <div className={styles.drop}>
-        <Dropzone style={dropzoneStyle} multiple={false} accept="image/*" onDrop={file => this.onImageDrop(file)}>
+        <Dropzone style={dropzoneStyle} multiple={false} accept="image/*" onDrop={this.handleImageDrop}>
           <ContentAdd style={addBtnStyle} />
         </Dropzone>
         <div className={styles.upload_info}>
@@ -87,7 +115,7 @@ export default class LogoUploader extends React.Component {
     return (
       <div className={styles.wrapper}>
         <div className={styles.label}>
-          <p className={styles.label_text}>Logo <span className={styles.label_green}>optional</span></p>
+          <p className={styles.label_text}>Logo <span className={styles.label_grey}>optional</span></p>
         </div>
         {displayUploader ? null : uploader}
         {displayPreviewZone ? previewZone : null}

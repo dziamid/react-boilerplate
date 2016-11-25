@@ -141,7 +141,7 @@ class SampleForm extends Component {
           </div>
           <div>
             <Field
-              name="logoUploader"
+              name="logoUrl"
               component={LogoUploader}
             />
           </div>
