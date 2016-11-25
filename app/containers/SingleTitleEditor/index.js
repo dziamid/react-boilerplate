@@ -15,6 +15,8 @@ import proximities from 'mocks/proximities';
 import MUISelectField from 'material-ui/SelectField';
 import { difference, compact } from 'lodash';
 import { List } from 'immutable';
+import FilterParams from '../FilterParams';
+
 
 import {
   Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn,
@@ -79,6 +81,11 @@ export default class SingleTitleEditor extends Component {
             </H3>
           </div>
         </div>
+        <FilterParams
+          form="SingleTitleEditor"
+          fields={['title']}
+        />
+
         <Table selectable={false}>
           <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
             <TableRow>

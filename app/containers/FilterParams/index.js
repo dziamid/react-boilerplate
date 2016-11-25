@@ -19,61 +19,65 @@ import { fetchSubCategories, fetchTitles, filterResults } from 'containers/Title
 import { jobCategories } from './mocks';
 
 export class FilterParams extends Component { // eslint-disable-line react/prefer-stateless-function
+  static defaultProps = {
+    fields: ['title', 'category', 'subCategory'],
+  };
+
   render() {
     const {
-      categories,
       subCategories,
       loading,
       error,
       fetchSubCategories,
       fetchTitles,
-      filterResults,
     } = this.props;
 
     return (
       <div className={styles.paper}>
         <div className={styles.FilterParams}>
-          <div className={styles.formRow}>
-            <Field
-              name="category"
-              component={Autocomplete}
-              dataSource={jobCategories.map(c => ({ text: c.name, value: c.id }))}
-              onNewRequest={item => fetchSubCategories(item.value)}
+          {this.props.fields.indexOf('category') !== -1 ?
+            <div className={styles.formRow}>
+              <Field
+                name="category"
+                component={Autocomplete}
+                dataSource={jobCategories.map(c => ({ text: c.name, value: c.id }))}
+                onNewRequest={item => fetchSubCategories(item.value)}
 
-              label={<FormattedMessage {...messages.category} />}
-              className={styles.filterField}
-              fullWidth
-              noFreetext
-              openOnFocus
-            />
-          </div>
+                label={<FormattedMessage {...messages.category} />}
+                className={styles.filterField}
+                fullWidth
+                noFreetext
+                openOnFocus
+              />
+            </div>
+            : null }
 
-          <div className={styles.formRow}>
-            <Field
-              name="subCategory"
-              component={Autocomplete}
-              dataSource={subCategories.map(s => ({ text: s.name, value: s.id }))}
-              label={<FormattedMessage {...messages.subCategory} />}
-              className={styles.filterField}
-              onNewRequest={item => fetchTitles(item.value)}
-              fullWidth
-              noFreetext
-              openOnFocus
-            />
-          </div>
+          {this.props.fields.indexOf('subCategory') !== -1 ?
+            <div className={styles.formRow}>
+              <Field
+                name="subCategory"
+                component={Autocomplete}
+                dataSource={subCategories.map(s => ({ text: s.name, value: s.id }))}
+                label={<FormattedMessage {...messages.subCategory} />}
+                className={styles.filterField}
+                onNewRequest={item => fetchTitles(item.value)}
+                fullWidth
+                noFreetext
+                openOnFocus
+              />
+            </div>
+            : null }
 
-          <div className={styles.formRow}>
-            <Field
-              name="filter"
-              component={TextField}
-              label={<FormattedMessage {...messages.filter} />}
-              className={styles.filterField}
-            />
-          </div>
-          <span style={{ position: 'absolute', background: 'yellow' }}>
-            {loading ? 'loading...' : ''}
-            {error ? 'error!' : ''}
-          </span>
+          {this.props.fields.indexOf('title') !== -1 ?
+            <div className={styles.formRow}>
+              <Field
+                name="title"
+                component={TextField}
+                label={<FormattedMessage {...messages.filter} />}
+                className={styles.filterField}
+              />
+            </div>
+            : null }
 
         </div>
       </div>
@@ -92,8 +96,6 @@ FilterParams.propTypes = {
 const mapStateToProps = (state) => ({
   categories: state.getIn(['titlesEditorRoot', 'categories']),
   subCategories: state.getIn(['titlesEditorRoot', 'subCategories']),
-  loading: state.getIn(['titlesEditorRoot', 'loading']),
-  error: state.getIn(['titlesEditorRoot', 'error']),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -104,5 +106,5 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-const form = reduxForm({ form: 'FilterParams' })(FilterParams);
+const form = reduxForm()(FilterParams);
 export default connect(mapStateToProps, mapDispatchToProps)(form);

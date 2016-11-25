@@ -18,6 +18,7 @@ import FilterParams from '../FilterParams';
 import Paper from 'material-ui/Paper';
 import * as selectors from './selectors';
 import { DEFAULT_PROXIMITY } from 'mocks/proximities';
+import Spinner from 'material-ui/svg-icons/action/autorenew';
 
 import {
   patchSeniority,
@@ -53,6 +54,8 @@ export class TitlesEditor extends React.Component { // eslint-disable-line react
     const {
       selectedTitle,
       selectedTitleRelations,
+      loading,
+      error,
     } = this.props;
 
     return (
@@ -67,10 +70,15 @@ export class TitlesEditor extends React.Component { // eslint-disable-line react
           <div className={styles.pageColumn}>
             <H3>
               <FormattedMessage {...messages.searchTitles} />
+              <span style={{ position: 'absolute' }}>
+                {loading ? <Spinner className={styles.spinner} /> : null}
+                {error ? 'error!' : null}
+              </span>
+
             </H3>
             <Paper className={styles.paper} zDepth={1}>
               <div className={styles.paperWrapper}>
-                <FilterParams />
+                <FilterParams form="TitleEditor" />
                 <FilterResults
                   results={this.props.results}
                   titlesTotal={this.props.titlesTotal}
@@ -110,6 +118,8 @@ const mapStateToProps = (state) => ({
   titlesTotal: selectors.titlesTotal()(state),
   selectedTitleId: selectors.selectedTitleId()(state),
   relations: selectors.relations()(state),
+  loading: state.getIn(['titlesEditorRoot', 'loading']),
+  error: state.getIn(['titlesEditorRoot', 'error']),
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({

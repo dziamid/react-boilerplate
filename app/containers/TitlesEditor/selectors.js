@@ -9,7 +9,7 @@ export const titlesTotal = () => createSelector(
   (titles) => titles.size
 );
 
-export const query = () => (state) => state.getIn(['form', 'FilterParams', 'values', 'filter']); // todo: why separate state root? use titlesEditorRoot.filterParams
+export const query = () => (state) => state.getIn(['form', 'TitleEditor', 'values', 'title']);
 export const selectedSubCategory = () => (state) => state.getIn(['titlesEditorRoot', 'selectedSubCategory']);
 export const relations = () => (state) => state.getIn(['titlesEditorRoot', 'relations']);
 
