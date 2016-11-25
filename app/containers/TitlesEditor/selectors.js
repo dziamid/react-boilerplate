@@ -9,7 +9,9 @@ export const titlesTotal = () => createSelector(
   (titles) => titles.size
 );
 
-export const query = () => (state) => state.getIn(['form', 'TitleEditor', 'values', 'title']);
+export const titleFilter = () => (state) => state.getIn(['form', 'TitleEditor', 'values', 'title']);
+export const relatedTitlesFilter = () => (state) => state.getIn(['form', 'SingleTitleEditor', 'values', 'title']);
+
 export const selectedSubCategory = () => (state) => state.getIn(['titlesEditorRoot', 'selectedSubCategory']);
 export const relations = () => (state) => state.getIn(['titlesEditorRoot', 'relations']);
 
@@ -30,7 +32,7 @@ export const selectedTitle = () => createSelector(
  */
 export const selectedTitleRelations = () => createSelector(
   selectedTitle(),
-  titles(),
+  filteredRelatedTitles(),
   relations(),
   (selectedTitle, titles, relations) => {
     if (!selectedTitle) {
@@ -57,9 +59,17 @@ export const selectedTitleRelations = () => createSelector(
   }
 );
 
-export const results = () => createSelector(
+export const filteredTitles = () => createSelector(
   titles(),
-  query(),
-  (titles, query) => {
-    return titles.filter(t => t.name.toLowerCase().includes((query || '').trim()));
+  titleFilter(),
+  (titles, titleFilter) => {
+    return titles.filter(t => t.name.toLowerCase().includes((titleFilter || '').trim()));
   });
+
+export const filteredRelatedTitles = () => createSelector(
+  titles(),
+  relatedTitlesFilter(),
+  (titles, titleFilter) => {
+    return titles.filter(t => t.name.toLowerCase().includes((titleFilter || '').trim()));
+  });
+

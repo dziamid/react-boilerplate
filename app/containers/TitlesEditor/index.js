@@ -80,7 +80,7 @@ export class TitlesEditor extends React.Component { // eslint-disable-line react
               <div className={styles.paperWrapper}>
                 <FilterParams form="TitleEditor" />
                 <FilterResults
-                  results={this.props.results}
+                  results={this.props.filteredTitles}
                   titlesTotal={this.props.titlesTotal}
                   selectedTitle={this.props.selectedTitleId}
                   relations={this.props.relations}
@@ -114,7 +114,7 @@ export class TitlesEditor extends React.Component { // eslint-disable-line react
 const mapStateToProps = (state) => ({
   selectedTitle: selectors.selectedTitle()(state),
   selectedTitleRelations: selectors.selectedTitleRelations()(state),
-  results: selectors.results()(state),
+  filteredTitles: selectors.filteredTitles()(state),
   titlesTotal: selectors.titlesTotal()(state),
   selectedTitleId: selectors.selectedTitleId()(state),
   relations: selectors.relations()(state),
