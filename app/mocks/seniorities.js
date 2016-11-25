@@ -1,7 +1,7 @@
 export default [
-  { name: 'Senior Management', value: 1 },
-  { name: 'Middle Management', value: 2 },
+  { name: 'Entry/Junior Level', value: 1 },
+  { name: 'Experienced/Intermediate Level', value: 2 },
   { name: 'Managers and Senior Technical Professionals', value: 3 },
-  { name: 'Experienced/Intermediate Level', value: 4 },
-  { name: 'Entry/Junior Level', value: 5 },
+  { name: 'Middle Management', value: 4 },
+  { name: 'Senior Management', value: 5 },
 ];
