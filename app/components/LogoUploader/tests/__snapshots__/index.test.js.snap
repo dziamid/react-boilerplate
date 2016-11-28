@@ -1,0 +1,55 @@
+exports[`<LogoUploader /> should render LogoUploader with icon 1`] = `
+<div>
+  <div>
+    <p>
+      Logo 
+      <span>
+        optional
+      </span>
+    </p>
+  </div>
+  <div>
+    <Dropzone
+      accept="image/jpeg,image/png"
+      disableClick={false}
+      disablePreview={false}
+      maxSize={Infinity}
+      minSize={0}
+      multiple={false}
+      onDrop={[Function]}
+      style={
+        Object {
+          "border": "1px dashed #1ac5c0",
+          "cursor": "pointer",
+          "height": "114px",
+          "position": "relative",
+          "width": "114px",
+        }
+      }>
+      <ContentAdd
+        style={
+          Object {
+            "color": "#1ac5c0",
+            "height": 48,
+            "left": "33px",
+            "position": "absolute",
+            "top": "33px",
+            "width": 48,
+          }
+        } />
+    </Dropzone>
+    <div>
+      <h4>
+         Drop or 
+        <span>
+          Select
+        </span>
+         File to Upload
+      </h4>
+      <p>
+        Only .jpg, .jpeg or .png files allowed, no size limit.
+      </p>
+    </div>
+  </div>
+</div>
+`;

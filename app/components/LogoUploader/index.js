@@ -54,6 +54,10 @@ export default class LogoUploader extends React.Component {
   }
 
   async handleImageDrop(file) {
+    if (file.length === 0) {
+      return; // invalid file case
+    }
+
     this.setState({
       uploadedFiles: this.state.uploadedFiles.concat(file),
     });
@@ -61,26 +65,21 @@ export default class LogoUploader extends React.Component {
 
     const uploadedFile = file[0];
 
-    if(uploadedFile){
+    const options = {
+      headers: {
+        'Content-type': uploadedFile.type,
+      },
+    };
 
-      const options = {
-        headers: {
-          'Content-type': uploadedFile.type,
-        },
-      };
-      
-      const fileName = `${String(+new Date()) + uploadedFile.name}`;
+    const fileName = `${String(+new Date()) + uploadedFile.name}`;
 
-      const imgUrl = `${bucketUrl}/${fileName}`;
+    const imgUrl = `${bucketUrl}/${fileName}`;
 
-      this.props.input.onChange(imgUrl);
+    this.props.input.onChange(imgUrl);
 
-      const signedUrl = await AWSUpload.sign(fileName, uploadedFile.type);
+    const signedUrl = await AWSUpload.sign(fileName, uploadedFile.type);
 
-      await Axios.put(signedUrl, uploadedFile, options);
-    }
-
-
+    await Axios.put(signedUrl, uploadedFile, options);
   }
 
   handleDeleteImg(index) {
@@ -108,6 +107,7 @@ export default class LogoUploader extends React.Component {
       </div>
     );
 
+    
     const previewZone = (
       <div>
         {this.state.uploadedFiles.map((item, index) =>
