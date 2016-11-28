@@ -8,7 +8,7 @@ import config from 'config';
 import AWSUpload from './getSignedUrl';
 
 
-const dropzoneStyle = { // todo: styles.css
+const dropzoneStyle = {
   position: 'relative',
   height: '114px',
   width: '114px',
@@ -57,20 +57,30 @@ export default class LogoUploader extends React.Component {
     this.setState({
       uploadedFiles: this.state.uploadedFiles.concat(file),
     });
-
     const bucketUrl = `https://${config.bucketName}.s3.amazonaws.com`;
+
     const uploadedFile = file[0];
 
-    const options = {
-      headers: {
-        'Content-type': uploadedFile.type,
-      },
-    };
+    if(uploadedFile){
 
-    const imgUrl = `${bucketUrl}/${uploadedFile.name}`;
-    this.props.input.onChange(imgUrl);
-    const signedUrl = await AWSUpload.sign(uploadedFile.name, uploadedFile.type);
-    await Axios.put(signedUrl, uploadedFile, options);
+      const options = {
+        headers: {
+          'Content-type': uploadedFile.type,
+        },
+      };
+      
+      const fileName = `${String(+new Date()) + uploadedFile.name}`;
+
+      const imgUrl = `${bucketUrl}/${fileName}`;
+
+      this.props.input.onChange(imgUrl);
+
+      const signedUrl = await AWSUpload.sign(fileName, uploadedFile.type);
+
+      await Axios.put(signedUrl, uploadedFile, options);
+    }
+
+
   }
 
   handleDeleteImg(index) {
@@ -88,7 +98,7 @@ export default class LogoUploader extends React.Component {
 
     const uploader = (
       <div className={styles.drop}>
-        <Dropzone style={dropzoneStyle} multiple={false} accept="image/*" onDrop={this.handleImageDrop}>
+        <Dropzone style={dropzoneStyle} multiple={false} accept="image/jpeg,image/png" onDrop={this.handleImageDrop}>
           <ContentAdd style={addBtnStyle} />
         </Dropzone>
         <div className={styles.upload_info}>
