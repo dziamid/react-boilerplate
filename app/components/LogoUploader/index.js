@@ -6,16 +6,7 @@ import ContentClear from 'material-ui/svg-icons/content/clear';
 import styles from './styles.css';
 import config from 'config';
 import AWSUpload from './getSignedUrl';
-
-
-const dropzoneStyle = {
-  position: 'relative',
-  height: '114px',
-  width: '114px',
-  border: '1px dashed #1ac5c0',
-  cursor: 'pointer',
-};
-
+xe
 const addBtnStyle = {
   width: 48,
   height: 48,
@@ -97,7 +88,7 @@ export default class LogoUploader extends React.Component {
 
     const uploader = (
       <div className={styles.drop}>
-        <Dropzone style={dropzoneStyle} multiple={false} accept="image/jpeg,image/png" onDrop={this.handleImageDrop}>
+        <Dropzone className={styles.dz} activeClassName={styles.dz_active} multiple={false} accept="image/jpeg,image/png" onDrop={this.handleImageDrop}>
           <ContentAdd style={addBtnStyle} />
         </Dropzone>
         <div className={styles.upload_info}>
@@ -107,7 +98,7 @@ export default class LogoUploader extends React.Component {
       </div>
     );
 
-    
+
     const previewZone = (
       <div>
         {this.state.uploadedFiles.map((item, index) =>

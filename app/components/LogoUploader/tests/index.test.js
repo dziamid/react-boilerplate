@@ -16,3 +16,4 @@ describe('<LogoUploader />', () => {
     expect(shallowToJson(wrapper)).toMatchSnapshot();
   });
 });
+
