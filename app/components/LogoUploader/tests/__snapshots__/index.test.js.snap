@@ -16,16 +16,7 @@ exports[`<LogoUploader /> should render LogoUploader with icon 1`] = `
       maxSize={Infinity}
       minSize={0}
       multiple={false}
-      onDrop={[Function]}
-      style={
-        Object {
-          "border": "1px dashed #1ac5c0",
-          "cursor": "pointer",
-          "height": "114px",
-          "position": "relative",
-          "width": "114px",
-        }
-      }>
+      onDrop={[Function]}>
       <ContentAdd
         style={
           Object {

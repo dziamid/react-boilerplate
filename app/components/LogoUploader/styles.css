@@ -11,12 +11,12 @@ body {
   position: relative;
   height: 114px;
   width: 114px;
-  border: 1px dashed #1ac5c0;
+  border: 1px dashed #1AC5C0;
   cursor: pointer;
 }
 
 .dz_active {
-  border: 1px solid #1ac5c0;
+  border: 1px solid #1AC5C0;
 }
 
 .label_text {

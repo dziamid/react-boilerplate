@@ -6,7 +6,7 @@ import ContentClear from 'material-ui/svg-icons/content/clear';
 import styles from './styles.css';
 import config from 'config';
 import AWSUpload from './getSignedUrl';
-xe
+
 const addBtnStyle = {
   width: 48,
   height: 48,
