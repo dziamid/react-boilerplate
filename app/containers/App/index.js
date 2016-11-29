@@ -44,6 +44,7 @@ function App(props) {
           <Img className={styles.logo} src={Banner} alt="react-boilerplate - Logo" />
         </A>
         {React.Children.toArray(props.children)}
+
         <Footer />
         <Toastr />
       </div>
