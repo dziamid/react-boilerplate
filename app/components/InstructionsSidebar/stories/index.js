@@ -4,7 +4,7 @@ import InstructionSidebar from '../index';
 
 const listStyle = { padding: '0 0 15px', fontFamily: '"Lato", sans-serif', fontSize: '13px', fontWeight: 300, lineHeight: '17px', color: '#1F768A', letterSpacing: 0 };
 const ulStyle = { listStyle: 'none', padding: 0, margin: 0, width: '230px' };
-const footerInfo = {
+const summary = {
   position: 'Senior UX/UI Designer',
   company: 'Airbnb HQ - San-Francisco',
   workflow: 'Hiring Workflow 1',
@@ -25,5 +25,5 @@ storiesOf('InstructionSidebar', module)
     <InstructionSidebar body={body} />
   ))
   .add('with footer', () => (
-    <InstructionSidebar body={body} footer footerInfo={footerInfo} />
+    <InstructionSidebar body={body} summary={summary} />
   ));
