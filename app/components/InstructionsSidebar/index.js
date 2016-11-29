@@ -15,9 +15,9 @@ export default class InstructionsSidebar extends React.Component {
         fontFamily: '"Lato", sans-serif',
         fontSize: '13px',
         lineHeight: '11px',
-        padding: '0 0 30px'
+        padding: '0 0 30px',
       },
-      container: {display: 'flex', flexDirection: 'column', alignItems: 'flex-start', padding: '0 0 0 20px'},
+      container: { display: 'flex', flexDirection: 'column', alignItems: 'flex-start', padding: '0 0 0 20px' },
       title: {
         display: 'inline-block',
         fontSize: '13px',
@@ -25,11 +25,11 @@ export default class InstructionsSidebar extends React.Component {
         color: '#1f768a',
         fontWeight: 400,
         margin: '15px 0 20px',
-        lineHeight: '11px'
+        lineHeight: '11px',
       },
-      ul: {listStyle: 'none', padding: 0, margin: 0, width: '200px'},
-      liBold: {color: '#757575', fontWeight: 400, margin: '0 0 15px'},
-      li: {color: '#757575', fontWeight: 300, margin: '0 0 15px'},
+      ul: { listStyle: 'none', padding: 0, margin: 0, width: '200px' },
+      liBold: { color: '#757575', fontWeight: 400, margin: '0 0 15px' },
+      li: { color: '#757575', fontWeight: 300, margin: '0 0 15px' },
     };
 
 
@@ -51,7 +51,7 @@ export default class InstructionsSidebar extends React.Component {
       <div className={styles.wrapper}>
         <div className={containerStyle}>
           <div>
-            <img className={iconStyle} src={placeholder} alt="icon"/>
+            <img className={iconStyle} src={placeholder} alt="icon" />
           </div>
           <div className={styles.container_bot}>
             <h1 className={titleStyle}>{titleText}</h1>
