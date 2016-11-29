@@ -24,9 +24,9 @@ export default class InstructionsSidebar extends React.Component {
         <div style={footerStyles.container}>
           <p style={footerStyles.title}>Summary</p>
           <ul style={footerStyles.ul}>
-            <li style={footerStyles.liBold}>{footerInfo.position ? footerInfo.position : null}</li>
-            <li style={footerStyles.li}>{footerInfo.company ? footerInfo.company : null}</li>
-            <li style={footerStyles.li}>{footerInfo.workflow ? footerInfo.workflow : null}</li>
+            <li style={footerStyles.liBold}>{footerInfo ? footerInfo.position : null}</li>
+            <li style={footerStyles.li}>{footerInfo ? footerInfo.company : null}</li>
+            <li style={footerStyles.li}>{footerInfo ? footerInfo.workflow : null}</li>
           </ul>
         </div>
       </div>

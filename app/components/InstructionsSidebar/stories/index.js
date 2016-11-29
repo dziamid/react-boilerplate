@@ -22,7 +22,7 @@ const body = (
 storiesOf('InstructionSidebar', module)
 
   .add('without footer', () => (
-    <InstructionSidebar body={body} footerInfo />
+    <InstructionSidebar body={body} />
   ))
   .add('with footer', () => (
     <InstructionSidebar body={body} footer footerInfo={footerInfo} />
