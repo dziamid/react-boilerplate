@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@kadira/storybook';
 import InstructionSidebar from '../index';
 
-const listStyle = { padding: '0 0 10px', fontFamily: '"Lato", sans-serif', fontSize: '13px', fontWeight: 300, lineHeight: '18px', color: '#1F768A', letterSpacing: 0 };
+const listStyle = { padding: '0 0 15px', fontFamily: '"Lato", sans-serif', fontSize: '13px', fontWeight: 300, lineHeight: '17px', color: '#1F768A', letterSpacing: 0 };
 const ulStyle = { listStyle: 'none', padding: 0, margin: 0, width: '220px' };
 const footerInfo = {
   position: 'Senior UX/UI Designer',
@@ -15,7 +15,7 @@ const body = (
     <li style={listStyle}>Nunc non diam metus. Fusce ornare pretium sodales.</li>
     <li style={listStyle}>Vivamus semper, tortor vel efficitur.</li>
     <li style={listStyle}>Maecenas faucibus mollis interdum.</li>
-    <li style={listStyle}>Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cras mattis consectetur purus sit amet fermentum</li>
+    <li style={listStyle}>Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cras mattis consectetur amet fermentum</li>
   </ul>
 );
 
