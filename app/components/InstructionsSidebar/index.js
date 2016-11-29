@@ -15,7 +15,7 @@ export default class InstructionsSidebar extends React.Component {
       container: { display: 'flex', flexDirection: 'column', alignItems: 'flex-start', padding: '0 0 0 20px' },
       title: { display: 'inline-block', fontSize: '13px', textTransform: 'uppercase', color: '#1f768a', fontWeight: 400, margin: '15px 0 20px', lineHeight: '11px' },
       ul: { listStyle: 'none', padding: 0, margin: 0, width: '200px' },
-      liPosition: { color: '#757575', fontWeight: 400, margin: '0 0 15px' },
+      liBold: { color: '#757575', fontWeight: 400, margin: '0 0 15px' },
       li: { color: '#757575', fontWeight: 300, margin: '0 0 15px' },
     };
 
@@ -24,7 +24,7 @@ export default class InstructionsSidebar extends React.Component {
         <div style={footerStyles.container}>
           <p style={footerStyles.title}>Summary</p>
           <ul style={footerStyles.ul}>
-            <li style={footerStyles.liPosition}>{footerInfo.position ? footerInfo.position : null}</li>
+            <li style={footerStyles.liBold}>{footerInfo.position ? footerInfo.position : null}</li>
             <li style={footerStyles.li}>{footerInfo.company ? footerInfo.company : null}</li>
             <li style={footerStyles.li}>{footerInfo.workflow ? footerInfo.workflow : null}</li>
           </ul>
