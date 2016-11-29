@@ -31,7 +31,7 @@ export default class InstructionsSidebar extends React.Component {
         </div>
       </div>
     );
-
+    
     let placeholder = 'http://placehold.it/115x115/1AC5C0/ffffff';
     let titleText = 'Tips for a winning description';
     let containerStyle = styles.container;
