@@ -14,6 +14,7 @@ import Dialog from 'components/Dialog';
 import styles from './styles.css';
 import * as toastrActions from 'components/Toastr/actions';
 import countries from 'components/common/stories/countries';
+import LogoUploader from 'components/LogoUploader';
 
 const sleep = ms => new Promise(resolve => setTimeout(() => resolve(), ms));
 
@@ -138,6 +139,12 @@ class SampleForm extends Component {
           <div>
             <h2>Embedded users form</h2>
             <FieldArray name="users" component={renderUsers} />
+          </div>
+          <div>
+            <Field
+              name="logoUrl"
+              component={LogoUploader}
+            />
           </div>
 
           <div className={styles.actionButtons}>
