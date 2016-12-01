@@ -1,0 +1,25 @@
+{
+  "resolution": "main",
+  "tree": {
+    "src": "https://raw.githubusercontent.com/asvetliakov/typings-redux-storage-engine-localstorage/866700830567ed3e2f7c64654d101274369bd35c/typings.json",
+    "raw": "registry:npm/redux-storage-engine-localstorage#1.0.1+20160310030142",
+    "main": "index.d.ts",
+    "dependencies": {
+      "redux-storage": {
+        "src": "https://raw.githubusercontent.com/asvetliakov/typings-redux-storage/master/typings.json",
+        "raw": "github:asvetliakov/typings-redux-storage",
+        "main": "index.d.ts",
+        "dependencies": {
+          "redux": {
+            "src": "https://raw.githubusercontent.com/andrew-w-ross/typings-redux/master/typings.json",
+            "raw": "github:andrew-w-ross/typings-redux",
+            "main": "redux.d.ts",
+            "name": "redux"
+          }
+        },
+        "name": "redux-storage"
+      }
+    },
+    "name": "redux-storage-engine-localstorage"
+  }
+}

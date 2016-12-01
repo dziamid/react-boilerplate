@@ -41,7 +41,6 @@ function loadAPI() {
 
 function* handleAutocompleteLoad({ payload: query }) {
   const suggestions = yield loadSuggestions(query);
-  console.log('handleAutocompleteLoad.suggestions', suggestions);
   yield put(show(suggestions));
 }
 

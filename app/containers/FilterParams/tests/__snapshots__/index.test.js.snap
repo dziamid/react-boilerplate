@@ -1,0 +1,59 @@
+exports[`<FilterParams /> should render with default props 1`] = `
+<div>
+  <div>
+    <div>
+      <Field
+        component={[Function]}
+        dataSource={
+          Array [
+            Object {
+              "text": "IT and Computers",
+              "value": "5836b54d073234521c49c874",
+            },
+          ]
+        }
+        fullWidth={true}
+        label={
+          <FormattedMessage
+            defaultMessage="Job Category"
+            id="app.containers.FilterParams.selectCategory"
+            tagName="span"
+            values={Object {}} />
+        }
+        name="category"
+        noFreetext={true}
+        onNewRequest={[Function]}
+        openOnFocus={true} />
+    </div>
+    <div>
+      <Field
+        component={[Function]}
+        dataSource={Array []}
+        fullWidth={true}
+        label={
+          <FormattedMessage
+            defaultMessage="Job Sub Category"
+            id="app.containers.FilterParams.selectSubCategory"
+            tagName="span"
+            values={Object {}} />
+        }
+        name="subCategory"
+        noFreetext={true}
+        onNewRequest={[Function]}
+        openOnFocus={true} />
+    </div>
+    <div>
+      <Field
+        component={[Function]}
+        label={
+          <FormattedMessage
+            defaultMessage="Filter Results"
+            id="app.containers.FilterParams.filter"
+            tagName="span"
+            values={Object {}} />
+        }
+        name="title" />
+    </div>
+  </div>
+</div>
+`;

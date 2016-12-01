@@ -1,0 +1,99 @@
+exports[`<SingleTitleEditor /> should render with default props 1`] = `
+<div>
+  <H3>
+    <div />
+  </H3>
+  <div>
+    <SelectField
+      autoWidth={false}
+      disabled={false}
+      fullWidth={true}
+      label={
+        <FormattedMessage
+          defaultMessage="Seniority"
+          id="app.containers.SingleTitle.seniority"
+          tagName="span"
+          values={Object {}} />
+      }
+      onChange={[Function]}>
+      <MenuItem
+        primaryText="Entry/Junior Level"
+        value={1} />
+      <MenuItem
+        primaryText="Experienced/Intermediate Level"
+        value={2} />
+      <MenuItem
+        primaryText="Managers and Senior Technical Professionals"
+        value={3} />
+      <MenuItem
+        primaryText="Middle Management"
+        value={4} />
+      <MenuItem
+        primaryText="Senior Management"
+        value={5} />
+    </SelectField>
+  </div>
+  <div>
+    <div>
+      <H3>
+        <FormattedMessage
+          defaultMessage="Edit Relations"
+          id="app.containers.SingleTitle.editRelations"
+          tagName="span"
+          values={Object {}} />
+      </H3>
+    </div>
+  </div>
+  <Connect(ReduxForm)
+    fields={
+      Array [
+        "title",
+      ]
+    }
+    form="SingleTitleEditor" />
+  <Table
+    allRowsSelected={false}
+    fixedFooter={true}
+    fixedHeader={true}
+    height="inherit"
+    multiSelectable={false}
+    selectable={false}>
+    <TableHeader
+      adjustForCheckbox={false}
+      displaySelectAll={false}
+      enableSelectAll={true}
+      selectAllSelected={false}>
+      <TableRow
+        displayBorder={true}
+        hoverable={false}
+        hovered={false}
+        selectable={true}
+        selected={false}
+        striped={false}>
+        <TableHeaderColumn>
+          <FormattedMessage
+            defaultMessage="Job Title"
+            id="app.containers.SingleTitle.jobTitle"
+            tagName="span"
+            values={Object {}} />
+        </TableHeaderColumn>
+        <TableHeaderColumn>
+          <FormattedMessage
+            defaultMessage="Proximity"
+            id="app.containers.SingleTitle.proximity"
+            tagName="span"
+            values={Object {}} />
+        </TableHeaderColumn>
+      </TableRow>
+    </TableHeader>
+    <TableBody
+      allRowsSelected={false}
+      deselectOnClickaway={true}
+      displayRowCheckbox={false}
+      multiSelectable={false}
+      preScanRows={true}
+      selectable={true}
+      style={Object {}} />
+  </Table>
+</div>
+`;

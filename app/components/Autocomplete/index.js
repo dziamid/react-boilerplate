@@ -34,14 +34,15 @@ export default class Autocomplete extends Component {
     },
     filter: caseInsensitiveFilter,
     fullWidth: true,
+    noFreetext: false,
   };
 
   static propTypes = {
     input: PropTypes.object,
-    label: PropTypes.string,
     meta: PropTypes.object,
     withClear: PropTypes.bool,
     onClear: PropTypes.func,
+    noFreetext: PropTypes.bool,
   };
 
   constructor() {
@@ -59,7 +60,9 @@ export default class Autocomplete extends Component {
   }
 
   handleInputUpdate(searchText) {
-    this.props.input.onChange(searchText);
+    if (!this.props.noFreetext) {
+      this.props.input.onChange(searchText);
+    }
   }
 
 
@@ -75,6 +78,7 @@ export default class Autocomplete extends Component {
       label,
       withClear,
       onClear, // eslint-disable-line no-unused-vars
+      noFreetext, // eslint-disable-line no-unused-vars
       ...other,
     } = this.props;
 

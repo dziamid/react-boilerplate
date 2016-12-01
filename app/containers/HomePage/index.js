@@ -33,8 +33,35 @@ import List from 'components/List';
 import ListItem from 'components/ListItem';
 import LoadingIndicator from 'components/LoadingIndicator';
 import SampleForm from 'components/SampleForm';
-
+import InstructionsSidebar from 'components/InstructionsSidebar';
 import styles from './styles.css';
+
+const listStyle = {
+  padding: '0 0 15px',
+  fontFamily: '"Lato", sans-serif',
+  fontSize: '13px',
+  fontWeight: 300,
+  lineHeight: '17px',
+  color: '#1F768A',
+  letterSpacing: 0,
+};
+const ulStyle = { listStyle: 'none', padding: 0, margin: 0, width: '230px' };
+const summary = {
+  position: 'Senior UX/UI Designer',
+  company: 'Airbnb HQ - San-Francisco',
+  workflow: 'Hiring Workflow 1',
+
+};
+const body = (
+  <ul style={ulStyle}>
+    <li style={listStyle}>Nunc non diam metus. Fusce ornare pretium sodales.</li>
+    <li style={listStyle}>Vivamus semper, tortor vel efficitur.</li>
+    <li style={listStyle}>Maecenas faucibus mollis interdum.</li>
+    <li style={listStyle}>Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cras mattis consectetur
+      pit amet fermentum.
+    </li>
+  </ul>
+);
 
 export class HomePage extends React.Component {
   /**
@@ -90,7 +117,10 @@ export class HomePage extends React.Component {
           ]}
         />
         <div>
-          <SampleForm />
+          <div className={styles.form_sidebar}>
+            <div className={styles.form}><SampleForm /></div>
+            <div className={styles.sidebar}><InstructionsSidebar body={body} summary={summary} /></div>
+          </div>
           <section className={styles.textSection}>
             <H2>
               <FormattedMessage {...messages.trymeHeader} />
