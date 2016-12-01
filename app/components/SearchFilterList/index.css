@@ -1,0 +1,25 @@
+.wrapper {
+  width: 700px;
+  overflow: hidden;
+}
+
+.input_container {
+  display: flex;
+  width: 800px;
+}
+
+.list {
+  padding: 0;
+  margin: 20px 0 0;
+  width: inherit;
+}
+
+.search {
+  position: relative;
+  width: 300px;
+}
+
+.sort {
+  position: relative;
+  margin-left: 50px;
+}

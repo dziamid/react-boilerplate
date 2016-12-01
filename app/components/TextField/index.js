@@ -10,6 +10,8 @@ const cx = classNames.bind(styles);
 class TextField extends Component {
   static defaultProps = {
     fullWidth: true,
+    meta: {},
+    input: {},
   };
 
   constructor() {

@@ -5,12 +5,12 @@
  */
 
 import React from 'react';
-import {connect} from 'react-redux';
-import {push} from 'react-router-redux';
+import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 import Helmet from 'react-helmet';
 
 import messages from './messages';
-import {createStructuredSelector} from 'reselect';
+import { createStructuredSelector } from 'reselect';
 
 import {
   selectRepos,
@@ -22,10 +22,10 @@ import {
   selectUsername,
 } from './selectors';
 
-import {changeUsername} from './actions';
-import {loadRepos} from '../App/actions';
+import { changeUsername } from './actions';
+import { loadRepos } from '../App/actions';
 
-import {FormattedMessage} from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import RepoListItem from 'containers/RepoListItem';
 import Button from 'components/Button';
 import H2 from 'components/H2';
@@ -43,9 +43,9 @@ const listStyle = {
   fontWeight: 300,
   lineHeight: '17px',
   color: '#1F768A',
-  letterSpacing: 0
+  letterSpacing: 0,
 };
-const ulStyle = {listStyle: 'none', padding: 0, margin: 0, width: '230px'};
+const ulStyle = { listStyle: 'none', padding: 0, margin: 0, width: '230px' };
 const summary = {
   position: 'Senior UX/UI Designer',
   company: 'Airbnb HQ - San-Francisco',
@@ -94,18 +94,18 @@ export class HomePage extends React.Component {
 
     // Show a loading indicator when we're loading
     if (this.props.loading) {
-      mainContent = (<List component={LoadingIndicator}/>);
+      mainContent = (<List component={LoadingIndicator} />);
 
       // Show an error if there is one
     } else if (this.props.error !== false) {
       const ErrorComponent = () => (
-        <ListItem item={'Something went wrong, please try again!'}/>
+        <ListItem item={'Something went wrong, please try again!'} />
       );
-      mainContent = (<List component={ErrorComponent}/>);
+      mainContent = (<List component={ErrorComponent} />);
 
       // If we're not loading, don't have an error and there are repos, show the repos
     } else if (this.props.repos !== false) {
-      mainContent = (<List items={this.props.repos} component={RepoListItem}/>);
+      mainContent = (<List items={this.props.repos} component={RepoListItem} />);
     }
 
     return (
@@ -119,7 +119,7 @@ export class HomePage extends React.Component {
         <div>
           <div className={styles.form_sidebar}>
             <div className={styles.form}><SampleForm /></div>
-            <div className={styles.sidebar}><InstructionsSidebar body={body} summary={summary}/></div>
+            <div className={styles.sidebar}><InstructionsSidebar body={body} summary={summary} /></div>
           </div>
           <section className={styles.textSection}>
             <H2>
