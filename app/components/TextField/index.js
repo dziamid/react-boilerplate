@@ -83,7 +83,7 @@ class TextField extends Component {
 
 TextField.propTypes = {
   input: PropTypes.object,
-  label: PropTypes.string,
+  label: PropTypes.node,
   meta: PropTypes.object,
   withClear: PropTypes.bool,
   onClear: PropTypes.func,

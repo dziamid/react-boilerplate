@@ -10,7 +10,9 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 import globalReducer from 'containers/App/reducer';
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
 import toastrReducer from 'components/Toastr/reducer';
+
 import { reducer as reduxFormReducer } from 'redux-form/immutable';
+import titlesEditorReducer from 'containers/TitlesEditor/reducer';
 import companiesFilterReducer from 'components/CompaniesFilter/reducer';
 import companiesReducer from 'components/Companies/reducer';
 import addressAutocompleteReducer from 'components/AddressAutocomplete/reducer';
@@ -56,7 +58,7 @@ export default function createReducer(asyncReducers) {
     companiesFilter: companiesFilterReducer,
     companies: companiesReducer,
     addressAutocomplete: addressAutocompleteReducer,
-
+    titlesEditorRoot: titlesEditorReducer,
     ...asyncReducers,
   });
 }

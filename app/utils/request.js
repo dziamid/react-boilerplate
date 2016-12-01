@@ -1,45 +1,40 @@
-import 'whatwg-fetch';
+import { call, put as putSaga } from 'redux-saga/effects';
+import axios from 'axios';
 
-/**
- * Parses the JSON returned by a network request
- *
- * @param  {object} response A response from a network request
- *
- * @return {object}          The parsed JSON from the request
- */
-function parseJSON(response) {
-  return response.json();
-}
+export const BASE_API = process.env.BASE_API || 'http://138.68.100.219:4000/api';
+// export const API_KEY = process.env.API_KEY || 'apiKey=WNDdxGon5y3SRaWjlqSM18l4gPvVhVgN&l=99999';
 
-/**
- * Checks if a network request came back fine, and throws an error if not
- *
- * @param  {object} response   A response from a network request
- *
- * @return {object|undefined} Returns either the response, or throws an error
- */
-function checkStatus(response) {
-  if (response.status >= 200 && response.status < 300) {
-    return response;
+export default function* request(params, onSuccess, onError) { // todo: do not use callbacks!
+  const _params = mapAxiosParams(params);
+  if (_params.url.indexOf('/') === 0) {
+    // relative url detected
+    _params.url = BASE_API + _params.url;
   }
 
-  const error = new Error(response.statusText);
-  error.response = response;
-  throw error;
+  try {
+    const { data } = yield call(axios, _params);
+    onSuccess && (yield putSaga(onSuccess(data)));
+  } catch (err) {
+    onError && (yield putSaga(onError(err)));
+  }
 }
 
-/**
- * Requests a URL, returning a promise
- *
- * @param  {string} url       The URL we want to request
- * @param  {object} [options] The options we want to pass to "fetch"
- *
- * @return {object}           An object containing either "data" or "err"
- */
-export default function request(url, options) {
-  return fetch(url, options)
-    .then(checkStatus)
-    .then(parseJSON)
-    .then((data) => ({ data }))
-    .catch((err) => ({ err }));
+export function* get(params, ...other) {
+  yield request({ method: 'GET', ...mapAxiosParams(params) }, ...other);
+}
+
+export function* post(params, ...other) {
+  yield request({ method: 'POST', ...mapAxiosParams(params) }, ...other);
+}
+
+export function* patch(params, ...other) {
+  yield request({ method: 'PATCH', ...mapAxiosParams(params) }, ...other);
+}
+
+export function* destroy(params, ...other) {
+  yield request({ method: 'DELETE', ...mapAxiosParams(params) }, ...other);
+}
+
+function mapAxiosParams(params) {
+  return typeof (params) === 'string' ? { url: params } : params;
 }

@@ -26,7 +26,6 @@ div[type=button] {
 }
 
 .wrapper {
-  max-width: 1400px;
   margin: 0 auto;
   display: flex;
   min-height: 100%;

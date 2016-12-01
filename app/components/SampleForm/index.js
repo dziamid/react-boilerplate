@@ -100,12 +100,13 @@ class SampleForm extends Component {
           </div>
           <div>
             <Field
-              name="field3"
+              name="country"
               component={Autocomplete}
               dataSource={countries.map(c => ({ text: c.name, value: c.code }))}
-              label="Autocomplete"
+              label="Choose country (Autocomplete)"
               withClear
-              onClear={() => dispatch(change(form, 'field3', ''))}
+              noFreetext
+              onClear={() => dispatch(change(form, 'country', ''))}
             />
           </div>
           <div>
@@ -122,7 +123,7 @@ class SampleForm extends Component {
               label="Choose countries"
               component={ChipInput}
               dataSource={countries.map(c => c.name)}
-              freetextDisabled
+              noFreetext
             />
           </div>
           <div>
