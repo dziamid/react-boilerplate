@@ -37,9 +37,11 @@ label {
 .form_sidebar {
   display: flex;
 }
+
 .form {
   flex-grow: 2;
 }
+
 .sidebar {
   align-self: center;
 }
