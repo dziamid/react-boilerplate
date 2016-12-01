@@ -1,11 +1,15 @@
-// import FilterResults from '../index';
+import React from 'react';
+import FilterResults from '../index';
+import { shallowToJson } from 'enzyme-to-json';
+import { shallow } from 'enzyme';
 
-import expect from 'chai';
-// import { shallow } from 'enzyme';
-// import React from 'react';
 
 describe('<FilterResults />', () => {
-  it('Expect to have unit tests specified', () => {
-    expect(true).toEqual(false);
+  it('should render show all companies correctly', () => {
+    const wrapper = shallow(
+      <FilterResults results={[]} />
+    );
+
+    expect(shallowToJson(wrapper)).toMatchSnapshot();
   });
 });

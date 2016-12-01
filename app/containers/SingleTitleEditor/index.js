@@ -24,10 +24,14 @@ import {
   from 'material-ui/Table';
 
 export default class SingleTitleEditor extends Component {
+  static defaultProps = {
+    relations: List([]),
+    title: {},
+  };
 
   static propTypes = {
-    title: PropTypes.object,
     relations: PropTypes.oneOfType([PropTypes.instanceOf(List), PropTypes.array]),
+    title: PropTypes.object,
     onSeniorityChange: PropTypes.func,
     onProximityChange: PropTypes.func,
   };

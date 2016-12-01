@@ -21,6 +21,7 @@ import { jobCategories } from './mocks';
 export class FilterParams extends Component { // eslint-disable-line react/prefer-stateless-function
   static defaultProps = {
     fields: ['title', 'category', 'subCategory'],
+    subCategories: [],
   };
 
   render() {

@@ -35,7 +35,6 @@ storiesOf('Autocomplete', module)
       label="Choose Country"
       withClear
       noFreetext
-      valueMapper={item => item.value}
       onClear={action('onClear')}
     />
   ));

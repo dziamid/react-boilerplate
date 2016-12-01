@@ -1,11 +1,15 @@
-// import TitlesEditor from '../index';
-
-import expect from 'chai';
-// import { shallow } from 'enzyme';
-// import React from 'react';
+import React from 'react';
+import { TitlesEditor } from '../index';
+import { shallow } from 'enzyme';
+import { shallowToJson } from 'enzyme-to-json';
 
 describe('<TitlesEditor />', () => {
-  it('Expect to have unit tests specified', () => {
-    expect(true).toEqual(false);
+  it('should render with default props', () => {
+    const wrapper = shallow(
+      <TitlesEditor />
+    );
+
+    expect(shallowToJson(wrapper)).toMatchSnapshot();
   });
 });
+

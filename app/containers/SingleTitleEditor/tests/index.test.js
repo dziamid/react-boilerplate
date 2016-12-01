@@ -1,11 +1,15 @@
-// import SingleTitle from '../index';
+import React from 'react';
+import SingleTitleEditor from '../index';
+import { shallow } from 'enzyme';
+import { shallowToJson } from 'enzyme-to-json';
 
-import expect from 'chai';
-// import { shallow } from 'enzyme';
-// import React from 'react';
+describe('<SingleTitleEditor />', () => {
+  it('should render with default props', () => {
+    const wrapper = shallow(
+      <SingleTitleEditor />
+    );
 
-describe('<SingleTitle />', () => {
-  it('Expect to have unit tests specified', () => {
-    expect(true).toEqual(false);
+    expect(shallowToJson(wrapper)).toMatchSnapshot();
   });
 });
+

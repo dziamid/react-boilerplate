@@ -1,0 +1,63 @@
+exports[`<TitlesEditor /> should render with default props 1`] = `
+<div>
+  <HelmetWrapper
+    meta={
+      Array [
+        Object {
+          "content": "Description of TitlesEditor",
+          "name": "description",
+        },
+      ]
+    }
+    title="TitlesEditor" />
+  <div>
+    <div>
+      <H3>
+        <FormattedMessage
+          defaultMessage="Search Titles"
+          id="app.containers.TitlesEditor.searchTitles"
+          tagName="span"
+          values={Object {}} />
+        <span
+          style={
+            Object {
+              "position": "absolute",
+            }
+          } />
+      </H3>
+      <Paper
+        circle={false}
+        rounded={true}
+        transitionEnabled={true}
+        zDepth={1}>
+        <div>
+          <Connect(ReduxForm)
+            form="TitleEditor" />
+          <FilterResults />
+        </div>
+      </Paper>
+    </div>
+    <div>
+      <H3>
+        <FormattedMessage
+          defaultMessage="Edit Seniority And Relations"
+          id="app.containers.TitlesEditor.editSeniorityAndRelations"
+          tagName="span"
+          values={Object {}} />
+      </H3>
+      <Paper
+        circle={false}
+        rounded={true}
+        transitionEnabled={true}
+        zDepth={1}>
+        <div>
+          <SingleTitleEditor
+            onProximityChange={[Function]}
+            relations={Array []}
+            title={Object {}} />
+        </div>
+      </Paper>
+    </div>
+  </div>
+</div>
+`;

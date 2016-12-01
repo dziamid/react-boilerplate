@@ -106,7 +106,6 @@ class SampleForm extends Component {
               label="Choose country (Autocomplete)"
               withClear
               noFreetext
-              valueMapper={item => item.value}
               onClear={() => dispatch(change(form, 'country', ''))}
             />
           </div>
