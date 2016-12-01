@@ -1,6 +1,7 @@
 import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
 import SearchFilterList from '../index';
+import ItemDescription from 'components/ItemDescription';
 
 const list1 = [
   {
@@ -10,7 +11,6 @@ const list1 = [
     date: '4 May 2016',
     time: '21:00pm',
     relevant: 1,
-    group: 'Recommended',
     id: 1,
 
   },
@@ -20,7 +20,6 @@ const list1 = [
     date: '4 May 2016',
     time: '22:00pm',
     relevant: 22,
-    group: 'Recommended',
     id: 2,
   },
   {
@@ -30,7 +29,6 @@ const list1 = [
     date: '4 May 2016',
     time: '22:00pm',
     relevant: 3,
-    group: 'Recommended',
     id: 3,
   },
   {
@@ -40,7 +38,6 @@ const list1 = [
     date: '3 January 2016',
     time: '14:00pm',
     relevant: 5,
-    group: 'Recommended',
     id: 4,
   },
   {
@@ -50,7 +47,6 @@ const list1 = [
     date: '1 August 2017',
     time: '08:00am',
     relevant: 8,
-    group: 'Recommended',
     id: 5,
   },
   {
@@ -60,7 +56,6 @@ const list1 = [
     date: '1 August 2017',
     time: '08:00am',
     relevant: 0,
-    group: 'Recommended',
     id: 6,
   },
 ];
@@ -74,7 +69,6 @@ const list2 = [
     date: '1 August 2017',
     time: '08:00am',
     relevant: 99,
-    group: 'Recommended',
     id: 7,
   },
   {
@@ -84,7 +78,6 @@ const list2 = [
     date: '1 August 2017',
     time: '08:00am',
     relevant: 6,
-    group: 'Recommended',
     id: 8,
   },
   {
@@ -94,7 +87,6 @@ const list2 = [
     date: '1 August 2017',
     time: '08:00am',
     relevant: 16,
-    group: '',
     id: 9,
   },
   {
@@ -104,7 +96,6 @@ const list2 = [
     date: '1 August 2017',
     time: '08:00am',
     relevant: 86,
-    group: 'Recommended',
     id: 10,
   },
   {
@@ -114,7 +105,6 @@ const list2 = [
     date: '1 August 2017',
     time: '08:00am',
     relevant: 33,
-    group: '',
     id: 11,
   },
   {
@@ -124,7 +114,6 @@ const list2 = [
     date: '1 August 2017',
     time: '08:00am',
     relevant: 44,
-    group: '',
     id: 12,
   },
 ];
@@ -132,6 +121,7 @@ const list2 = [
 const groups = [
   { title: 'Group A', items: list1 },
   { title: 'Group B', items: list2 },
+  { title: 'GRoup C', items: list2 },
 ];
 
 storiesOf('SearchFilterList', module)
@@ -143,5 +133,6 @@ storiesOf('SearchFilterList', module)
       filterBy="name"
       subheader="group"
       onItemSelected={action('item selected')}
+      itemType={ItemDescription}
     />
   ));

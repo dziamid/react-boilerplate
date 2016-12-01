@@ -1,6 +1,6 @@
 import React from 'react';
-import ItemDescription from './ItemDescription';
 import Subheader from 'material-ui/Subheader';
+import Divider from 'material-ui/Divider';
 import TextField from 'components/TextField';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
@@ -36,7 +36,7 @@ export default class SearchFilterList extends React.Component {
     });
   }
 
-  renderItems(title, items) {
+  renderItems(title, items, groupIndex) {
     let sortedItems;
 
     if (this.state.sort === null) {
@@ -56,13 +56,19 @@ export default class SearchFilterList extends React.Component {
       });
     }
     const filteredItems = sortedItems.filter((item) => item[this.props.filterBy].toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1);
+    const Item = this.props.itemType;
 
     return (
       filteredItems.length > 0 ? (
         <div className={styles.list}>
+          { groupIndex > 0 ? <Divider /> : null }
           <List>
             <Subheader>{title}</Subheader>
-            {filteredItems.map((item, index) => <ItemDescription item={item} key={index} />)}
+            {filteredItems.map((item, index) =>
+              <div key={index}>
+                <Item {...item} />
+              </div>
+            )}
           </List>
         </div>
       ) : null
@@ -77,6 +83,10 @@ export default class SearchFilterList extends React.Component {
       width: 22,
       height: 22,
     };
+
+    const {
+      groups,
+    } = this.props;
 
     const style = {
       fontSize: '13px',
@@ -116,7 +126,11 @@ export default class SearchFilterList extends React.Component {
             </SelectField>
           </div>
         </div>
-        { this.props.groups.map(({ title, items }) => this.renderItems(title, items)) }
+        {groups.map(({ title, items }, index) =>
+          <div className={styles.item} key={index}>
+            {this.renderItems(title, items, index)}
+          </div>
+        )}
       </div>
     );
   }

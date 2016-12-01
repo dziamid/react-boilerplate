@@ -1,15 +1,9 @@
-.list_wrapper {
+.wrapper {
   display: flex;
   justify-content: space-between;
   color: #BDBDBD;
   font-size: 13px;
   line-height: 11px;
-}
-
-.radio {
-  margin-right: 5px;
-  height: 13px;
-  width: 13px;
 }
 
 .list_left {
