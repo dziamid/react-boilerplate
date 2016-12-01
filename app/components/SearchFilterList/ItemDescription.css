@@ -1,15 +1,19 @@
 .list_wrapper {
   display: flex;
   justify-content: space-between;
-  width: 600px;
   color: #BDBDBD;
   font-size: 13px;
-  line-height: 12px;
+  line-height: 11px;
 }
 
-.list {
-  list-style: none;
-  margin-bottom: 10px;
+.radio {
+  margin-right: 5px;
+  height: 13px;
+  width: 13px;
+}
+
+.list_left {
+  display: flex;
 }
 
 .item_name {

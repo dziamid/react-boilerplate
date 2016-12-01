@@ -1,17 +1,10 @@
 .wrapper {
-  width: 700px;
+  width: 640px;
   overflow: hidden;
 }
 
-.input_container {
+.container {
   display: flex;
-  width: 800px;
-}
-
-.list {
-  padding: 0;
-  margin: 20px 0 0;
-  width: inherit;
 }
 
 .search {
@@ -19,7 +12,11 @@
   width: 300px;
 }
 
+.list {
+  padding: 0;
+}
+
 .sort {
   position: relative;
-  margin-left: 50px;
+  margin-left: 80px;
 }

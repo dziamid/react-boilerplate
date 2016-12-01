@@ -1,8 +1,8 @@
 import React from 'react';
-import { storiesOf } from '@kadira/storybook';
+import { storiesOf, action } from '@kadira/storybook';
 import SearchFilterList from '../index';
 
-const list = [
+const list1 = [
   {
     name: 'AX Functional Consultant',
     location: 'Sydney',
@@ -10,15 +10,18 @@ const list = [
     date: '4 May 2016',
     time: '21:00pm',
     relevant: 1,
+    group: 'Recommended',
+    id: 1,
 
   },
   {
     name: 'Back-end Developer',
     location: 'Canberra',
-    position: 'Full-time',
     date: '4 May 2016',
     time: '22:00pm',
-    relevant: 0,
+    relevant: 22,
+    group: 'Recommended',
+    id: 2,
   },
   {
     name: 'Sitecore Lead Consultant',
@@ -26,7 +29,9 @@ const list = [
     position: 'Lead',
     date: '4 May 2016',
     time: '22:00pm',
-    relevant: 1,
+    relevant: 3,
+    group: 'Recommended',
+    id: 3,
   },
   {
     name: 'Front-end Developer',
@@ -34,7 +39,9 @@ const list = [
     position: 'Full-time',
     date: '3 January 2016',
     time: '14:00pm',
-    relevant: 1,
+    relevant: 5,
+    group: 'Recommended',
+    id: 4,
   },
   {
     name: 'UX/UI designer',
@@ -42,7 +49,9 @@ const list = [
     position: 'Full-time',
     date: '1 August 2017',
     time: '08:00am',
-    relevant: 1,
+    relevant: 8,
+    group: 'Recommended',
+    id: 5,
   },
   {
     name: 'PR manager',
@@ -50,15 +59,23 @@ const list = [
     position: 'Full-time',
     date: '1 August 2017',
     time: '08:00am',
-    relevant: 1,
+    relevant: 0,
+    group: 'Recommended',
+    id: 6,
   },
+];
+
+const list2 = [
+
   {
     name: 'Trader',
     location: 'Chicago',
     position: 'Full-time',
     date: '1 August 2017',
     time: '08:00am',
-    relevant: 1,
+    relevant: 99,
+    group: 'Recommended',
+    id: 7,
   },
   {
     name: 'Business analyst',
@@ -66,7 +83,9 @@ const list = [
     position: 'Full-time',
     date: '1 August 2017',
     time: '08:00am',
-    relevant: 1,
+    relevant: 6,
+    group: 'Recommended',
+    id: 8,
   },
   {
     name: 'UX/UI designer',
@@ -74,7 +93,9 @@ const list = [
     position: 'Full-time',
     date: '1 August 2017',
     time: '08:00am',
-    relevant: 1,
+    relevant: 16,
+    group: '',
+    id: 9,
   },
   {
     name: 'JS developer',
@@ -82,7 +103,9 @@ const list = [
     position: 'Lead',
     date: '1 August 2017',
     time: '08:00am',
-    relevant: 1,
+    relevant: 86,
+    group: 'Recommended',
+    id: 10,
   },
   {
     name: 'UX/UI designer',
@@ -90,7 +113,9 @@ const list = [
     position: 'Full-time',
     date: '1 August 2017',
     time: '08:00am',
-    relevant: 1,
+    relevant: 33,
+    group: '',
+    id: 11,
   },
   {
     name: 'Front-end Developer',
@@ -98,27 +123,25 @@ const list = [
     position: 'Junior',
     date: '1 August 2017',
     time: '08:00am',
-    relevant: 1,
+    relevant: 44,
+    group: '',
+    id: 12,
   },
+];
 
+const groups = [
+  { title: 'Group A', items: list1 },
+  { title: 'Group B', items: list2 },
 ];
 
 storiesOf('SearchFilterList', module)
 
   .add('SearchFilterList single block', () => (
     <SearchFilterList
-      items={list}
+      groups={groups}
       sortBy={['relevant', 'name']}
       filterBy="name"
+      subheader="group"
+      onItemSelected={action('item selected')}
     />
   ));
-  /* .add('SearchFilterList multiple blocks', () => (
-    <SearchFilterList
-      items={[
-       { title: 'block1', items: hugeList },
-       { title: 'block2', items: hugeList },
-       ]}
-      sortBy={['relevance', 'name']}
-      filterBy="name"
-    />
-  ));*/
