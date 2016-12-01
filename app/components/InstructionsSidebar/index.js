@@ -8,7 +8,6 @@ export default class InstructionsSidebar extends React.Component {
       summary,
       body,
     } = this.props;
-
     const summaryStyles = {
       wrapper: {
         backgroundColor: '#DDF6F6',
