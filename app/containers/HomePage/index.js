@@ -5,12 +5,12 @@
  */
 
 import React from 'react';
-import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
+import {connect} from 'react-redux';
+import {push} from 'react-router-redux';
 import Helmet from 'react-helmet';
 
 import messages from './messages';
-import { createStructuredSelector } from 'reselect';
+import {createStructuredSelector} from 'reselect';
 
 import {
   selectRepos,
@@ -22,10 +22,10 @@ import {
   selectUsername,
 } from './selectors';
 
-import { changeUsername } from './actions';
-import { loadRepos } from '../App/actions';
+import {changeUsername} from './actions';
+import {loadRepos} from '../App/actions';
 
-import { FormattedMessage } from 'react-intl';
+import {FormattedMessage} from 'react-intl';
 import RepoListItem from 'containers/RepoListItem';
 import Button from 'components/Button';
 import H2 from 'components/H2';
@@ -33,8 +33,35 @@ import List from 'components/List';
 import ListItem from 'components/ListItem';
 import LoadingIndicator from 'components/LoadingIndicator';
 import SampleForm from 'components/SampleForm';
-
+import InstructionsSidebar from 'components/InstructionsSidebar';
 import styles from './styles.css';
+
+const listStyle = {
+  padding: '0 0 15px',
+  fontFamily: '"Lato", sans-serif',
+  fontSize: '13px',
+  fontWeight: 300,
+  lineHeight: '17px',
+  color: '#1F768A',
+  letterSpacing: 0
+};
+const ulStyle = {listStyle: 'none', padding: 0, margin: 0, width: '230px'};
+const summary = {
+  position: 'Senior UX/UI Designer',
+  company: 'Airbnb HQ - San-Francisco',
+  workflow: 'Hiring Workflow 1',
+
+};
+const body = (
+  <ul style={ulStyle}>
+    <li style={listStyle}>Nunc non diam metus. Fusce ornare pretium sodales.</li>
+    <li style={listStyle}>Vivamus semper, tortor vel efficitur.</li>
+    <li style={listStyle}>Maecenas faucibus mollis interdum.</li>
+    <li style={listStyle}>Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cras mattis consectetur
+      pit amet fermentum.
+    </li>
+  </ul>
+);
 
 export class HomePage extends React.Component {
   /**
@@ -67,18 +94,18 @@ export class HomePage extends React.Component {
 
     // Show a loading indicator when we're loading
     if (this.props.loading) {
-      mainContent = (<List component={LoadingIndicator} />);
+      mainContent = (<List component={LoadingIndicator}/>);
 
       // Show an error if there is one
     } else if (this.props.error !== false) {
       const ErrorComponent = () => (
-        <ListItem item={'Something went wrong, please try again!'} />
+        <ListItem item={'Something went wrong, please try again!'}/>
       );
-      mainContent = (<List component={ErrorComponent} />);
+      mainContent = (<List component={ErrorComponent}/>);
 
       // If we're not loading, don't have an error and there are repos, show the repos
     } else if (this.props.repos !== false) {
-      mainContent = (<List items={this.props.repos} component={RepoListItem} />);
+      mainContent = (<List items={this.props.repos} component={RepoListItem}/>);
     }
 
     return (
@@ -90,7 +117,10 @@ export class HomePage extends React.Component {
           ]}
         />
         <div>
-          <SampleForm />
+          <div className={styles.form_sidebar}>
+            <div className={styles.form}><SampleForm /></div>
+            <div className={styles.sidebar}><InstructionsSidebar body={body} summary={summary}/></div>
+          </div>
           <section className={styles.textSection}>
             <H2>
               <FormattedMessage {...messages.trymeHeader} />
