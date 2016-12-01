@@ -41,14 +41,16 @@ export default class SearchFilterList extends React.Component {
     } else {
       sortedJobs = this.props.items.sort((a, b) => {
         if (typeof a[this.state.sort] === 'string') {
-          if (a[this.state.sort].toLowerCase() < b[this.state.sort].toLowerCase())
+          if (a[this.state.sort].toLowerCase() < b[this.state.sort].toLowerCase()) {
             return -1;
-          if (a[this.state.sort].toLowerCase() > b[this.state.sort].toLowerCase())
+          }
+
+          if (a[this.state.sort].toLowerCase() > b[this.state.sort].toLowerCase()) {
             return 1;
+          }
           return 0;
-        } else {
-          return b[this.state.sort] - a[this.state.sort];
         }
+        return b[this.state.sort] - a[this.state.sort];
       });
     }
     const filteredItems = sortedJobs.filter((item) => { return item[this.props.filterBy].toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1; });

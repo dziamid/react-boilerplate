@@ -5,9 +5,6 @@ import { ListItem } from 'material-ui/List';
 import { grey400 } from 'material-ui/styles/colors';
 
 export default class ItemDescription extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     const iconStyle = {

@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@kadira/storybook';
 import SearchFilterList from '../index';
 
-const jobDescriptions = [
+const list = [
   {
     name: 'AX Functional Consultant',
     location: 'Sydney',
@@ -103,16 +103,11 @@ const jobDescriptions = [
 
 ];
 
-let hugeList = [];
-for (let i = 0; i < 50; i++) {
-  hugeList = hugeList.concat(jobDescriptions);
-}
-
 storiesOf('SearchFilterList', module)
 
   .add('SearchFilterList single block', () => (
     <SearchFilterList
-      items={hugeList}
+      items={list}
       sortBy={['relevant', 'name']}
       filterBy="name"
     />
