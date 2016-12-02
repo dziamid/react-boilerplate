@@ -38,7 +38,7 @@ export default class ItemDescription extends React.Component {
       height: '28px',
       top: '-6px',
     };
-    
+
     return (
       <ListItem>
         <div className={styles.wrapper}>

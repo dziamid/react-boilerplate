@@ -4,11 +4,11 @@ import Divider from 'material-ui/Divider';
 import TextField from 'components/TextField';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
-import {List} from 'material-ui/List';
+import { List } from 'material-ui/List';
 
 import ActionSearch from 'material-ui/svg-icons/action/search';
 
-import {grey400} from 'material-ui/styles/colors';
+import { grey400 } from 'material-ui/styles/colors';
 
 import styles from './index.css';
 import IconButton from 'material-ui/IconButton';
@@ -86,8 +86,8 @@ export default class SearchFilterList extends React.Component {
         style={radio}
         iconStyle={radioIcon}
       >
-        {this.state.selectedItem === item ? <RadioButtonOn style={radioIcon} color="#1AC5C0"/> :
-          <RadioButtonOff style={radioIcon} color="grey"/>}
+        {this.state.selectedItem === item ? <RadioButtonOn style={radioIcon} color="#1AC5C0" /> :
+          <RadioButtonOff style={radioIcon} color="grey" />}
       </IconButton>
     );
 
@@ -159,12 +159,12 @@ export default class SearchFilterList extends React.Component {
               onChange={this.handleSort}
             >
               {this.props.sortBy.map((field, index) =>
-                <MenuItem style={style} value={field} primaryText={field} key={index}/>
+                <MenuItem style={style} value={field} primaryText={field} key={index} />
               )}
             </SelectField>
           </div>
         </div>
-        {groups.map(({title, items}, index) =>
+        {groups.map(({ title, items }, index) =>
           <div className={styles.item} key={index}>
             {this.renderItems(title, items, index)}
           </div>
