@@ -13,8 +13,9 @@ export default class ChipInput extends Component {
       onBlur: () => {
       },
     },
-    filter: filters.caseInsensitiveStartsWithFilter,
-    freetextDisabled: false,
+    filter: filters.caseInsensitiveFilter,
+    noFreetext: false,
+    fullWidth: true,
   };
 
   constructor(props) {
@@ -31,7 +32,7 @@ export default class ChipInput extends Component {
   }
 
   handleRequestAdd(chip) {
-    if (this.props.freetextDisabled && !this.isChipInSource(chip)) {
+    if (this.props.noFreetext && !this.isChipInSource(chip)) {
       return;
     }
 
@@ -45,7 +46,6 @@ export default class ChipInput extends Component {
   }
 
   handleBlur() {
-    console.log(this.props.input.onBlur);
     this.props.input.onBlur();
   }
 
@@ -56,8 +56,9 @@ export default class ChipInput extends Component {
         onBlur, // eslint-disable-line no-unused-vars
         ...inputProps,
       },
+      meta, // eslint-disable-line no-unused-vars
       label,
-      freetextDisabled, // eslint-disable-line no-unused-vars
+      noFreetext, // eslint-disable-line no-unused-vars
       ...otherProps,
 
     } = this.props;
@@ -66,7 +67,7 @@ export default class ChipInput extends Component {
       <MUIChipInput
         floatingLabelText={label}
         floatingLabelFixed={label !== undefined}
-        value={value}
+        searchText={value}
         onRequestAdd={this.handleRequestAdd}
         onRequestDelete={this.handleRequestDelete}
         onBlur={this.handleBlur}

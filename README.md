@@ -1,7 +1,15 @@
 NOVIOPUS
 --------
 
+Deploying to heroku:
 
+1. CI calls `npm run heroku:stable` upon successful build and test-run of `dev` branch
+   and deploys to: https://novio-ats.herokuapp.com/
+
+2. Run `npm run build && npm run heroku` to deploy any local branch manually
+   to https://novio-ats-manual.herokuapp.com/
+
+3. Run `npm run build:nocheck && npm run heroku` - same as 2, but surpress test runs and linting
 
 
 BOILER PLATE NOTES

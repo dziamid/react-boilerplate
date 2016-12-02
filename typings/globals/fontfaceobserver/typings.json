@@ -1,0 +1,8 @@
+{
+  "resolution": "main",
+  "tree": {
+    "src": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/8ef4d9a7db3fa5bdca6bf30570620bb2c70be809/fontfaceobserver/fontfaceobserver.d.ts",
+    "raw": "registry:dt/fontfaceobserver#0.0.0+20160602130518",
+    "typings": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/8ef4d9a7db3fa5bdca6bf30570620bb2c70be809/fontfaceobserver/fontfaceobserver.d.ts"
+  }
+}

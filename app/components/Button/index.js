@@ -12,7 +12,7 @@ function Button({ icon, label, raised, children, ...other }) {
   const ButtonComponent = iconOnly ? IconButton : (raised ? RaisedButton : FlatButton);
   const props = {
     label,
-    icon,
+    icon: iconOnly ? undefined : icon,
     children: iconOnly ? icon : children,
     ...other,
   };

@@ -1,0 +1,13 @@
+
+.clearButton {
+  position: absolute !important;
+  bottom: 0;
+  right: 0;
+  width: 24px;
+  height: 24px;
+}
+
+.withClear {
+  position: relative;
+}
+

@@ -1,6 +1,7 @@
 .actionButtons {
   display: flex;
   margin: 8px 0;
+  justify-content: flex-end;
 }
 
 .actionButtons > * {

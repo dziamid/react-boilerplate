@@ -2,15 +2,20 @@ import React, { PropTypes, Component } from 'react';
 import { default as MUITextField } from 'material-ui/TextField';
 import Button from 'components/Button';
 import CloseIcon from 'material-ui/svg-icons/navigation/close';
-
+import { minBlack } from 'material-ui/styles/colors';
 import styles from './styles.css';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
 class TextField extends Component {
+  static defaultProps = {
+    fullWidth: true,
+  };
+
   constructor() {
     super();
     this.handleClear = this.handleClear.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleClear() {
@@ -18,14 +23,23 @@ class TextField extends Component {
     this.muiTextField.focus();
   }
 
+  handleChange(e) {
+    this.props.input.onChange(e.target.value);
+  }
+
   render() {
     const {
-      input,
+      input: {
+        onChange, // eslint-disable-line no-unused-vars
+        ...inputProps,
+      },
       label,
       onClear, // eslint-disable-line no-unused-vars
       withClear,
       labelPosition,
       meta: { touched, error },
+      style,
+      className,
       ...other,
     } = this.props;
 
@@ -35,18 +49,19 @@ class TextField extends Component {
     const rootClassnames = {
       withLeftLabel,
       withClear,
+      [className]: className,
     };
 
     const clearButton = (
       <Button
         onClick={this.handleClear}
         className={styles.clearButton}
-        icon={<CloseIcon />}
+        icon={<CloseIcon color={minBlack} />}
       />
     );
 
     return (
-      <div className={cx(rootClassnames)}>
+      <div style={style} className={cx(rootClassnames)}>
         {withLeftLabel ? <label>{label}</label> : null}
 
         <MUITextField
@@ -54,7 +69,8 @@ class TextField extends Component {
           floatingLabelText={floatingLabel}
           floatingLabelFixed={floatingLabel !== undefined}
           errorText={touched && error}
-          {...input}
+          onChange={this.handleChange}
+          {...inputProps}
           {...other}
         />
         { withClear ? clearButton : null }
@@ -67,7 +83,7 @@ class TextField extends Component {
 
 TextField.propTypes = {
   input: PropTypes.object,
-  label: PropTypes.string,
+  label: PropTypes.node,
   meta: PropTypes.object,
   withClear: PropTypes.bool,
   onClear: PropTypes.func,
