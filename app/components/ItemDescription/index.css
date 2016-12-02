@@ -1,17 +1,34 @@
 .wrapper {
   display: flex;
   justify-content: space-between;
-  color: #BDBDBD;
+  color: #757575;
   font-size: 13px;
   align-content: center;
   height: 15px;
 }
 
-.list_left {
+.listLeft {
   display: flex;
 }
 
-.item_name {
+.listRight {
+  display: flex;
+}
+
+.itemName {
   font-weight: bold;
-  color: #757575;
+  margin: 0 5px 0 0;
+}
+
+.date {
+  margin: 0 5px 0 0;
+}
+
+.time {
+  margin: 0;
+}
+
+.info {
+  margin: 0;
+  color: #AFAFAF;
 }

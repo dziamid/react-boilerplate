@@ -26,6 +26,36 @@ const radioIcon = {
   height: 16,
 };
 
+const subHeaderStyle = {
+  padding: 0,
+  fontSize: '13px',
+  color: '#757575',
+  height: '24px',
+  lineHeight: '24px',
+};
+
+const dividerStyle = {
+  margin: '0 0 15px',
+};
+
+const searchIconStyle = {
+  position: 'absolute',
+  top: '13px',
+  right: '3px',
+  width: 22,
+  height: 22,
+};
+
+const style = {
+  fontSize: '13px',
+  color: grey400,
+  padding: '0 0 0 10px',
+};
+
+const underlineStyle = {
+  width: '280px',
+};
+
 export default class SearchFilterList extends React.Component {
   constructor(props) {
     super(props);
@@ -58,6 +88,7 @@ export default class SearchFilterList extends React.Component {
     this.setState({
       selectedItem,
     });
+    this.props.onItemSelect(selectedItem);
   }
 
   renderItems(title, items, groupIndex) {
@@ -94,15 +125,15 @@ export default class SearchFilterList extends React.Component {
     return (
       filteredItems.length > 0 ? (
         <div className={styles.list}>
-          { groupIndex > 0 ? <Divider /> : null }
+          { groupIndex > 0 ? <Divider style={dividerStyle} /> : null }
           <List>
-            <Subheader>{title}</Subheader>
+            <Subheader style={subHeaderStyle}>{title}</Subheader>
             {filteredItems.map((item, index) =>
               <Item
-                {...item}
-                leftIcon={radioButton(item)}
                 key={index}
                 onClick={() => this.handleItemClick(item)}
+                {...item}
+                leftIcon={radioButton(item)}
               />
             )}
           </List>
@@ -112,25 +143,6 @@ export default class SearchFilterList extends React.Component {
   }
 
   render() {
-    const searchIconStyle = {
-      position: 'absolute',
-      top: '13px',
-      right: '3px',
-      width: 22,
-      height: 22,
-    };
-
-    const {
-      groups,
-    } = this.props;
-
-    const style = {
-      fontSize: '13px',
-      color: grey400,
-    };
-
-    console.log(this.state.selectedItem);
-
     return (
       <div className={styles.wrapper}>
         <div className={styles.container}>
@@ -155,8 +167,10 @@ export default class SearchFilterList extends React.Component {
               hintStyle={style}
               menuStyle={style}
               style={style}
+              underlineStyle={underlineStyle}
               value={this.state.sort}
               onChange={this.handleSort}
+              fullWidth
             >
               {this.props.sortBy.map((field, index) =>
                 <MenuItem style={style} value={field} primaryText={field} key={index} />
@@ -164,7 +178,7 @@ export default class SearchFilterList extends React.Component {
             </SelectField>
           </div>
         </div>
-        {groups.map(({ title, items }, index) =>
+        {this.props.groups.map(({ title, items }, index) =>
           <div className={styles.item} key={index}>
             {this.renderItems(title, items, index)}
           </div>

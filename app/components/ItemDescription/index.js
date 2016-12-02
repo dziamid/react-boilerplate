@@ -23,8 +23,8 @@ export default class ItemDescription extends React.Component {
       position,
       date,
       time,
-      relevant,
       leftIcon,
+      onClick,
     } = this.props;
 
     const iconStyle = {
@@ -39,17 +39,22 @@ export default class ItemDescription extends React.Component {
       top: '-6px',
     };
 
+    const innerDivStyle = {
+      padding: '10px 0',
+    };
+
     return (
-      <ListItem>
+      <ListItem onClick={onClick} innerDivStyle={innerDivStyle}>
         <div className={styles.wrapper}>
-          <div className={styles.list_left}>
+          <div className={styles.listLeft}>
             { leftIcon }
             <IconButton disableTouchRipple iconStyle={iconStyle} style={btnStyle}>
               <NotificationEventNote color={grey400} />
             </IconButton>
-            <span className={styles.item_name}>{name}</span> - {location}, {position}, {relevant}
+            <span className={styles.itemName}>{name}</span>
+            <p className={styles.info}>- {location}, {position}</p>
           </div>
-          <div>{date} {time}</div>
+          <div className={styles.listRight}><p className={styles.date}>{date}</p><p className={styles.time}>{time}</p></div>
         </div>
       </ListItem>
     );

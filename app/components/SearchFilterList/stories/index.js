@@ -127,12 +127,12 @@ const groups = [
 
 storiesOf('SearchFilterList', module)
 
-  .add('SearchFilterList single block', () => (
+  .add('default', () => (
     <SearchFilterList
       groups={groups}
       sortBy={['relevant', 'name']}
       filterBy="name"
-      onItemSelect={action(this)}
+      onItemSelect={action('onItemSelect')}
       itemType={ItemDescription}
     />
   ));
