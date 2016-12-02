@@ -2,6 +2,7 @@ import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
 import SearchFilterList from '../index';
 import ItemDescription from 'components/ItemDescription';
+import { cloneDeep } from 'lodash';
 
 const list1 = [
   {
@@ -119,9 +120,9 @@ const list2 = [
 ];
 
 const groups = [
-  { title: 'Group A', items: list1 },
-  { title: 'Group B', items: list2 },
-  { title: 'GRoup C', items: list2 },
+  { title: 'Group A', items: cloneDeep(list1) },
+  { title: 'Group B', items: cloneDeep(list2) },
+  { title: 'Group C', items: cloneDeep(list2) },
 ];
 
 storiesOf('SearchFilterList', module)
@@ -131,8 +132,7 @@ storiesOf('SearchFilterList', module)
       groups={groups}
       sortBy={['relevant', 'name']}
       filterBy="name"
-      subheader="group"
-      onItemSelected={action('item selected')}
+      onItemSelect={action(this)}
       itemType={ItemDescription}
     />
   ));

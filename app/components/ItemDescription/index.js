@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import IconButton from 'material-ui/IconButton';
 import NotificationEventNote from 'material-ui/svg-icons/notification/event-note';
 import { ListItem } from 'material-ui/List';
 import { grey400 } from 'material-ui/styles/colors';
@@ -16,12 +17,6 @@ export default class ItemDescription extends React.Component {
   };
 
   render() {
-    const iconStyle = {
-      margin: '-1px 5px 0 0',
-      width: 16,
-      height: 16,
-    };
-
     const {
       name,
       location,
@@ -29,16 +24,29 @@ export default class ItemDescription extends React.Component {
       date,
       time,
       relevant,
+      leftIcon,
     } = this.props;
 
+    const iconStyle = {
+      width: 16,
+      height: 16,
+    };
+
+    const btnStyle = {
+      padding: 0,
+      width: '28px',
+      height: '28px',
+      top: '-6px',
+    };
+    
     return (
       <ListItem>
         <div className={styles.wrapper}>
           <div className={styles.list_left}>
-            <NotificationEventNote
-              style={iconStyle}
-              color={grey400}
-            />
+            { leftIcon }
+            <IconButton disableTouchRipple iconStyle={iconStyle} style={btnStyle}>
+              <NotificationEventNote color={grey400} />
+            </IconButton>
             <span className={styles.item_name}>{name}</span> - {location}, {position}, {relevant}
           </div>
           <div>{date} {time}</div>

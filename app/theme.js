@@ -25,4 +25,8 @@ export default {
     clockCircleColor: fade(darkBlack, 0.07),
     shadowColor: fullBlack,
   },
+  tooltip: {
+    color: grey500,
+    rippleBackgroundColor: 'aquamarine',
+  },
 };

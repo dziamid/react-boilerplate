@@ -3,7 +3,8 @@
   justify-content: space-between;
   color: #BDBDBD;
   font-size: 13px;
-  line-height: 11px;
+  align-content: center;
+  height: 15px;
 }
 
 .list_left {

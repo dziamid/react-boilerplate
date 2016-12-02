@@ -4,11 +4,27 @@ import Divider from 'material-ui/Divider';
 import TextField from 'components/TextField';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
-import { List } from 'material-ui/List';
+import {List} from 'material-ui/List';
+
 import ActionSearch from 'material-ui/svg-icons/action/search';
-import { grey400 } from 'material-ui/styles/colors';
+
+import {grey400} from 'material-ui/styles/colors';
 
 import styles from './index.css';
+import IconButton from 'material-ui/IconButton';
+import RadioButtonOn from 'material-ui/svg-icons/toggle/radio-button-checked';
+import RadioButtonOff from 'material-ui/svg-icons/toggle/radio-button-unchecked';
+
+const radio = {
+  padding: 0,
+  width: '16px',
+  height: '16px',
+};
+
+const radioIcon = {
+  width: 16,
+  height: 16,
+};
 
 export default class SearchFilterList extends React.Component {
   constructor(props) {
@@ -17,11 +33,13 @@ export default class SearchFilterList extends React.Component {
     this.state = {
       search: '',
       sort: null,
+      selectedItem: null,
     };
 
     this.handleSearch = this.handleSearch.bind(this);
     this.handleSort = this.handleSort.bind(this);
     this.renderItems = this.renderItems.bind(this);
+    this.handleItemClick = this.handleItemClick.bind(this);
   }
 
   handleSearch(e) {
@@ -33,6 +51,12 @@ export default class SearchFilterList extends React.Component {
   handleSort(e, i, v) {
     this.setState({
       sort: v,
+    });
+  }
+
+  handleItemClick(selectedItem) {
+    this.setState({
+      selectedItem,
     });
   }
 
@@ -57,6 +81,15 @@ export default class SearchFilterList extends React.Component {
     }
     const filteredItems = sortedItems.filter((item) => item[this.props.filterBy].toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1);
     const Item = this.props.itemType;
+    const radioButton = (item) => (
+      <IconButton
+        style={radio}
+        iconStyle={radioIcon}
+      >
+        {this.state.selectedItem === item ? <RadioButtonOn style={radioIcon} color="#1AC5C0"/> :
+          <RadioButtonOff style={radioIcon} color="grey"/>}
+      </IconButton>
+    );
 
     return (
       filteredItems.length > 0 ? (
@@ -65,9 +98,12 @@ export default class SearchFilterList extends React.Component {
           <List>
             <Subheader>{title}</Subheader>
             {filteredItems.map((item, index) =>
-              <div key={index}>
-                <Item {...item} />
-              </div>
+              <Item
+                {...item}
+                leftIcon={radioButton(item)}
+                key={index}
+                onClick={() => this.handleItemClick(item)}
+              />
             )}
           </List>
         </div>
@@ -92,6 +128,8 @@ export default class SearchFilterList extends React.Component {
       fontSize: '13px',
       color: grey400,
     };
+
+    console.log(this.state.selectedItem);
 
     return (
       <div className={styles.wrapper}>
@@ -121,12 +159,12 @@ export default class SearchFilterList extends React.Component {
               onChange={this.handleSort}
             >
               {this.props.sortBy.map((field, index) =>
-                <MenuItem style={style} value={field} primaryText={field} key={index} />
+                <MenuItem style={style} value={field} primaryText={field} key={index}/>
               )}
             </SelectField>
           </div>
         </div>
-        {groups.map(({ title, items }, index) =>
+        {groups.map(({title, items}, index) =>
           <div className={styles.item} key={index}>
             {this.renderItems(title, items, index)}
           </div>
