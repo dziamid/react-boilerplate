@@ -29,7 +29,6 @@ class A extends React.Component<IAProps, {}> {
       </a>
     );
   }
-
 }
 
 export default A;

@@ -1,11 +1,10 @@
 /**
  * Testing our link component
  */
-
+import * as React from 'react';
 import A from '../index';
 
 import { shallow } from 'enzyme';
-import React from 'react';
 
 describe('<A />', () => {
   it('should render its children', () => {

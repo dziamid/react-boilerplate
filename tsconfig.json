@@ -1,30 +1,29 @@
 {
-  "compilerOptions": {
-    "noEmit": true,
-    "target": "es6",
-    "module": "commonjs",
-    "noImplicitAny": false,
-    "sourceMap": true,
-    "inlineSourceMap": false,
-    "inlineSources": false,
-    "preserveConstEnums": true,
-    "moduleResolution": "node",
-    "experimentalDecorators": true,
-    "jsx": "preserve",
-    "lib": ["dom","es5","es6","es7","es2017.object"],
-    "allowSyntheticDefaultImports": true,
-    "baseUrl": "./app"
-  },
-  "filesGlob": [
-    "./**/*.ts"
-  ],
-  "exclude": [
-    "node_modules",
+	"compilerOptions": {
+		"experimentalDecorators": true,
+		"lib": ["es6", "dom"],
+		"module": "commonjs",
+		"target": "es6",
+		"noImplicitAny": true,
+		"suppressImplicitAnyIndexErrors": true,
+		"moduleResolution": "node",
+		"emitDecoratorMetadata": true,
+		"sourceMap": false,
+		"declaration": true,
+		"outDir": "dist",
+		"removeComments": false,
+		"typeRoots": [
+			"node_modules/@types"
+		],
+		"types": [
+			"@types/node"
+		]
+	},
+	"include": [
+    "app/**/*"
+	],
+	"exclude": [
+		"node_modules",
     "build"
-  ],
-  "awesomeTypescriptLoaderOptions": {
-    "useBabel": true,
-    "forkChecker": true,
-    "useCache": false
-  }
+	]
 }
