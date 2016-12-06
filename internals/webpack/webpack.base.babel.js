@@ -20,7 +20,7 @@ module.exports = (options) => ({
   module: {
     loaders: [{
       test: /\.tsx?$/,
-      loader: 'awesome-typescript-loader'
+      loader: 'ts-loader'
     }, {
       test: /\.js$/, // Transform all .js files required somewhere with Babel
       loader: 'babel',

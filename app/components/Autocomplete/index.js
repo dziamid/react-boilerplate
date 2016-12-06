@@ -71,7 +71,7 @@ export default class Autocomplete extends Component {
     this.muiAutocomplete.focus();
   }
 
-  render() {
+  render(): Element {
     const {
       input: { value, ...inputProps },
       meta: { touched, error },

@@ -1,23 +1,30 @@
 {
 	"compilerOptions": {
+    "allowJs": true,
 		"experimentalDecorators": true,
 		"lib": ["es6", "dom"],
 		"module": "commonjs",
+		"moduleResolution": "node",
 		"target": "es6",
 		"noImplicitAny": true,
 		"suppressImplicitAnyIndexErrors": true,
-		"moduleResolution": "node",
 		"emitDecoratorMetadata": true,
 		"sourceMap": false,
 		"declaration": true,
 		"outDir": "dist",
 		"removeComments": false,
-		"typeRoots": [
-			"node_modules/@types"
-		],
-		"types": [
-			"@types/node"
-		]
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "jsx": "react",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "*": [
+        "app/*"
+      ]
+    }
 	},
 	"include": [
     "app/**/*"

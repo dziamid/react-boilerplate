@@ -1,6 +1,9 @@
 # Don't check auto-generated stuff into git
 /coverage
+#production build
 /build
+#typescript compiled code
+/dist
 /node_modules
 stats.json
 /typings/globals
