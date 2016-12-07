@@ -6,8 +6,10 @@ import * as React from 'react';
 import {omit} from 'lodash';
 const styles = require('./styles.css');
 
-interface IAProps extends React.ClassAttributes<A> {
-  children: React.ReactNode,
+export interface IAProps extends React.ClassAttributes<A> {
+  children?: React.ReactNode,
+  //children are optional due to TS does not understand react children syntax
+  //todo: wait until resolved https://github.com/Microsoft/TypeScript/issues/8588
   className?: string,
   href: string,
   target?: string,

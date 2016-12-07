@@ -10,7 +10,6 @@
 		"suppressImplicitAnyIndexErrors": true,
 		"emitDecoratorMetadata": true,
 		"sourceMap": false,
-		"declaration": true,
 		"outDir": "dist",
 		"removeComments": false,
     "skipLibCheck": true,

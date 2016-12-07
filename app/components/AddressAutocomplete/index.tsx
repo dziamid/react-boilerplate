@@ -1,17 +1,16 @@
 import * as React from 'react';
-import Autocomplete from 'components/Autocomplete/index.js';
+import Autocomplete from 'components/Autocomplete';
 import {load} from './actions';
-import {connect, MapDispatchToPropsFunction, MapStateToProps} from 'react-redux';
+const {connect} = require('react-redux');
 import {Dispatch, Action} from 'redux';
 import {Map} from 'immutable';
 import {omit} from 'lodash';
 
-export interface IAddressAutocompleteProps extends React.ClassAttributes<AddressAutocomplete> {
+export interface IAddressAutocompleteProps extends __MaterialUI.AutoCompleteProps {
   dispatch: Dispatch<Action>,
   input?: {
     onChange: (text: string) => void,
   },
-  dataSource: any[],
 }
 
 export class AddressAutocomplete extends React.Component<IAddressAutocompleteProps, {}> {
@@ -20,7 +19,6 @@ export class AddressAutocomplete extends React.Component<IAddressAutocompletePro
       onChange: () => {
       },
     },
-    dataSource: [],
   };
 
   constructor() {
@@ -35,11 +33,12 @@ export class AddressAutocomplete extends React.Component<IAddressAutocompletePro
   }
 
   render() {
-    const other = omit(this.props, 'input', 'dispatch');
+    const other = omit(this.props, 'input', 'dispatch', 'dataSource');
     const inputProps = omit(this.props.input, 'onChange');
 
     return (
       <Autocomplete
+        dataSource={this.props.dataSource}
         input={{ onChange: this.handleChange, ...inputProps }}
         {...other}
       />

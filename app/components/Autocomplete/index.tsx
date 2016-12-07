@@ -1,10 +1,10 @@
-import React, { Component, PropTypes } from 'react';
-import { default as MUIAutocomplete } from 'material-ui/AutoComplete';
-import Button from 'components/Button';
+import * as React from 'react';
+import * as MUI from 'material-ui';
+const Button = require('components/Button');
 import CloseIcon from 'material-ui/svg-icons/navigation/close';
 
-import styles from './styles.css';
-import classNames from 'classnames/bind';
+const styles = require('./styles.css');
+const classNames = require('classnames/bind'); //todo: load classnames typings
 const cx = classNames.bind(styles);
 import { minBlack } from 'material-ui/styles/colors';
 
@@ -13,9 +13,9 @@ const {
   caseSensitiveFilter,
   caseInsensitiveFilter,
   fuzzyFilter,
-} = MUIAutocomplete;
+} = MUI.AutoComplete;
 
-const caseInsensitiveStartsWithFilter = (searchText, value) => value.toLowerCase().indexOf(searchText.toLowerCase()) === 0;
+const caseInsensitiveStartsWithFilter = (searchText: string, value: string) => value.toLowerCase().indexOf(searchText.toLowerCase()) === 0;
 
 export const filters = {
   caseSensitiveFilter,
@@ -25,7 +25,27 @@ export const filters = {
   noFilter,
 };
 
-export default class Autocomplete extends Component {
+export interface IAutocompeteItem {
+  text: string,
+  value: any,
+}
+
+export interface IAutocompleteProps extends __MaterialUI.AutoCompleteProps {
+  input?: {
+    value?: any,
+    onChange: (text: string) => void,
+  },
+  meta?: {
+    touched: any,
+    error: any,
+  },
+  withClear?: boolean,
+  onClear?: () => void,
+  noFreetext?: boolean,
+  label?: string,
+}
+
+export default class Autocomplete extends React.Component<IAutocompleteProps, {}> {
 
   static defaultProps = {
     input: {
@@ -37,13 +57,7 @@ export default class Autocomplete extends Component {
     noFreetext: false,
   };
 
-  static propTypes = {
-    input: PropTypes.object,
-    meta: PropTypes.object,
-    withClear: PropTypes.bool,
-    onClear: PropTypes.func,
-    noFreetext: PropTypes.bool,
-  };
+  private muiAutocomplete: any;
 
   constructor() {
     super();
@@ -52,14 +66,13 @@ export default class Autocomplete extends Component {
     this.handleClear = this.handleClear.bind(this);
   }
 
-  handleNewRequest(searchText, key) {
-    if (key !== -1) {
-      const { text } = searchText;
-      this.props.input.onChange(text);
+  handleNewRequest(chosenRequest: string, index: number) {
+    if (index !== -1) {
+      this.props.input.onChange(chosenRequest);
     }
   }
 
-  handleInputUpdate(searchText) {
+  handleInputUpdate(searchText: string) {
     if (!this.props.noFreetext) {
       this.props.input.onChange(searchText);
     }
@@ -71,14 +84,14 @@ export default class Autocomplete extends Component {
     this.muiAutocomplete.focus();
   }
 
-  render(): Element {
+  render(): any {
     const {
       input: { value, ...inputProps },
       meta: { touched, error },
       label,
       withClear,
-      onClear, // eslint-disable-line no-unused-vars
-      noFreetext, // eslint-disable-line no-unused-vars
+      onClear,
+      noFreetext,
       ...other,
     } = this.props;
 
@@ -94,17 +107,19 @@ export default class Autocomplete extends Component {
       />
     );
 
+    //          floatingLabelFixed={label !== undefined}
+
     return (
       <div className={cx(rootClassnames)}>
-        <MUIAutocomplete
-          ref={ref => (this.muiAutocomplete = ref)}
+        <MUI.AutoComplete
+          ref={ref => { this.muiAutocomplete = ref}}
           floatingLabelText={label}
-          floatingLabelFixed={label !== undefined}
           errorText={touched && error}
           {...inputProps}
           searchText={value}
           onNewRequest={this.handleNewRequest}
           onUpdateInput={this.handleInputUpdate}
+          dataSource={this.props.dataSource}
           {...other}
         />
         { withClear ? clearButton : null }
