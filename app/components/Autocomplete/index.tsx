@@ -1,12 +1,12 @@
 import * as React from 'react';
 import * as MUI from 'material-ui';
-const Button = require('components/Button');
+const Button = require('components/Button').default;
 import CloseIcon from 'material-ui/svg-icons/navigation/close';
 
 const styles = require('./styles.css');
 const classNames = require('classnames/bind'); //todo: load classnames typings
 const cx = classNames.bind(styles);
-import { minBlack } from 'material-ui/styles/colors';
+import {minBlack} from 'material-ui/styles/colors';
 
 const {
   noFilter,
@@ -55,6 +55,7 @@ export default class Autocomplete extends React.Component<IAutocompleteProps, {}
     filter: caseInsensitiveFilter,
     fullWidth: true,
     noFreetext: false,
+    withClear: false,
   };
 
   private muiAutocomplete: any;
@@ -86,8 +87,8 @@ export default class Autocomplete extends React.Component<IAutocompleteProps, {}
 
   render(): any {
     const {
-      input: { value, ...inputProps },
-      meta: { touched, error },
+      input: {value, ...inputProps},
+      meta: {touched, error},
       label,
       withClear,
       onClear,
@@ -98,14 +99,6 @@ export default class Autocomplete extends React.Component<IAutocompleteProps, {}
     const rootClassnames = {
       withClear,
     };
-
-    const clearButton = (
-      <Button
-        onClick={this.handleClear}
-        className={styles.clearButton}
-        icon={<CloseIcon color={minBlack} />}
-      />
-    );
 
     //          floatingLabelFixed={label !== undefined}
 
@@ -122,7 +115,11 @@ export default class Autocomplete extends React.Component<IAutocompleteProps, {}
           dataSource={this.props.dataSource}
           {...other}
         />
-        { withClear ? clearButton : null }
+        <Button
+          onClick={this.handleClear}
+          className={styles.clearButton}
+          icon={<CloseIcon color={minBlack} />}
+        />
 
       </div>
 
