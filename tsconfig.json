@@ -1,5 +1,10 @@
 {
 	"compilerOptions": {
+    "sourceMap": true,
+    "inlineSourceMap": false,
+    "inlineSources": false,
+    "jsx": "preserve",
+
     "allowJs": true,
 		"experimentalDecorators": true,
 		"lib": ["es6", "dom"],
@@ -8,13 +13,9 @@
 		"target": "es6",
 		"noImplicitAny": true,
 		"suppressImplicitAnyIndexErrors": true,
-		"emitDecoratorMetadata": true,
-		"sourceMap": false,
-		"outDir": "dist",
-		"removeComments": false,
+
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "jsx": "react",
     "typeRoots": [
       "node_modules/@types"
     ],
