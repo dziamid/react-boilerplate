@@ -33,14 +33,17 @@ export class AddressAutocomplete extends React.Component<IAddressAutocompletePro
   }
 
   render() {
-    const other = omit(this.props, 'input', 'dispatch', 'dataSource');
-    const inputProps = omit(this.props.input, 'onChange');
+    const proxyProps = omit(this.props, 'input', 'dispatch', 'dataSource');
+    const inputProps = Object.assign({}, this.props.input, {
+      onChange: this.handleChange
+    });
 
     return (
       <Autocomplete
         dataSource={this.props.dataSource}
-        input={{ onChange: this.handleChange, ...inputProps }}
-        {...other}
+        {...inputProps}
+        {...proxyProps}
+
       />
     );
   }

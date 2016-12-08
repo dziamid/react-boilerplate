@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as MUI from 'material-ui';
 const Button = require('components/Button').default;
 import CloseIcon from 'material-ui/svg-icons/navigation/close';
-
+import {omit} from 'lodash';
 const styles = require('./styles.css');
 const classNames = require('classnames/bind'); //todo: load classnames typings
 const cx = classNames.bind(styles);
@@ -24,11 +24,6 @@ export const filters = {
   fuzzyFilter,
   noFilter,
 };
-
-export interface IAutocompeteItem {
-  text: string,
-  value: any,
-}
 
 export interface IAutocompleteProps extends __MaterialUI.AutoCompleteProps {
   input?: {
@@ -87,20 +82,20 @@ export default class Autocomplete extends React.Component<IAutocompleteProps, {}
 
   render(): any {
     const {
-      input: {value, ...inputProps},
+      input: {value},
       meta: {touched, error},
       label,
       withClear,
       onClear,
       noFreetext,
-      ...other,
     } = this.props;
+
+    const proxyProps = omit(this.props, ['input', 'meta', 'label', 'withClear', 'onClear', 'noFreetext']);
+    const inputProps = omit(this.props.input, ['value']);
 
     const rootClassnames = {
       withClear,
     };
-
-    //          floatingLabelFixed={label !== undefined}
 
     return (
       <div className={cx(rootClassnames)}>
@@ -108,12 +103,12 @@ export default class Autocomplete extends React.Component<IAutocompleteProps, {}
           ref={ref => { this.muiAutocomplete = ref}}
           floatingLabelText={label}
           errorText={touched && error}
-          {...inputProps}
           searchText={value}
           onNewRequest={this.handleNewRequest}
           onUpdateInput={this.handleInputUpdate}
           dataSource={this.props.dataSource}
-          {...other}
+          {...inputProps}
+          {...proxyProps}
         />
         <Button
           onClick={this.handleClear}
