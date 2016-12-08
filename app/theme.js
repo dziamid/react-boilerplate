@@ -1,6 +1,5 @@
 import {
   cyan500, cyan700,
-  pinkA200,
   grey100, grey300, grey400, grey500,
   white, darkBlack, fullBlack,
 } from 'material-ui/styles/colors';
@@ -14,10 +13,10 @@ export default {
     primary1Color: cyan500,
     primary2Color: cyan700,
     primary3Color: grey400,
-    accent1Color: pinkA200,
+    accent1Color: cyan700,  // for color of selected field in SELECT
     accent2Color: grey100,
     accent3Color: grey500,
-    textColor: darkBlack,
+    textColor: darkBlack, // for text_value of selected field in SELECT
     alternateTextColor: white,
     canvasColor: white,
     borderColor: grey300,
@@ -25,5 +24,9 @@ export default {
     pickerHeaderColor: cyan500,
     clockCircleColor: fade(darkBlack, 0.07),
     shadowColor: fullBlack,
+  },
+  tooltip: {
+    color: grey500,
+    rippleBackgroundColor: 'aquamarine',
   },
 };

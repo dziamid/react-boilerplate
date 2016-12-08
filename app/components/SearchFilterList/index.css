@@ -1,0 +1,36 @@
+.wrapper {
+  width: 640px;
+  overflow: hidden;
+}
+
+.container {
+  display: flex;
+  width: 640px;
+  padding: 0 20px 10px;
+}
+
+.search {
+  position: relative;
+  width: 290px;
+}
+
+.sort {
+  position: relative;
+  margin-left: 30px;
+  width: 300px;
+}
+
+.list {
+  margin: 0 0 5px;
+  padding: 0 20px;
+}
+
+.item {
+  padding: 0;
+}
+
+.radio {
+  margin-right: 5px;
+  height: 13px;
+  width: 13px;
+}
