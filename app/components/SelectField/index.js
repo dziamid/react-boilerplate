@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { default as MUISelectField } from 'material-ui/SelectField';
 
 export default class SelectField extends Component {
+
   render() {
     const {
       input: { onChange, ...inputProps },

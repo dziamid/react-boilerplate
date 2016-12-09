@@ -95,9 +95,12 @@ module.exports = (options) => ({
       '.react.js',
     ],
     mainFields: [
-      'main',
       'jsnext:main',
+      'main',
     ],
+    alias: {
+      'es6-error': path.resolve(process.cwd(), 'node_modules/es6-error/lib/index.js'),
+    }
   },
   devtool: options.devtool,
   target: 'web', // Make web variables accessible to webpack, e.g. window
