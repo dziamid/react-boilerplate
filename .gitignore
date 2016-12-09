@@ -4,8 +4,6 @@
 /build
 #typescript compiled code
 /dist
-/app/**/*.jsx
-/app/**/*.jsx.map
 /node_modules
 stats.json
 /typings/globals

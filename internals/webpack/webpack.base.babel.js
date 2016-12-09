@@ -20,7 +20,7 @@ module.exports = (options) => ({
   module: {
     loaders: [{
       test: /\.tsx?$/,
-      loaders: ['babel', 'ts-loader'],
+      loaders: ['awesome-typescript-loader'],
     }, {
       test: /\.js$/, // Transform all .js files required somewhere with Babel
       loader: 'babel',
@@ -87,12 +87,12 @@ module.exports = (options) => ({
   resolve: {
     modules: ['app', 'node_modules'],
     extensions: [
-      '',
-      '.js',
-      '.jsx',
-      '.ts',
       '.tsx',
+      '.ts',
+      '.jsx',
+      '.js',
       '.react.js',
+      '',
     ],
     mainFields: [
       'jsnext:main',
