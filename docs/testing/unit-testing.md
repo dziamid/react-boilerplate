@@ -239,7 +239,6 @@ First, we have to import `expect`, the reducer and the constant.
 ```javascript
 // NavBar.reducer.test.js
 
-import expect from 'chai';
 import NavBarReducer from '../NavBar.reducer';
 import { TOGGLE_NAV } from '../NavBar.constants';
 ```
